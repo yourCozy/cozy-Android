@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_main"
+        android:title="추천"
+        android:icon="@drawable/icon_main"/>
+
+    <item android:id="@+id/menu_map"
+        android:title="지도"
+        android:icon="@drawable/icon_map"/>
+
+    <item android:id="@+id/menu_category"
+        android:title="카테고리"
+        android:icon="@drawable/icon_category"/>
+
+    <item android:id="@+id/menu_mypage"
+        android:title="내정보"
+        android:icon="@drawable/icon_mypage"/>
+</menu>
