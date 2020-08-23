@@ -9,7 +9,7 @@
         android:icon="@drawable/icon_map"/>
 
     <item android:id="@+id/menu_category"
-        android:title="카테고리"
+        android:title="활동"
         android:icon="@drawable/icon_category"/>
 
     <item android:id="@+id/menu_mypage"
