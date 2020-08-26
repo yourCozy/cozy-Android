@@ -2,7 +2,6 @@ package com.example.cozy
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -12,11 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
-        actionBar?.setDisplayShowCustomEnabled(true);
-        actionBar?.setDisplayShowTitleEnabled(true);
-        actionBar?.setDisplayHomeAsUpEnabled(true);
-
+        setSupportActionBar(main_toolbar)
+        supportActionBar!!.setDisplayShowCustomEnabled(true)  // custom하기 위해
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)   // 뒤로가기 버튼
+        main_toolbar.elevation = 5F
 
         main_viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
         main_viewPager.offscreenPageLimit = 2
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 // 네비게이션 메뉴 아이템 체크
                 navigation.menu.getItem(position).isChecked = true
+
             }
 
         })
@@ -47,9 +47,5 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.search, menu)
-        return true
     }
 }

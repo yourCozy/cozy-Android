@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.cozy.R
 import kotlin.properties.Delegates
 
-class RecommendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -> Unit) : RecyclerView.ViewHolder(itemView) {
     var bookstoreIdx by Delegates.notNull<Int>()
     var profile : ImageView = itemView.findViewById(R.id.rec_img)
     var tag1 : TextView = itemView.findViewById(R.id.rec_tag1)
@@ -28,6 +28,6 @@ class RecommendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         intro.text = myData.intro
         name.text = myData.bookstoreName
         address.text = myData.location
-//        itemView.setOnClickListener{itemClick(myData, itemView)}
+        itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

@@ -1,11 +1,12 @@
 package com.example.cozy.views.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.cozy.BottomItemDecoration
+import com.example.cozy.MainActivity
 import com.example.cozy.R
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
@@ -20,13 +21,17 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         var view =  inflater.inflate(R.layout.fragment_main, container, false)
 
+        setHasOptionsMenu(true)
         initRecommend(view)
 
         return view
     }
 
     fun initRecommend(v : View){
-        recommendAdapter = RecommendAdapter(v.context)
+        recommendAdapter = RecommendAdapter(v.context){RecommendData, View ->
+            var intent = Intent(activity as MainActivity,RecommendDetailActivity::class.java)
+            startActivity(intent)
+        }
         v.rv_recommend.adapter = recommendAdapter
         loadData(v)
     }
@@ -53,4 +58,14 @@ class MainFragment : Fragment() {
         recommendAdapter.notifyDataSetChanged()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.search -> Toast.makeText(context,"검색",Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

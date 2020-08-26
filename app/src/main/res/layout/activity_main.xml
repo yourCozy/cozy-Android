@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
@@ -25,7 +25,7 @@
         android:layout_height="0dp"
         android:overScrollMode="never"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
         app:layout_constraintBottom_toTopOf="@+id/navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
