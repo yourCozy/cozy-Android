@@ -9,6 +9,8 @@ import com.example.cozy.BottomItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import com.example.cozy.views.main.event.EventActivity
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
