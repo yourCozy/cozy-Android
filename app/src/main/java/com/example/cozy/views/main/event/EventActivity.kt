@@ -17,9 +17,8 @@ class EventActivity : AppCompatActivity(){
 
         eventAdapter = EventAdapter(view.context)
         rc_event.adapter = eventAdapter
-        rc_event.addItemDecoration(EventBothSideItemDecoration(this, 20))
-        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
         loadData()
+        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
 
     }
 
@@ -29,27 +28,27 @@ class EventActivity : AppCompatActivity(){
         data.apply {
             add(
                 EventData(
-                    event_image = "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg"
+                    event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
                 EventData(
-                    event_image = "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg"
+                    event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
                 EventData(
-                    event_image = "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg"
+                    event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
                 EventData(
-                    event_image = "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg"
+                    event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
                 EventData(
-                    event_image = "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg"
+                    event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
         }

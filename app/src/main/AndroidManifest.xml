@@ -19,4 +19,6 @@
         <activity android:name=".views.main.event.EventActivity"/>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

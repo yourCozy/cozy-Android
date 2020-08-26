@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 class EventLeftItemDecoration(context: Context, private val num: Int) : RecyclerView.ItemDecoration(){
 
     var size = dpToPx(context, num)
+    var size2 = dpToPx(context, 20)
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -19,8 +20,17 @@ class EventLeftItemDecoration(context: Context, private val num: Int) : Recycler
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
 
-        if(position != parent.adapter!!.itemCount -1){
-            outRect.right = size
+        when {
+            position == 0 -> {
+                outRect.left = size2
+            }
+            position == parent.adapter!!.itemCount -1 -> {
+                //outRect.left = size
+                outRect.right = size2
+            }
+            position != parent.adapter!!.itemCount -1 -> {
+                outRect.left = size
+            }
         }
     }
 
