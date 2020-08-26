@@ -19,6 +19,11 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <include
+        android:id="@+id/toolbar_setting"
+        layout="@layout/fragment_mypage"
+        android:visibility="gone"/>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_viewPager"
         android:layout_width="match_parent"
