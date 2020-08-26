@@ -70,4 +70,6 @@ dependencies {
 //    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
     //RxJava2 : https://github.com/ReactiveX/RxJava/tree/2.x
     //implementation "io.reactivex.rxjava2:rxjava:2.x.y"
+
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
 }

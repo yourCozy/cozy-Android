@@ -13,8 +13,4 @@
 
     </style>
 
-    <style name="Widget.BottomNavigationView14" parent="@style/Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@font/nanum_square_roundb</item>
-    </style>
-
 </resources>

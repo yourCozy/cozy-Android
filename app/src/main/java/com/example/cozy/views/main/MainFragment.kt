@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cozy.R
 
+
 /**
  * A simple [Fragment] subclass.
  */
@@ -19,5 +20,7 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
+
+
 
 }
