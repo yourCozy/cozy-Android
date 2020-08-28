@@ -17,10 +17,7 @@ class MypageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_mypage, container, false)
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_mypage, container, false)
     }
 
 }

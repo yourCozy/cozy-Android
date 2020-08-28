@@ -2,6 +2,7 @@ package com.example.cozy.views.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ class CategoryFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         var view = inflater.inflate(R.layout.fragment_category, container, false)
 
         //버튼 onClickListener 설정
@@ -109,5 +111,9 @@ class CategoryFragment : Fragment(), View.OnClickListener {
 
         }
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.search, menu)
+//    }
 
 }
