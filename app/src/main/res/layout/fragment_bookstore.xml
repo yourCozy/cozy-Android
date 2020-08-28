@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="72dp"
+    android:clipToPadding="false"
+    tools:context=".views.main.bookstore.BookstoreFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bookstore_img1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hong01"
+            app:layout_constraintDimensionRatio="1.07:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/bookstore_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="6sp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="300"
+            android:includeFontPadding="false"
+            android:text="이것은 무의미한 랜덤텍스트입니다. 겨울이 아침이 다 동경과 이름과 시인의 별 있습니다. 소녀들의 시와 별 계절이 성할 이름자 자랑처럼 봅니다. "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/bookstore_img1"
+            app:layout_constraintTop_toBottomOf="@id/bookstore_img1" />
+
+        <ImageView
+            android:id="@+id/bookstore_img2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hong01"
+            android:layout_marginTop="36dp"
+            app:layout_constraintDimensionRatio="1.07:1"
+            app:layout_constraintStart_toStartOf="@id/bookstore_text1"
+            app:layout_constraintTop_toBottomOf="@id/bookstore_text1" />
+
+        <TextView
+            android:id="@+id/bookstore_text2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="6sp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="300"
+            android:includeFontPadding="false"
+            android:text="이것은 무의미한 랜덤텍스트입니다. 겨울이 아침이 다 동경과 이름과 시인의 별 있습니다. 소녀들의 시와 별 계절이 성할 이름자 자랑처럼 봅니다. "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/bookstore_img2"
+            app:layout_constraintTop_toBottomOf="@id/bookstore_img2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
