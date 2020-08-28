@@ -6,9 +6,10 @@ import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class BottomItemDecoration(context: Context, private val num: Int) : RecyclerView.ItemDecoration() {
+class ItemDecoration(context: Context, private val right: Int, private val bottom: Int) : RecyclerView.ItemDecoration() {
 
-    var size = dpToPx(context, num)
+    var r_size = dpToPx(context, right)
+    var b_size = dpToPx(context, bottom)
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -19,7 +20,8 @@ class BottomItemDecoration(context: Context, private val num: Int) : RecyclerVie
         super.getItemOffsets(outRect, view, parent, state)
 
         if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1)
-            outRect.bottom = size
+            outRect.right = r_size
+            outRect.bottom = b_size
     }
 
     private fun dpToPx(context: Context, dp:Int):Int{

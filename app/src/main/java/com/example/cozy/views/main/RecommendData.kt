@@ -6,7 +6,8 @@ class RecommendData (
     val tag1 : String,
     val tag2 : String,
     val tag3 : String,
-    val intro : String,
+    val intro1 : String,
+    val intro2: String,
     val bookstoreName : String,
     val location : String
 )

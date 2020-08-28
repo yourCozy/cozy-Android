@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".views.main.RecommendDetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/rec_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/rec_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/white"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/rec_toolbar">
 
-        <ImageView
-            android:id="@+id/rec_de_img"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/recommend_img"
-            app:layout_constraintDimensionRatio="1.4:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rec_toolbar" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/rec_de_img"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/recommend_img"
+                android:layout_marginTop="18dp"
+                app:layout_constraintDimensionRatio="1.4:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/bookstore_profile"
@@ -180,20 +189,6 @@
                 android:textFontWeight="700"
                 android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/share"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:drawableTop="@drawable/icon_share"
-                android:fontFamily="@font/fontfamily"
-                android:letterSpacing="-0.02"
-                android:text="공유"
-                android:textColor="@color/black"
-                android:textFontWeight="700"
-                android:textSize="12sp" />
-
         </LinearLayout>
 
         <ImageView
@@ -305,7 +300,7 @@
             app:layout_constraintStart_toStartOf="@id/tv_closed"
             app:layout_constraintTop_toBottomOf="@id/rec_de_closed"
             android:textSize="14sp"
-            android:textColor="#757575"
+            android:textColor="@color/dark_gray"
             android:lineSpacingExtra="6sp" />
 
         <ImageView
@@ -340,6 +335,31 @@
             android:layout_marginTop="28dp"
             app:layout_constraintTop_toBottomOf="@id/ic_house" />
 
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/detail_appbarlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:elevation="0dp"
+                android:theme="@style/TabTheme"
+                app:layout_constraintTop_toBottomOf="@id/divide_line3">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/detail_tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    app:tabTextAppearance="@style/TabTextStyle"
+                    app:tabRippleColor="@color/white"
+                    app:tabIndicatorFullWidth="false"/>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.example.cozy.CustomViewPager
+                android:id="@+id/detail_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@+id/detail_appbarlayout"/>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/start_guideline"
             android:layout_width="wrap_content"
@@ -354,7 +374,10 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="20dp"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-</androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,10 @@ package com.example.cozy.views.mypage
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.cozy.R
 
-/**
- * A simple [Fragment] subclass.
- */
 class MypageFragment : Fragment() {
 
     override fun onCreateView(
@@ -21,6 +19,13 @@ class MypageFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.setting, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.setting -> Toast.makeText(context,"설정", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

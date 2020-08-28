@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.cozy.BottomItemDecoration
+import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import kotlinx.android.synthetic.main.fragment_main.view.*
-import com.example.cozy.views.main.event.EventActivity
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
@@ -48,7 +46,8 @@ class MainFragment : Fragment() {
                         tag1 = "이국적인",
                         tag2 = "이국적인",
                         tag3 = "이국적인",
-                        intro = "빵과 함께하는 달콤한 책 그리고 오늘",
+                        intro1 = "빵과 함께하는",
+                        intro2 = "달콤한 책 그리고 오늘",
                         bookstoreName = "홍철책빵",
                         location = "서울특별시 용산구 한강대로102길 5"
                     )
@@ -56,12 +55,12 @@ class MainFragment : Fragment() {
             }
         }
         recommendAdapter.datas = datas
-        v.rv_recommend.addItemDecoration(BottomItemDecoration(this.context!!, 16))
+        v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0,16))
         recommendAdapter.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search, menu)
+//        inflater.inflate(R.menu.search, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

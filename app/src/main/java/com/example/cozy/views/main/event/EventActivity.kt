@@ -1,7 +1,11 @@
 package com.example.cozy.views.main.event
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import kotlinx.android.synthetic.main.activity_event.*
 
@@ -14,11 +18,17 @@ class EventActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
 
+        setSupportActionBar(event_toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_before)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        event_toolbar.elevation = 5F
 
         eventAdapter = EventAdapter(view.context)
         rc_event.adapter = eventAdapter
         loadData()
-        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
+        rc_event.addItemDecoration(ItemDecoration(this, 8,0))
 
     }
 
@@ -55,5 +65,18 @@ class EventActivity : AppCompatActivity(){
 
         eventAdapter.data = data
         eventAdapter.notifyDataSetChanged()
+    }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.search,menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+            R.id.search -> Toast.makeText(this,"검색", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
