@@ -17,4 +17,9 @@
         <item name="fontFamily">@font/nanum_square_roundb</item>
     </style>
 
+    <style name="title_text" parent="@android:style/Widget.TextView">
+        <item name="fontFamily">@font/fontfamily</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

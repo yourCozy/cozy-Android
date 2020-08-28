@@ -34,6 +34,7 @@
                 android:drawablePadding="19.5dp"
                 android:text="영화 상영"
                 android:textSize="14dp"
+                android:onClick="onClick"
                 app:layout_constraintEnd_toStartOf="@+id/btn_writing"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintBottom_toBottomOf="@id/btn_rental"

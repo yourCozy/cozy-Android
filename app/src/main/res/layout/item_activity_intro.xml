@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:outlineAmbientShadowColor="@color/item_shadow">
+
+    <ImageView
+        android:id="@+id/iv_activity_intro"
+        android:layout_width="320dp"
+        android:layout_height="216dp"
+        android:src="@drawable/ex_img_activity_unsplash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_activity_duedate"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/fontfamily"
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="7dp"
+        android:text="D-3"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
+        app:layout_constraintTop_toTopOf="@id/iv_activity_intro" />
+
+    <TextView
+        android:id="@+id/tv_activity_title"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="@dimen/text_image_gap"
+        android:layout_marginRight="36dp"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxWidth="276dp"
+        android:maxLines="2"
+        android:text="책빵영화관 두 줄 이상으로 제목이 길어질 경우 다음과 같이 표시됩니다. 만약 두 줄을 초과하는 제목이라면 어떨까요?"
+        android:textFontWeight="700"
+        app:layout_constraintEnd_toEndOf="@id/iv_activity_intro"
+        app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
+        app:layout_constraintTop_toBottomOf="@id/iv_activity_intro" />
+
+    <ImageView
+        android:id="@+id/iv_activity_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/icon_place"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_title" />
+
+    <TextView
+        android:id="@+id/tv_activity_bookstore_name"
+        android:layout_width="wrap_content"
+        android:layout_height="13dp"
+        android:fontFamily="@font/fontfamily"
+        android:gravity="left"
+        android:includeFontPadding="false"
+        android:text="홍철책빵"
+        android:textFontWeight="700"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/iv_activity_location"
+        app:layout_constraintTop_toTopOf="@id/iv_activity_location" />
+
+    <TextView
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:inputType="number"
+        android:text="18000원"
+        android:textColor="@color/colorAccent"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_bookstore_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>
