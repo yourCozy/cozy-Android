@@ -18,7 +18,7 @@ class EventActivity : AppCompatActivity(){
         eventAdapter = EventAdapter(view.context)
         rc_event.adapter = eventAdapter
         loadData()
-        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
+
 
     }
 
@@ -54,6 +54,7 @@ class EventActivity : AppCompatActivity(){
         }
 
         eventAdapter.data = data
+        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
         eventAdapter.notifyDataSetChanged()
     }
 }
