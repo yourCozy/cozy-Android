@@ -1,6 +1,7 @@
 package com.example.cozy.views.main
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
     var intro2 : TextView = itemView.findViewById(R.id.rec_intro2)
     var name : TextView = itemView.findViewById(R.id.rec_name)
     var address : TextView = itemView.findViewById(R.id.rec_address)
+    var save : ImageButton = itemView.findViewById(R.id.btn_save)
 
     fun bind(myData: RecommendData){
         bookstoreIdx = myData.bookstoreIdx
