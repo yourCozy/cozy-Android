@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/event_toolbar"
         android:descendantFocusability="blocksDescendants"
         android:clipToPadding="false"
-        android:paddingBottom="80dp"
+        android:paddingBottom="136dp"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
