@@ -40,4 +40,10 @@
         <item name="fontWeight">700</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="hint_text" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/fontfamily</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
 </resources>
