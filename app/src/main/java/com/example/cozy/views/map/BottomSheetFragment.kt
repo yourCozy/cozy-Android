@@ -10,8 +10,16 @@ import kotlinx.android.synthetic.main.bottomsheet_map.*
 
 class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetDialogFragment(){
 
-    private var num = 1;
+    private var num = 1
+    //체크되었을 때
+    var isCheckedys : Int = 0
+    var isCheckedmp : Int = 0
+    var isCheckedga : Int = 0
+    var isCheckednw : Int = 0
+    var isCheckedsc : Int = 0
+    var isCheckedjr : Int = 0
 
+    //커스텀
     override fun getTheme(): Int = R.style.RoundBottomSheetDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,32 +30,116 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         super.onViewCreated(view, savedInstanceState)
 
         layout_yongsan.setOnClickListener{
-            num = 1
+            //isChecked가 1일 때(체크되어 있을 때)
+            if(isCheckedys !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 1
+                mapo_unclick()
+                gwanak_unclick()
+                nowon_unclick()
+                seocho_unclick()
+                jongro_unclick()
+                yongsan_click()
+                isCheckedys = 1
+            }
         }
         layout_mapo.setOnClickListener {
-            num = 2
-
+            if(isCheckedmp !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 2
+                yongsan_unclick()
+                gwanak_unclick()
+                nowon_unclick()
+                seocho_unclick()
+                jongro_unclick()
+                mapo_click()
+                isCheckedmp = 1
+            }
         }
         layout_gwanak.setOnClickListener {
-            num = 3
+            if(isCheckedga !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 3
+                yongsan_unclick()
+                mapo_unclick()
+                nowon_unclick()
+                seocho_unclick()
+                jongro_unclick()
+                gwanak_click()
+                isCheckedga = 1
+            }
 
         }
         layout_nowon.setOnClickListener {
-            num = 4
+            if(isCheckednw !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 4
+                yongsan_unclick()
+                mapo_unclick()
+                gwanak_unclick()
+                seocho_unclick()
+                jongro_unclick()
+                nowon_click()
+                isCheckednw = 1
+            }
 
         }
         layout_seocho.setOnClickListener {
-            num = 5
+            if(isCheckedsc !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 5
+                yongsan_unclick()
+                mapo_unclick()
+                gwanak_unclick()
+                jongro_unclick()
+                nowon_unclick()
+                seocho_click()
+                isCheckedsc = 1
+            }
 
         }
         layout_jongro.setOnClickListener {
-            num = 6
+            if(isCheckedjr !=0) {
+                initunClick()
+                initisChecked()
+            }
+            else {
+                initisChecked()
+                num = 6
+                yongsan_unclick()
+                mapo_unclick()
+                gwanak_unclick()
+                seocho_unclick()
+                nowon_unclick()
+                jongro_click()
+                isCheckedjr = 1
+            }
 
         }
         btn_map.setOnClickListener {
-            sectionIdx(num)
             val popF = this as BottomSheetDialogFragment
             popF.dismiss()
+            sectionIdx(num)
         }
     }
 
@@ -56,13 +148,29 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         tv_yongsan.setTextColor(resources.getColor(R.color.white))
         tv_yongsan_num.setTextColor(resources.getColor(R.color.white))
         ys_view.visibility = View.INVISIBLE
+
     }
+    fun yongsan_unclick(){
+        layout_yongsan.setBackgroundColor(resources.getColor(R.color.white))
+        tv_yongsan.setTextColor(resources.getColor(R.color.black))
+        tv_yongsan_num.setTextColor(resources.getColor(R.color.colorAccent))
+        ys_view.visibility = View.VISIBLE
+    }
+
     fun mapo_click(){
         layout_mapo.setBackgroundColor(resources.getColor(R.color.colorAccent))
         tv_mapo.setTextColor(resources.getColor(R.color.white))
         tv_mapo_num.setTextColor(resources.getColor(R.color.white))
         ys_view.visibility = View.INVISIBLE
         mp_view.visibility = View.INVISIBLE
+    }
+
+    fun mapo_unclick(){
+        layout_mapo.setBackgroundColor(resources.getColor(R.color.white))
+        tv_mapo.setTextColor(resources.getColor(R.color.black))
+        tv_mapo_num.setTextColor(resources.getColor(R.color.colorAccent))
+        ys_view.visibility = View.VISIBLE
+        mp_view.visibility = View.VISIBLE
     }
 
     fun gwanak_click(){
@@ -73,12 +181,28 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         ga_view.visibility = View.INVISIBLE
     }
 
+    fun gwanak_unclick(){
+        layout_gwanak.setBackgroundColor(resources.getColor(R.color.white))
+        tv_gwanak.setTextColor(resources.getColor(R.color.black))
+        tv_gwanak_num.setTextColor(resources.getColor(R.color.colorAccent))
+        mp_view.visibility = View.VISIBLE
+        ga_view.visibility = View.VISIBLE
+    }
+
     fun nowon_click(){
         layout_nowon.setBackgroundColor(resources.getColor(R.color.colorAccent))
         tv_nowon.setTextColor(resources.getColor(R.color.white))
-        tv_yongsan_num.setTextColor(resources.getColor(R.color.white))
+        tv_nowon_num.setTextColor(resources.getColor(R.color.white))
         ga_view.visibility = View.INVISIBLE
         nw_view.visibility = View.INVISIBLE
+    }
+
+    fun nowon_unclick(){
+        layout_nowon.setBackgroundColor(resources.getColor(R.color.white))
+        tv_nowon.setTextColor(resources.getColor(R.color.black))
+        tv_nowon_num.setTextColor(resources.getColor(R.color.colorAccent))
+        ga_view.visibility = View.VISIBLE
+        nw_view.visibility = View.VISIBLE
     }
 
     fun seocho_click(){
@@ -89,6 +213,14 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         sc_view.visibility = View.INVISIBLE
     }
 
+    fun seocho_unclick(){
+        layout_seocho.setBackgroundColor(resources.getColor(R.color.white))
+        tv_seocho.setTextColor(resources.getColor(R.color.black))
+        tv_seocho_num.setTextColor(resources.getColor(R.color.colorAccent))
+        nw_view.visibility = View.VISIBLE
+        sc_view.visibility = View.VISIBLE
+    }
+
     fun jongro_click(){
         layout_jongro.setBackgroundColor(resources.getColor(R.color.colorAccent))
         tv_jongro.setTextColor(resources.getColor(R.color.white))
@@ -97,6 +229,35 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         gr_view.visibility = View.INVISIBLE
     }
 
+    fun jongro_unclick(){
+        layout_jongro.setBackgroundColor(resources.getColor(R.color.white))
+        tv_jongro.setTextColor(resources.getColor(R.color.black))
+        tv_jongro_num.setTextColor(resources.getColor(R.color.colorAccent))
+        sc_view.visibility = View.VISIBLE
+        gr_view.visibility = View.VISIBLE
+    }
 
+    fun initunClick(){
+        yongsan_unclick()
+        mapo_unclick()
+        gwanak_unclick()
+        nowon_unclick()
+        seocho_unclick()
+        jongro_unclick()
+    }
+
+    fun initisChecked(){
+        isCheckedys = 0
+        isCheckedmp = 0
+        isCheckedga = 0
+        isCheckednw = 0
+        isCheckedsc = 0
+        isCheckedjr = 0
+    }
+    override fun onResume() {
+        super.onResume()
+
+
+    }
 
 }

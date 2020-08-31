@@ -11,14 +11,10 @@ import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_recommend_detail.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class MapFragment : Fragment() {
 
     val data = mutableListOf<MapData>()
@@ -56,7 +52,7 @@ class MapFragment : Fragment() {
 
         tv_location.setOnClickListener {
             val bottomsheet = BottomSheetFragment(sectionIdx)
-            getFragmentManager()?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
+            fragmentManager?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
         }
     }
 
@@ -120,25 +116,7 @@ class MapFragment : Fragment() {
         v.rv_map.addItemDecoration(ItemDecoration(this.context!!, 0,36))
         mapAdapter.notifyDataSetChanged()
     }
-/*
-    private fun initPersistentBottomSheetBehavior(){
-        persistentBottomSheetBehavior = BottomSheetBehavior.from(bottomsheet_map)
 
-        persistentBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(p0: View, p1: Float) {
-            }
-
-            override fun onStateChanged(p0: View, state: Int) {
-                when(state) {
-                    BottomSheetBehavior.STATE_EXPANDED-> {
-
-                    }
-
-                }
-            }
-        })
-    }
-*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 //        inflater.inflate(R.menu.search, menu)
     }
