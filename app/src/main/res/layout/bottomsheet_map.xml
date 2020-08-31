@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -367,7 +366,7 @@
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_marginTop="65dp"
-        android:background="@color/colorAccent"
+        android:background="@color/disabled"
         android:fontFamily="@font/fontfamily"
         android:gravity="center_horizontal"
         android:paddingTop="24dp"

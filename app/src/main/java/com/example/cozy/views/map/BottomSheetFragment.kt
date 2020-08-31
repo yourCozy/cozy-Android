@@ -34,6 +34,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
             if(isCheckedys !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -45,12 +46,14 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 jongro_unclick()
                 yongsan_click()
                 isCheckedys = 1
+                btnEnabled()
             }
         }
         layout_mapo.setOnClickListener {
             if(isCheckedmp !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -62,12 +65,14 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 jongro_unclick()
                 mapo_click()
                 isCheckedmp = 1
+                btnEnabled()
             }
         }
         layout_gwanak.setOnClickListener {
             if(isCheckedga !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -79,6 +84,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 jongro_unclick()
                 gwanak_click()
                 isCheckedga = 1
+                btnEnabled()
             }
 
         }
@@ -86,6 +92,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
             if(isCheckednw !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -97,6 +104,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 jongro_unclick()
                 nowon_click()
                 isCheckednw = 1
+                btnEnabled()
             }
 
         }
@@ -104,6 +112,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
             if(isCheckedsc !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -115,6 +124,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 nowon_unclick()
                 seocho_click()
                 isCheckedsc = 1
+                btnEnabled()
             }
 
         }
@@ -122,6 +132,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
             if(isCheckedjr !=0) {
                 initunClick()
                 initisChecked()
+                btnEnabled()
             }
             else {
                 initisChecked()
@@ -133,6 +144,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
                 nowon_unclick()
                 jongro_click()
                 isCheckedjr = 1
+                btnEnabled()
             }
 
         }
@@ -254,10 +266,20 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         isCheckedsc = 0
         isCheckedjr = 0
     }
+
+    fun btnEnabled(){
+        btn_map.isEnabled = !(isCheckedga == 0 && isCheckedjr == 0 && isCheckedmp == 0 && isCheckednw == 0
+                && isCheckedsc == 0 && isCheckedys == 0)
+        if (btn_map.isEnabled){
+            btn_map.setBackgroundColor(resources.getColor(R.color.colorAccent))
+        }
+        else{
+            btn_map.setBackgroundColor(resources.getColor(R.color.disabled))
+        }
+
+    }
     override fun onResume() {
         super.onResume()
-
-
     }
 
 }
