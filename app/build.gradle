@@ -71,9 +71,12 @@ dependencies {
     //RxJava2 : https://github.com/ReactiveX/RxJava/tree/2.x
     //implementation "io.reactivex.rxjava2:rxjava:2.x.y"
 
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
     //Glide 오류 해결
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt "android.arch.lifecycle:compiler:1.0.0"
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    //bottom sheet 라이브러리
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
 }
