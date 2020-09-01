@@ -1,6 +1,7 @@
 package com.example.cozy.views.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import com.example.cozy.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottomsheet_map.*
 
-class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetDialogFragment(){
+class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetDialogFragment() {
 
     private var num = 1
     //체크되었을 때
@@ -149,9 +150,9 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
 
         }
         btn_map.setOnClickListener {
-            val popF = this as BottomSheetDialogFragment
-            popF.dismiss()
             sectionIdx(num)
+            Log.d("sectionIdx" , "$num")
+            this.dismiss()
         }
     }
 

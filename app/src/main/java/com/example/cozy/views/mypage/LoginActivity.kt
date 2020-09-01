@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.R
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,11 +17,27 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
+import com.kakao.auth.ISessionCallback
+import com.kakao.auth.Session
+import com.kakao.network.ErrorResult
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.MeV2ResponseCallback
+import com.kakao.usermgmt.response.MeV2Response
+import com.kakao.usermgmt.response.model.UserAccount
+import com.kakao.util.exception.KakaoException
+import com.kakao.util.helper.log.Logger
+import java.io.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var mAuth: FirebaseAuth
+
+    private lateinit var callback: SessionCallback
 
     private lateinit var login_view: View
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +60,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         googleSingInButton.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
+
+        //카카오 로그인
+        callback = SessionCallback()
+        Session.getCurrentSession().addCallback(callback)
+        Session.getCurrentSession().checkAndImplicitOpen()
+
+
+
     }
 
     override fun onStart() {
@@ -64,6 +88,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        //카카오
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return
+        }
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSigconsole.firebase.google.comnInApi.getSignInIntent(...);
@@ -95,6 +124,63 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }*/
         }
     }
+    //카카오
+    private inner class SessionCallback : ISessionCallback {
+        override fun onSessionOpened() {
+            // 로그인 세션이 열렸을 때
+            UserManagement.getInstance().me( object : MeV2ResponseCallback() {
+                override fun onSuccess(result: MeV2Response?) {
+                    // 로그인이 성공했을 때
+                    Log.d(TAG, "카카오 로그인 성공")
+                    //Log.i("KAKAO_API", "사용자 아이디: " + result!!.id);
+                    //Kakao.Auth.getAccessToken()
+                    val kakaoAccount: UserAccount = result!!.kakaoAccount
+                    val email = kakaoAccount.email
+                    val nickname = kakaoAccount.profile.nickname
+                    val profile_pic = kakaoAccount.profile.profileImageUrl
+                    //액세스 토큰
+                    val session = Session.getCurrentSession().accessTokenCallback
+                    Log.i("KAKAO_API", "사용자 이름: $nickname");
+                    Log.i("KAKAO_API", "사용자 이메일: $email");
+                    Log.i("KAKAO_API", "사용자 사진: $profile_pic");
+                    Log.i("KAKAO_API", "사용자 토큰: $session"); //나중에 토큰만 받아오기
+                    var intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+                    intent.putExtra("kakao_name", nickname)
+                    intent.putExtra("kakao_email", email)
+                    intent.putExtra("kakao_picture", profile_pic)
+                    startActivity(intent)
+                    finish()
+                }
+
+                override fun onSessionClosed(errorResult: ErrorResult?) {
+                    Log.e("KAKAO_API", "세션이 닫혀 있음: $errorResult")
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "세션이 닫혔습니다. 다시 시도해주세요 : ${errorResult.toString()}",
+                        Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+        override fun onSessionOpenFailed(exception: KakaoException?) {
+            Log.e("SessionCallback :: ", "onSessionOpenFailed : $exception")
+            // 로그인 세션이 정상적으로 열리지 않았을 때
+            if (exception != null) {
+                Logger.e(exception)
+                Toast.makeText(
+                    this@LoginActivity,
+                    "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요 : $exception",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    private fun redirectSignupActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 
     // [START auth_with_google]
     private fun firebaseAuthWithGoogle(idToken: String, completeTask: Task<GoogleSignInAccount>) {
@@ -143,7 +229,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 signIn()
                 Log.d(TAG, "sign in button works")
             }
+
         }
+
     }
 
     private fun signIn() {
@@ -165,4 +253,5 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         private val TAG = "LoginActivityTAG"
         private val RC_SIGN_IN = 9001
     }
+
 }

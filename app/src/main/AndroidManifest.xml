@@ -3,6 +3,7 @@
     package="com.example.cozy">
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,8 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.main.event.EventActivity"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
         <activity android:name=".views.mypage.NoInterestsActivity"/>
     </application>
+
 
     <uses-permission android:name="android.permission.INTERNET" />
 
