@@ -9,19 +9,19 @@ import android.view.ViewGroup
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.views.main.RecommendDetailActivity
-import kotlinx.android.synthetic.main.fragment_activity.view.*
+import kotlinx.android.synthetic.main.fragment_event.view.*
 
-class ActivityFragment : Fragment() {
+class EventFragment : Fragment() {
 
-    lateinit var culturalActivityAdapter: CulturalActivityAdapter
-    val datas = mutableListOf<CulturalActivityData>()
+    lateinit var eventAdapter: EventAdapter
+    val datas = mutableListOf<EventData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_activity, container, false)
+        var view = inflater.inflate(R.layout.fragment_event, container, false)
 
         initActivity(view)
 
@@ -29,15 +29,15 @@ class ActivityFragment : Fragment() {
     }
 
     private fun initActivity(view: View) {
-        culturalActivityAdapter =
-            CulturalActivityAdapter(view.context) { CulturalActivityData, View ->
+        eventAdapter =
+            EventAdapter(view.context) { EventData, View ->
                 var intent = Intent(
                     activity as RecommendDetailActivity,
-                    EventActivity::class.java
+                    EventDetailActivity::class.java
                 )
                 startActivity(intent)
             }
-        view.rv_activity.adapter = culturalActivityAdapter
+        view.rv_activity.adapter = eventAdapter
         loadData(view)
     }
 
@@ -45,7 +45,7 @@ class ActivityFragment : Fragment() {
         datas.apply{
             for (i in 0..7) {
                 add(
-                    CulturalActivityData(
+                    EventData(
                         day = "D-3",
                         img = "gg",
                         activity_title = "책방 영화관",
@@ -55,9 +55,9 @@ class ActivityFragment : Fragment() {
                 )
             }
         }
-        culturalActivityAdapter.datas = datas
+        eventAdapter.datas = datas
         view.rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
-        culturalActivityAdapter.notifyDataSetChanged()
+        eventAdapter.notifyDataSetChanged()
     }
 
 }

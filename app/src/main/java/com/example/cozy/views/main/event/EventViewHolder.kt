@@ -2,15 +2,28 @@ package com.example.cozy.views.main.event
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.cozy.R
 
+class EventViewHolder(
+    itemView: View,
+    val itemClick: (EventData, View) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
 
-class EventViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
-    val event_rv_img : ImageView = itemView.findViewById(R.id.event_rv_img)
+    val img : ImageView = itemView.findViewById(R.id.activity_img)
+    val day : TextView = itemView.findViewById(R.id.d_day)
+    val title : TextView = itemView.findViewById(R.id.activity_title)
+    val info : TextView = itemView.findViewById(R.id.activity_info)
+    val price : TextView = itemView.findViewById(R.id.activity_price)
 
-    fun bind(data: EventData){
-        Glide.with(itemView).load(data.event_image).into(event_rv_img)
+    fun bind(myData: EventData){
+//        Glide.with(itemView).load(myData.img).into(img)
+        img.setImageResource(R.drawable.event_pic)
+        day.text = myData.day
+        title.text = myData.activity_title
+        info.text = myData.activiry_info
+        price.text = myData.activity_price
+        itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

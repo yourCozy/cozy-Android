@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                android:drawableTop="@drawable/icon_save"
+                android:drawableTop="@drawable/detailsavebtn_selector"
                 android:fontFamily="@font/fontfamily"
                 android:letterSpacing="-0.02"
                 android:text="저장"

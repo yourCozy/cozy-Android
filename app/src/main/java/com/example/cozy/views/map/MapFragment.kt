@@ -71,7 +71,7 @@ class MapFragment : Fragment() {
                         bookstoreIdx = 1,
                         img = "https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052014__340.jpg",
                         bookstoreName = "코지책방",
-                        location = "서울특별시 용산구 한강대로102길 용산구 한강",
+                        location = "서울특별시 용산구 한강대로102길 용산구 한강 서울특별시 용산구 한강대로102길 용산구 한강 서울특별시 용산구 한강대로102길 용산구 한강",
                         tag1 = "베이커리",
                         tag2 = "베이커리",
                         tag3 = "베이커리"

@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
-import com.example.cozy.views.main.event.EventActivity
+import com.example.cozy.views.main.event.EventDetailActivity
 import kotlinx.android.synthetic.main.activity_event_list.*
 
 class CategoryListActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class CategoryListActivity : AppCompatActivity() {
 
         //eventAdapter = ActivityAdapter()
         categoryAdapter = CategoryAdapter(view_sortByDDay.context){ ActivityData, View ->
-            val intent = Intent(this, EventActivity::class.java)
+            val intent = Intent(this, EventDetailActivity::class.java)
             startActivity(intent)
             Log.e("CATCH","adapter set success")
         }
