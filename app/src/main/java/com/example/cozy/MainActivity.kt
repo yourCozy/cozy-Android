@@ -54,27 +54,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        getHashKey()
+        //카카오 해시키 가져오기
+        getAppKeyHash()
 
     }
 
-    private fun getHashKey() {
+    private fun getAppKeyHash() {
         try {
-            val info =
-                packageManager.getPackageInfo("패키지이름", PackageManager.GET_SIGNATURES)
+            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
             for (signature in info.signatures) {
-                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                val md: MessageDigest
+                md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
                 val something = String(Base64.encode(md.digest(), 0))
-                Log.d("hashkey : ", something)
+                Log.e("Hash key", something)
             }
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-            Log.d("hashkey : ", e.toString())
-        } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
-            Log.d("hashkey : ", e.toString())
+        } catch (e: Exception) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString())
         }
+
     }
 
 }

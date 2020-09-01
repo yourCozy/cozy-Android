@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kakao.auth.Session
+import com.kakao.usermgmt.response.model.UserAccount
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
@@ -63,6 +65,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         Log.d(TAG, "current user email is = " + auth.currentUser?.email)
         Log.d(TAG, "last signed in account = " + account?.email)
 
+
         recentlySeenAdapter = RecentlySeenAdapter(view.context) { RecentlySeenData, View ->
             val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
             startActivity(intent)
@@ -91,6 +94,8 @@ class MypageFragment : Fragment(), View.OnClickListener {
         view.findViewById<View>(R.id.btn_interests).setOnClickListener(this)
         view.findViewById<View>(R.id.view_notice).setOnClickListener(this)
         view.findViewById<View>(R.id.view_event).setOnClickListener(this)
+
+        //카카오는 소셜 로그인 후 서버에 토큰, 이름, 이메일, 사진 POST 후 MypageFragment에서 데이터 GET or Firebase..
 
         return view
 

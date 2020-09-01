@@ -43,6 +43,12 @@ class MapFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        setSection(sectionIdx)
+        Log.d("sectionIdx" , "$sectionIdx")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,12 +62,6 @@ class MapFragment : Fragment() {
         }
     }
 
-    override fun onResume(){
-        super.onResume()
-
-        setSection(sectionIdx)
-        Log.d("sectionIdx" , "$sectionIdx")
-    }
 
     fun loadData(v : View){
         data.apply{
