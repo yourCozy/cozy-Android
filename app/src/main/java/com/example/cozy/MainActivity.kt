@@ -1,9 +1,15 @@
 package com.example.cozy
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import android.util.Base64
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,6 +54,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        //카카오 해시키 가져오기
+        getAppKeyHash()
 
     }
+
+    private fun getAppKeyHash() {
+        try {
+            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures) {
+                val md: MessageDigest
+                md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val something = String(Base64.encode(md.digest(), 0))
+                Log.e("Hash key", something)
+            }
+        } catch (e: Exception) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString())
+        }
+
+    }
+
 }

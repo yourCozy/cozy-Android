@@ -2,6 +2,7 @@ package com.example.cozy.views.map
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -9,16 +10,17 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.views.main.RecommendDetailActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class MapFragment : Fragment() {
 
     val data = mutableListOf<MapData>()
     lateinit var mapAdapter: MapAdapter
+    private lateinit var persistentBottomSheetBehavior : BottomSheetBehavior<*>
+    private var sectionIdx = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +34,32 @@ class MapFragment : Fragment() {
             startActivity(intent)
         }
         view.rv_map.adapter = mapAdapter
+        Log.d("sectionIdx" , "$sectionIdx")
+        //setSection(sectionIdx)
         loadData(view)
 
 
+
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setSection(sectionIdx)
+        Log.d("sectionIdx" , "$sectionIdx")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sectionIdx = { num : Int ->
+            sectionIdx = num
+        }
+
+        tv_location.setOnClickListener {
+            val bottomsheet = BottomSheetFragment(sectionIdx)
+            fragmentManager?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
+        }
     }
 
 
@@ -102,6 +126,17 @@ class MapFragment : Fragment() {
             R.id.search -> Toast.makeText(context,"검색",Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setSection(sectionIdx : Int){
+        when(sectionIdx){
+            1 -> {tv_location.text = "용산구"}
+            2 -> {tv_location.text = "마포구"}
+            3 -> {tv_location.text = "관악구,영등포구,강서구"}
+            4 -> {tv_location.text = "광진구,노원구,성북구"}
+            5 -> {tv_location.text = "서초구,강남구,송파구"}
+            6 -> {tv_location.text = "서대문구,종로구"}
+        }
     }
 
 }

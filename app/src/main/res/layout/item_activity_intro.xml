@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="17dp"
+    android:outlineSpotShadowColor="@color/item_shadow">
+
+    <ImageView
+        android:id="@+id/iv_activity_intro"
+        android:layout_width="320dp"
+        android:layout_height="216dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="독립서점 활동 이미지"
+        android:src="@drawable/ex_img_activity_unsplash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_activity_duedate"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/fontfamily"
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="7dp"
+        android:text="D-3"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
+        app:layout_constraintTop_toTopOf="@id/iv_activity_intro" />
+
+    <TextView
+        android:id="@+id/tv_activity_title"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_image_gap"
+        android:layout_marginTop="@dimen/text_image_gap"
+        android:layout_marginEnd="@dimen/text_image_gap"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxWidth="276dp"
+        android:maxLines="2"
+        android:text="책빵영화관"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
+        app:layout_constraintTop_toBottomOf="@id/iv_activity_intro" />
+
+    <ImageView
+        android:id="@+id/iv_activity_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/icon_place_gray"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_title" />
+
+    <TextView
+        android:id="@+id/tv_activity_bookstore_name"
+        android:layout_width="wrap_content"
+        android:layout_height="13dp"
+        android:fontFamily="@font/fontfamily"
+        android:gravity="left"
+        android:includeFontPadding="false"
+        android:text="홍철책빵"
+        android:textFontWeight="700"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/iv_activity_location"
+        app:layout_constraintTop_toTopOf="@id/iv_activity_location" />
+
+    <TextView
+        android:id="@+id/tv_activity_price"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:paddingBottom="16dp"
+        android:text="18,000원"
+        android:textColor="@color/colorAccent"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_bookstore_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>
