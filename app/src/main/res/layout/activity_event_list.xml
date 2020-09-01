@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_event"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+        android:id="@+id/btn_sortByDueDate"
+        android:layout_width="73dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="39dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/fontfamily"
+        android:includeFontPadding="false"
+        android:text="마감임박순"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tb_event"/>
+
+    <View
+        android:id="@+id/view_sortByDDay"
+        android:layout_width="73dp"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/btn_sortByDueDate"
+        app:layout_constraintStart_toStartOf="@id/btn_sortByDueDate"
+        app:layout_constraintTop_toBottomOf="@id/btn_sortByDueDate" />
+
+    <Button
+        android:id="@+id/btn_sortByLatest"
+        android:layout_width="44dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="39dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/fontfamily"
+        android:includeFontPadding="false"
+        android:visibility="gone"
+        android:text="최신순"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toEndOf="@id/btn_sortByDueDate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_sortByLatest"
+        android:layout_width="44dp"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/btn_sortByLatest"
+        app:layout_constraintStart_toStartOf="@id/btn_sortByLatest"
+        app:layout_constraintTop_toBottomOf="@id/btn_sortByLatest" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_event_item_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="109dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/btn_sortByDueDate"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_activity_intro"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

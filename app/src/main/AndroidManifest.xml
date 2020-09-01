@@ -8,9 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-        <activity android:name=".views.main.RecommendDetailActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".views.main.RecommendDetailActivity"/>
+        <activity android:name=".views.category.CategoryListActivity"/>
+        <activity android:name=".views.mypage.LoginActivity"/>
+        <activity android:name=".views.mypage.ProfileActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +24,7 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+        <activity android:name=".views.mypage.NoInterestsActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
