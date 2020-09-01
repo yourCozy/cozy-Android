@@ -1,5 +1,9 @@
 package com.example.cozy.views.main.event
 
-data class EventData(
-    val event_image : String
+class EventData (
+    val img : String,
+    val day : String,
+    val activity_title : String,
+    val activiry_info : String,
+    val activity_price : String
 )

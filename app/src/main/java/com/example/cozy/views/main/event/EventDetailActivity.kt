@@ -7,16 +7,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
-import kotlinx.android.synthetic.main.activity_event.*
+import kotlinx.android.synthetic.main.activity_event_detail.*
 
-class EventActivity : AppCompatActivity(){
+class EventDetailActivity : AppCompatActivity(){
 
-    lateinit var eventAdapter : EventAdapter
-    var data = mutableListOf<EventData>()
+    lateinit var eventdetailAdapter : EventDetailAdapter
+    var data = mutableListOf<EventDetailData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event)
+        setContentView(R.layout.activity_event_detail)
 
         setSupportActionBar(event_toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -25,11 +25,9 @@ class EventActivity : AppCompatActivity(){
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         event_toolbar.elevation = 5F
 
-        eventAdapter = EventAdapter(view.context)
-        rc_event.adapter = eventAdapter
+        eventdetailAdapter = EventDetailAdapter(view.context)
+        rc_event.adapter = eventdetailAdapter
         loadData()
-        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
-
     }
 
 
@@ -37,35 +35,35 @@ class EventActivity : AppCompatActivity(){
     fun loadData() {
         data.apply {
             add(
-                EventData(
+                EventDetailData(
                     event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
-                EventData(
+                EventDetailData(
                     event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
-                EventData(
+                EventDetailData(
                     event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
-                EventData(
+                EventDetailData(
                     event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
             add(
-                EventData(
+                EventDetailData(
                     event_image = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
                 )
             )
         }
 
-        eventAdapter.data = data
-        rc_event.addItemDecoration(EventLeftItemDecoration(this, 8))
-        eventAdapter.notifyDataSetChanged()
+        eventdetailAdapter.data = data
+        rc_event.addItemDecoration(ItemDecoration(this, 8,0))
+        eventdetailAdapter.notifyDataSetChanged()
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
