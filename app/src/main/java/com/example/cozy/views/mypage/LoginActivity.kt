@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.gson.JsonElement
-import com.google.gson.JsonParser
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
@@ -28,9 +26,6 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.usermgmt.response.model.UserAccount
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
-import java.io.*
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
