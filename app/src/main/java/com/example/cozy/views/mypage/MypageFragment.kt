@@ -11,6 +11,7 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.views.main.RecommendDetailActivity
+import com.example.cozy.views.mypage.interest.InterestActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -152,7 +153,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.btn_interests -> {
-                val intent = Intent(activity as MainActivity, NoInterestsActivity::class.java)
+                val intent = Intent(activity as MainActivity, InterestActivity::class.java)
                 startActivity(intent)
             }
             R.id.view_notice -> {

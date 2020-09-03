@@ -135,10 +135,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val profile_pic = kakaoAccount.profile.profileImageUrl
                     //액세스 토큰
                     val session = Session.getCurrentSession().accessTokenCallback
-                    Log.i("KAKAO_API", "사용자 이름: $nickname");
-                    Log.i("KAKAO_API", "사용자 이메일: $email");
-                    Log.i("KAKAO_API", "사용자 사진: $profile_pic");
-                    Log.i("KAKAO_API", "사용자 토큰: $session"); //나중에 토큰만 받아오기
+                    //refreshToken
+                    val refreshsession = Session.getCurrentSession().refreshAccessToken(session)
+
+                    Log.i("KAKAO_API", "사용자 이름: $nickname")
+                    Log.i("KAKAO_API", "사용자 이메일: $email")
+                    Log.i("KAKAO_API", "사용자 사진: $profile_pic")
+                    Log.i("KAKAO_API", "사용자 토큰: $session")//나중에 토큰만 받아오기
+                    Log.i("KAKAO_API", "사용자 토큰: $refreshsession")
                     var intent = Intent(this@LoginActivity, ProfileActivity::class.java)
                     intent.putExtra("kakao_name", nickname)
                     intent.putExtra("kakao_email", email)

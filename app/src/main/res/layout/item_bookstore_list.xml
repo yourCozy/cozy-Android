@@ -111,15 +111,17 @@
         app:layout_constraintStart_toEndOf="@id/tv_bookstore_tag2"
         app:layout_constraintTop_toBottomOf="@id/tv_bookstore_address" />
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/map_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_save_white"
+        android:src="@drawable/savebtn_selector"
+        android:background="@color/transparent"
         app:layout_constraintTop_toTopOf="@id/img_bookstore"
         app:layout_constraintEnd_toEndOf="@id/img_bookstore"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="18dp"/>
+        android:padding="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"/>
 
 
-    
 </androidx.constraintlayout.widget.ConstraintLayout>

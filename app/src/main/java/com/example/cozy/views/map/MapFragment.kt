@@ -30,7 +30,7 @@ class MapFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         setHasOptionsMenu(true)
         mapAdapter = MapAdapter(view.context){
-            MapData -> val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
+            MapData, View -> val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
             startActivity(intent)
         }
         view.rv_map.adapter = mapAdapter
