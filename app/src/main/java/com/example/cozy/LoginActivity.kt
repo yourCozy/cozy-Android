@@ -1,17 +1,18 @@
-package com.example.cozy.views.mypage
+package com.example.cozy
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cozy.R
+import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
+import com.example.cozy.views.mypage.ProfileActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -51,8 +52,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         //Build a GoogleSignInClient w/ the options specified by gso.
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        val googleSingInButton: SignInButton = findViewById(R.id.google_sign_in_button)
+        val googleSingInButton: Button = findViewById(R.id.google_sign_in_button)
         googleSingInButton.setOnClickListener(this)
+
+        val kakaoSignInButton : Button = findViewById(R.id.kakao_sign_in_btn)
+        kakaoSignInButton.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -72,7 +76,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         var account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(applicationContext)
         val currentUser = mAuth.currentUser
         if (currentUser != null) {
-            val intent = Intent(applicationContext, ProfileActivity::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             intent.putExtra(GOOGLE_ACCOUNT, account)
             startActivity(intent)
             finish()
@@ -139,7 +143,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.i("KAKAO_API", "사용자 이메일: $email");
                     Log.i("KAKAO_API", "사용자 사진: $profile_pic");
                     Log.i("KAKAO_API", "사용자 토큰: $session"); //나중에 토큰만 받아오기
-                    var intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+                    var intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
                     intent.putExtra("kakao_name", nickname)
                     intent.putExtra("kakao_email", email)
                     intent.putExtra("kakao_picture", profile_pic)
@@ -211,7 +215,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // [END auth_with_google]
 
     private fun updateUI(account: GoogleSignInAccount?) {
-        val intent = Intent(applicationContext, ProfileActivity::class.java)
+        val intent = Intent(applicationContext, MainActivity::class.java)//ProfileActivity
         intent.putExtra(GOOGLE_ACCOUNT, account)
         Log.d(TAG,"프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
         startActivityForResult(intent, 1001)
@@ -224,7 +228,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 signIn()
                 Log.d(TAG, "sign in button works")
             }
+            R.id.kakao_sign_in_btn -> {
 
+            }
+            R.id.btn_passing_sign_in ->{
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }
