@@ -28,18 +28,7 @@ class NoticeActivitiy : AppCompatActivity() {
         tb_notice.elevation = 5F
 
 
-        noticeAdapter = NoticeAdapter(tb_notice.context) { NoticeData, View ->
-
-            if (tv_notice_content.visibility == android.view.View.GONE) {
-                tv_notice_content.visibility = android.view.View.VISIBLE
-                iv_notice_up.visibility = android.view.View.VISIBLE
-                iv_notice_down.visibility = android.view.View.GONE
-            } else {
-                tv_notice_content.visibility = android.view.View.GONE
-                iv_notice_up.visibility = android.view.View.GONE
-                iv_notice_down.visibility = android.view.View.VISIBLE
-            }
-        }
+        noticeAdapter = NoticeAdapter(tb_notice.context)
 
         with(rv_notice) {
             adapter = noticeAdapter

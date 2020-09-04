@@ -51,29 +51,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_notice_title"/>
 
+    <TextView
+        android:id="@+id/tv_notice_content"
+        style="@style/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_textbox"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="20dp"
+        android:text="이곳은 공지사항 제목을 누르면 그에 맞는 세부 내용이 들어갑니다. 쏘옥!"
+        android:textAlignment="textStart"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_notice_date"/>
     <View
         android:id="@+id/view_item_line"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@id/tv_notice_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_notice_content" />
 
-    <TextView
-        android:id="@+id/tv_notice_content"
-        style="@style/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@color/gray_textbox"
-        android:lineSpacingExtra="6sp"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="20dp"
-        android:text="이곳은 공지사항 제목을 누르면 그에 맞는 세부 내용이 들어갑니다. 쏘옥!이곳은 공지사항 제목을 누르면 그에 맞는 세부 내용이 들어갑니다. 쏘옥!
-이곳은 공지사항 제목을 누르면 그에 맞는 세부 내용이 들어갑니다. 쏘옥!"
-        android:textAlignment="textStart"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_item_line" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

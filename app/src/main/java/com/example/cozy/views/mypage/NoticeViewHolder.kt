@@ -7,7 +7,7 @@ import com.example.cozy.R
 import kotlinx.android.synthetic.main.item_notice.view.*
 import kotlin.properties.Delegates
 
-class NoticeViewHolder(itemView: View, val itemClick: (NoticeData, View) -> Unit) :
+class NoticeViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
     var noticeIdx by Delegates.notNull<Int>()
     var noticeTitle = itemView.findViewById<TextView>(R.id.tv_notice_title)
@@ -20,6 +20,5 @@ class NoticeViewHolder(itemView: View, val itemClick: (NoticeData, View) -> Unit
         noticeDate.text = myData.noticeDate
         noticeContent.text = myData.noticeContent
 
-        itemView.setOnClickListener { itemClick(myData, itemView) }
     }
 }
