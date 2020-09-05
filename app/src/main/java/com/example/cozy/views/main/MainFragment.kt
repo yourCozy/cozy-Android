@@ -4,17 +4,25 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.activity_recommend_detail.view.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
-
+    lateinit var auth: FirebaseAuth
     lateinit var recommendAdapter: RecommendAdapter
+    private lateinit var userNickname : TextView
     val datas = mutableListOf<RecommendData>()
 
     override fun onCreateView(
@@ -27,6 +35,18 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
         initRecommend(view)
 
+        userNickname = view.findViewById(R.id.nickname)
+        //로그인한 상태에서 setDataOnView
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        if (currentUser != null) {//user google 로그인 한 상태면 여기로
+
+            setDataOnView(currentUser)
+        } /*else if(kakao 로그인){
+
+        } else{ // 로그인 안 한 상태.
+
+        }*/
         return view
     }
 
@@ -60,6 +80,10 @@ class MainFragment : Fragment() {
         recommendAdapter.datas = datas
         v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0,16))
         recommendAdapter.notifyDataSetChanged()
+    }
+
+    private fun setDataOnView(account: FirebaseUser?) {
+        userNickname.setText(account?.displayName)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

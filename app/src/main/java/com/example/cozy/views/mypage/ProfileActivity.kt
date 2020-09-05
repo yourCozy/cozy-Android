@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -55,8 +54,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         Log.d(TAG, "클라이언트가 잘 받아졌는지 확인." + mGoogleSignInClient.api)
 
-        val account: GoogleSignInAccount? =
-            GoogleSignIn.getLastSignedInAccount(this)
         auth = Firebase.auth
         val currentUser = auth.currentUser
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cozy" >
+    package="com.example.cozy">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_cozy"
@@ -26,7 +27,8 @@
         </activity>
         <activity android:name=".views.main.RecommendDetailActivity" />
         <activity android:name=".views.category.CategoryListActivity" />
-        <activity android:name=".views.mypage.LoginActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".views.mypage.NoticeActivitiy"/>
         <activity android:name=".views.mypage.ProfileActivity" />
         <activity android:name=".MainActivity" >
         </activity>
@@ -34,8 +36,8 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
-        <activity android:name=".views.mypage.NoInterestsActivity" />
+        <activity android:name=".views.mypage.interest.InterestActivity"/>
+        <activity android:name=".views.mypage.InterestsActivity"/>
         <activity android:name=".views.main.event.EventDetailActivity" />
     </application>
 

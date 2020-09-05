@@ -1,5 +1,6 @@
 package com.example.cozy.views.map
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -17,42 +20,43 @@ import kotlinx.android.synthetic.main.fragment_map.view.*
 
 class MapFragment : Fragment() {
 
+    val service = RequestToServer.service
     val data = mutableListOf<MapData>()
     lateinit var mapAdapter: MapAdapter
-    private lateinit var persistentBottomSheetBehavior : BottomSheetBehavior<*>
-    private var sectionIdx = 1
+    lateinit var detailData : MapData
+    lateinit var fragView: View
+    private var sectionIdx = 2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_map, container, false)
+        fragView = inflater.inflate(R.layout.fragment_map, container, false)
+        showMapList(fragView, sectionIdx)
         setHasOptionsMenu(true)
+        /*
         mapAdapter = MapAdapter(view.context){
-            MapData -> val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
+            MapData, View -> val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
             startActivity(intent)
         }
         view.rv_map.adapter = mapAdapter
         Log.d("sectionIdx" , "$sectionIdx")
+        */
+
         //setSection(sectionIdx)
-        loadData(view)
 
 
 
-        return view
-    }
 
-    override fun onResume() {
-        super.onResume()
-        setSection(sectionIdx)
-        Log.d("sectionIdx" , "$sectionIdx")
+        return fragView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val sectionIdx = { num : Int ->
+            showMapList(view,num)
             sectionIdx = num
         }
 
@@ -62,59 +66,34 @@ class MapFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        showMapList(fragView, sectionIdx)
+        Log.d("sectionIdx" , "$sectionIdx")
+    }
 
-    fun loadData(v : View){
-        data.apply{
 
-                add(
-                    MapData(
-                        bookstoreIdx = 1,
-                        img = "https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052014__340.jpg",
-                        bookstoreName = "코지책방",
-                        location = "서울특별시 용산구 한강대로102길 용산구 한강 서울특별시 용산구 한강대로102길 용산구 한강 서울특별시 용산구 한강대로102길 용산구 한강",
-                        tag1 = "베이커리",
-                        tag2 = "베이커리",
-                        tag3 = "베이커리"
-                    )
-                )
-            add(
-                MapData(
-                    bookstoreIdx = 1,
-                    img = "https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052014__340.jpg",
-                    bookstoreName = "코지책방",
-                    location = "서울특별시 용산구 한강대로102길 용산구 한강",
-                    tag1 = "베이커리",
-                    tag2 = "베이커리",
-                    tag3 = "베이커리"
-                )
-            )
-            add(
-                MapData(
-                    bookstoreIdx = 1,
-                    img = "https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052014__340.jpg",
-                    bookstoreName = "코지책방",
-                    location = "서울특별시 용산구 한강대로102길 용산구 한강",
-                    tag1 = "베이커리",
-                    tag2 = "베이커리",
-                    tag3 = "베이커리"
-                )
-            )
-            add(
-                MapData(
-                    bookstoreIdx = 1,
-                    img = "https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052014__340.jpg",
-                    bookstoreName = "코지책방",
-                    location = "서울특별시 용산구 한강대로102길 용산구 한강",
-                    tag1 = "베이커리",
-                    tag2 = "베이커리",
-                    tag3 = "베이커리"
-                )
-            )
+    private fun showMapList(view : View, num : Int){
+        val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        val header = mutableMapOf<String, String?>()
+        header["Context-Type"] = "application/json"
+        header["token"] = sharedPref.getString("token","token")
+        service.requestMap(num, header).customEnqueue(
+            onError = {Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
+            onSuccess = {
+                if(it.success){
+                    setSection(num)
+                    detailData = it.data.elementAt(0)
 
-        }
-        mapAdapter.data = data
-        v.rv_map.addItemDecoration(ItemDecoration(this.context!!, 0,36))
-        mapAdapter.notifyDataSetChanged()
+                    mapAdapter = MapAdapter(view.context, it.data.toMutableList()){
+                        MapData, View -> val intent = Intent(activity, RecommendDetailActivity::class.java)
+                        intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                        startActivity(intent)
+                    }
+                    rv_map.adapter = mapAdapter
+                }
+            }
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -128,7 +107,7 @@ class MapFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setSection(sectionIdx : Int){
+    private fun setSection(sectionIdx : Int){
         when(sectionIdx){
             1 -> {tv_location.text = "용산구"}
             2 -> {tv_location.text = "마포구"}

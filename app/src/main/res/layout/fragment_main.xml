@@ -34,8 +34,8 @@
         android:textColor="@color/black"
         android:textFontWeight="300"
         android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/nickname"
-        app:layout_constraintTop_toTopOf="@+id/nickname" />
+        app:layout_constraintStart_toEndOf="@id/nickname"
+        app:layout_constraintTop_toTopOf="@id/nickname" />
 
     <TextView
         android:id="@+id/textView5"
@@ -46,8 +46,8 @@
         android:textColor="@color/black"
         android:textFontWeight="300"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="@+id/nickname"
-        app:layout_constraintTop_toBottomOf="@+id/nickname" />
+        app:layout_constraintStart_toStartOf="@id/nickname"
+        app:layout_constraintTop_toBottomOf="@id/nickname" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recommend"

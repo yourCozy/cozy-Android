@@ -1,17 +1,26 @@
 package com.example.cozy.views.map
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.DialogInterface.OnShowListener
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.example.cozy.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottomsheet_map.*
 
+
 class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetDialogFragment() {
 
-    private var num = 1
+    private var num = 2
     //체크되었을 때
     var isCheckedys : Int = 0
     var isCheckedmp : Int = 0
@@ -21,14 +30,40 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
     var isCheckedjr : Int = 0
 
     //커스텀
-    override fun getTheme(): Int = R.style.RoundBottomSheetDialog
+    //override fun getTheme(): Int = R.style.RoundBottomSheet
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.bottomsheet_map,container,false)
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        dialog.setContentView(R.layout.bottomsheet_map)
+
+        dialog.setOnShowListener {
+            val castDialog = it as BottomSheetDialog
+            val bottomSheet = castDialog.findViewById<View?>(R.id.design_bottom_sheet)
+            val behavior = bottomSheet?.let { it1 -> BottomSheetBehavior.from(it1) }
+            if (behavior != null) {
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            behavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+            })
+        }
+
+        return dialog
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         layout_yongsan.setOnClickListener{
             //isChecked가 1일 때(체크되어 있을 때)
@@ -151,10 +186,32 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         }
         btn_map.setOnClickListener {
             sectionIdx(num)
-            Log.d("sectionIdx" , "$num")
             this.dismiss()
         }
     }
+
+    private fun setupRatio(bottomSheetDialog: BottomSheetDialog) {
+        val bottomSheet =
+            bottomSheetDialog.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout?
+        val behavior: BottomSheetBehavior<*> = BottomSheetBehavior.from<FrameLayout?>(bottomSheet!!)
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = getBottomSheetDialogDefaultHeight()
+        bottomSheet.layoutParams = layoutParams
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun getBottomSheetDialogDefaultHeight(): Int {
+        return getWindowHeight() * 78 / 100
+    }
+
+    private fun getWindowHeight(): Int {
+        // Calculate window height for fullscreen use
+        val displayMetrics = DisplayMetrics()
+        (context as Activity?)!!.windowManager.defaultDisplay
+            .getMetrics(displayMetrics)
+        return displayMetrics.heightPixels
+    }
+
 
     fun yongsan_click(){
         layout_yongsan.setBackgroundColor(resources.getColor(R.color.colorAccent))
