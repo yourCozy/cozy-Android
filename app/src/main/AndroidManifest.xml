@@ -36,7 +36,6 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <activity android:name=".views.mypage.interest.InterestActivity"/>
         <activity android:name=".views.mypage.InterestsActivity"/>
         <activity android:name=".views.main.event.EventDetailActivity" />
     </application>
