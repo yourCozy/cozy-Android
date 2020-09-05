@@ -16,16 +16,17 @@ class MapViewHolder (itemView: View, val itemClick: (MapData, View) -> Unit) : R
     val tag1 = itemView.findViewById<TextView>(R.id.tv_bookstore_tag1)
     val tag2 = itemView.findViewById<TextView>(R.id.tv_bookstore_tag2)
     val tag3 = itemView.findViewById<TextView>(R.id.tv_bookstore_tag3)
-    var save : ImageButton = itemView.findViewById(R.id.map_save_btn)
+    var bookmark : ImageButton = itemView.findViewById(R.id.map_save_btn)
 
     fun bind(data: MapData)
     {
-        Glide.with(itemView).load(data.img).into(img1)
+        Glide.with(itemView).load(data.mainImg).into(img1)
         bookstoreName.text = data.bookstoreName
         location.text = data.location
-        tag1.text = "#"+ data.tag1
-        tag2.text = "#"+ data.tag2
-        tag3.text = "#"+ data.tag3
+        tag1.text = "#"+ data.hashtag1
+        tag2.text = "#"+ data.hashtag2
+        tag3.text = "#"+ data.hashtag3
+        bookmark.isSelected = data.checked != 0
         itemView.setOnClickListener{itemClick(data, itemView)}
     }
 
