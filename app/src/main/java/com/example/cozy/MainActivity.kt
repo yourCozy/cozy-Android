@@ -6,6 +6,12 @@ import android.util.Log
 import android.util.Base64
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GetTokenResult
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -13,6 +19,7 @@ import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,6 +64,26 @@ class MainActivity : AppCompatActivity() {
         //카카오 해시키 가져오기
         getAppKeyHash()
 
+        //google account 이용중인지 확인
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        if(currentUser != null) {
+            currentUser.getIdToken(true)
+                .addOnCompleteListener(OnCompleteListener<GetTokenResult>(){
+                    fun onComplete(task : Task<GetTokenResult>){
+                        if(task.isSuccessful()){
+                            val idToken = (task.result)?.token
+                            //token 백엔드로 보낼 수 있음.
+                        } else{
+                            //handle error
+
+                        }
+                    }
+                })
+            //Firebase 실시간 데이터베이스에서 메타데이터 업데이트
+//            var ref: DatabaseReference = FirebaseDatabase.getInstance()
+
+        }
     }
 
     private fun getAppKeyHash() {

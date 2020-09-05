@@ -28,10 +28,10 @@ class CategoryListActivity : AppCompatActivity() {
         tb_event.elevation = 5F
 
         //eventAdapter = ActivityAdapter()
-        categoryAdapter = CategoryAdapter(view_sortByDDay.context){ ActivityData, View ->
+        categoryAdapter = CategoryAdapter(view_sortByDDay.context) { ActivityData, View ->
             val intent = Intent(this, EventDetailActivity::class.java)
             startActivity(intent)
-            Log.e("CATCH","adapter set success")
+            Log.e("CATCH", "adapter set success")
         }
         rv_event_item_list.adapter = categoryAdapter
         loadData()
@@ -40,19 +40,17 @@ class CategoryListActivity : AppCompatActivity() {
 
     fun loadData() {
         data.apply {
-            for(i in 0 .. 5) {
-                add(
-                    CategoryData(
-                        bookstoreIdx = 1,
-                        profile = "ex_img_activity_unsplash",
-                        activity_name = "책빵영화관",
-                        bookstore_name = "코지책방",
-                        categoryIdx = "movie",
-                        price = "18000원",
-                        deadline = "D-3"
-                    )
+            add(
+                CategoryData(
+                    bookstoreIdx = 1,
+                    profile = "ex_img_activity_unsplash",
+                    activity_name = "책빵영화관",
+                    bookstore_name = "코지책방",
+                    categoryIdx = "movie",
+                    price = "18000원",
+                    deadline = "D-3"
                 )
-            }
+            )
             add(
                 CategoryData(
                     bookstoreIdx = 1,
@@ -79,7 +77,7 @@ class CategoryListActivity : AppCompatActivity() {
         categoryAdapter.data = data
         rv_event_item_list.addItemDecoration(ItemDecoration(this, 0, 32))
         categoryAdapter.notifyDataSetChanged()
-        Log.e("CATCH","notifydatasetChanged 동작함")
+        Log.e("CATCH", "notifydatasetChanged 동작함")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -31,6 +31,7 @@
         android:background="@drawable/icon_camera_btn"
         app:layout_constraintTop_toTopOf="@id/rounded_iv_account_detail_profile"
         app:layout_constraintStart_toStartOf="@id/rounded_iv_account_detail_profile"
+        android:visibility="gone"
         android:layout_marginTop="61.5dp"
         android:layout_marginStart="59dp"
         app:layout_goneMarginEnd="18dp"/>

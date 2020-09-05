@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.example.cozy.LoginActivity
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.example.cozy.views.mypage.interest.InterestActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.kakao.auth.Session
-import com.kakao.usermgmt.response.model.UserAccount
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
@@ -79,9 +78,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         profileName = view.findViewById(R.id.tv_user_name)
         profileEmail = view.findViewById(R.id.tv_user_email)
 
-        if (currentUser != null) {//user 로그인 한 상태면 여기로
-            loadData(view)
-
+        if (currentUser != null) {//user google 로그인 한 상태면 여기로
             view.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
 
             setDataOnView(account)
@@ -96,8 +93,8 @@ class MypageFragment : Fragment(), View.OnClickListener {
         view.findViewById<View>(R.id.view_notice).setOnClickListener(this)
         view.findViewById<View>(R.id.view_event).setOnClickListener(this)
 
+        loadData(view)
         //카카오는 소셜 로그인 후 서버에 토큰, 이름, 이메일, 사진 POST 후 MypageFragment에서 데이터 GET or Firebase..
-
         return view
 
     }
@@ -116,7 +113,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {//로그인 된 상태
-
             btn_login.visibility = View.GONE
             tv_login_needed.visibility = View.GONE
             rounded_iv_profile.visibility = View.VISIBLE
@@ -125,7 +121,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
             rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
             tv_no_recently_seen_text.visibility = View.GONE
 
-            loadData(view!!)
             rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
             setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
             /*
@@ -153,11 +148,12 @@ class MypageFragment : Fragment(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.btn_interests -> {
-                val intent = Intent(activity as MainActivity, InterestActivity::class.java)
+                val intent = Intent(activity as MainActivity, InterestsActivity::class.java)
                 startActivity(intent)
             }
             R.id.view_notice -> {
-                Toast.makeText(context, "공지사항을 선택했습니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity as MainActivity, NoticeActivitiy::class.java)
+                startActivity(intent)
             }
             R.id.view_event -> {
                 Toast.makeText(context, "이벤트를 선택했습니다.", Toast.LENGTH_SHORT).show()

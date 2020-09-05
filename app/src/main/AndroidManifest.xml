@@ -13,26 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".onboarding.OnBoardingPreferenceActivity"></activity>
-        <activity android:name=".onboarding.OnBoardingActivity">
+        <activity android:name=".onboarding.OnBoardingPreferenceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".onboarding.OnBoardingActivity"/>
         <activity android:name=".views.main.RecommendDetailActivity"/>
         <activity android:name=".views.category.CategoryListActivity"/>
-        <activity android:name=".views.mypage.LoginActivity"/>
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".views.mypage.ProfileActivity"/>
+        <activity android:name=".views.mypage.NoticeActivitiy"/>
         <activity android:name=".MainActivity">
 
         </activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <activity android:name=".views.mypage.NoInterestsActivity"/>
         <activity android:name=".views.mypage.interest.InterestActivity"/>
+        <activity android:name=".views.mypage.InterestsActivity"/>
         <activity android:name=".views.main.event.EventDetailActivity" />
     </application>
 
