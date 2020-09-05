@@ -25,7 +25,7 @@ class MapFragment : Fragment() {
     lateinit var mapAdapter: MapAdapter
     lateinit var detailData : MapData
     lateinit var fragView: View
-    private var sectionIdx = 1
+    private var sectionIdx = 2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class MapFragment : Fragment() {
 
 
 
-        return view
+        return fragView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class MapFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setSection(sectionIdx : Int){
+    private fun setSection(sectionIdx : Int){
         when(sectionIdx){
             1 -> {tv_location.text = "용산구"}
             2 -> {tv_location.text = "마포구"}

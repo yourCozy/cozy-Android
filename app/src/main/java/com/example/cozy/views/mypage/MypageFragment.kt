@@ -12,7 +12,6 @@ import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.LoginActivity
 import com.example.cozy.views.main.RecommendDetailActivity
-import com.example.cozy.views.mypage.interest.InterestActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

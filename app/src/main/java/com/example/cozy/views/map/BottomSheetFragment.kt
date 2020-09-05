@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.bottomsheet_map.*
 
 class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetDialogFragment() {
 
-    private var num = 1
+    private var num = 2
     //체크되었을 때
     var isCheckedys : Int = 0
     var isCheckedmp : Int = 0
@@ -186,7 +186,6 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         }
         btn_map.setOnClickListener {
             sectionIdx(num)
-            Log.d("sectionIdx" , "$num")
             this.dismiss()
         }
     }
