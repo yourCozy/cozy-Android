@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(main_toolbar)
         supportActionBar!!.setDisplayShowCustomEnabled(true)  // custom하기 위해
-        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(false)   // 뒤로가기 버튼
         main_toolbar.elevation = 5F
 

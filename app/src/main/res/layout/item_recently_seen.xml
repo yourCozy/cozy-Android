@@ -8,7 +8,7 @@
         android:id="@+id/iv_recently_seen_profile"
         android:layout_width="0dp"
         android:layout_height="114dp"
-        app:layout_constraintDimensionRatio="W, 68:57"
+        app:layout_constraintDimensionRatio="1.2:1"
         android:scaleType="centerCrop"
         android:contentDescription="bookstore profile image"
         android:src="@drawable/ex_socialcut_unsplash"

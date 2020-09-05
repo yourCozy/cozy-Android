@@ -19,17 +19,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.kakao.auth.Session
-import com.kakao.usermgmt.response.model.UserAccount
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import java.lang.Exception
 
-/**
- * A simple [Fragment] subclass.
- */
 class MypageFragment : Fragment(), View.OnClickListener {
     lateinit var recentlySeenAdapter: RecentlySeenAdapter
     var data = mutableListOf<RecentlySeenData>()
@@ -47,6 +42,10 @@ class MypageFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         //이하 구글 계정 로그인 된 것 있는지 가져오는 동작.
+        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
+
+        setHasOptionsMenu(true)
+
         Log.d(TAG, "내 정보 페이지 프래그먼트 뷰 생성.")
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -59,8 +58,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
             GoogleSignIn.getLastSignedInAccount(activity as MainActivity)
         auth = Firebase.auth
         val currentUser = auth.currentUser
-
-        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
 
         Log.d(TAG, "current user email is = " + auth.currentUser?.email)
         Log.d(TAG, "last signed in account = " + account?.email)
@@ -188,22 +185,20 @@ class MypageFragment : Fragment(), View.OnClickListener {
         }
 
         recentlySeenAdapter.data = data
-        v.rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 13, 0))
+        v.rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 6, 0))
         recentlySeenAdapter.notifyDataSetChanged()
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
         inflater.inflate(R.menu.setting, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.setting -> {
-                Toast.makeText(this.context, "설정", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(context,ProfileActivity::class.java)
+//                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -65,10 +65,13 @@
         android:text="내 주변 지역 또는 원하는 지역에 위치한\n독립서점을 찾아봐요! 오늘은 어디로 가볼까요?" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintDimensionRatio="0.65:1"
+        android:scaleType="fitEnd"
         android:src="@drawable/img_onboarding_4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />

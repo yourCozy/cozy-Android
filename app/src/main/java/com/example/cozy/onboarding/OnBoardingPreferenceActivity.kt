@@ -8,6 +8,7 @@ import com.example.cozy.R
 import kotlinx.android.synthetic.main.activity_on_boarding_preference.*
 
 class OnBoardingPreferenceActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding_preference)

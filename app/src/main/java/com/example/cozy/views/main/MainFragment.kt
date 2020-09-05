@@ -1,5 +1,6 @@
 package com.example.cozy.views.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -8,12 +9,14 @@ import androidx.fragment.app.Fragment
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import kotlinx.android.synthetic.main.activity_recommend_detail.view.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
 
     lateinit var recommendAdapter: RecommendAdapter
     val datas = mutableListOf<RecommendData>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -60,9 +60,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
         Session.getCurrentSession().checkAndImplicitOpen()
-
-
-
     }
 
     override fun onStart() {
@@ -249,4 +246,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         private val RC_SIGN_IN = 9001
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Session.getCurrentSession().removeCallback(callback);
+    }
 }
