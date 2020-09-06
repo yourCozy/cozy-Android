@@ -1,5 +1,6 @@
 package com.example.cozy.views.mypage
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kakao.auth.Session
+import com.kakao.usermgmt.response.MeV2Response
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
@@ -33,6 +36,9 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var auth: FirebaseAuth
+
+    //카카오
+    lateinit var session : Session
 
     private lateinit var profileImage: CircleImageView
     private lateinit var profileName: TextView
@@ -80,7 +86,13 @@ class MypageFragment : Fragment(), View.OnClickListener {
             view.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
 
             setDataOnView(account)
-        } else {
+        }
+        else if (Session.getCurrentSession() != null){ //user kakao 로그인 한 상태면 여기로
+            view.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
+
+
+        }
+        else {
             //user 로그인 안 한 상태
             view.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
@@ -92,7 +104,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         view.findViewById<View>(R.id.view_event).setOnClickListener(this)
 
         loadData(view)
-        //카카오는 소셜 로그인 후 서버에 토큰, 이름, 이메일, 사진 POST 후 MypageFragment에서 데이터 GET or Firebase..
+
         return view
 
     }
@@ -102,15 +114,31 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
         Log.d(TAG, "화면 구성 onStart 호출")
         val currentUser = auth.currentUser
-        if (currentUser != null) {
+        if (currentUser != null) {//구글
             Log.d(TAG, "현재 로그인한 계정이 있음." + FirebaseAuth.getInstance().currentUser?.email)
             Log.d(TAG, "현재 로그인한 계정의 아이디 토큰 " + (auth.currentUser)?.getIdToken(true))
+            updateUI()
+            setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
         }
-        updateUI(currentUser)
+        else if(Session.getCurrentSession() != null){
+            updateUI()
+            profileName.text = MeV2Response.KEY_NICKNAME
+            Picasso.get().load(MeV2Response.KEY_PROFILE_IMAGE)
+                .centerInside().fit().into(profileImage)
+        }
+        else{
+            btn_login.visibility = View.VISIBLE
+            tv_login_needed.visibility = View.VISIBLE
+            rounded_iv_profile.visibility = View.GONE
+            tv_user_name.visibility = View.GONE
+            tv_user_email.visibility = View.GONE
+            rv_recently_seen.visibility = View.GONE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
+            tv_no_recently_seen_text.visibility = View.VISIBLE
+        }
+
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {//로그인 된 상태
+    private fun updateUI() {
             btn_login.visibility = View.GONE
             tv_login_needed.visibility = View.GONE
             rounded_iv_profile.visibility = View.VISIBLE
@@ -120,22 +148,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
             tv_no_recently_seen_text.visibility = View.GONE
 
             rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
-            setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
-            /*
-                if (user.isEmailVerified) {
-                } else {
-                }
-            */
-        } else {
-            btn_login.visibility = View.VISIBLE
-            tv_login_needed.visibility = View.VISIBLE
-            rounded_iv_profile.visibility = View.GONE
-            tv_user_name.visibility = View.GONE
-            tv_user_email.visibility = View.GONE
-            rv_recently_seen.visibility = View.GONE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
-            tv_no_recently_seen_text.visibility = View.VISIBLE
-
-        }
     }
 
     override fun onClick(v: View?) {

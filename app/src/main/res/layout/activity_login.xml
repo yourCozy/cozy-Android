@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
         />
 
+
     <Button
         android:id="@+id/google_sign_in_button"
         android:layout_width="320dp"

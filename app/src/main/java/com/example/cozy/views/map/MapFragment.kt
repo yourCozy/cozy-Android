@@ -35,19 +35,6 @@ class MapFragment : Fragment() {
         fragView = inflater.inflate(R.layout.fragment_map, container, false)
         showMapList(fragView, sectionIdx)
         setHasOptionsMenu(true)
-        /*
-        mapAdapter = MapAdapter(view.context){
-            MapData, View -> val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
-            startActivity(intent)
-        }
-        view.rv_map.adapter = mapAdapter
-        Log.d("sectionIdx" , "$sectionIdx")
-        */
-
-        //setSection(sectionIdx)
-
-
-
 
         return fragView
     }
