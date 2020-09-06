@@ -58,6 +58,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val kakaoSignInButton : Button = findViewById(R.id.kakao_sign_in_btn)
         kakaoSignInButton.setOnClickListener(this)
 
+        val passingButton : Button = findViewById(R.id.btn_passing_sign_in)
+        passingButton.setOnClickListener(this)
+
         mAuth = FirebaseAuth.getInstance()
 
         //카카오 로그인

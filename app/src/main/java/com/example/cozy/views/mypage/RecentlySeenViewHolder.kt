@@ -4,27 +4,29 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cozy.R
-import kotlinx.android.synthetic.main.item_recently_seen.view.*
 import kotlin.properties.Delegates
 
-class RecentlySeenListViewHolder(
+class RecentlySeenViewHolder(
     itemView: View,
     val itemClick: (RecentlySeenData, View) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
 
     var boostoreIdx by Delegates.notNull<Int>()
-    var profile : ImageView = itemView.findViewById(R.id.iv_recently_seen_profile)
     var bookstoreName : TextView = itemView.findViewById(R.id.tv_recently_seen_title)
+    var mainImg : ImageView = itemView.findViewById(R.id.iv_recently_seen_profile)
+
 
     fun bind(myData: RecentlySeenData) {
         boostoreIdx = myData.bookstoreIdx
-        if(myData.profile != ""){
-            val resourceId = itemView.context.resources.getIdentifier(myData.profile,"drawable", itemView.context.packageName)
-            profile.setImageResource(resourceId)
-        }else{
-            profile.setImageResource(R.drawable.ex_socialcut_unsplash)
-        }
+        Glide.with(itemView).load(myData.mainImg).into(mainImg)
+//        if(myData.mainImg != ""){
+//            val resourceId = itemView.context.resources.getIdentifier(myData.mainImg,"drawable", itemView.context.packageName)
+//            mainImg.setImageResource(resourceId)
+//        }else{
+//            mainImg.setImageResource(R.drawable.ex_socialcut_unsplash)
+//        }
         bookstoreName.text = myData.bookstoreName
 
         itemView.setOnClickListener{ itemClick(myData,itemView)}

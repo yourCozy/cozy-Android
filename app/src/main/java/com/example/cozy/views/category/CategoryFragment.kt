@@ -58,98 +58,98 @@ class CategoryFragment : Fragment(), View.OnClickListener {
             R.id.btn_movie -> {
                 Log.e("error","btn click doesn't work")
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","movie")
+                intent.putExtra("categoryIdx",1)
                 startActivity(intent)
             }
             R.id.btn_writing -> {
                 Toast.makeText(context, "[활동] 글쓰기 모임 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","writing")
+                intent.putExtra("categoryIdx",2)
                 startActivity(intent)
             }
             R.id.btn_rental -> {
                 Toast.makeText(context, "[활동] 공간 대여 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","rental")
+                intent.putExtra("categoryIdx",3)
                 startActivity(intent)
             }
             R.id.btn_readingClub -> {
                 Toast.makeText(context, "[활동] 독서 모임 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","readingClub")
+                intent.putExtra("categoryIdx",4)
                 startActivity(intent)
             }
             R.id.btn_night -> {
                 Toast.makeText(context, "[활동] 심야 책방 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","night")
+                intent.putExtra("categoryIdx",5)
                 startActivity(intent)
             }
             R.id.btn_exhibit -> {
                 Toast.makeText(context, "[활동] 전시, 공연 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","exhibit")
+                intent.putExtra("categoryIdx",6)
                 startActivity(intent)
             }
             R.id.btn_recommendation -> {
                 Toast.makeText(context, "[활동] 책 추천 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","recommendation")
+                intent.putExtra("categoryIdx",7)
                 startActivity(intent)
             }
             R.id.btn_workshop -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","workshop")
+                intent.putExtra("categoryIdx",8)
                 startActivity(intent)
             }
             R.id.btn_bookTalk -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","bookTalk")
+                intent.putExtra("categoryIdx",9)
                 startActivity(intent)
             }
             R.id.btn_music -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","music")
+                intent.putExtra("categoryIdx",10)
                 startActivity(intent)
             }
             R.id.btn_recite -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","recite")
+                intent.putExtra("categoryIdx",11)
                 startActivity(intent)
             }
             R.id.btn_silentReading -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","silentReading")
+                intent.putExtra("categoryIdx",12)
                 startActivity(intent)
             }
             R.id.btn_transcription -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","transcription")
+                intent.putExtra("categoryIdx",13)
                 startActivity(intent)
             }
             R.id.btn_stay -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","stay")
+                intent.putExtra("categoryIdx",14)
                 startActivity(intent)
             }
             R.id.btn_making -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","making")
+                intent.putExtra("categoryIdx",15)
                 startActivity(intent)
             }
             R.id.btn_publication -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","publication")
+                intent.putExtra("categoryIdx",16)
                 startActivity(intent)
             }
             R.id.btn_class -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","class")
+                intent.putExtra("categoryIdx",17)
                 startActivity(intent)
             }
             R.id.btn_market -> {
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
-                intent.putExtra("category","market")
+                intent.putExtra("categoryIdx",18)
                 startActivity(intent)
             }
 
