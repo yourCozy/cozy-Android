@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
+import com.example.cozy.network.requestData.RequestLogin
 import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
-import com.example.cozy.views.mypage.ProfileActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,6 +20,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
@@ -34,8 +37,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mAuth: FirebaseAuth
 
     private lateinit var callback: SessionCallback
+    val requestTosever = RequestToServer
+    private lateinit var session : Session
 
     private lateinit var login_view: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -56,21 +62,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         googleSingInButton.setOnClickListener(this)
 
         val kakaoSignInButton : Button = findViewById(R.id.kakao_sign_in_btn)
-        kakaoSignInButton.setOnClickListener(this)
+        kakaoSignInButton.setOnClickListener(View.OnClickListener {
+            session = Session.getCurrentSession()
+            session.addCallback(SessionCallback())
+            session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
+        })
 
         val passingButton : Button = findViewById(R.id.btn_passing_sign_in)
         passingButton.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
 
-        //카카오 로그인
-        callback = SessionCallback()
-        Session.getCurrentSession().addCallback(callback)
-        Session.getCurrentSession().checkAndImplicitOpen()
-
-
-
     }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -87,6 +92,18 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         } else{
             Log.d(TAG, "현재 로그인한 계정이 없는 경우")
         }
+
+        //이미 로그인한 카카오 계정이 있으면 non-null
+
+//        if(Session.getCurrentSession() != null){
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//            Log.d(TAG, "on Start kakao works successful")
+//        }
+//        else{
+//            Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,29 +144,42 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     //카카오
-    private inner class SessionCallback : ISessionCallback {
+    public inner class SessionCallback : ISessionCallback {
         override fun onSessionOpened() {
             // 로그인 세션이 열렸을 때
             UserManagement.getInstance().me( object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
                     Log.d(TAG, "카카오 로그인 성공")
-                    //Log.i("KAKAO_API", "사용자 아이디: " + result!!.id);
-                    //Kakao.Auth.getAccessToken()
                     val kakaoAccount: UserAccount = result!!.kakaoAccount
-                    val email = kakaoAccount.email
+                    val kakao_email = kakaoAccount.email
                     val nickname = kakaoAccount.profile.nickname
                     val profile_pic = kakaoAccount.profile.profileImageUrl
-                    //액세스 토큰
-                    val session = Session.getCurrentSession().accessTokenCallback
+                    //리프레시 토큰
+                    val session = Session.getCurrentSession().tokenInfo.refreshToken
 
-                    Log.i("KAKAO_API", "사용자 이름: $nickname");
-                    Log.i("KAKAO_API", "사용자 이메일: $email");
-                    Log.i("KAKAO_API", "사용자 사진: $profile_pic");
-                    Log.i("KAKAO_API", "사용자 토큰: $session"); //나중에 토큰만 받아오기
+                    //server 통신
+                    requestTosever.service.requestLogin(
+                        RequestLogin(
+                            email = kakao_email,
+                            nickname = nickname,
+                            refreshToken = session.toString()
+                        )
+                    ).customEnqueue(
+                        onError = {
+                            Log.e(TAG, "onError!!!!")
+                        },
+                        onSuccess = {
+                            Log.i("KAKAO_API", "사용자 이름: ${it.data[1]}");
+                            Log.i("KAKAO_API", "사용자 이메일: $kakao_email");
+                            Log.i("KAKAO_API", "사용자 토큰: $session");
+                            finish()
+                        }
+                    )
+                    Log.i("KAKAO_API", "사용자 토큰: $session");
                     var intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
                     intent.putExtra("kakao_name", nickname)
-                    intent.putExtra("kakao_email", email)
+                    intent.putExtra("kakao_email", kakao_email)
                     intent.putExtra("kakao_picture", profile_pic)
                     startActivity(intent)
                     finish()
@@ -232,9 +262,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 signIn()
                 Log.d(TAG, "sign in button works")
             }
-            R.id.kakao_sign_in_btn -> {
-
-            }
             R.id.btn_passing_sign_in ->{
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
@@ -263,4 +290,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         private val RC_SIGN_IN = 9001
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //Session.getCurrentSession().removeCallback(callback);
+    }
 }

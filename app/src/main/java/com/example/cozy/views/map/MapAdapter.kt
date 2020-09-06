@@ -2,6 +2,8 @@ package com.example.cozy.views.map
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.R
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
 
 
 class MapAdapter (private val context : Context, val data : MutableList<MapData>, val itemClick: (MapData, View) -> Unit) : RecyclerView.Adapter<MapViewHolder>(){
@@ -27,13 +31,42 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
         holder.bind(data[position])
 
         holder.bookmark.setOnClickListener{
-            Toast.makeText(context, "북마크!", Toast.LENGTH_SHORT).show()
-            if (holder.bookmark.isSelected){
-                holder.bookmark.isSelected = false
-            }
-            else{
-                holder.bookmark.isSelected = true
-            }
+            val sharedPref = context.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "token")
+            val header = mutableMapOf<String, String?>()
+            header["Content-Type"] = "application/json"
+            header["token"] = token
+
+            RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header).customEnqueue(
+                onError = { Log.d("RESPONSE", "error")},
+                onSuccess = {
+                    if(it.success) {
+                        //커스텀
+                        if(holder.bookmark.isSelected == false){
+                            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+
+                            with (Toast(context)) {
+                                setGravity(Gravity.CENTER, 0, 0)
+                                duration = Toast.LENGTH_SHORT
+                                view = layout
+                                show()
+                            }
+                        }
+                        else{
+                            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val layout = inflater.inflate(R.layout.bookmark_cancel_custom_toast,null)
+
+
+
+                        }
+                        holder.bookmark.isSelected = !holder.bookmark.isSelected
+                        Log.d("RESPONSE", it.message)
+                    }
+                    else Log.d("RESPONSE", it.message)
+                }
+            )
+
         }
     }
 

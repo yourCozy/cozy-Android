@@ -1,5 +1,6 @@
 package com.example.cozy.views.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -15,6 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.activity_recommend_detail.view.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
@@ -22,6 +24,7 @@ class MainFragment : Fragment() {
     lateinit var recommendAdapter: RecommendAdapter
     private lateinit var userNickname : TextView
     val datas = mutableListOf<RecommendData>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

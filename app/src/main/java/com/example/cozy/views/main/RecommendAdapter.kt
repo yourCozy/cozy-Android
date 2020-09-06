@@ -1,6 +1,7 @@
 package com.example.cozy.views.main
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,18 @@ class RecommendAdapter (private val context : Context, val itemClick: (Recommend
         holder.bind(datas[position])
 
         holder.save.setOnClickListener{
-            Toast.makeText(context, "북마크!", Toast.LENGTH_SHORT).show()
+
+            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+
+            with (Toast(context)) {
+                setGravity(Gravity.CENTER, 0, 0)
+                duration = Toast.LENGTH_SHORT
+                view = layout
+                show()
+            }
+
+//            Toast.makeText(context, "북마크!", Toast.LENGTH_SHORT).show()
             if (holder.save.isSelected){
                 holder.save.isSelected = false
             }

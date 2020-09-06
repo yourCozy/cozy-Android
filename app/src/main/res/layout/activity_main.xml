@@ -17,6 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/text_logo"/>
+
     </androidx.appcompat.widget.Toolbar>
 
     <include

@@ -65,10 +65,13 @@
         android:text="취향으로 추천받고 공간으로 느끼자!\n마음에 드는 공간은 관심책방으로 저장해요." />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitEnd"
+        android:layout_marginTop="22dp"
+        app:layout_constraintDimensionRatio="0.625:1"
         android:src="@drawable/img_onboarding_2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />

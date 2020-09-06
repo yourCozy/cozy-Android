@@ -1,12 +1,13 @@
 package com.example.cozy.views.main
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.MenuItem
-import android.widget.TabWidget
 import android.widget.Toast
 import com.example.cozy.R
 import com.google.android.material.tabs.TabLayout
@@ -45,7 +46,16 @@ class RecommendDetailActivity : AppCompatActivity() {
         }
 
         save.setOnClickListener{
-            Toast.makeText(this, "북마크!", Toast.LENGTH_SHORT).show()
+            val inflater : LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+
+            with (Toast(this)) {
+                setGravity(Gravity.CENTER, 0, 0)
+                duration = Toast.LENGTH_SHORT
+                view = layout
+                show()
+            }
+
             if (save.isSelected){
                 save.isSelected = false
             }

@@ -1,7 +1,11 @@
 package com.example.cozy.network
 
+import com.example.cozy.network.requestData.RequestLogin
+import com.example.cozy.network.responseData.ResponseBookmarkUpdate
+import com.example.cozy.network.responseData.ResponseInterest
 import com.example.cozy.network.responseData.ResponseCategoryActivity
 import com.example.cozy.network.responseData.ResponseMap
+import com.example.cozy.network.responseData.ResponseSignin
 import com.example.cozy.network.responseData.ResponseRecent
 import retrofit2.Call
 import retrofit2.http.*
@@ -9,8 +13,8 @@ import retrofit2.http.*
 interface RequestInterface {
 
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
-    //@POST("/auth/signin")
-    //fun requestSignin(@Body body: RequestLogin) : Call<ResponseSignin>
+    @POST("/auth/signin")
+    fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
 
     //추천
     //책방 8개 추천 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-8%EA%B0%9C-%EC%B6%94%EC%B2%9C
@@ -57,11 +61,13 @@ interface RequestInterface {
 
     //내정보
     //관심 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EA%B4%80%EC%8B%AC%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
-    //@GET("/mypage/interest")
+    @GET("/mypage/interest")
+    fun requestInterest(@HeaderMap headers: Map<String, String?>) : Call<ResponseInterest>
 
 
     //북마크 업데이트 https://github.com/yourCozy/cozy-Server/wiki/%EB%B6%81%EB%A7%88%ED%81%AC-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
-    //@PUT("/mypage/interest/{bookstoreIdx}")
+    @PUT("/mypage/interest/{bookstoreIdx}")
+    fun requestBookmarkUpdate(@Path("bookstoreIdx") bookstoreIdx : Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseBookmarkUpdate>
 
 
     //최근 본 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EC%B5%9C%EA%B7%BC-%EB%B3%B8-%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
