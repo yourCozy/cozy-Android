@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
-import com.example.cozy.views.mypage.ProfileActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -107,17 +106,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
+                Toast.makeText(this,"로그인에 실패하셨습니다.",Toast.LENGTH_SHORT).show()
                 // ...
             }
-            /*if(result!!.isSuccess()){
-                val account = result.signInAccount
-                Log.d(TAG, "이름 = " + account!!.displayName)
-                Log.d(TAG, "이메일 = " + account!!.email)
-                Log.d(TAG,"getID() = " + account!!.id)
-                Log.d(TAG, "getAccount() = " + account!!.account)
-                Log.d(TAG, "getIDToken() = " + account!!.idToken)
-
-            }*/
         }
     }
     //카카오

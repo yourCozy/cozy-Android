@@ -9,13 +9,24 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.cozy.R
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
+import com.example.cozy.network.responseData.BookstoreDetailData
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_recommend_detail.*
+import kotlin.properties.Delegates
 
 class RecommendDetailActivity : AppCompatActivity() {
 
     lateinit var tel: String
+    var latitude by Delegates.notNull<Double>()
+    var longitude by Delegates.notNull<Double>()
+    val service = RequestToServer.service
+    lateinit var detailData : BookstoreDetailData
+    var bookstoreIdx by Delegates.notNull<Int>()
+
     var kakaoPackageName : String = "net.daum.android.map"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +40,13 @@ class RecommendDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         rec_toolbar.elevation = 5F
 
-        detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager)
+        if (intent.hasExtra("bookstoreIdx")) {
+            bookstoreIdx = intent.getIntExtra("bookstoreIdx",0)
+        }
+
+        initDetail()
+
+        detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager,bookstoreIdx)
         detail_viewpager.offscreenPageLimit = 2
         detail_tablayout.setupWithViewPager(detail_viewpager)
         detail_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(detail_tablayout))
@@ -41,7 +58,7 @@ class RecommendDetailActivity : AppCompatActivity() {
 
         call.setOnClickListener {
             val intent  = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:0325242889")
+            intent.data = Uri.parse("tel:$tel")
             startActivity(intent)
         }
 
@@ -49,24 +66,23 @@ class RecommendDetailActivity : AppCompatActivity() {
             val inflater : LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
 
-            with (Toast(this)) {
-                setGravity(Gravity.CENTER, 0, 0)
-                duration = Toast.LENGTH_SHORT
-                view = layout
-                show()
-            }
-
             if (save.isSelected){
                 save.isSelected = false
             }
             else{
                 save.isSelected = true
+                with (Toast(this)) {
+                    setGravity(Gravity.CENTER, 0, 0)
+                    duration = Toast.LENGTH_SHORT
+                    view = layout
+                    show()
+                }
             }
         }
 
         road.setOnClickListener {
             if(isInstalledApp(kakaoPackageName)) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://look?p=37.549399,126.975219"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://look?p=$latitude,$longitude"))
                 startActivity(intent)
             } else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$kakaoPackageName"))
@@ -74,6 +90,39 @@ class RecommendDetailActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun initDetail() {
+
+        val header = mutableMapOf<String, String>()
+        val sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        header["Content-Type"] = "application/json"
+//        header["token"] = sharedPref.getString("token","token").toString()
+        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo1LCJpYXQiOjE1OTk0Nzg3NjcsImV4cCI6MTU5OTUxNDc2NywiaXNzIjoib3VyLXNvcHQifQ.Fg4ya9ny7YbqTvyntvZmAskAyUw007dbK8--KCMaUMI"
+        service.requestBookstoreDatail(header,bookstoreIdx).customEnqueue(
+            onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
+            onSuccess = {
+                if(it.success){
+                    detailData = it.data.elementAt(0)
+                    Glide.with(this).load(detailData.mainImg).into(rec_de_img)
+                    Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                    bookstore_name.text = detailData.bookstoreName
+                    rec_de_tag1.text = detailData.hashtag1
+                    rec_de_tag2.text = detailData.hashtag2
+                    rec_de_tag3.text = detailData.hashtag3
+                    rec_de_intro.text = detailData.description
+                    tel = detailData.tel
+                    save.isSelected = detailData.bookmark != 0
+                    latitude = detailData.latitude
+                    longitude = detailData.longitude
+                    rec_de_adress.text = detailData.location
+                    rec_de_time.text = detailData.businessHours
+                    rec_de_closed.text = detailData.dayoff
+                    rec_de_activity.text = detailData.activities
+
+                }
+            }
+        )
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {

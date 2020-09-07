@@ -1,6 +1,6 @@
 package com.example.cozy.network
 
-import com.example.cozy.network.responseData.ResponseMap
+import com.example.cozy.network.responseData.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,19 +12,22 @@ interface RequestInterface {
 
     //추천
     //책방 8개 추천 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-8%EA%B0%9C-%EC%B6%94%EC%B2%9C
-    //@GET("/bookstore/recommendation")
-    //fun requestRecommendation(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecommendList>
+    @GET("/bookstore/recommendation")
+    fun requestRecommendation(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecommendData>
 
     //책방 상세 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8
-    //@GET("/bookstore/detail/{bookstoreIdx}")
+    @GET("/bookstore/detail/{bookstoreIdx}")
+    fun requestBookstoreDatail(@HeaderMap headers: Map<String, String?>, @Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
 
 
     //책방 상세_책방 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%EC%B1%85%EB%B0%A9-%ED%94%BC%EB%93%9C
-    //@GET("/feed/{bookstoreIdx}")
+    @GET("/bookstore/feed/{bookstoreIdx}")
+    fun requestBookstoreFeed(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseBookstoreFeedData>
 
 
     //책방 상세_활동 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%ED%99%9C%EB%8F%99-%ED%94%BC%EB%93%9C
-    //@GET("/activity/{bookstoreIdx}")
+    @GET("/activity/{bookstoreIdx}")
+    fun requestBookstoreActivity(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseBookstoreActivityData>
 
 
     //지역

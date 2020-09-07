@@ -13,11 +13,11 @@ fun<ResponseType> Call<ResponseType>.customEnqueue(
     this.enqueue(object:Callback<ResponseType>{
         override fun onFailure(call: Call<ResponseType>, t: Throwable) {
             onFail()
-            Log.d("response >>", t.toString())
+            Log.d("onFailure response >>", t.toString())
         }
 
         override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
-            Log.d("response", response.toString())
+            Log.d("onResponse response", response.toString())
             response.body()?.let {
                 onSuccess(it)
             } ?: onError()

@@ -23,13 +23,13 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
 
     fun bind(myData: RecommendData){
         bookstoreIdx = myData.bookstoreIdx
-//        Glide.with(itemView).load(myData.profile).into(profile)
+        Glide.with(itemView).load("https://t1.daumcdn.net/cfile/tistory/21053641544FEA7816").into(profile)
         profile.setBackgroundResource(R.drawable.recommend_img)
-        tag1.text = "#" + myData.tag1
-        tag2.text = "#" + myData.tag2
-        tag3.text = "#" + myData.tag3
-        intro1.text = myData.intro1
-        intro2.text = myData.intro2
+        tag1.text = "#" + myData.hashtag1
+        tag2.text = "#" + myData.hashtag2
+        tag3.text = "#" + myData.hashtag3
+        intro1.text = myData.shortIntro1
+        intro2.text = myData.shortIntro2
         name.text = myData.bookstoreName
         address.text = myData.location
         itemView.setOnClickListener{itemClick(myData, itemView)}
