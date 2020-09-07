@@ -14,9 +14,9 @@ class CategoryViewHolder(
 
     var activityIdx by Delegates.notNull<Int>()
     var bookstoreName: TextView = itemView.findViewById(R.id.tv_activity_bookstore_name)
-    var activityName: TextView = itemView.findViewById(R.id.tv_activity_title)
+    var activityName by Delegates.notNull<String>()
     var image: ImageView = itemView.findViewById(R.id.iv_activity_intro)
-    var shortIntro by Delegates.notNull<String>() //이게 뭐하는 데이터인지 물어볼 것
+    var shortIntro : TextView = itemView.findViewById(R.id.tv_activity_title) //이게 뭐하는 데이터인지 물어볼 것
     var price: TextView = itemView.findViewById(R.id.tv_activity_price)
     var dDay: TextView = itemView.findViewById(R.id.tv_activity_duedate)
 
@@ -29,9 +29,9 @@ class CategoryViewHolder(
             image.setImageResource(R.drawable.ex_img_activity_unsplash)
         }
         activityIdx = categoryData.activityIdx
-        activityName.text = categoryData.activityName
+        activityName = categoryData.activityName
         bookstoreName.text = categoryData.bookstoreName
-        shortIntro = categoryData.shortIntro
+        shortIntro.text = categoryData.shortIntro
         dDay.text = "D-" + categoryData.dday
         price.text = categoryData.price
 

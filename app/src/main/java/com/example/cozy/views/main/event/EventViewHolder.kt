@@ -21,6 +21,7 @@ class EventViewHolder(
 
     fun bind(myData: EventData){
 //        Glide.with(itemView).load(myData.img).into(img)
+        activityIdx = myData.activityIdx
         img.setImageResource(R.drawable.event_pic)
         day.text = myData.dday.toString()
         title.text = myData.activityName

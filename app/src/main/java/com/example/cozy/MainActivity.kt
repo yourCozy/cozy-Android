@@ -6,6 +6,7 @@ import android.util.Log
 import android.util.Base64
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -64,6 +65,14 @@ class MainActivity : AppCompatActivity() {
         //카카오 해시키 가져오기
         getAppKeyHash()
 
+        //google accesstoken 가져오기
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+
+
         //google account 이용중인지 확인
         auth = Firebase.auth
         val currentUser = auth.currentUser
@@ -74,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                         if(task.isSuccessful()){
                             val idToken = (task.result)?.token
                             //token 백엔드로 보낼 수 있음.
+
                         } else{
                             //handle error
 

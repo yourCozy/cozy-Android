@@ -145,7 +145,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
         tv_no_recently_seen_text.visibility = View.GONE
 
-        rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
+            rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
     }
 
     override fun onClick(v: View?) {

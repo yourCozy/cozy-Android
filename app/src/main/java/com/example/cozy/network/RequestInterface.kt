@@ -14,7 +14,7 @@ import retrofit2.http.*
 interface RequestInterface {
 
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
-    @POST("/auth/signin")
+    @POST("/auth/social")
     fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
 
     //추천
@@ -53,8 +53,8 @@ interface RequestInterface {
 
 
     //활동 상세 조회 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C
-    //@GET("/activity/detail/{activityIdx}")
-
+    @GET("/activity/detail/{activityIdx}")
+    fun requestEventDetail(@Path("activityIdx") activityIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseEventDetail>
 
     //카테고리별 활동 조회(마감 임박순) https://github.com/yourCozy/cozy-Server/wiki/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC%EB%B3%84-%ED%99%9C%EB%8F%99-%EC%A1%B0%ED%9A%8C(%EB%A7%88%EA%B0%90-%EC%9E%84%EB%B0%95%EC%88%9C)
     @GET("/activity/category/deadline/{categoryIdx}")
