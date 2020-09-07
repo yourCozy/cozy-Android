@@ -11,6 +11,6 @@ class EventDetailViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView)
     val event_rv_img : ImageView = itemView.findViewById(R.id.event_rv_img)
 
     fun bind(data: EventDetailData){
-        Glide.with(itemView).load(data.event_image).into(event_rv_img)
+        Glide.with(itemView).load(data.img).into(event_rv_img)
     }
 }

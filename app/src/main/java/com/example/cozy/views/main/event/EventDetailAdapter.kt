@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.R
 
 
-class EventDetailAdapter (private val context: Context): RecyclerView.Adapter<EventDetailViewHolder>(){
-    var data = mutableListOf<EventDetailData>()
+class EventDetailAdapter (private val context: Context, val data : MutableList<EventDetailData>): RecyclerView.Adapter<EventDetailViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventDetailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_event_items, parent, false)
     return EventDetailViewHolder(

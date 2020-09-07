@@ -46,11 +46,12 @@ class EventFragment : Fragment() {
             for (i in 0..7) {
                 add(
                     EventData(
-                        day = "D-3",
+                        activityIdx = 1,
+                        activityName = "책방 영화관",
+                        shortIntro = "홍철책방을 대표하는 책방 영화관이 돌아왔습니다:-)",
                         img = "gg",
-                        activity_title = "책방 영화관",
-                        activiry_info = "홍철책방을 대표하는 책방 영화관이 돌아왔습니다:-)",
-                        activity_price = "16000원"
+                        dday = "D-3",
+                        price = "16000원"
                     )
                 )
             }

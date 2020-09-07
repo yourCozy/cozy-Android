@@ -1,6 +1,7 @@
 package com.example.cozy
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,10 +12,10 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.requestData.RequestLogin
 import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.GoogleAuthUtil
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.*
+import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -117,6 +118,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         // Result returned from launching the Intent from GoogleSigconsole.firebase.google.comnInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val result : GoogleSignInResult? = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+            if (result!!.isSuccess()) {
+                val account: GoogleSignInAccount? = result.signInAccount
+
+                val runnable = object: Runnable{
+                    override fun run() {
+                        val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
+                        val accessToken: String = GoogleAuthUtil.getToken(applicationContext, account?.account, scope, Bundle())
+                        Log.d(TAG, "accessToken:"+accessToken)
+                    }
+                }
+                AsyncTask.execute(runnable)
+            }
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
