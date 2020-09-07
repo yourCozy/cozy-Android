@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.view.*
+import java.lang.Exception
 
 class MypageFragment : Fragment(), View.OnClickListener {
 
@@ -86,18 +87,14 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
             setDataOnView(account)
         }
-        fragView.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
-            val intent = Intent(activity as MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-        }
         else if (Session.getCurrentSession() != null){ //user kakao 로그인 한 상태면 여기로
-            view.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
+            fragView.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
 
 
         }
         else {
             //user 로그인 안 한 상태
-            view.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
+            fragView.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
@@ -108,10 +105,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
         //카카오는 소셜 로그인 후 서버에 토큰, 이름, 이메일, 사진 POST 후 MypageFragment에서 데이터 GET or Firebase..
         return fragView
-        loadData(view)
-
-        return view
-
     }
 
     override fun onStart() {
@@ -144,15 +137,15 @@ class MypageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun updateUI() {
-            btn_login.visibility = View.GONE
-            tv_login_needed.visibility = View.GONE
-            rounded_iv_profile.visibility = View.VISIBLE
-            tv_user_name.visibility = View.VISIBLE
-            tv_user_email.visibility = View.VISIBLE
-            rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
-            tv_no_recently_seen_text.visibility = View.GONE
+        btn_login.visibility = View.GONE
+        tv_login_needed.visibility = View.GONE
+        rounded_iv_profile.visibility = View.VISIBLE
+        tv_user_name.visibility = View.VISIBLE
+        tv_user_email.visibility = View.VISIBLE
+        rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
+        tv_no_recently_seen_text.visibility = View.GONE
 
-            rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
+        rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
     }
 
     override fun onClick(v: View?) {
@@ -218,14 +211,13 @@ class MypageFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
         inflater.inflate(R.menu.setting, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting -> {
+                Toast.makeText(this.context, "설정", Toast.LENGTH_SHORT).show()
 //                val intent = Intent(context,ProfileActivity::class.java)
 //                startActivity(intent)
             }
