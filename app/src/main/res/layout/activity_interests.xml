@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/no_interest"
         style="@style/hint_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,12 +34,15 @@
         android:id="@+id/rv_interests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="10dp"
+        android:overScrollMode="never"
         android:clipToPadding="false"
+        android:paddingTop="34dp"
+        android:paddingBottom="105dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tb_interests"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_interests_bookstore" />
+        tools:listitem="@layout/item_interest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

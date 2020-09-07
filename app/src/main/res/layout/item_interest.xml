@@ -93,10 +93,10 @@
         android:background="#ffffff"/>
 
     <TextView
-        android:id="@+id/interest_intro"
+        android:id="@+id/interest_intro1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="매일 새로 구운 빵과 함께하는 달콤한 책 그리고 오늘, 봄날의 책방"
+        android:text="매일 새로 구운 빵과 함께하는 달콤한 "
         android:textColor="@color/black"
         android:fontFamily="@font/fontfamily"
         android:textFontWeight="700"
@@ -106,6 +106,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="16dp"/>
+    <TextView
+        android:id="@+id/interest_intro2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="매일 새로 구운 빵과 함께하는 달콤한 책 그방"
+        android:textColor="@color/black"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="700"
+        app:layout_constraintTop_toBottomOf="@id/interest_intro1"
+        app:layout_constraintStart_toStartOf="@id/interest_intro1"
+        app:layout_constraintEnd_toEndOf="@id/interest_intro1"
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="4dp"/>
 
     <ImageView
     android:id="@+id/interest_icon"
@@ -113,8 +126,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/icon_location_gray"
     android:layout_marginTop="8dp"
-    app:layout_constraintTop_toBottomOf="@id/interest_intro"
-    app:layout_constraintStart_toStartOf="@id/interest_intro"/>
+    app:layout_constraintTop_toBottomOf="@id/interest_intro2"
+    app:layout_constraintStart_toStartOf="@id/interest_intro2"/>
 
     <TextView
         android:id="@+id/interest_place"
