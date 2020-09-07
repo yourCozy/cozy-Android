@@ -1,5 +1,6 @@
 package com.example.cozy.views.mypage
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.LoginActivity
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -24,11 +27,14 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.view.*
-import java.lang.Exception
 
 class MypageFragment : Fragment(), View.OnClickListener {
+
+    val service = RequestToServer.service
     lateinit var recentlySeenAdapter: RecentlySeenAdapter
     var data = mutableListOf<RecentlySeenData>()
+    lateinit var recentlySeenData: RecentlySeenData
+    lateinit var fragView: View
     private val TAG = "MyPageTAG"
 
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -42,8 +48,9 @@ class MypageFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fragView = inflater.inflate(R.layout.fragment_mypage, container, false)
+
         //이하 구글 계정 로그인 된 것 있는지 가져오는 동작.
-        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
 
         setHasOptionsMenu(true)
 
@@ -63,38 +70,27 @@ class MypageFragment : Fragment(), View.OnClickListener {
         Log.d(TAG, "current user email is = " + auth.currentUser?.email)
         Log.d(TAG, "last signed in account = " + account?.email)
 
+        profileImage = fragView.findViewById(R.id.rounded_iv_profile)
+        profileName = fragView.findViewById(R.id.tv_user_name)
+        profileEmail = fragView.findViewById(R.id.tv_user_email)
 
-        recentlySeenAdapter = RecentlySeenAdapter(view.context) { RecentlySeenData, View ->
-            val intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "어댑터 및 클릭리스너 설정됨.")
-        }
-        with(view.rv_recently_seen) {
-            adapter = recentlySeenAdapter
-        }
-        profileImage = view.findViewById(R.id.rounded_iv_profile)
-        profileName = view.findViewById(R.id.tv_user_name)
-        profileEmail = view.findViewById(R.id.tv_user_email)
+        loadRSData()
 
         if (currentUser != null) {//user google 로그인 한 상태면 여기로
-            view.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
+            fragView.findViewById<View>(R.id.rounded_iv_profile).setOnClickListener(this)
 
             setDataOnView(account)
-        } else {
-            //user 로그인 안 한 상태
-            view.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
-                val intent = Intent(activity as MainActivity, LoginActivity::class.java)
-                startActivity(intent)
-            }
         }
-        view.findViewById<View>(R.id.btn_interests).setOnClickListener(this)
-        view.findViewById<View>(R.id.view_notice).setOnClickListener(this)
-        view.findViewById<View>(R.id.view_event).setOnClickListener(this)
+        fragView.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
+            val intent = Intent(activity as MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+        fragView.findViewById<View>(R.id.btn_interests).setOnClickListener(this)
+        fragView.findViewById<View>(R.id.view_notice).setOnClickListener(this)
+        fragView.findViewById<View>(R.id.view_event).setOnClickListener(this)
 
-        loadData(view)
         //카카오는 소셜 로그인 후 서버에 토큰, 이름, 이메일, 사진 POST 후 MypageFragment에서 데이터 GET or Firebase..
-        return view
-
+        return fragView
     }
 
     override fun onStart() {
@@ -105,27 +101,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         if (currentUser != null) {
             Log.d(TAG, "현재 로그인한 계정이 있음." + FirebaseAuth.getInstance().currentUser?.email)
             Log.d(TAG, "현재 로그인한 계정의 아이디 토큰 " + (auth.currentUser)?.getIdToken(true))
-        }
-        updateUI(currentUser)
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {//로그인 된 상태
-            btn_login.visibility = View.GONE
-            tv_login_needed.visibility = View.GONE
-            rounded_iv_profile.visibility = View.VISIBLE
-            tv_user_name.visibility = View.VISIBLE
-            tv_user_email.visibility = View.VISIBLE
-            rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
-            tv_no_recently_seen_text.visibility = View.GONE
-
-            rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
-            setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
-            /*
-                if (user.isEmailVerified) {
-                } else {
-                }
-            */
+            updateUI()
         } else {
             btn_login.visibility = View.VISIBLE
             tv_login_needed.visibility = View.VISIBLE
@@ -134,8 +110,20 @@ class MypageFragment : Fragment(), View.OnClickListener {
             tv_user_email.visibility = View.GONE
             rv_recently_seen.visibility = View.GONE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
             tv_no_recently_seen_text.visibility = View.VISIBLE
-
         }
+
+    }
+
+    private fun updateUI() {
+        btn_login.visibility = View.GONE
+        tv_login_needed.visibility = View.GONE
+        rounded_iv_profile.visibility = View.VISIBLE
+        tv_user_name.visibility = View.VISIBLE
+        tv_user_email.visibility = View.VISIBLE
+        rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
+        tv_no_recently_seen_text.visibility = View.GONE
+
+        fragView.rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
     }
 
     override fun onClick(v: View?) {
@@ -165,30 +153,44 @@ class MypageFragment : Fragment(), View.OnClickListener {
         profileEmail.setText(account?.email)
     }
 
-    fun loadData(v: View) {
-        try {
-            data.apply {
-                for (i in 0..3) {
-                    add(
-                        RecentlySeenData(
-                            i,
-                            "ex_socialcut_unsplash",
-                            "보라돌이의 책방"
-                        )
-                    )
-                }
+    fun loadRSData() {
+        val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        val header = mutableMapOf<String, String?>()
+        header["Content-Type"] = "application/json"
+        header["token"] = sharedPref.getString("token", "token")
+        service.requestRecentlySeen(header).customEnqueue(
+            onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show() },
+            onSuccess = {
+                if (it.success) {
+                    if (it.message == "최근 본 책방 조회 성공") {
+                        recentlySeenAdapter = RecentlySeenAdapter(
+                            context!!,
+                            it.data.toMutableList()
+                        ) { RecentlySeenData, View ->
+                            val intent = Intent(
+                                activity as MainActivity,
+                                RecommendDetailActivity::class.java
+                            )
+                            intent.putExtra("bookstoreIdx", RecentlySeenData.bookstoreIdx)
+                            startActivity(intent)
+                        }
+                        rv_recently_seen.adapter = recentlySeenAdapter
+                        rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 13, 0))
+                        Log.d(TAG, "최근 본 책방 통신 성공.")
+                    } else {
+                        onEmpty()
+                        Log.d(TAG, "최근 본 책방 없음. 통신 성공")
+                    }
+                }else onEmpty()
             }
-        } catch (e: Exception) {
-            Log.e("CATCH", "data load failed")
-        }
-
-        recentlySeenAdapter.data = data
-        v.rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 6, 0))
-        recentlySeenAdapter.notifyDataSetChanged()
+        )
+        Log.d(TAG, "최근 본 책방 어댑터 적용 됨.")
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
         inflater.inflate(R.menu.setting, menu)
     }
 
@@ -200,5 +202,10 @@ class MypageFragment : Fragment(), View.OnClickListener {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun onEmpty() {
+        rv_recently_seen.visibility = View.GONE
+        tv_no_recently_seen_text.visibility = View.VISIBLE
     }
 }
