@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.cozy.DialogBookmark
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
@@ -65,36 +66,60 @@ class RecommendDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        save.setOnClickListener{
+        save.setOnClickListener {
+            val sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
             val header = mutableMapOf<String, String>()
             header["Content-Type"] = "application/json"
-            header["token"] = sharedPref.getString("token","token").toString()
-            service.requestBookmarkUpdate(bookstoreIdx,header).customEnqueue(
-                onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
-                onSuccess = {
-                    Log.d("Bookmark message", "${it.message}")
-                    if(it.success){
-                        val data = it.data
-                        if (data!!.checked == 1){
-                            Log.d("Bookmark message", "북마크 성공 ${it.message}")
+            header["token"] = sharedPref.getString("token", "token").toString()
+            if (!save.isSelected) {
+                service.requestBookmarkUpdate(bookstoreIdx, header).customEnqueue(
+                    onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
+                    onSuccess = {
+                        Log.d("Bookmark message", "${it.message}")
+                        Log.d("Bookmark checked11", "${it.data}")
+                        if (it.success) {
+                            val data = it.data
+                            Log.d("Bookmark checked22", "북마크 성공 ${data!!.checked}")
                             save.isSelected = true
-                            val inflater : LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+                            val inflater: LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val layout = inflater.inflate(R.layout.bookmark_custom_toast, null)
 
-                            with (Toast(this)) {
+                            with(Toast(this)) {
                                 setGravity(Gravity.CENTER, 0, 0)
                                 duration = Toast.LENGTH_SHORT
                                 view = layout
                                 show()
                             }
                         }
-                        else{
-                            save.isSelected = false
-                            Log.d("Bookmark message", "북마트 해제 ${it.message}")
-                        }
-                    }
+                    })
+            } else {
+                val customDialog = DialogBookmark(this)
+                customDialog.setOnOKClickedListener {
+                    RequestToServer.service.requestBookmarkUpdate(bookstoreIdx, header)
+                        .customEnqueue(
+                            onError = {
+                                Toast.makeText(
+                                    this,
+                                    "올바르지 않은 요청입니다.",
+                                    Toast.LENGTH_SHORT
+                                )
+                            },
+                            onSuccess = {
+                                Log.d("Bookmark message", "${it.message}")
+                                Log.d("Bookmark checked11", "${it.data}")
+
+                                if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                    //팝업창 띄우기
+                                }
+                                if (it.success) {
+                                    save.isSelected = false
+                                    Log.d("Bookmark checked22", "북마크 해제${it.data!!.checked}")
+                                }
+                            }
+                        )
                 }
-            )
+                customDialog.start()
+            }
         }
 
         road.setOnClickListener {
