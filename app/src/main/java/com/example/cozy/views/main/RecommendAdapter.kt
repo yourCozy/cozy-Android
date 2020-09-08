@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cozy.DialogBookmark
 import com.example.cozy.R
 
 class RecommendAdapter (private val context : Context, val itemClick: (RecommendData, View) -> Unit) : RecyclerView.Adapter<RecommendViewHolder>(){
@@ -25,23 +26,42 @@ class RecommendAdapter (private val context : Context, val itemClick: (Recommend
 
         holder.save.setOnClickListener{
 
-            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+            if(holder.save.isSelected == false){
+                val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
 
-            with (Toast(context)) {
-                setGravity(Gravity.CENTER, 0, 0)
-                duration = Toast.LENGTH_SHORT
-                view = layout
-                show()
-            }
-
-//            Toast.makeText(context, "북마크!", Toast.LENGTH_SHORT).show()
-            if (holder.save.isSelected){
-                holder.save.isSelected = false
+                with (Toast(context)) {
+                    setGravity(Gravity.CENTER, 0, 0)
+                    duration = Toast.LENGTH_SHORT
+                    view = layout
+                    show()
+                }
+                holder.save.isSelected = !holder.save.isSelected
             }
             else{
-                holder.save.isSelected = true
+                val customDialog = DialogBookmark(context!!)
+                customDialog.setOnOKClickedListener {
+                    holder.save.isSelected = !holder.save.isSelected
+                }
+                customDialog.start()
             }
+//            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+//
+//            with (Toast(context)) {
+//                setGravity(Gravity.CENTER, 0, 0)
+//                duration = Toast.LENGTH_SHORT
+//                view = layout
+//                show()
+//            }
+//
+////            Toast.makeText(context, "북마크!", Toast.LENGTH_SHORT).show()
+//            if (holder.save.isSelected){
+//                holder.save.isSelected = false
+//            }
+//            else{
+//                holder.save.isSelected = true
+//            }
         }
     }
 

@@ -1,17 +1,14 @@
 package com.example.cozy.network
 
 import com.example.cozy.network.requestData.RequestLogin
-import com.example.cozy.network.responseData.ResponseBookmarkUpdate
-import com.example.cozy.network.responseData.ResponseInterest
-import com.example.cozy.network.responseData.ResponseMap
-import com.example.cozy.network.responseData.ResponseSignin
+import com.example.cozy.network.responseData.*
 import retrofit2.Call
 import retrofit2.http.*
 
 interface RequestInterface {
 
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
-    @POST("/auth/signin")
+    @POST("/auth/social")
     fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
 
     //추천
@@ -38,7 +35,9 @@ interface RequestInterface {
 
 
     //지역별 책방 갯수 https://github.com/yourCozy/cozy-Server/wiki/%EC%A7%80%EC%97%AD%EB%B3%84-%EC%B1%85%EB%B0%A9-%EA%B0%AF%EC%88%98-%EB%B3%B4%EA%B8%B0
-    //@GET("/bookstore/sectionnum")
+    @GET("/bookstore/count/section")
+    fun requestCount(@HeaderMap headers: Map<String, String?>) : Call<ResponseCount>
+
 
 
     //활동

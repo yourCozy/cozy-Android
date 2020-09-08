@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cozy.DialogBookmark
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
@@ -52,15 +53,16 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                                 view = layout
                                 show()
                             }
+                            holder.bookmark.isSelected = !holder.bookmark.isSelected
                         }
                         else{
-                            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                            val layout = inflater.inflate(R.layout.bookmark_cancel_custom_toast,null)
-
-
-
+                            val customDialog = DialogBookmark(context!!)
+                            customDialog.setOnOKClickedListener {
+                                holder.bookmark.isSelected = !holder.bookmark.isSelected
+                            }
+                            customDialog.start()
                         }
-                        holder.bookmark.isSelected = !holder.bookmark.isSelected
+                        //holder.bookmark.isSelected = !holder.bookmark.isSelected
                         Log.d("RESPONSE", it.message)
                     }
                     else Log.d("RESPONSE", it.message)
