@@ -16,6 +16,7 @@
         <item name="fontFamily">@font/nanum_square_roundb</item>
     </style>
 
+
     <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:showDividers">middle</item>
         <item name="android:divider">@drawable/divide_line2</item>

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cozy.DialogBookmark
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
@@ -54,7 +55,11 @@ class RecommendAdapter (private val context : Context, val itemClick: (Recommend
                             }
                         }
                         else{
-                            holder.save.isSelected = false
+                            val customDialog = DialogBookmark(context!!)
+                            customDialog.setOnOKClickedListener {
+                                holder.save.isSelected = !holder.save.isSelected
+                            }
+                            customDialog.start()
                             Log.d("Bookmark checked22", "북마크 해제${data!!.checked.toString()}")
                         }
                     }

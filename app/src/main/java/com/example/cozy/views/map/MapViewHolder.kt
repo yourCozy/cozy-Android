@@ -1,5 +1,6 @@
 package com.example.cozy.views.map
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -26,7 +27,14 @@ class MapViewHolder (itemView: View, val itemClick: (MapData, View) -> Unit) : R
         tag1.text = "#"+ data.hashtag1
         tag2.text = "#"+ data.hashtag2
         tag3.text = "#"+ data.hashtag3
-        bookmark.isSelected = data.checked != 0
+        if(data.checked == 0) {
+            bookmark.isSelected
+            Log.d("북마크 체크 안되어있음", (bookmark.isSelected).toString())
+        }
+        else {
+            !bookmark.isSelected
+            Log.d("북마크 체크 되어있음", (!bookmark.isSelected).toString())
+        }
         itemView.setOnClickListener{itemClick(data, itemView)}
     }
 
