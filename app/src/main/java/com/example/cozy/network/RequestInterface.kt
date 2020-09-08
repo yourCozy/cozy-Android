@@ -31,8 +31,10 @@ interface RequestInterface {
     //지역
     //지역별 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EC%A7%80%EC%97%AD%EB%B3%84-%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
     @GET("/bookstore/section/{sectionIdx}")
-    fun requestMap(@Path("sectionIdx") sectionIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseMap>
-
+    fun requestMapLogin(@Path("sectionIdx") sectionIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseMap>
+    //로그인하지 않았을 때
+    @GET("/bookstore/section/{sectionIdx}")
+    fun requestMap(@Path("sectionIdx") sectionIdx: Int) : Call<ResponseMap>
 
     //지역별 책방 갯수 https://github.com/yourCozy/cozy-Server/wiki/%EC%A7%80%EC%97%AD%EB%B3%84-%EC%B1%85%EB%B0%A9-%EA%B0%AF%EC%88%98-%EB%B3%B4%EA%B8%B0
     @GET("/bookstore/count/section")

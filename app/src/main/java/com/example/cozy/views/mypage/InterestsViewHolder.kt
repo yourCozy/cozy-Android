@@ -5,6 +5,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cozy.R
 import kotlin.properties.Delegates
 
@@ -22,12 +23,7 @@ class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View)
 
     fun bind(myData: InterestsData) {
         bookstoreIdx = myData.bookstoreIdx
-        if(myData.mainimg != ""){
-            val resourceId = itemView.context.resources.getIdentifier(myData.mainimg, "drawable", itemView.context.packageName)
-            bookstoreImg.setImageResource(resourceId)
-        }else{
-            bookstoreImg.setImageResource(R.drawable.ex_heftiba_unsplash)
-        }
+        Glide.with(itemView).load(myData.mainimg).into(bookstoreImg)
         shortIntro1.text = myData.shortIntro1
         shortIntro2.text = myData.shortIntro2
         bookstorename.text = myData.bookstoreName
@@ -35,7 +31,6 @@ class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View)
         tag1.text = "#" + myData.tag1
         tag2.text = "#" + myData.tag2
         tag3.text = "#" + myData.tag3
-        bookmark.isSelected = myData.checked != 0
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

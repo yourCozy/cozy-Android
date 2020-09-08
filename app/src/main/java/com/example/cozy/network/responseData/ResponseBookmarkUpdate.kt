@@ -8,5 +8,5 @@ data class ResponseBookmarkUpdate(
 )
 
 data class Checked(
-    val checked: Int
+    var checked: Int
 )

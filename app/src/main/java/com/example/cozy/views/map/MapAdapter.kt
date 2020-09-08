@@ -37,42 +37,52 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
             val header = mutableMapOf<String, String?>()
             header["Content-Type"] = "application/json"
             header["token"] = token
-
-            RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header).customEnqueue(
-                onError = { Log.d("RESPONSE", "error")},
-                onSuccess = {
-                    if(it.success) {
-                        //커스텀
-                        if(holder.bookmark.isSelected == false){
-                            val inflater : LayoutInflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
-
-                            with (Toast(context)) {
-                                setGravity(Gravity.CENTER, 0, 0)
-                                duration = Toast.LENGTH_SHORT
-                                view = layout
-                                show()
+            if(holder.bookmark.isSelected == false) {
+                RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header).customEnqueue(
+                        onError = { Log.d("RESPONSE", "error") },
+                        onSuccess = {
+                            if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                //팝업창 띄우기
                             }
-                            holder.bookmark.isSelected = !holder.bookmark.isSelected
-                        }
-                        else{
-                            val customDialog = DialogBookmark(context!!)
-                            customDialog.setOnOKClickedListener {
+                            if (it.success) {
+                                Log.d("RESPONSE", it.message)
+                                val inflater: LayoutInflater =
+                                    context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                                val layout = inflater.inflate(R.layout.bookmark_custom_toast, null)
+
+                                with(Toast(context)) {
+                                    setGravity(Gravity.CENTER, 0, 0)
+                                    duration = Toast.LENGTH_SHORT
+                                    view = layout
+                                    show()
+                                }
                                 holder.bookmark.isSelected = !holder.bookmark.isSelected
                             }
-                            customDialog.start()
                         }
-                        //holder.bookmark.isSelected = !holder.bookmark.isSelected
-                        Log.d("RESPONSE", it.message)
-                    }
-                    else Log.d("RESPONSE", it.message)
+                    )
                 }
-            )
+            else {
+                val customDialog = DialogBookmark(context!!)
+                customDialog.start()
+                customDialog.setOnOKClickedListener {
+                    RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header)
+                        .customEnqueue(
+                            onError = { Log.d("RESPONSE", "error") },
+                            onSuccess = {
+                                if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                    //팝업창 띄우기
+                                }
+                                if (it.success) {
+                                    Log.d("RESPONSE", it.message)
+                                    holder.bookmark.isSelected = !holder.bookmark.isSelected
+                                }
+                            }
+                        )
+                }
+            }
 
         }
-    }
 
-    fun addItem(item : MapData){
-        data.add(item)
     }
 }
+

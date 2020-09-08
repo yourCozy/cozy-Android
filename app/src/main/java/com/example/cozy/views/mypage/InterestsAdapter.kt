@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cozy.DialogBookmark
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
@@ -26,7 +26,7 @@ class InterestsAdapter(val context: Context, var data : MutableList<InterestsDat
     override fun onBindViewHolder(holder: InterestsViewHolder, position: Int) {
         holder.bind(data[position])
 
-        holder.bookmark.isSelected == true
+        holder.bookmark.setImageResource(R.drawable.icon_save_full)
 
         //북마크 해제 온클릭리스터 추가
         holder.bookmark.setOnClickListener{
@@ -36,21 +36,26 @@ class InterestsAdapter(val context: Context, var data : MutableList<InterestsDat
             header["Content-Type"] = "application/json"
             header["token"] = token
 
-            RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header).customEnqueue(
-                onError = { Log.d("RESPONSE", "error")},
-                onSuccess = {
-                    if(it.success){
-                        Log.d("RESPONSE", it.message)
-                        data.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position,data.size)
-                        if(data.size == 0)
-                            onEmpty()
-                    }
-                    else
-                        Log.d("RESPONSE", it.message)
-                }
-            )
+            val customDialog = DialogBookmark(context!!)
+            customDialog.start()
+            customDialog.setOnOKClickedListener {
+                RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header)
+                    .customEnqueue(
+                        onError = { Log.d("RESPONSE", "error") },
+                        onSuccess = {
+                            if (it.success) {
+                                Log.d("RESPONSE", it.message)
+                                data.removeAt(position)
+                                notifyItemRemoved(position)
+                                notifyItemRangeChanged(position, data.size)
+                                if(data.size == 0) onEmpty()
+                            }
+                            else Log.d("RESPONSE", it.message)
+                        }
+                    )
+            }
+
+
 
         }
     }

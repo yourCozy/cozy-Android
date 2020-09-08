@@ -36,8 +36,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var mAuth: FirebaseAuth
 
-    private lateinit var callback: SessionCallback
-    val requestTosever = RequestToServer
+    val requestToServer = RequestToServer
     private lateinit var session : Session
 
     private lateinit var login_view: View
@@ -149,16 +148,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     // 로그인이 성공했을 때
                     Log.d(TAG, "카카오 로그인 성공")
                     val kakaoAccount: UserAccount = result!!.kakaoAccount
-                    val kakao_email = kakaoAccount.email
+                    val kakao_id = result.id
+
                     val nickname = kakaoAccount.profile.nickname
                     val profile_pic = kakaoAccount.profile.profileImageUrl
                     //리프레시 토큰
                     val session = Session.getCurrentSession().tokenInfo.refreshToken
 
                     //server 통신
-                    requestTosever.service.requestLogin(
+                    requestToServer.service.requestLogin(
                         RequestLogin(
-                            email = kakao_email,
+                            email = kakao_id.toString(),
                             nickname = nickname,
                             refreshToken = session.toString()
                         )
@@ -167,17 +167,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.e(TAG, "onError!!!!")
                         },
                         onSuccess = {
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data[1]}");
-                            Log.i("KAKAO_API", "사용자 이메일: $kakao_email");
-                            Log.i("KAKAO_API", "사용자 토큰: $session");
+                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}");
+                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}");
+                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}");
                             finish()
                         }
                     )
-                    Log.i("KAKAO_API", "사용자 토큰: $session");
+                    Log.i("KAKAO_API", "사용자 id: $kakao_id");
                     var intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
-                    intent.putExtra("kakao_name", nickname)
-                    intent.putExtra("kakao_email", kakao_email)
-                    intent.putExtra("kakao_picture", profile_pic)
                     startActivity(intent)
                     finish()
                 }
@@ -289,6 +286,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        //Session.getCurrentSession().removeCallback(callback);
+        Session.getCurrentSession().removeCallback(SessionCallback());
     }
 }

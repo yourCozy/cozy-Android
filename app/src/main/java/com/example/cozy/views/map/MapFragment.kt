@@ -13,6 +13,7 @@ import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
@@ -51,6 +52,8 @@ class MapFragment : Fragment() {
             val bottomsheet = BottomSheetFragment(sectionIdx)
             fragmentManager?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
         }
+
+        rv_map.addItemDecoration(ItemDecoration(this.context!!, 0,32))
     }
 
     override fun onResume() {
@@ -63,24 +66,61 @@ class MapFragment : Fragment() {
     private fun showMapList(view : View, num : Int){
         val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
+        val token = sharedPref.getString("token", "token")
         header["Context-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token","token")
-        service.requestMap(num, header).customEnqueue(
-            onError = {Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
-            onSuccess = {
-                if(it.success){
+        header["token"] = token
+        if(header["token"] == "token") {//로그인하지 않았을 때
+            service.requestMap(num).customEnqueue(
+                onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
+                onSuccess = {
                     setSection(num)
-                    detailData = it.data.elementAt(0)
-
-                    mapAdapter = MapAdapter(view.context, it.data.toMutableList()){
-                        MapData, View -> val intent = Intent(activity, RecommendDetailActivity::class.java)
-                        intent.putExtra("bookIdx", MapData.bookstoreIdx)
-                        startActivity(intent)
+                    Log.d("오류", it.message)
+                    if (it.success) {
+                        Log.d("maplist", "성공")
+                        detailData = it.data.elementAt(0)
+                        rv_map.visibility = View.VISIBLE
+                        mapAdapter =
+                            MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
+                                val intent = Intent(activity, RecommendDetailActivity::class.java)
+                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                startActivity(intent)
+                            }
+                        rv_map.adapter = mapAdapter
+                        map_no_bookstore.visibility = View.GONE
                     }
-                    rv_map.adapter = mapAdapter
+                    if (it.message == "서점 리스트가 없습니다.") {
+                        rv_map.visibility = View.GONE
+                        map_no_bookstore.visibility = View.VISIBLE
+                    }
                 }
-            }
-        )
+            )
+        }
+        else {
+            service.requestMapLogin(num, header).customEnqueue(
+                onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
+                onSuccess = {
+                    setSection(num)
+                    Log.d("오류", it.message)
+                    if (it.success) {
+                        Log.d("maplist", "성공")
+                        detailData = it.data.elementAt(0)
+                        rv_map.visibility = View.VISIBLE
+                        mapAdapter =
+                            MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
+                                val intent = Intent(activity, RecommendDetailActivity::class.java)
+                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                startActivity(intent)
+                            }
+                        rv_map.adapter = mapAdapter
+                        map_no_bookstore.visibility = View.GONE
+                    }
+                    if (it.message == "서점 리스트가 없습니다.") {
+                        rv_map.visibility = View.GONE
+                        map_no_bookstore.visibility = View.VISIBLE
+                    }
+                }
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
