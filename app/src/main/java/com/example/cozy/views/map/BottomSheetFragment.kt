@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface.OnShowListener
 import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -42,7 +44,7 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragView =  inflater.inflate(R.layout.bottomsheet_map,container,false)
         initCount()
-
+        //dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return fragView
     }
 
