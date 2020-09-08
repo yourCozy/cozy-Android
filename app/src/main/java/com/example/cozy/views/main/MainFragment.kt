@@ -2,6 +2,7 @@ package com.example.cozy.views.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -25,6 +26,7 @@ class MainFragment : Fragment() {
     val service = RequestToServer.service
     val recommendData = mutableListOf<RecommendData>()
     private lateinit var userNickname : TextView
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +36,12 @@ class MainFragment : Fragment() {
         var view =  inflater.inflate(R.layout.fragment_main, container, false)
 
         setHasOptionsMenu(true)
-        initRecommend(view)
 
         userNickname = view.findViewById(R.id.nickname)
+        sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        userNickname.text = sharedPref.getString("nickname","나그네")
+
+        initRecommend(view)
         //로그인한 상태에서 setDataOnView
         auth = Firebase.auth
         val currentUser = auth.currentUser
@@ -64,10 +69,9 @@ class MainFragment : Fragment() {
     private fun loadData(v : View){
 
         val header = mutableMapOf<String, String>()
-        val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         header["Content-Type"] = "application/json"
-        //header["token"] = sharedPref.getString("token","token").toString()
-        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo1LCJpYXQiOjE1OTk0Nzg3NjcsImV4cCI6MTU5OTUxNDc2NywiaXNzIjoib3VyLXNvcHQifQ.Fg4ya9ny7YbqTvyntvZmAskAyUw007dbK8--KCMaUMI"
+//        header["token"] = sharedPref.getString("token","token").toString()
+        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE1OTk1NDUwODMsImV4cCI6MTU5OTU4MTA4MywiaXNzIjoib3VyLXNvcHQifQ.5LiwFhnFJ-zLcuafwaGzHtjdlxIlM13sXgXdnb_G7q8"
         service.requestRecommendation(header).customEnqueue(
             onError = {
                 Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)

@@ -2,9 +2,11 @@ package com.example.cozy.views.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -26,7 +28,7 @@ class RecommendDetailActivity : AppCompatActivity() {
     val service = RequestToServer.service
     lateinit var detailData : BookstoreDetailData
     var bookstoreIdx by Delegates.notNull<Int>()
-
+    lateinit var sharedPref: SharedPreferences
     var kakaoPackageName : String = "net.daum.android.map"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,7 @@ class RecommendDetailActivity : AppCompatActivity() {
         if (intent.hasExtra("bookstoreIdx")) {
             bookstoreIdx = intent.getIntExtra("bookstoreIdx",0)
         }
+        sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
 
         initDetail()
 
@@ -63,21 +66,35 @@ class RecommendDetailActivity : AppCompatActivity() {
         }
 
         save.setOnClickListener{
-            val inflater : LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
+            val header = mutableMapOf<String, String>()
+            header["Content-Type"] = "application/json"
+            header["token"] = sharedPref.getString("token","token").toString()
+            service.requestBookmarkUpdate(bookstoreIdx,header).customEnqueue(
+                onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
+                onSuccess = {
+                    Log.d("Bookmark message", "${it.message}")
+                    if(it.success){
+                        val data = it.data
+                        if (data!!.checked == 1){
+                            Log.d("Bookmark message", "북마크 성공 ${it.message}")
+                            save.isSelected = true
+                            val inflater : LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val layout = inflater.inflate(R.layout.bookmark_custom_toast,null)
 
-            if (save.isSelected){
-                save.isSelected = false
-            }
-            else{
-                save.isSelected = true
-                with (Toast(this)) {
-                    setGravity(Gravity.CENTER, 0, 0)
-                    duration = Toast.LENGTH_SHORT
-                    view = layout
-                    show()
+                            with (Toast(this)) {
+                                setGravity(Gravity.CENTER, 0, 0)
+                                duration = Toast.LENGTH_SHORT
+                                view = layout
+                                show()
+                            }
+                        }
+                        else{
+                            save.isSelected = false
+                            Log.d("Bookmark message", "북마트 해제 ${it.message}")
+                        }
+                    }
                 }
-            }
+            )
         }
 
         road.setOnClickListener {
@@ -95,10 +112,9 @@ class RecommendDetailActivity : AppCompatActivity() {
     private fun initDetail() {
 
         val header = mutableMapOf<String, String>()
-        val sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         header["Content-Type"] = "application/json"
 //        header["token"] = sharedPref.getString("token","token").toString()
-        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo1LCJpYXQiOjE1OTk0Nzg3NjcsImV4cCI6MTU5OTUxNDc2NywiaXNzIjoib3VyLXNvcHQifQ.Fg4ya9ny7YbqTvyntvZmAskAyUw007dbK8--KCMaUMI"
+        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE1OTk1NDUwODMsImV4cCI6MTU5OTU4MTA4MywiaXNzIjoib3VyLXNvcHQifQ.5LiwFhnFJ-zLcuafwaGzHtjdlxIlM13sXgXdnb_G7q8"
         service.requestBookstoreDatail(header,bookstoreIdx).customEnqueue(
             onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
             onSuccess = {

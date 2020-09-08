@@ -20,6 +20,7 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
     var name : TextView = itemView.findViewById(R.id.rec_name)
     var address : TextView = itemView.findViewById(R.id.rec_address)
     var save : ImageButton = itemView.findViewById(R.id.btn_save)
+    var checked by Delegates.notNull<Int>()
 
     fun bind(myData: RecommendData){
         bookstoreIdx = myData.bookstoreIdx
@@ -32,6 +33,8 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
         intro2.text = myData.shortIntro2
         name.text = myData.bookstoreName
         address.text = myData.location
+        checked = myData.checked
+        save.isSelected = checked != 0
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

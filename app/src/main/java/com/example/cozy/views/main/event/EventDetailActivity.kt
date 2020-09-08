@@ -31,11 +31,18 @@ class EventDetailActivity : AppCompatActivity(){
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         event_toolbar.elevation = 5F
 
-//        eventdetailAdapter = EventDetailAdapter(view.context)
+        if (intent.hasExtra("activityIdx")) {
+            activityIdx = intent.getIntExtra("activityIdx",0)
+        }
+
+        initEventDetailView()
+    }
+
+    private fun initEventDetailView() {
+        eventdetailAdapter = EventDetailAdapter(this)
         rc_event.adapter = eventdetailAdapter
         loadData()
     }
-
 
 
     fun loadData() {
@@ -49,39 +56,10 @@ class EventDetailActivity : AppCompatActivity(){
             },
             onSuccess = {
                 if(it.success){
-                    eventdetailAdapter = EventDetailAdapter(this, it.data.toMutableList())
+
                 }
             }
         )
-//        data.apply {
-//            add(
-//                EventDetailData(
-//                    img = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
-//                )
-//            )
-//            add(
-//                EventDetailData(
-//                    img = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
-//                )
-//            )
-//            add(
-//                EventDetailData(
-//                    img = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
-//                )
-//            )
-//            add(
-//                EventDetailData(
-//                    img = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
-//                )
-//            )
-//            add(
-//                EventDetailData(
-//                    img = "https://cdn.pixabay.com/photo/2018/03/26/02/05/cat-3261420__340.jpg"
-//                )
-//            )
-//        }
-//
-//        eventdetailAdapter.data = data
         rc_event.addItemDecoration(ItemDecoration(this, 8,0))
         eventdetailAdapter.notifyDataSetChanged()
     }

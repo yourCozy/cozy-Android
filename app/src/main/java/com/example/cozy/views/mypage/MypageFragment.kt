@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
@@ -25,11 +26,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.auth.Session
 import com.kakao.usermgmt.response.MeV2Response
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
-import kotlinx.android.synthetic.main.fragment_mypage.view.*
-import java.lang.Exception
 
 class MypageFragment : Fragment(), View.OnClickListener {
 
@@ -121,8 +119,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         else if(Session.getCurrentSession() != null){
             updateUI()
             profileName.text = MeV2Response.KEY_NICKNAME
-            Picasso.get().load(MeV2Response.KEY_PROFILE_IMAGE)
-                .centerInside().fit().into(profileImage)
+            Glide.with(fragView).load(MeV2Response.KEY_PROFILE_IMAGE).into(profileImage)
         }
         else{
             btn_login.visibility = View.VISIBLE
@@ -170,7 +167,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setDataOnView(account: GoogleSignInAccount?) {
-        Picasso.get().load(account?.photoUrl).centerInside().fit().into(profileImage)
+        Glide.with(fragView).load(account?.photoUrl).into(profileImage)
         profileName.setText(account?.displayName)
         profileEmail.setText(account?.email)
     }

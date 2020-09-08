@@ -15,7 +15,7 @@ class TabViewPagerAdapter(fm: FragmentManager, bookstoreIdx: Int): FragmentPager
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> BookstoreFragment().newInstance(bookstoreIdx)
-            else -> EventFragment()
+            else -> EventFragment().newInstance(bookstoreIdx)
         }
     }
 

@@ -1,13 +1,13 @@
 package com.example.cozy.network.responseData
 
-class ResponseBookstoreFeedData (
+data class ResponseBookstoreFeedData (
     val status: String,
     val success: Boolean,
     val message: String,
-    val data: List<BookstoreFeedData>
+    val data: BookstoreFeedData
 )
 
-class BookstoreFeedData(
+data class BookstoreFeedData(
     val bookstoreIdx: Int,
     val image1: String,
     val image2: String,

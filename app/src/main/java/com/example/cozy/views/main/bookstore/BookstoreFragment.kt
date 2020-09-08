@@ -42,7 +42,7 @@ class BookstoreFragment : Fragment() {
             onSuccess = {
                 if(it.success){
                     Log.d("success message >>>> ",it.message)
-                    val data = it.data.elementAt(0)
+                    val data = it.data
                     Glide.with(view).load("https://media.vlpt.us/images/cocoa/post/5b1179ca-b79f-41dc-b910-76ee6150c1a4/cat10.jpg").into(bookstore_img1)
                     bookstore_text1.text = data.description
                     Glide.with(view).load("https://media.vlpt.us/images/cocoa/post/5b1179ca-b79f-41dc-b910-76ee6150c1a4/cat10.jpg").into(bookstore_img2)

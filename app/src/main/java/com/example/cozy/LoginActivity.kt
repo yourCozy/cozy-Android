@@ -1,6 +1,8 @@
 package com.example.cozy
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.requestData.RequestLogin
+import com.example.cozy.onboarding.OnBoardingPreferenceActivity
 import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
 import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.Auth
@@ -43,6 +46,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var login_view: View
 
+    lateinit var sharedPref : SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -58,6 +64,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //Build a GoogleSignInClient w/ the options specified by gso.
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
 
         val googleSingInButton: Button = findViewById(R.id.google_sign_in_button)
         googleSingInButton.setOnClickListener(this)
@@ -159,10 +168,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "카카오 로그인 성공")
                     val kakaoAccount: UserAccount = result!!.kakaoAccount
                     val kakao_email = kakaoAccount.email
+                    Log.d(TAG, kakao_email)
                     val nickname = kakaoAccount.profile.nickname
+                    Log.d(TAG, nickname)
                     val profile_pic = kakaoAccount.profile.profileImageUrl
                     //리프레시 토큰
                     val session = Session.getCurrentSession().tokenInfo.refreshToken
+                    Log.d(TAG, session.toString())
 
                     //server 통신
                     requestTosever.service.requestLogin(
@@ -176,17 +188,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.e(TAG, "onError!!!!")
                         },
                         onSuccess = {
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data[1]}");
-                            Log.i("KAKAO_API", "사용자 이메일: $kakao_email");
-                            Log.i("KAKAO_API", "사용자 토큰: $session");
+                            val data = it.data
+                            editor.putString("token",data.jwtToken) // key,value 형식으로 저장
+                            editor.putString("email",data.email)
+                            editor.putString("nickname",data.nickname)
+                            editor.putString("profile",data.profile)
+                            editor.apply()
+                            editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
+                            Log.i("KAKAO_API", data.jwtToken)
+                            Log.i("KAKAO_API", data.email)
+                            Log.i("KAKAO_API", data.profile)
+                            Log.i("KAKAO_API", data.nickname)
                             finish()
                         }
                     )
-                    Log.i("KAKAO_API", "사용자 토큰: $session");
-                    var intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
-                    intent.putExtra("kakao_name", nickname)
-                    intent.putExtra("kakao_email", kakao_email)
-                    intent.putExtra("kakao_picture", profile_pic)
+                    var intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
                     startActivity(intent)
                     finish()
                 }
@@ -255,7 +271,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // [END auth_with_google]
 
     private fun updateUI(account: GoogleSignInAccount?) {
-        val intent = Intent(applicationContext, MainActivity::class.java)//ProfileActivity
+        val intent = Intent(applicationContext, OnBoardingPreferenceActivity::class.java)//ProfileActivity
         intent.putExtra(GOOGLE_ACCOUNT, account)
         Log.d(TAG,"프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
         startActivityForResult(intent, 1001)
@@ -269,8 +285,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "sign in button works")
             }
             R.id.btn_passing_sign_in ->{
-                val intent = Intent(applicationContext, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
+                editor.putString("user","no")
+                editor.apply()
+                editor.commit();
                 startActivity(intent)
+                finish()
             }
         }
 
@@ -298,6 +318,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        //Session.getCurrentSession().removeCallback(callback);
+//        Session.getCurrentSession().removeCallback(callback);
     }
 }
