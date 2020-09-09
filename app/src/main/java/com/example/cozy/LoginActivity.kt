@@ -1,6 +1,9 @@
 package com.example.cozy
 
+import android.accounts.Account
+import android.accounts.AccountManager
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -38,10 +41,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mAuth: FirebaseAuth
 
     private lateinit var callback: SessionCallback
-    val requestTosever = RequestToServer
+    val requestToServer = RequestToServer
     private lateinit var session : Session
 
     private lateinit var login_view: View
+    private lateinit var token : String
+
+    lateinit var editor : SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +82,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-
-
     override fun onStart() {
         super.onStart()
 
@@ -90,21 +94,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(intent)
             finish()
             Log.d(TAG, "on Start works successful")
+//            Log.d(TAG, "id : " + account?.id)
         } else{
             Log.d(TAG, "현재 로그인한 계정이 없는 경우")
         }
-
-        //이미 로그인한 카카오 계정이 있으면 non-null
-
-//        if(Session.getCurrentSession() != null){
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//            Log.d(TAG, "on Start kakao works successful")
-//        }
-//        else{
-//            Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
-//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,49 +112,119 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             val result : GoogleSignInResult? = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+
             if (result!!.isSuccess()) {
                 val account: GoogleSignInAccount? = result.signInAccount
 
-                val runnable = object: Runnable{
-                    override fun run() {
-                        val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
-                        val accessToken: String = GoogleAuthUtil.getToken(applicationContext, account?.account, scope, Bundle())
-                        Log.d(TAG, "accessToken:"+accessToken)
-                    }
+                val runnable = Runnable {
+                    val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
+                    val accessToken: String = GoogleAuthUtil.getToken(
+                        applicationContext,
+                        account?.account,
+                        scope,
+                        Bundle()
+                    )
+
+                    token = accessToken
+                    Log.d(TAG, "accessToken : ${token}")
+//                    val accnt = task.getResult(ApiException::class.java)!!
+                    requestToServer.service.requestLogin(
+                        RequestLogin(
+                            id = account?.idToken!!,
+                            nickname = account.displayName!!,
+                            refreshToken = token
+                        )
+                    ).customEnqueue(
+                        onError = {
+                            Log.d(TAG, "server 로그인 정보 전송 실패")
+                        },
+                        onSuccess = {
+                            if (it.success) {
+                                val data = it.data
+                                editor.putString("token", data.jwtToken)
+                                editor.putString("email", data.email)
+                                editor.putString("nickname", data.nickname)
+                                editor.putString("profile",data.profile)
+                                editor.apply()
+                                editor.commit()
+                                Log.d(TAG, "이름 = " + data.nickname)
+                                Log.d(TAG, "이메일 = " + data.email)
+                                Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
+                            }else{
+                                Log.d(TAG, "로그인 정보 서버에 전송하는 건 실패!")
+                            }
+                        }
+                    )
+
                 }
                 AsyncTask.execute(runnable)
-            }
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "이름 = " + account.displayName)
-                Log.d(TAG, "이메일 = " + account.email)
-                Log.d(TAG, "getID() = " + account.id)
-                Log.d(TAG, "getAccount() = " + account.account)
-                Log.d(TAG, "getIDToken() = " + account.idToken)
+                /*val refreshToken = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestServerAuthCode(account?.id, true)
+                    .build()
+                val mScope = "oauth2:server:client_id:" + account!!.idToken + ":api_scope:" + "https://www.googleapis.com/auth/userinfo.email"
+                val token = GoogleAuthUtil.getToken(this@LoginActivity, account, mScope)
+                Log.d(TAG, "리프레시 토큰 : $refreshToken")
+                */
+//                val token = GoogleAuthUtil.getToken(mActivity, accnt, mScope, Bundle())
 
-                firebaseAuthWithGoogle(account.idToken!!,task)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
-                // ...
-            }
-            /*if(result!!.isSuccess()){
-                val account = result.signInAccount
-                Log.d(TAG, "이름 = " + account!!.displayName)
-                Log.d(TAG, "이메일 = " + account!!.email)
-                Log.d(TAG,"getID() = " + account!!.id)
-                Log.d(TAG, "getAccount() = " + account!!.account)
-                Log.d(TAG, "getIDToken() = " + account!!.idToken)
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    val accnt = task.getResult(ApiException::class.java)!!
 
-            }*/
+                    /*Log.d(TAG, "이름 = " + accnt.displayName)
+                    Log.d(TAG, "이메일 = " + accnt.email)
+                    Log.d(TAG, "getID() = " + accnt.id)
+                    Log.d(TAG, "getAccount() = " + accnt.account)
+                    Log.d(TAG, "getIDToken() = " + accnt.idToken)
+                    Log.d(TAG," " )
+                    requestToServer.service.requestLogin(
+                        RequestLogin(
+                            email = account?.email!!,
+                            nickname = account?.displayName!!,
+                            refreshToken = token
+                        )
+                    ).customEnqueue(
+                        onError = {
+                            Log.d(TAG, "server 로그인 정보 전송 error 발생")
+                        },
+                        onSuccess = {
+                            if (it.success) {
+                                val data = it.data
+                                editor.putString("token", data.jwtToken)
+                                editor.putString("email", data.email)
+                                editor.putString("nickname", data.nickname)
+                                editor.putString("profile",data.profile)
+                                editor.apply()
+                                editor.commit()
+                                Log.d(TAG, "이름 = " + account?.displayName)
+                                Log.d(TAG, "이메일 = " + account?.email)
+                            } else
+                                Log.d(TAG, "서버 정보 전송 오류 발생.")
+
+//                                val refreshToken = GoogleSignInOptions.Builder().requestServerAuthCode(account?.id)
+//                                Log.d(TAG, "리프레시 토큰 구하기" + refreshToken)
+                        }
+                    )*/
+
+                    firebaseAuthWithGoogle(accnt.idToken!!, task)
+
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Log.w(TAG, "Google sign in failed", e)
+                    // ...
+                }
+            }
+
+
+            /*
+                val account = result.signInAccount*/
         }
     }
     //카카오
     public inner class SessionCallback : ISessionCallback {
         override fun onSessionOpened() {
             // 로그인 세션이 열렸을 때
-            UserManagement.getInstance().me( object : MeV2ResponseCallback() {
+            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response?) {
                     // 로그인이 성공했을 때
                     Log.d(TAG, "카카오 로그인 성공")
@@ -173,9 +236,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val session = Session.getCurrentSession().tokenInfo.refreshToken
 
                     //server 통신
-                    requestTosever.service.requestLogin(
+                    requestToServer.service.requestLogin(
                         RequestLogin(
-                            email = kakao_email,
+                            id = kakao_email,
                             nickname = nickname,
                             refreshToken = session.toString()
                         )
@@ -184,7 +247,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.e(TAG, "onError!!!!")
                         },
                         onSuccess = {
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data[1]}");
+                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}");
                             Log.i("KAKAO_API", "사용자 이메일: $kakao_email");
                             Log.i("KAKAO_API", "사용자 토큰: $session");
                             finish()
@@ -204,7 +267,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(
                         this@LoginActivity,
                         "세션이 닫혔습니다. 다시 시도해주세요 : ${errorResult.toString()}",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
         }
@@ -216,7 +280,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(
                     this@LoginActivity,
                     "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요 : $exception",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -228,8 +293,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         finish()
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.google_sign_in_button -> {
+                signIn()
+                Log.d(TAG, "sign in button works")
+            }
+            R.id.btn_passing_sign_in -> {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
-    // [START auth_with_google]
+    }
+
+    private fun signIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+        Log.d(TAG, "SignIn함수 호출")
+    }
+
     private fun firebaseAuthWithGoogle(idToken: String, completeTask: Task<GoogleSignInAccount>) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
@@ -239,6 +322,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "signInWithCredential:success")
 //                    val user = mAuth.currentUser
                     val user : GoogleSignInAccount? = completeTask.getResult(ApiException::class.java)
+                    val authCode : String? = user?.serverAuthCode
+//                    val account: GoogleSignInAccount? = result.signInAccount
+
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -255,40 +341,34 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     updateUI(null)
                 }
 
-                // [START_EXCLUDE]
-                //hideProgressBar()
-                // [END_EXCLUDE]
             }
     }
-    // [END auth_with_google]
 
     private fun updateUI(account: GoogleSignInAccount?) {
         val intent = Intent(applicationContext, MainActivity::class.java)//ProfileActivity
         intent.putExtra(GOOGLE_ACCOUNT, account)
-        Log.d(TAG,"프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
+        Log.d(TAG, "프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
         startActivityForResult(intent, 1001)
         finish()
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.google_sign_in_button -> {
-                signIn()
-                Log.d(TAG, "sign in button works")
-            }
-            R.id.btn_passing_sign_in ->{
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
-            }
+    /*private fun getAccessCode(result : GoogleSignInResult?) : String {
+        val account: GoogleSignInAccount? = result?.signInAccount
+
+        val runnable = Runnable {
+            val scope = "oauth2:" + Scopes.EMAIL + " " + Scopes.PROFILE
+            val accessToken: String = GoogleAuthUtil.getToken(
+                applicationContext,
+                account?.account,
+                scope,
+                Bundle()
+            )
+            token = accessToken
         }
+        AsyncTask.execute(runnable)
 
-    }
-
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
+        return token
+    }*/
     private fun revokeAccess() {
         // Firebase sign out
         mAuth.signOut()
@@ -306,6 +386,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        //Session.getCurrentSession().removeCallback(callback);
+//        Session.getCurrentSession().removeCallback(callback);
     }
 }

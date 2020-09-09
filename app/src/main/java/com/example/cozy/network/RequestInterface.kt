@@ -40,8 +40,8 @@ interface RequestInterface {
 
     //활동
     //책방별 활동 조회 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%ED%99%9C%EB%8F%99-%ED%94%BC%EB%93%9C
-    //@GET("/activity/{bookstoreIdx}")
-
+    @GET("/activity/{bookstoreIdx}")
+    fun requestEvent(@Path("bookstoreIdx") bookstoreIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseEvent>
 
     //활동 상세 조회 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C
     @GET("/activity/detail/{activityIdx}")

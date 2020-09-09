@@ -24,12 +24,17 @@ class EventDetailActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
 
+        if (intent.hasExtra("activityIdx")) {
+            activityIdx = intent.getIntExtra("activityIdx",0)
+        }
+
         setSupportActionBar(event_toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_before)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         event_toolbar.elevation = 5F
+
 
 //        eventdetailAdapter = EventDetailAdapter(view.context)
         rc_event.adapter = eventdetailAdapter
@@ -50,6 +55,7 @@ class EventDetailActivity : AppCompatActivity(){
             onSuccess = {
                 if(it.success){
                     eventdetailAdapter = EventDetailAdapter(this, it.data.toMutableList())
+                    rc_event.adapter = eventdetailAdapter
                 }
             }
         )

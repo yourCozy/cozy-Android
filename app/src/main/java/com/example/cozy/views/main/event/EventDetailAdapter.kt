@@ -1,19 +1,23 @@
 package com.example.cozy.views.main.event
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.R
 
 
-class EventDetailAdapter (private val context: Context, val data : MutableList<EventDetailData>): RecyclerView.Adapter<EventDetailViewHolder>(){
+class EventDetailAdapter(private val context: Context, val data: MutableList<EventDetailData>) :
+    RecyclerView.Adapter<EventDetailViewHolder>() {
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventDetailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_event_items, parent, false)
-    return EventDetailViewHolder(
-        view
-    )
+        return EventDetailViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {
@@ -22,5 +26,7 @@ class EventDetailAdapter (private val context: Context, val data : MutableList<E
 
     override fun onBindViewHolder(holder: EventDetailViewHolder, position: Int) {
         holder.bind(data[position])
+
+
     }
 }

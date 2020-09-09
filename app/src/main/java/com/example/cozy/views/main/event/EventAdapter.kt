@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.R
 
-class EventAdapter (private val context : Context, val itemClick: (EventData, View) -> Unit) : RecyclerView.Adapter<EventViewHolder>(){
-    var datas = mutableListOf<EventData>()
+class EventAdapter (private val context : Context, var data: MutableList<EventData>, val itemClick: (EventData, View) -> Unit) : RecyclerView.Adapter<EventViewHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_activity,parent,false)
         return EventViewHolder(
@@ -18,14 +18,15 @@ class EventAdapter (private val context : Context, val itemClick: (EventData, Vi
     }
 
     override fun getItemCount(): Int {
-        return datas.size
+        return data.size
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(data[position])
     }
 
     fun addItem(item : EventData){
-        datas.add(item)
+        data.add(item)
     }
+
 }

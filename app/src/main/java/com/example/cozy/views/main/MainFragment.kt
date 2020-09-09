@@ -53,6 +53,7 @@ class MainFragment : Fragment() {
     fun initRecommend(v : View){
         recommendAdapter = RecommendAdapter(v.context){RecommendData, View ->
             var intent = Intent(activity as MainActivity,RecommendDetailActivity::class.java)
+            intent.putExtra("bookstoreIdx",RecommendData.bookstoreIdx)
             startActivity(intent)
         }
         v.rv_recommend.adapter = recommendAdapter

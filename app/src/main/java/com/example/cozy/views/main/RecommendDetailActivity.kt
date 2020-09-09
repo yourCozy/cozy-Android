@@ -9,14 +9,18 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.cozy.R
+import com.example.cozy.views.main.event.EventFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_recommend_detail.*
+import kotlin.properties.Delegates
 
 class RecommendDetailActivity : AppCompatActivity() {
 
     lateinit var tel: String
     var kakaoPackageName : String = "net.daum.android.map"
+    var bookstoreIdx by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,10 @@ class RecommendDetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         rec_toolbar.elevation = 5F
 
-        detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager)
+
+        bookstoreIdx = intent.getIntExtra("bookstoreIdx",0)
+
+        detail_viewpager.adapter = TabViewPagerAdapter(bookstoreIdx,supportFragmentManager)
         detail_viewpager.offscreenPageLimit = 2
         detail_tablayout.setupWithViewPager(detail_viewpager)
         detail_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(detail_tablayout))
@@ -73,6 +80,13 @@ class RecommendDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+
+
+//        val fragment = EventFragment()
+//        val bundle = Bundle()
+//        bundle.putInt("bookstoreIdx", bookstoreIdx)
+//        fragment.setArguments(bundle)
 
     }
 

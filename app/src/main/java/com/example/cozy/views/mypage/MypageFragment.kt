@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.auth.Session
+import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.response.MeV2Response
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -92,12 +93,12 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
 
         }
-        else {
-            //user 로그인 안 한 상태
+        else { //user 로그인 안 한 상태
             fragView.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
+
         }
         fragView.findViewById<View>(R.id.btn_interests).setOnClickListener(this)
         fragView.findViewById<View>(R.id.view_notice).setOnClickListener(this)
@@ -112,19 +113,21 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
         Log.d(TAG, "화면 구성 onStart 호출")
         val currentUser = auth.currentUser
-        if (currentUser != null) {//구글
+        if (currentUser != null) {//구글 로그인 한 상태
             Log.d(TAG, "현재 로그인한 계정이 있음." + FirebaseAuth.getInstance().currentUser?.email)
             Log.d(TAG, "현재 로그인한 계정의 아이디 토큰 " + (auth.currentUser)?.getIdToken(true))
             updateUI()
             setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
         }
-        else if(Session.getCurrentSession() != null){
+        else if(Session.getCurrentSession().isOpened){ //카카오 로그인 한 상태
+            Log.d(TAG, "현재 카카오 로그인.")
             updateUI()
             profileName.text = MeV2Response.KEY_NICKNAME
             Picasso.get().load(MeV2Response.KEY_PROFILE_IMAGE)
                 .centerInside().fit().into(profileImage)
         }
         else{
+            Log.d(TAG, "현재 로그인한 계정 없음.")
             btn_login.visibility = View.VISIBLE
             tv_login_needed.visibility = View.VISIBLE
             rounded_iv_profile.visibility = View.GONE
@@ -132,11 +135,15 @@ class MypageFragment : Fragment(), View.OnClickListener {
             tv_user_email.visibility = View.GONE
             rv_recently_seen.visibility = View.GONE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
             tv_no_recently_seen_text.visibility = View.VISIBLE
+            fragView.findViewById<View>(R.id.btn_login).setOnClickListener { View ->
+                val intent = Intent(activity as MainActivity, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }
 
-    private fun updateUI() {
+    private fun updateUI() {//로그인에 맞게 뷰 재구성
             btn_login.visibility = View.GONE
             tv_login_needed.visibility = View.GONE
             rounded_iv_profile.visibility = View.VISIBLE

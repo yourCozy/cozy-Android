@@ -23,6 +23,7 @@ import com.kakao.auth.Session
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.LogoutResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
+import com.kakao.usermgmt.response.model.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_myaccount.*
 
@@ -143,6 +144,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
         else{
             Log.d(TAG, "카카오 로그아웃")
+
             UserManagement.getInstance()
                 .requestLogout(object : LogoutResponseCallback() {
                     override fun onCompleteLogout() {

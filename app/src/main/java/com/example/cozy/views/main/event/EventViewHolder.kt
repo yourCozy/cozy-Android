@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cozy.R
 import kotlin.properties.Delegates
 
@@ -12,20 +13,23 @@ class EventViewHolder(
     val itemClick: (EventData, View) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
     var activityIdx by Delegates.notNull<Int>()
-    var img : ImageView = itemView.findViewById(R.id.activity_img)
-    val dday : TextView = itemView.findViewById(R.id.d_day)
     val activityName : TextView = itemView.findViewById(R.id.activity_title)
-    val info : TextView = itemView.findViewById(R.id.activity_info)
+    val shortIntro : TextView = itemView.findViewById(R.id.activity_info)
+    var image : ImageView = itemView.findViewById(R.id.activity_img)
     val price : TextView = itemView.findViewById(R.id.activity_price)
+    val dday : TextView = itemView.findViewById(R.id.d_day)
 
     fun bind(myData: EventData){
-//        Glide.with(itemView).load(myData.img).into(img)
         activityIdx = myData.activityIdx
-        img.setImageResource(R.drawable.event_pic)
-        dday.text = myData.dday
         activityName.text = myData.activityName
-        info.text = myData.shortIntro
-        price.text = myData.price
+        shortIntro.text = myData.shortIntro
+        if(myData.image1 != null){
+            Glide.with(itemView).load(myData.image1).into(image)
+        }else{
+            Glide.with(itemView).load(R.drawable.ex_heftiba_unsplash).into(image)
+        }
+        price.text = "" + myData.price + "원"
+        dday.text = "D-" + myData.dday
 
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
