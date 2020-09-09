@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
@@ -24,13 +25,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.auth.Session
-import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.response.MeV2Response
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
-import kotlinx.android.synthetic.main.fragment_mypage.view.*
-import java.lang.Exception
 
 class MypageFragment : Fragment(), View.OnClickListener {
 
@@ -98,7 +95,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
-
         }
         fragView.findViewById<View>(R.id.btn_interests).setOnClickListener(this)
         fragView.findViewById<View>(R.id.view_notice).setOnClickListener(this)
@@ -113,18 +109,16 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
         Log.d(TAG, "화면 구성 onStart 호출")
         val currentUser = auth.currentUser
-        if (currentUser != null) {//구글 로그인 한 상태
+        if (currentUser != null) {//구글
             Log.d(TAG, "현재 로그인한 계정이 있음." + FirebaseAuth.getInstance().currentUser?.email)
             Log.d(TAG, "현재 로그인한 계정의 아이디 토큰 " + (auth.currentUser)?.getIdToken(true))
             updateUI()
             setDataOnView(GoogleSignIn.getLastSignedInAccount(activity as MainActivity))
         }
-        else if(Session.getCurrentSession().isOpened){ //카카오 로그인 한 상태
-            Log.d(TAG, "현재 카카오 로그인.")
+        else if(Session.getCurrentSession() != null){
             updateUI()
             profileName.text = MeV2Response.KEY_NICKNAME
-            Picasso.get().load(MeV2Response.KEY_PROFILE_IMAGE)
-                .centerInside().fit().into(profileImage)
+            Glide.with(fragView).load(MeV2Response.KEY_PROFILE_IMAGE).into(profileImage)
         }
         else{
             Log.d(TAG, "현재 로그인한 계정 없음.")
@@ -143,14 +137,14 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
     }
 
-    private fun updateUI() {//로그인에 맞게 뷰 재구성
-            btn_login.visibility = View.GONE
-            tv_login_needed.visibility = View.GONE
-            rounded_iv_profile.visibility = View.VISIBLE
-            tv_user_name.visibility = View.VISIBLE
-            tv_user_email.visibility = View.VISIBLE
-            rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
-            tv_no_recently_seen_text.visibility = View.GONE
+    private fun updateUI() {
+        btn_login.visibility = View.GONE
+        tv_login_needed.visibility = View.GONE
+        rounded_iv_profile.visibility = View.VISIBLE
+        tv_user_name.visibility = View.VISIBLE
+        tv_user_email.visibility = View.VISIBLE
+        rv_recently_seen.visibility = View.VISIBLE //로그인 안 한 유저도 최근 책방 보여준다면 이것 수정해야함.
+        tv_no_recently_seen_text.visibility = View.GONE
 
             rounded_iv_profile.setOnClickListener(this)//여기 없으면 로그아웃 하고 바로 화면 다시 그린 상황에서 프로필 사진 클릭 안됨.
     }
@@ -177,7 +171,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setDataOnView(account: GoogleSignInAccount?) {
-        Picasso.get().load(account?.photoUrl).centerInside().fit().into(profileImage)
+        Glide.with(fragView).load(account?.photoUrl).into(profileImage)
         profileName.setText(account?.displayName)
         profileEmail.setText(account?.email)
     }

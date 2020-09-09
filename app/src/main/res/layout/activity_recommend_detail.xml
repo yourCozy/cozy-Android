@@ -249,31 +249,31 @@
             app:layout_constraintStart_toStartOf="@id/rec_de_adress"
             app:layout_constraintTop_toBottomOf="@id/rec_de_adress"/>
 
-        <TextView
-            android:id="@+id/rec_de_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/fontfamily"
-            android:includeFontPadding="false"
-            android:text="매일 13:00 ~ 19:00"
-            android:textColor="@color/black"
-            android:textFontWeight="500"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/tv_operate"
-            app:layout_constraintTop_toTopOf="@id/tv_operate" />
+            <TextView
+                android:id="@+id/rec_de_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:text="매일 13:00 ~ 19:00"
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintStart_toEndOf="@id/tv_operate"
+                app:layout_constraintTop_toTopOf="@id/tv_operate" />
 
-        <TextView
-            android:id="@+id/tv_closed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="휴무 : "
-            android:textColor="@color/black"
-            android:fontFamily="@font/fontfamily"
-            android:textFontWeight="500"
-            android:layout_marginTop="4dp"
-            android:includeFontPadding="false"
-            app:layout_constraintStart_toStartOf="@id/tv_operate"
-            app:layout_constraintTop_toBottomOf="@id/tv_operate"/>
+            <TextView
+                android:id="@+id/tv_closed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:text="휴무 : "
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                app:layout_constraintStart_toStartOf="@id/tv_operate"
+                app:layout_constraintTop_toBottomOf="@+id/rec_de_time" />
 
         <TextView
             android:id="@+id/rec_de_closed"
@@ -313,7 +313,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_guidance"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/rec_de_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"

@@ -1,12 +1,13 @@
 package com.example.cozy.network.responseData
 
-data class ResponseBookmarkUpdate(
+data class ResponseCount(
     val status : Int,
     val success : Boolean,
     val message : String,
-    val data : Checked?
+    val data : List<MapCount>
 )
 
-data class Checked(
-    var checked: Int
+data class MapCount(
+    val sectionIdx : Int,
+    val count : Int
 )

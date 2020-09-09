@@ -2,12 +2,13 @@ package com.example.cozy.views.main
 
 class RecommendData (
     val bookstoreIdx : Int,
-    val profile : String,
-    val tag1 : String,
-    val tag2 : String,
-    val tag3 : String,
-    val intro1 : String,
-    val intro2: String,
+    val mainImg : String,
+    val shortIntro1 : String,
+    val shortIntro2: String,
     val bookstoreName : String,
-    val location : String
+    val location : String,
+    val hashtag1 : String,
+    val hashtag2 : String,
+    val hashtag3 : String,
+    val checked : Int
 )

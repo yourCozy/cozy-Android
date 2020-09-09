@@ -2,8 +2,11 @@ package com.example.cozy.views.map
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface.OnShowListener
 import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -11,7 +14,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import com.example.cozy.R
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
+import com.example.cozy.network.responseData.MapCount
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -29,11 +36,16 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
     var isCheckedsc : Int = 0
     var isCheckedjr : Int = 0
 
+    lateinit var countdata : MapCount
+
     //커스텀
     //override fun getTheme(): Int = R.style.RoundBottomSheet
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.bottomsheet_map,container,false)
+        val fragView =  inflater.inflate(R.layout.bottomsheet_map,container,false)
+        initCount()
+        //dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return fragView
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -332,4 +344,25 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         super.onResume()
     }
 
+    fun initCount(){
+        val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        val header = mutableMapOf<String, String?>()
+        header["Context-Type"] = "application/json"
+        header["token"] = sharedPref.getString("token","token")
+        RequestToServer.service.requestCount(header).customEnqueue(
+            onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
+            onSuccess = {
+                if(it.success){
+                    Log.d("지도 개수", "성공")
+                    tv_yongsan_num.text = it.data.elementAt(0).count.toString()
+                    tv_mapo_num.text = it.data.elementAt(1).count.toString()
+                    tv_gwanak_num.text = it.data.elementAt(2).count.toString()
+                    tv_nowon_num.text = it.data.elementAt(3).count.toString()
+                    tv_seocho_num.text = it.data.elementAt(4).count.toString()
+                    tv_jongro_num.text = it.data.elementAt(5).count.toString()
+
+                }
+            }
+        )
+    }
 }

@@ -3,6 +3,7 @@ package com.example.cozy.views.mypage
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -13,9 +14,10 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import kotlinx.android.synthetic.main.activity_interests.*
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class InterestsActivity : AppCompatActivity() {
-    val service = RequestToServer.service
+    private val service = RequestToServer.service
     lateinit var interestAdapter: InterestsAdapter
     var data = mutableListOf<InterestsData>()
 
@@ -33,8 +35,9 @@ class InterestsActivity : AppCompatActivity() {
         tb_interests.elevation = 5F
 
         loadInterestData()
-
+        rv_interests.addItemDecoration(ItemDecoration(this, 0,32))
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -45,8 +48,9 @@ class InterestsActivity : AppCompatActivity() {
     private fun loadInterestData(){
         val sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
+        val token = sharedPref.getString("token", "token")
         header["Context-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token","token")
+        header["token"] = token
         service.requestInterest(header).customEnqueue(
             onError = { Log.d("test", "error")},
             onSuccess = {
@@ -59,6 +63,7 @@ class InterestsActivity : AppCompatActivity() {
                             val intent = Intent(this, RecommendDetailActivity::class.java)
                             startActivity(intent)
                         }
+                        rv_interests.adapter = interestAdapter
                         rv_interests.visibility = View.VISIBLE
                         no_interest.visibility = View.GONE
                     }else onEmpty()
@@ -78,8 +83,8 @@ class InterestsActivity : AppCompatActivity() {
                     location = "서울특병시 용산구 한강대로 102길 5",
                     tag1 = "베이커리",
                     tag2 = "전시",
-                    tag3 = "영화상영",
-                    checked = 1
+                    tag3 = "영화상영"
+
                 )
             )
             add(
@@ -92,8 +97,8 @@ class InterestsActivity : AppCompatActivity() {
                     location = "서울특병시 용산구 한강대로 102길 5",
                     tag1 = "커피",
                     tag2 = "전시",
-                    tag3 = "영화상영",
-                    checked = 1
+                    tag3 = "영화상영"
+
                 )
             )
         }

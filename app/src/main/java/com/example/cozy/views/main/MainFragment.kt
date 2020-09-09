@@ -2,7 +2,9 @@ package com.example.cozy.views.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -10,20 +12,21 @@ import androidx.fragment.app.Fragment
 import com.example.cozy.ItemDecoration
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.example.cozy.network.RequestToServer
+import com.example.cozy.network.customEnqueue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.activity_recommend_detail.view.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
     lateinit var auth: FirebaseAuth
     lateinit var recommendAdapter: RecommendAdapter
+    val service = RequestToServer.service
+    val recommendData = mutableListOf<RecommendData>()
     private lateinit var userNickname : TextView
-    val datas = mutableListOf<RecommendData>()
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +36,12 @@ class MainFragment : Fragment() {
         var view =  inflater.inflate(R.layout.fragment_main, container, false)
 
         setHasOptionsMenu(true)
-        initRecommend(view)
 
         userNickname = view.findViewById(R.id.nickname)
+        sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        userNickname.text = sharedPref.getString("nickname","나그네")
+
+        initRecommend(view)
         //로그인한 상태에서 setDataOnView
         auth = Firebase.auth
         val currentUser = auth.currentUser
@@ -61,26 +67,29 @@ class MainFragment : Fragment() {
     }
 
     private fun loadData(v : View){
-        datas.apply{
-            for ( i in 0..7) {
-                add(
-                    RecommendData(
-                        bookstoreIdx = 1,
-                        profile = "ㅎㅎ",
-                        tag1 = "이국적인",
-                        tag2 = "이국적인",
-                        tag3 = "이국적인",
-                        intro1 = "빵과 함께하는",
-                        intro2 = "달콤한 책 그리고 오늘",
-                        bookstoreName = "홍철책빵",
-                        location = "서울특별시 용산구 한강대로102길 5"
-                    )
-                )
+
+        val header = mutableMapOf<String, String>()
+        header["Content-Type"] = "application/json"
+//        header["token"] = sharedPref.getString("token","token").toString()
+        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE1OTk1NDUwODMsImV4cCI6MTU5OTU4MTA4MywiaXNzIjoib3VyLXNvcHQifQ.5LiwFhnFJ-zLcuafwaGzHtjdlxIlM13sXgXdnb_G7q8"
+        service.requestRecommendation(header).customEnqueue(
+            onError = {
+                Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+            },
+            onSuccess = {
+                if(it.success) {
+                    Log.d("success message >>>> ",it.message)
+                    recommendData.clear()
+                    recommendData.addAll(it.data)
+                    recommendAdapter.datas = recommendData
+                    v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
+                    recommendAdapter.notifyDataSetChanged()
+                }
+                else{
+                    Log.d("message >>>> ",it.message)
+                }
             }
-        }
-        recommendAdapter.datas = datas
-        v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0,16))
-        recommendAdapter.notifyDataSetChanged()
+        )
     }
 
     private fun setDataOnView(account: FirebaseUser?) {

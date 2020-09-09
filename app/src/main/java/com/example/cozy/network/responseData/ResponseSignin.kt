@@ -5,7 +5,6 @@ data class ResponseSignin(
     val success : Boolean,
     val message : String,
     val data : UserInfoData
-
 )
 
 data class UserInfoData(

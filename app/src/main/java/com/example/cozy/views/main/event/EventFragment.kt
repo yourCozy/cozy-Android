@@ -1,26 +1,26 @@
 package com.example.cozy.views.main.event
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
-import kotlinx.android.synthetic.main.fragment_event.*
+import com.example.cozy.views.main.bookstore.BookstoreFragment
 import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlin.properties.Delegates
 
 class EventFragment : Fragment() {
-    val service = RequestToServer.service
+
     lateinit var eventAdapter: EventAdapter
-    var data = mutableListOf<EventData>()
+    val service = RequestToServer.service
+    val eventData = mutableListOf<EventData>()
     var bookstoreIdx by Delegates.notNull<Int>()
 
     override fun onCreateView(
@@ -30,60 +30,51 @@ class EventFragment : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_event, container, false)
 
-        val bundle = arguments
+        val extra = arguments
+        bookstoreIdx = extra!!.getInt("bookstoreIdx")
+        Log.d("feed >>>>> ",bookstoreIdx.toString())
 
-        bookstoreIdx = bundle!!.getInt("bookstoreIdx")
-
-
-        initActivity()
+        initActivity(view)
 
         return view
     }
 
-    private fun initActivity() {
-        val sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
-        val header = mutableMapOf<String, String?>()
-        header["Context-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token","token")
-        service.requestEvent(bookstoreIdx,header).customEnqueue(
-            onError = { Log.d("event_from_each : ", "가져오기 실패") },
-            onSuccess = {
-                if (it.success) {
-                    if (it.message == "활동 리스트 조회 성공") {
-                        eventAdapter = EventAdapter(context!!,it.data.toMutableList()) { EventData, View ->
-                            var intent = Intent(
-                                activity as RecommendDetailActivity,
-                                EventDetailActivity::class.java
-                            )
-                            intent.putExtra("activityIdx", EventData.activityIdx)
-                            startActivity(intent)
-                        }
-                        rv_activity.adapter = eventAdapter
+    private fun initActivity(view: View) {
+        eventAdapter = EventAdapter(view.context) { EventData, View ->
+            var intent = Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
+            intent.putExtra("activityIdx",EventData.activityIdx)
+            startActivity(intent)
+        }
+        view.rv_activity.adapter = eventAdapter
 
-                    }
-                }else Log.d("event_from_each : ","활동 리스트가 없어요.")
+        loadData(view)
+    }
+
+    private fun loadData(view: View) {
+        service.requestBookstoreActivity(bookstoreIdx).customEnqueue(
+            onError = { Toast.makeText(context, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
+            onSuccess = {
+                if(it.success) {
+                    Log.d("success message >>>> ",it.message)
+                    Log.d("success data >>>> ",it.data.toString())
+                    eventData.clear()
+                    eventData.addAll(it.data)
+                    eventAdapter.datas = eventData
+                    view.rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
+                    eventAdapter.notifyDataSetChanged()
+                }else{
+                    Log.d("success message >>>> ",it.message)
+                }
             }
         )
     }
 
-    private fun loadData() {
-        data.apply{
-            for (i in 0..7) {
-                add(
-                    EventData(
-                        activityIdx = 1,
-                        activityName = "책방 영화관",
-                        shortIntro = "홍철책방을 대표하는 책방 영화관이 돌아왔습니다:-)",
-                        image1 = "gg",
-                        dday = 3,
-                        price = 16000
-                    )
-                )
-            }
-        }
-        eventAdapter.data = data
-        rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
-        eventAdapter.notifyDataSetChanged()
+    fun newInstance(bookstoreIdx: Int): EventFragment{
+        val args = Bundle()
+        val fragment = EventFragment()
+        args.putInt("bookstoreIdx", bookstoreIdx)
+        fragment.arguments = args
+        return fragment
     }
 
 }

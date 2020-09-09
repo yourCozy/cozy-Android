@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.example.cozy.LoginActivity
 import com.example.cozy.R
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 
@@ -63,7 +64,7 @@ class OnBoardingActivity : AppCompatActivity() {
         })
 
         go_select.setOnClickListener {
-            val intent = Intent(this, OnBoardingPreferenceActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
