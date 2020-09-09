@@ -82,7 +82,7 @@ class MapFragment : Fragment() {
                         mapAdapter =
                             MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
-                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
                             }
                         rv_map.adapter = mapAdapter
@@ -108,7 +108,7 @@ class MapFragment : Fragment() {
                         mapAdapter =
                             MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
-                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
                             }
                         rv_map.adapter = mapAdapter

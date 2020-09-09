@@ -64,6 +64,7 @@ class CategoryListActivity : AppCompatActivity() {
                             CategoryAdapter(this, it.data.toMutableList()) { CategoryData, View ->
                                 val intent = Intent(this, EventDetailActivity::class.java)
                                 //여기 사이에 activityIdx 누른 것을 어떻게 받아오지??
+                                intent.putExtra("activityIdx", CategoryData.activityIdx)
                                 startActivity(intent)
                                 Log.d("CATEGORY_READ", "카테고리 별 활동 읽기 성공")
                             }
