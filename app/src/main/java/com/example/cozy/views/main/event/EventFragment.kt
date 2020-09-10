@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
@@ -64,7 +65,8 @@ class EventFragment : Fragment() {
                     view.rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
                     eventAdapter.notifyDataSetChanged()
                 }else{
-                    Log.d("success message >>>> ",it.message)
+                    Log.d("non success message >>>> ",it.message)
+                    view.tv_nonActivity.visibility = View.VISIBLE
                 }
             }
         )

@@ -1,4 +1,4 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Interest
 
 import android.content.Context
 import android.os.Build
@@ -20,7 +20,10 @@ class InterestsAdapter(val context: Context, var data : MutableList<InterestsDat
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InterestsViewHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.item_interest, parent, false)
-        return InterestsViewHolder(view, itemClick)
+        return InterestsViewHolder(
+            view,
+            itemClick
+        )
     }
 
     override fun onBindViewHolder(holder: InterestsViewHolder, position: Int) {

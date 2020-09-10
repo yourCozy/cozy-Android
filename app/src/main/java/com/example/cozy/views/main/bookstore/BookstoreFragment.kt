@@ -1,6 +1,5 @@
 package com.example.cozy.views.main.bookstore
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,17 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.bumptech.glide.Glide
+import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
-import kotlinx.android.synthetic.main.fragment_bookstore.*
+import com.example.cozy.network.responseData.BookstoreFeedData
+import kotlinx.android.synthetic.main.fragment_bookstore.view.*
 import kotlin.properties.Delegates
 
 class BookstoreFragment : Fragment() {
 
     val service = RequestToServer.service
     var bookstoreIdx by Delegates.notNull<Int>()
+    var bookstoreFeedData = mutableListOf<BookstoreFeedData>()
+    lateinit var bookstoreFeedAdapter: BookstoreFeedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +39,18 @@ class BookstoreFragment : Fragment() {
     }
 
     private fun initView(view : View) {
+        bookstoreFeedAdapter = BookstoreFeedAdapter(view.context)
+        view.rv_feed.adapter = bookstoreFeedAdapter
         service.requestBookstoreFeed(bookstoreIdx).customEnqueue(
             onError = { Toast.makeText(context, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
             onSuccess = {
                 if(it.success){
                     Log.d("success message >>>> ",it.message)
-                    val data = it.data
-                    Glide.with(view).load("https://media.vlpt.us/images/cocoa/post/5b1179ca-b79f-41dc-b910-76ee6150c1a4/cat10.jpg").into(bookstore_img1)
-                    bookstore_text1.text = data.description
-                    Glide.with(view).load("https://media.vlpt.us/images/cocoa/post/5b1179ca-b79f-41dc-b910-76ee6150c1a4/cat10.jpg").into(bookstore_img2)
+                    bookstoreFeedData.clear()
+                    bookstoreFeedData.addAll(it.data)
+                    bookstoreFeedAdapter.datas = bookstoreFeedData
+                    view.rv_feed.addItemDecoration(ItemDecoration(this.context!!, 36, 0))
+                    bookstoreFeedAdapter.notifyDataSetChanged()
                 }else(Log.d("fail message >>>> ",it.message))
             }
         )

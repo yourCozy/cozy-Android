@@ -23,7 +23,7 @@ class EventViewHolder(
 //        Glide.with(itemView).load(myData.img).into(img)
         activityIdx = myData.activityIdx
         img.setImageResource(R.drawable.event_pic)
-        day.text = myData.dday.toString()
+        day.text = "D-" + myData.dday.toString()
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"

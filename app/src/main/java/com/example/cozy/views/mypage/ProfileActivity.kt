@@ -1,6 +1,8 @@
 package com.example.cozy.views.mypage
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -43,6 +45,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var session : Session
     private lateinit var callback: LoginActivity.SessionCallback
 
+    lateinit var sharedPref: SharedPreferences
+    lateinit var nickname: String
+    lateinit var profileImg: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myaccount)
@@ -55,6 +61,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_before)
 
         tb_myaccount.elevation = 5F
+
+        sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -71,48 +79,16 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         profileEmail = findViewById(R.id.edit_detail_email)
         profileImage = findViewById(R.id.rounded_iv_account_detail_profile)
 
-        btn_account_detail_logout.setOnClickListener(this)
+        setDataOnView()
 
-        //구글 로그인일 때
-        if (currentUser != null) {
-            //"여기로 보내는 액티비티마다 intent.putExtra해야함."
-            mGoogleSignInAccount = intent.getParcelableExtra(GOOGLE_ACCOUNT)
-            setDataOnView()
-        }
-        //카카오 로그인일 때
-        else {
-            Log.d(TAG, "카카오")
-            kakaoProfile()
-        }
+        btn_account_detail_logout.setOnClickListener(this)
 
     }
 
     private fun setDataOnView(){
-        Glide.with(this).load(mGoogleSignInAccount.photoUrl).into(profileImage)
-        profileName.text = mGoogleSignInAccount.displayName
-        profileEmail.text = mGoogleSignInAccount.email
-    }
-
-    private fun kakaoProfile(){
-        //카카오 소셜 로그인 프로필 업데이트
-        session = Session.getCurrentSession()
-
-        if(MeV2Response.KEY_NICKNAME != null || MeV2Response.KEY_PROFILE_IMAGE != null)
-        {
-            profileName.text = MeV2Response.KEY_NICKNAME
-            //profileEmail.text = MeV2Response.KEY_PROFILE_IMAGE
-            if(MeV2Response.KEY_PROFILE_IMAGE == null){
-                //코지 로고 띄우면 됨
-            }
-            else{
-                Glide.with(this).load(MeV2Response.KEY_PROFILE_IMAGE).into(profileImage)
-            }
-
-        }
-        else
-        {
-            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
-        }
+        Glide.with(this).load(sharedPref.getString("profile", "token")).into(profileImage)
+        profileName.text = sharedPref.getString("nickname", "token")
+//        profileEmail.text = mGoogleSignInAccount.email
     }
 
     override fun onClick(v: View?) {

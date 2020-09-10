@@ -11,7 +11,7 @@ import kotlin.properties.Delegates
 
 class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -> Unit) : RecyclerView.ViewHolder(itemView) {
     var bookstoreIdx by Delegates.notNull<Int>()
-    var profile : ImageView = itemView.findViewById(R.id.rec_img)
+    var mainImg : ImageView = itemView.findViewById(R.id.rec_img)
     var tag1 : TextView = itemView.findViewById(R.id.rec_tag1)
     var tag2 : TextView = itemView.findViewById(R.id.rec_tag2)
     var tag3 : TextView = itemView.findViewById(R.id.rec_tag3)
@@ -24,8 +24,7 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
 
     fun bind(myData: RecommendData){
         bookstoreIdx = myData.bookstoreIdx
-        Glide.with(itemView).load("https://t1.daumcdn.net/cfile/tistory/21053641544FEA7816").into(profile)
-        profile.setBackgroundResource(R.drawable.recommend_img)
+        Glide.with(itemView).load(myData.mainImg).into(mainImg)
         tag1.text = "#" + myData.hashtag1
         tag2.text = "#" + myData.hashtag2
         tag3.text = "#" + myData.hashtag3

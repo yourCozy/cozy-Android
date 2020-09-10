@@ -176,7 +176,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     //server 통신
                     requestToServer.service.requestLogin(
                         RequestLogin(
-                            email = kakao_id.toString(),
+                            id = kakao_id.toString(),
                             nickname = nickname,
                             refreshToken = session.toString()
                         )
@@ -187,14 +187,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         onSuccess = {
                             val data = it.data
                             editor.putString("token",data.jwtToken) // key,value 형식으로 저장
-                            editor.putString("email",data.email)
                             editor.putString("nickname",data.nickname)
                             editor.putString("profile",data.profile)
                             editor.apply()
                             editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}");
-                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}");
-                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}");
+                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}")
+                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}")
+                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}")
                             finish()
                         }
                     )
@@ -283,7 +282,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_passing_sign_in ->{
                 val intent = Intent(this, MainActivity::class.java)
-                editor.putString("user","no")
+                editor.putString("token","token") // key,value 형식으로 저장
+                editor.putString("nickname","나그네")
                 editor.apply()
                 editor.commit();
                 startActivity(intent)

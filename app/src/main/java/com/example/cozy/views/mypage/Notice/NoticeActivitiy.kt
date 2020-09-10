@@ -1,15 +1,13 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Notice
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cozy.ItemDecoration
 import com.example.cozy.R
+import com.example.cozy.views.mypage.MypageFragment
 import kotlinx.android.synthetic.main.activity_notice.*
-import kotlinx.android.synthetic.main.item_notice.*
 
 class NoticeActivitiy : AppCompatActivity() {
     lateinit var noticeAdapter: NoticeAdapter
@@ -28,7 +26,8 @@ class NoticeActivitiy : AppCompatActivity() {
         tb_notice.elevation = 5F
 
 
-        noticeAdapter = NoticeAdapter(tb_notice.context)
+        noticeAdapter =
+            NoticeAdapter(tb_notice.context)
 
         with(rv_notice) {
             adapter = noticeAdapter

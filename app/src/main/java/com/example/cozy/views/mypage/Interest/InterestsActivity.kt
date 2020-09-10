@@ -1,9 +1,8 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Interest
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -14,7 +13,6 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import kotlinx.android.synthetic.main.activity_interests.*
-import kotlinx.android.synthetic.main.fragment_map.*
 
 class InterestsActivity : AppCompatActivity() {
     private val service = RequestToServer.service
@@ -56,13 +54,14 @@ class InterestsActivity : AppCompatActivity() {
             onSuccess = {
                 if (it.success) {
                     if (it.message == "서점 리스트 조회 성공") {
-                        interestAdapter = InterestsAdapter(
-                            this,
-                            it.data.toMutableList(),
-                            { onEmpty() }) { InterestsData, View ->
-                            val intent = Intent(this, RecommendDetailActivity::class.java)
-                            startActivity(intent)
-                        }
+                        interestAdapter =
+                            InterestsAdapter(
+                                this,
+                                it.data.toMutableList(),
+                                { onEmpty() }) { InterestsData, View ->
+                                val intent = Intent(this, RecommendDetailActivity::class.java)
+                                startActivity(intent)
+                            }
                         rv_interests.adapter = interestAdapter
                         rv_interests.visibility = View.VISIBLE
                         no_interest.visibility = View.GONE
@@ -76,7 +75,7 @@ class InterestsActivity : AppCompatActivity() {
             add(
                 InterestsData(
                     bookstoreIdx = 1,
-                    mainimg =  "",
+                    mainimg = "",
                     bookstoreName = "코지책방",
                     shortIntro1 = "매일 새로 구운 빵과 함께하는 달콤한 책\n그리고 오늘 봄날의 책방",
                     shortIntro2 = "매일 새로 구운 빵과 함께하는",
