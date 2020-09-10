@@ -105,15 +105,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //이미 로그인한 카카오 계정이 있으면 non-null
 
-//        if(Session.getCurrentSession() != null){
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//            Log.d(TAG, "on Start kakao works successful")
-//        }
-//        else{
-//            Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
-//        }
+        if(Session.getCurrentSession() != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            Log.d(TAG, "on Start kakao works successful")
+        }
+        else{
+            Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
