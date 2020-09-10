@@ -105,11 +105,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //이미 로그인한 카카오 계정이 있으면 non-null
 
-        if(Session.getCurrentSession() != null){
+        if(Session.getCurrentSession().isOpened){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
             Log.d(TAG, "on Start kakao works successful")
+            Log.d(TAG,Session.getCurrentSession().toString())
+            Log.d(TAG,Session.getCurrentSession().isOpened.toString())
         }
         else{
             Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
@@ -349,6 +351,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        Session.getCurrentSession().removeCallback(SessionCallback());
+        Session.getCurrentSession().removeCallback(SessionCallback())
     }
 }
