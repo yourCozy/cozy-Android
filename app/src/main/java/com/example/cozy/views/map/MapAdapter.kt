@@ -46,6 +46,7 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                             }
                             if (it.success) {
                                 Log.d("RESPONSE", it.message)
+                                holder.bookmark.isSelected = true
                                 val inflater: LayoutInflater =
                                     context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                                 val layout = inflater.inflate(R.layout.bookmark_custom_toast, null)
@@ -56,7 +57,6 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                                     view = layout
                                     show()
                                 }
-                                holder.bookmark.isSelected = !holder.bookmark.isSelected
                             }
                         }
                     )
@@ -74,7 +74,7 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                                 }
                                 if (it.success) {
                                     Log.d("RESPONSE", it.message)
-                                    holder.bookmark.isSelected = !holder.bookmark.isSelected
+                                    holder.bookmark.isSelected = false
                                 }
                             }
                         )

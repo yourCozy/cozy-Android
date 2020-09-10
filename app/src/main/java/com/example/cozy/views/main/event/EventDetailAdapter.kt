@@ -10,7 +10,7 @@ import com.example.cozy.R
 
 class EventDetailAdapter (private val context: Context): RecyclerView.Adapter<EventDetailViewHolder>(){
 
-    lateinit var data : MutableList<EventDetailData>
+    var data = mutableListOf<EventDetailData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventDetailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_event_items, parent, false)

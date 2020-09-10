@@ -61,7 +61,7 @@ class EventFragment : Fragment() {
                     Log.d("success data >>>> ",it.data.toString())
                     eventData.clear()
                     eventData.addAll(it.data)
-                    eventAdapter.datas = eventData
+                    eventAdapter.data = eventData
                     view.rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
                     eventAdapter.notifyDataSetChanged()
                 }else{
