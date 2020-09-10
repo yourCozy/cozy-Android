@@ -166,10 +166,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     // 로그인이 성공했을 때
                     Log.d(TAG, "카카오 로그인 성공")
                     val kakaoAccount: UserAccount = result!!.kakaoAccount
-                    val kakao_email = kakaoAccount.email
                     val kakao_id = result.id
                     val nickname = kakaoAccount.profile.nickname
-                    val profile_pic = kakaoAccount.profile.profileImageUrl
                     //리프레시 토큰
                     val session = Session.getCurrentSession().tokenInfo.refreshToken
 
