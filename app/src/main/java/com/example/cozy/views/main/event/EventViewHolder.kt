@@ -25,13 +25,22 @@ class EventViewHolder(
         Glide.with(itemView).load("myData.image1").into(img)
         Log.d("데이터야",myData.image1)
         activityIdx = myData.activityIdx
-        day.text = "D-" + myData.dday.toString()
+        if(myData.dday < 0){
+            day.text = "마감"
+        }else{
+            day.text = "D-" + myData.dday.toString()
+        }
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"
         price.text = "" + myData.price + "원"
-        day.text = "D-" + myData.dday
-
+        if(myData.dday < 0){
+            day.text = "마감"
+        }else if (myData.dday == 0) {
+            day.text = "오늘"
+        }else{
+            day.text = "D-" + myData.dday
+        }
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

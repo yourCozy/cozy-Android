@@ -1,5 +1,6 @@
 package com.example.cozy.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,12 @@ class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+
+        val sharedPreferences = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isFirst",false)
+        editor.apply()
+        editor.commit()
 
         onboarding_viewpager.adapter = OnBoardingAdapter(supportFragmentManager)
         onboarding_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
