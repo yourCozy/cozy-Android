@@ -60,6 +60,7 @@ class InterestsActivity : AppCompatActivity() {
                                 it.data.toMutableList(),
                                 { onEmpty() }) { InterestsData, View ->
                                 val intent = Intent(this, RecommendDetailActivity::class.java)
+                                intent.putExtra("bookstoreIdx", InterestsData.bookstoreIdx)
                                 startActivity(intent)
                             }
                         rv_interests.adapter = interestAdapter

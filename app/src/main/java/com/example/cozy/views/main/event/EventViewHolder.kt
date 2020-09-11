@@ -33,7 +33,14 @@ class EventViewHolder(
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"
-
+        price.text = "" + myData.price + "원"
+        if(myData.dday < 0){
+            day.text = "마감"
+        }else if (myData.dday == 0) {
+            day.text = "오늘"
+        }else{
+            day.text = "D-" + myData.dday
+        }
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

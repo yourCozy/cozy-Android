@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var session : Session
 
     private lateinit var login_view: View
-    private lateinit var token : String
 
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
@@ -133,7 +132,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             if (result!!.isSuccess()) {
                 val account: GoogleSignInAccount? = result.signInAccount
 
-                val runnable = Runnable {
+                /*val runnable = Runnable {
                     val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
                     val accessToken: String = GoogleAuthUtil.getToken(
                         applicationContext,
@@ -142,39 +141,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         Bundle()
                     )
 
-                    token = accessToken
-                    Log.d(TAG, "accessToken : ${token}")
-//                    val accnt = task.getResult(ApiException::class.java)!!
-                    requestToServer.service.requestLogin(
-                        RequestLogin(
-                            id = account?.idToken!!,
-                            nickname = account.displayName!!,
-                            refreshToken = token
-                        )
-                    ).customEnqueue(
-                        onError = {
-                            Log.d(TAG, "server 로그인 정보 전송 실패")
-                        },
-                        onSuccess = {
-                            if (it.success) {
-                                val data = it.data
-                                editor.putString("token", data.jwtToken)
-                                editor.putString("email", data.email)
-                                editor.putString("nickname", data.nickname)
-                                editor.putString("profile",data.profile)
-                                editor.apply()
-                                editor.commit()
-                                Log.d(TAG, "이름 = " + data.nickname)
-                                Log.d(TAG, "이메일 = " + data.email)
-                                Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
-                            }else{
-                                Log.d(TAG, "로그인 정보 서버에 전송하는 건 실패!")
-                            }
-                        }
-                    )
+                    Log.d(TAG, "accessToken : ${accessToken}")
 
                 }
-                AsyncTask.execute(runnable)
+                AsyncTask.execute(runnable)*/
             }
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -280,9 +250,37 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "signInWithCredential:success")
 //                    val user = mAuth.currentUser
                     val user : GoogleSignInAccount? = completeTask.getResult(ApiException::class.java)
-                    val authCode : String? = user?.serverAuthCode
+//                    val authCode : String? = user?.serverAuthCode
 //                    val account: GoogleSignInAccount? = result.signInAccount
+//                    Log.d(TAG, "authCode: $authCode")
 
+                    requestToServer.service.requestLogin(
+                        RequestLogin(
+                            id = user?.idToken!!,
+                            nickname = user.displayName!!,
+                            refreshToken = user.idToken!!
+                        )
+                    ).customEnqueue(
+                        onError = {
+                            Log.d(TAG, "server 로그인 정보 전송 실패")
+                        },
+                        onSuccess = {
+                            if (it.success) {
+                                val data = it.data
+                                editor.putString("token", data.jwtToken)
+                                editor.putString("email", data.email)
+                                editor.putString("nickname", data.nickname)
+                                editor.putString("profile",data.profile)
+                                editor.apply()
+                                editor.commit()
+                                Log.d(TAG, "이름 = " + data.nickname)
+                                Log.d(TAG, "이메일 = " + data.email)
+                                Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
+                            }else{
+                                Log.d(TAG, "로그인 정보 서버에 전송하는 건 실패!")
+                            }
+                        }
+                    )
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
