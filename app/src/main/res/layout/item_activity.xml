@@ -7,12 +7,13 @@
 
     <ImageView
         android:id="@+id/activity_img"
-        android:layout_width="match_parent"
+        android:layout_width="154dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/event_pic"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
         android:id="@+id/box"
@@ -50,8 +51,8 @@
         android:textFontWeight="700"
         android:textSize="16sp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/activity_img"
-        app:layout_constraintTop_toBottomOf="@+id/activity_img" />
+        app:layout_constraintStart_toStartOf="@id/activity_img"
+        app:layout_constraintTop_toBottomOf="@id/activity_img" />
 
     <TextView
         android:id="@+id/activity_info"
@@ -62,7 +63,9 @@
         android:lineSpacingExtra="6sp"
         android:text="홍철책방을 대표하는 책방영화관이 돌아왔습니다:-)"
         android:textColor="@color/black"
+        android:ellipsize="end"
         android:textFontWeight="300"
+        android:maxLines="2"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_title"
