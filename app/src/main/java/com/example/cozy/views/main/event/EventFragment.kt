@@ -46,8 +46,7 @@ class EventFragment : Fragment() {
             if(EventData.dday < 0) {
                 Toast.makeText(context,"마감된 활동입니다.",Toast.LENGTH_SHORT).show()
             }else {
-                var intent =
-                    Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
+                var intent = Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
                 intent.putExtra("activityIdx", EventData.activityIdx)
                 startActivity(intent)
             }
