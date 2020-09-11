@@ -8,7 +8,6 @@ import com.example.cozy.network.responseData.ResponseInterest
 import com.example.cozy.network.responseData.ResponseMap
 import com.example.cozy.network.responseData.ResponseSignin
 import com.example.cozy.network.responseData.ResponseRecent
-import com.example.cozy.network.responseData.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -21,11 +20,17 @@ interface RequestInterface {
     //추천
     //책방 8개 추천 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-8%EA%B0%9C-%EC%B6%94%EC%B2%9C
     @GET("/bookstore/recommendation")
-    fun requestRecommendation(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecommendData>
+    fun requestRecommendationUser(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecommendData>
+    //로그인 안한 사용자
+    @GET("/bookstore/recommendation")
+    fun requestRecommendation() : Call<ResponseRecommendData>
 
     //책방 상세 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8
     @GET("/bookstore/detail/{bookstoreIdx}")
-    fun requestBookstoreDatail(@HeaderMap headers: Map<String, String?>, @Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
+    fun requestBookstoreDatailUser(@HeaderMap headers: Map<String, String?>, @Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
+    //로그인 안한 사용자
+    @GET("/bookstore/detail/{bookstoreIdx}")
+    fun requestBookstoreDatail(@Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
 
 
     //책방 상세_책방 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%EC%B1%85%EB%B0%A9-%ED%94%BC%EB%93%9C
@@ -53,10 +58,6 @@ interface RequestInterface {
 
 
     //활동
-    //책방별 활동 조회 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%ED%99%9C%EB%8F%99-%ED%94%BC%EB%93%9C
-    //@GET("/activity/{bookstoreIdx}")
-
-
     //활동 상세 조회 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C
     @GET("/activity/detail/{activityIdx}")
     fun requestEventDetail(@Path("activityIdx") activityIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseEventDetail>
@@ -69,6 +70,11 @@ interface RequestInterface {
 
 
     //내정보
+    //내 정보 조회 https://github.com/yourCozy/cozy-Server/wiki/%EB%82%B4-%EC%A0%95%EB%B3%B4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%A1%B0%ED%9A%8C
+    @GET("/mypage/myinfo")
+    fun requestMypage(@HeaderMap headers: Map<String, String?>): Call<ResponseMypage>
+
+
     //관심 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EA%B4%80%EC%8B%AC%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
     @GET("/mypage/interest")
     fun requestInterest(@HeaderMap headers: Map<String, String?>) : Call<ResponseInterest>
@@ -87,8 +93,9 @@ interface RequestInterface {
     //@POST("/user/profile")
 
 
-    //취향 등록 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EB%93%B1%EB%A1%9D
-    //@POST("/mypage/recommendation?opt=%&opt=% ...")
+//    취향 등록 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EB%93%B1%EB%A1%9D
+    @POST("/mypage/recommendation")
+    fun requestPreference(@HeaderMap headers: Map<String, String?>, @Query("opt") opt1: String, @Query("opt") opt2: String, @Query("opt") opt3: String, @Query("opt") opt4: String, @Query("opt") opt5: String, @Query("opt") opt6: String) : Call<ResponsePreference>
 
 
     //취향 수정 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EC%88%98%EC%A0%95

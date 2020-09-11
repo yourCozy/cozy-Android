@@ -101,7 +101,7 @@
         android:layout_marginEnd="20dp"
         android:background="@color/light_gray"
         android:paddingHorizontal="20dp"
-        android:text="ehrflqtjwja@naver.com"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@id/tv_account_detail_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_account_detail_email" />
@@ -125,7 +125,7 @@
         android:background="@color/light_gray"
         android:inputType="phone"
         android:paddingHorizontal="20dp"
-        android:text="010.1111.1111"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@id/tv_account_detail_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_account_detail_phone" />

@@ -1,9 +1,11 @@
 package com.example.cozy.views.main.event
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cozy.R
 import kotlin.properties.Delegates
 
@@ -20,13 +22,16 @@ class EventViewHolder(
     val price : TextView = itemView.findViewById(R.id.activity_price)
 
     fun bind(myData: EventData){
-//        Glide.with(itemView).load(myData.img).into(img)
+        Glide.with(itemView).load("myData.image1").into(img)
+        Log.d("데이터야",myData.image1)
         activityIdx = myData.activityIdx
-        img.setImageResource(R.drawable.event_pic)
-        day.text = myData.dday.toString()
+        day.text = "D-" + myData.dday.toString()
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"
+        price.text = "" + myData.price + "원"
+        day.text = "D-" + myData.dday
+
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

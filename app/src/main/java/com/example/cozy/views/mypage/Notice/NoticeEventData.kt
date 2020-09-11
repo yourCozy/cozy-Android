@@ -1,4 +1,4 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Notice
 
 class NoticeEventData (
     val eventIdx : Int,

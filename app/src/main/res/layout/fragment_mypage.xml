@@ -70,7 +70,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/fontfamily"
         android:includeFontPadding="false"
-        android:text="ehrflqtjwja@naver.com"
+        android:text=""
         android:textColor="@color/dark_gray"
         android:textFontWeight="300"
         android:textSize="11sp"

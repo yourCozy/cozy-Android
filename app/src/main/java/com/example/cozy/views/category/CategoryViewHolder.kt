@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cozy.R
 import kotlin.properties.Delegates
 
@@ -23,8 +24,7 @@ class CategoryViewHolder(
     fun bind(categoryData: CategoryData) {
 //        profile.setImageResource(R.drawable.ex_img_activity_unsplash)
         if(categoryData.image != ""){
-            val resourceId = itemView.context.resources.getIdentifier(categoryData.image, "drawable", itemView.context.packageName)
-            image.setImageResource(resourceId)
+            Glide.with(itemView).load(categoryData.image).into(image)
         }else{
             image.setImageResource(R.drawable.ex_img_activity_unsplash)
         }

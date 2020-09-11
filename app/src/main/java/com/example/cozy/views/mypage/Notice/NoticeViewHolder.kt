@@ -1,10 +1,10 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Notice
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.R
-import kotlinx.android.synthetic.main.item_notice.view.*
+import com.example.cozy.views.mypage.Notice.NoticeData
 import kotlin.properties.Delegates
 
 class NoticeViewHolder(itemView: View) :

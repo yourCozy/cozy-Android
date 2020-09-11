@@ -10,10 +10,18 @@ data class EventDetailData(
     val categoryName : String,
     val price : Int,
     val limitation : Int,
-    val shortIntro : String,
     val introduction : String,
     val period : String,
     val deadline : Date,
-    val img : String,
-    val createdAt : String
+    val image1 : String?,
+    val image2 : String?,
+    val image3 : String?,
+    val image4 : String?,
+    val image5 : String?,
+    val image6 : String?,
+    val image7 : String?,
+    val image8 : String?,
+    val image9 : String?,
+    val image10 : String?,
+    val dday : Int
 )

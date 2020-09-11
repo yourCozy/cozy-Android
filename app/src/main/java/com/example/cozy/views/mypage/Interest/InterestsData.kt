@@ -1,4 +1,4 @@
-package com.example.cozy.views.mypage
+package com.example.cozy.views.mypage.Interest
 
 class InterestsData(
     val bookstoreIdx : Int,

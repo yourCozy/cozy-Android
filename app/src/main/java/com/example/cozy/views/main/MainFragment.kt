@@ -21,7 +21,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
-    lateinit var auth: FirebaseAuth
+
     lateinit var recommendAdapter: RecommendAdapter
     val service = RequestToServer.service
     val recommendData = mutableListOf<RecommendData>()
@@ -42,17 +42,6 @@ class MainFragment : Fragment() {
         userNickname.text = sharedPref.getString("nickname","나그네")
 
         initRecommend(view)
-        //로그인한 상태에서 setDataOnView
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-        if (currentUser != null) {//user google 로그인 한 상태면 여기로
-
-            setDataOnView(currentUser)
-        } /*else if(kakao 로그인){
-
-        } else{ // 로그인 안 한 상태.
-
-        }*/
         return view
     }
 
@@ -66,34 +55,49 @@ class MainFragment : Fragment() {
         loadData(v)
     }
 
-    private fun loadData(v : View){
+    private fun loadData(v : View) {
 
         val header = mutableMapOf<String, String>()
         header["Content-Type"] = "application/json"
-//        header["token"] = sharedPref.getString("token","token").toString()
-        header["token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE1OTk1NDUwODMsImV4cCI6MTU5OTU4MTA4MywiaXNzIjoib3VyLXNvcHQifQ.5LiwFhnFJ-zLcuafwaGzHtjdlxIlM13sXgXdnb_G7q8"
-        service.requestRecommendation(header).customEnqueue(
-            onError = {
-                Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
-            },
-            onSuccess = {
-                if(it.success) {
-                    Log.d("success message >>>> ",it.message)
-                    recommendData.clear()
-                    recommendData.addAll(it.data)
-                    recommendAdapter.datas = recommendData
-                    v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
-                    recommendAdapter.notifyDataSetChanged()
+        header["token"] = sharedPref.getString("token", "token").toString()
+        if (header["token"] == "token") {
+            service.requestRecommendation().customEnqueue(
+                onError = {
+                    Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                },
+                onSuccess = {
+                    if (it.success) {
+                        Log.d("success message >>>> ", it.message)
+                        recommendData.clear()
+                        recommendData.addAll(it.data)
+                        recommendAdapter.datas = recommendData
+                        v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
+                        recommendAdapter.notifyDataSetChanged()
+                    } else {
+                        Log.d("message >>>> ", it.message)
+                    }
                 }
-                else{
-                    Log.d("message >>>> ",it.message)
+            )
+        }
+        else{
+            service.requestRecommendationUser(header).customEnqueue(
+                onError = {
+                    Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                },
+                onSuccess = {
+                    if (it.success) {
+                        Log.d("success message >>>> ", it.message)
+                        recommendData.clear()
+                        recommendData.addAll(it.data)
+                        recommendAdapter.datas = recommendData
+                        v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
+                        recommendAdapter.notifyDataSetChanged()
+                    } else {
+                        Log.d("message >>>> ", it.message)
+                    }
                 }
-            }
-        )
-    }
-
-    private fun setDataOnView(account: FirebaseUser?) {
-        userNickname.setText(account?.displayName)
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

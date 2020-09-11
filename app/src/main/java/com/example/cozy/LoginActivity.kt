@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var session : Session
 
     private lateinit var login_view: View
+    private lateinit var token : String
 
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
@@ -104,11 +105,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //이미 로그인한 카카오 계정이 있으면 non-null
 
-        if(Session.getCurrentSession() != null){
+        if(Session.getCurrentSession().isOpened){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
             Log.d(TAG, "on Start kakao works successful")
+            Log.d(TAG,Session.getCurrentSession().toString())
+            Log.d(TAG,Session.getCurrentSession().isOpened.toString())
         }
         else{
             Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
@@ -130,12 +133,46 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             if (result!!.isSuccess()) {
                 val account: GoogleSignInAccount? = result.signInAccount
 
-                val runnable = object: Runnable{
-                    override fun run() {
-                        val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
-                        val accessToken: String = GoogleAuthUtil.getToken(applicationContext, account?.account, scope, Bundle())
-                        Log.d(TAG, "accessToken:"+accessToken)
-                    }
+                val runnable = Runnable {
+                    val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
+                    val accessToken: String = GoogleAuthUtil.getToken(
+                        applicationContext,
+                        account?.account,
+                        scope,
+                        Bundle()
+                    )
+
+                    token = accessToken
+                    Log.d(TAG, "accessToken : ${token}")
+//                    val accnt = task.getResult(ApiException::class.java)!!
+                    requestToServer.service.requestLogin(
+                        RequestLogin(
+                            id = account?.idToken!!,
+                            nickname = account.displayName!!,
+                            refreshToken = token
+                        )
+                    ).customEnqueue(
+                        onError = {
+                            Log.d(TAG, "server 로그인 정보 전송 실패")
+                        },
+                        onSuccess = {
+                            if (it.success) {
+                                val data = it.data
+                                editor.putString("token", data.jwtToken)
+                                editor.putString("email", data.email)
+                                editor.putString("nickname", data.nickname)
+                                editor.putString("profile",data.profile)
+                                editor.apply()
+                                editor.commit()
+                                Log.d(TAG, "이름 = " + data.nickname)
+                                Log.d(TAG, "이메일 = " + data.email)
+                                Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
+                            }else{
+                                Log.d(TAG, "로그인 정보 서버에 전송하는 건 실패!")
+                            }
+                        }
+                    )
+
                 }
                 AsyncTask.execute(runnable)
             }
@@ -174,7 +211,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     //server 통신
                     requestToServer.service.requestLogin(
                         RequestLogin(
-                            email = kakao_id.toString(),
+                            id = kakao_id.toString(),
                             nickname = nickname,
                             refreshToken = session.toString()
                         )
@@ -185,14 +222,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         onSuccess = {
                             val data = it.data
                             editor.putString("token",data.jwtToken) // key,value 형식으로 저장
-                            editor.putString("email",data.email)
                             editor.putString("nickname",data.nickname)
                             editor.putString("profile",data.profile)
                             editor.apply()
                             editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}");
-                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}");
-                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}");
+                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}")
+                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}")
+                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}")
                             finish()
                         }
                     )
@@ -242,6 +278,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d(TAG, "signInWithCredential:success")
 //                    val user = mAuth.currentUser
                     val user : GoogleSignInAccount? = completeTask.getResult(ApiException::class.java)
+                    val authCode : String? = user?.serverAuthCode
+//                    val account: GoogleSignInAccount? = result.signInAccount
+
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -258,17 +297,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     updateUI(null)
                 }
 
-                // [START_EXCLUDE]
-                //hideProgressBar()
-                // [END_EXCLUDE]
             }
     }
-    // [END auth_with_google]
 
     private fun updateUI(account: GoogleSignInAccount?) {
         val intent = Intent(applicationContext, OnBoardingPreferenceActivity::class.java)//ProfileActivity
         intent.putExtra(GOOGLE_ACCOUNT, account)
-        Log.d(TAG,"프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
+        Log.d(TAG, "프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
         startActivityForResult(intent, 1001)
         finish()
     }
@@ -281,7 +316,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_passing_sign_in ->{
                 val intent = Intent(this, MainActivity::class.java)
-                editor.putString("user","no")
+                editor.putString("token","token") // key,value 형식으로 저장
+                editor.putString("nickname","나그네")
                 editor.apply()
                 editor.commit();
                 startActivity(intent)
@@ -313,6 +349,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        Session.getCurrentSession().removeCallback(SessionCallback());
+        Session.getCurrentSession().removeCallback(SessionCallback())
     }
 }

@@ -74,7 +74,7 @@ class MapFragment : Fragment() {
                 onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
                 onSuccess = {
                     setSection(num)
-                    Log.d("오류", it.message)
+                    Log.d("maplist message >> ", it.message)
                     if (it.success) {
                         Log.d("maplist", "성공")
                         detailData = it.data.elementAt(0)
@@ -82,7 +82,7 @@ class MapFragment : Fragment() {
                         mapAdapter =
                             MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
-                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
                             }
                         rv_map.adapter = mapAdapter
@@ -108,7 +108,7 @@ class MapFragment : Fragment() {
                         mapAdapter =
                             MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
-                                intent.putExtra("bookIdx", MapData.bookstoreIdx)
+                                intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
                             }
                         rv_map.adapter = mapAdapter
