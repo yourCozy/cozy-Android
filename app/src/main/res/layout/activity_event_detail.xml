@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.main.event.EventDetailActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/event_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/event_toolbar"
+        android:descendantFocusability="blocksDescendants"
+        android:clipToPadding="false"
+        android:paddingBottom="136dp"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/event_img"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/event_pic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_event"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/event_img"
+                tools:listitem="@layout/item_event_items">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <ImageView
+                android:id="@+id/event_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/iconfeaturewhite42"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rc_event" />
+
+            <TextView
+                android:id="@+id/event_tv_cate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="전시"
+                android:textSize="12sp"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="@id/event_icon"
+                app:layout_constraintEnd_toEndOf="@id/event_icon"
+                app:layout_constraintStart_toStartOf="@id/event_icon"
+                app:layout_constraintTop_toTopOf="@id/event_icon" />
+
+
+            <ImageView
+                android:id="@+id/event_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/iconfeaturewhite42"
+                app:layout_constraintLeft_toRightOf="@id/event_icon"
+                app:layout_constraintTop_toTopOf="@id/event_icon" />
+
+            <TextView
+                android:id="@+id/evnet_tv_cate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="전시"
+                android:textSize="12sp"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintBottom_toBottomOf="@id/event_icon2"
+                app:layout_constraintEnd_toEndOf="@id/event_icon2"
+                app:layout_constraintStart_toStartOf="@id/event_icon2"
+                app:layout_constraintTop_toTopOf="@id/event_icon2" />
+
+            <TextView
+                android:id="@+id/event_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:includeFontPadding="false"
+                android:text="하얀 어둠"
+                android:textSize="20sp"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/event_icon"
+                app:layout_constraintTop_toBottomOf="@id/event_icon" />
+
+            <ImageView
+                android:id="@+id/yellowbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/box_yellow_day"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_name"
+                app:layout_constraintStart_toEndOf="@id/event_tv_name"
+                app:layout_constraintTop_toTopOf="@id/event_tv_name" />
+
+            <TextView
+                android:id="@+id/event_tv_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D-7"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:includeFontPadding="false"
+                app:layout_constraintBottom_toBottomOf="@id/yellowbox"
+                app:layout_constraintEnd_toEndOf="@id/yellowbox"
+                app:layout_constraintStart_toStartOf="@id/yellowbox"
+                app:layout_constraintTop_toTopOf="@+id/yellowbox" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pickyellow20"
+                app:layout_constraintTop_toTopOf="@id/yellowbox"
+                app:layout_constraintBottom_toBottomOf="@id/yellowbox"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전시시간"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/event_tv_name"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_name"
+                android:layout_marginTop="24dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_time_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020.08.20 - 2020.09.13"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="300"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintStart_toEndOf="@id/event_tv_time"
+                app:layout_constraintTop_toTopOf="@id/event_tv_time"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_time"
+                android:layout_marginLeft="16dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신청마감"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/event_tv_time"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_time"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_deadline_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020.08.19"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="300"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintStart_toEndOf="@id/event_tv_deadline"
+                app:layout_constraintTop_toTopOf="@id/event_tv_deadline"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_deadline"
+                android:layout_marginLeft="16dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모집인원"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/event_tv_deadline"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_deadline"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_people_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제한없음"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="300"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintStart_toEndOf="@id/event_tv_people"
+                app:layout_constraintTop_toTopOf="@id/event_tv_people"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_people"
+                android:layout_marginLeft="16dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="활동료"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/event_tv_people"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_people"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_cost_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="무료"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="300"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintStart_toStartOf="@id/event_tv_people_explain"
+                app:layout_constraintTop_toTopOf="@id/event_tv_cost"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_cost" />
+
+            <ImageView
+                android:id="@+id/yellowbtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/buttonyellow320"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_cost"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신청하기"
+                android:textSize="16sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="@id/yellowbtn"
+                app:layout_constraintStart_toStartOf="@id/yellowbtn"
+                app:layout_constraintEnd_toEndOf="@id/yellowbtn"
+                app:layout_constraintBottom_toBottomOf="@id/yellowbtn"/>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#f5f5f5"
+                app:layout_constraintTop_toBottomOf="@id/yellowbtn"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="23dp"/>
+            
+            <TextView
+                android:id="@+id/event_tv_introtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="활동 소개"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="700"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="26dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/event_tv_introduce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홍철책방에 다시 찾아온 감각적인 전시를 소개합니다. 올해
+로 벌써 두번째로 전시를 함께 진행하게된 주목받는 디자이
+너 무라카미 다카시의 개인전으로 평소 저희 책방 능히 넣
+는 싹이 청춘의 하는 생생하며, 못할 아니다. 품에 것이 밥을
+우리의 그러므로 아름답고 힘차게 광야에서 것은 뿐이다.
+이 이것이야말로 어디 말이다. 안고, 생의 남는 위하여서 같
+지 원질이 이는 가슴이 아름다우냐? 구하지 이성은 풍부하
+게 피어나는 석가는 아니한 물방아 것이다. 원질이 위하여,
+위하여 불어 그들의 그들은 되려니와, 그들의 꽃 위하여서.
+우리는 위하여, 투명하되 밝은 주는 작고 더운지라 동산에
+는 소금이라 아니다. 돋고, 열매를 별과 인간이 그들에게
+석가는 방황하여도, 교향악이다. 풀밭에 이상 끓는 불어 무
+엇을 너의 위하여 따뜻한 운다.
+"
+                android:textSize="14sp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="300"
+                android:textColor="@color/dark_gray"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_introtitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="14dp"
+                android:paddingLeft="20dp"
+                android:paddingEnd="20dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

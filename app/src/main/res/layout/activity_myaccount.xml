@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_myaccount"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/rounded_iv_account_detail_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/ex_rayul_unsplash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tb_myaccount" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/icon_camera_btn"
+        app:layout_constraintTop_toTopOf="@id/rounded_iv_account_detail_profile"
+        app:layout_constraintStart_toStartOf="@id/rounded_iv_account_detail_profile"
+        android:visibility="gone"
+        android:layout_marginTop="61.5dp"
+        android:layout_marginStart="59dp"
+        app:layout_goneMarginEnd="18dp"/>
+
+    <TextView
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="13dp"
+        android:text="내 계정정보"
+        android:textFontWeight="700"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/view_account_detail_midline"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view_account_detail_midline"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="248dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_account_detail_username"
+        style="@style/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="이름"
+        android:textFontWeight="500"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_account_detail_midline" />
+
+    <EditText
+        android:id="@+id/edit_detail_username"
+        style="@style/title_text"
+        android:layout_width="254dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/light_gray"
+        android:paddingHorizontal="20dp"
+        android:text="김코지"
+        app:layout_constraintBottom_toBottomOf="@id/tv_account_detail_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_account_detail_username" />
+
+    <TextView
+        android:id="@+id/tv_account_detail_email"
+        style="@style/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginTop="36dp"
+        android:text="이메일"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="@id/tv_account_detail_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_detail_username" />
+
+    <EditText
+        android:id="@+id/edit_detail_email"
+        style="@style/title_text"
+        android:layout_width="254dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/light_gray"
+        android:paddingHorizontal="20dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@id/tv_account_detail_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_account_detail_email" />
+
+    <TextView
+        android:id="@+id/tv_account_detail_phone"
+        style="@style/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginTop="36dp"
+        android:text="전화번호"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="@id/tv_account_detail_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_detail_email" />
+
+    <EditText
+        style="@style/title_text"
+        android:layout_width="254dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/light_gray"
+        android:inputType="phone"
+        android:paddingHorizontal="20dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@id/tv_account_detail_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_account_detail_phone" />
+
+    <Button
+        android:id="@+id/btn_account_detail_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/icon_next_14"
+        android:text="로그아웃"
+        android:textAlignment="textStart"
+        android:background="@color/transparent"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@id/view_account_deatail_bottomline"/>
+    <View
+        android:id="@+id/view_account_deatail_bottomline"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="82dp"
+        android:background="@color/light_gray"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

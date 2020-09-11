@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/onboarding"
+    tools:context=".onboarding.FirstFragment">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/fontfamily"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:text="취향으로\n찾고,\n공간으로\n느끼다"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:text="COZY"
+        android:textColor="@color/white"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="900"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_onboarding_1"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:fontFamily="@font/fontfamily"
+        android:lineSpacingExtra="6sp"
+        android:paddingHorizontal="50dp"
+        android:text="영화를 좋아하는 당신. 처음 방문한 서점이 영화를 상영하는 서점이라면 어떨까요? 코지가 추천하는 취향저격 독립서점에서 독서, 그 이상의 경험을 느껴보세요."
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

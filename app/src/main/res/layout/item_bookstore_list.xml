@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@drawable/shadow"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <ImageView
+        android:id="@+id/img_bookstore"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/img_bookstore_list"
+        app:layout_constraintDimensionRatio="320:216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@id/view"
+        android:layout_width="match_parent"
+        android:layout_height="118dp"
+        app:layout_constraintTop_toBottomOf="@id/img_bookstore"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#ffffff"/>
+
+    <TextView
+        android:id="@+id/tv_bookstore_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="코지서점"
+        android:textSize="16sp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="700"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/view"
+        app:layout_constraintStart_toStartOf="@id/view"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_bookstore_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="서울특별시 용산구 한강 한강대로102길 용산구 한강한강대로102길 용산구 한강"
+        android:textSize="14sp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="300"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/tv_bookstore_name"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_bookstore_tag1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/icon_round"
+        android:fontFamily="@font/fontfamily"
+        android:gravity="center"
+        android:text="#베이커리"
+        android:textFontWeight="500"
+        android:textSize="10sp"
+        android:textColor="@color/dark_gray"
+        android:lineSpacingExtra="2sp"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/tv_bookstore_address" />
+
+    <TextView
+        android:id="@+id/tv_bookstore_tag2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/icon_round"
+        android:fontFamily="@font/fontfamily"
+        android:gravity="center"
+        android:text="#베이커리"
+        android:textFontWeight="500"
+        android:textSize="10sp"
+        android:textColor="@color/dark_gray"
+        android:lineSpacingExtra="2sp"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toEndOf="@id/tv_bookstore_tag1"
+        app:layout_constraintTop_toBottomOf="@id/tv_bookstore_address" />
+
+    <TextView
+        android:id="@+id/tv_bookstore_tag3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/icon_round"
+        android:fontFamily="@font/fontfamily"
+        android:gravity="center"
+        android:text="#베이커리"
+        android:textFontWeight="500"
+        android:textSize="10sp"
+        android:textColor="@color/dark_gray"
+        android:lineSpacingExtra="2sp"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toEndOf="@id/tv_bookstore_tag2"
+        app:layout_constraintTop_toBottomOf="@id/tv_bookstore_address" />
+
+    <ImageButton
+        android:id="@+id/map_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/savebtn_selector"
+        android:background="@color/transparent"
+        app:layout_constraintTop_toTopOf="@id/img_bookstore"
+        app:layout_constraintEnd_toEndOf="@id/img_bookstore"
+        android:padding="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

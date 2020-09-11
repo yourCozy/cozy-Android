@@ -1,13 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.category.CategoryFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="카테고리" />
+        android:padding="20dp"
+        android:columnCount="3"
+        android:rowCount="6">
+        <Button
+            android:id="@+id/btn_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_movie"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:paddingTop="20dp"
+            android:text="영화 상영"
+            android:textSize="14dp" />
 
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_writing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_writing"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="글쓰기 모임"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_rental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_rental"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:paddingTop="20dp"
+            android:drawablePadding="3dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="공간 대여"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_readingClub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_reading"
+            android:paddingTop="20dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="독서 모임"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:drawableTop="@drawable/icon_night"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="심야 책방"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_exhibit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:drawableTop="@drawable/icon_display"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="전시, 공연"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_recommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_recommendation"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="책 추천"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_workshop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_workshop"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="워크숍"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_bookTalk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_booktalk"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="북토크"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_music"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="음악 감상"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_recite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_recite"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="낭독 모임"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_silentReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_silentreading"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="묵독 모임"
+            android:textSize="14dp"/>
+
+        <Button
+            android:id="@+id/btn_transcription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_transcription"
+            android:paddingTop="20dp"
+            android:drawablePadding="4dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="필사 모임"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_stay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_stay"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="숙박"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_making"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_making"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="만들기"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_publication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_publication"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="정기간행물"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_class"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="강연"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_market"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/icon_market"
+            android:paddingTop="20dp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            android:text="마켓"
+            android:textSize="14dp" />
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

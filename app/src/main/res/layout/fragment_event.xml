@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="14dp"
+    tools:context=".views.main.event.EventFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never"
+        android:paddingTop="28dp"
+        android:paddingBottom="80dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="2"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="20dp"
+        tools:listitem="@layout/item_activity" />
+
+    <TextView
+        android:id="@+id/tv_nonActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="준비된 활동이 없습니다."
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="700"
+        android:visibility="invisible"
+        android:includeFontPadding="false"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
