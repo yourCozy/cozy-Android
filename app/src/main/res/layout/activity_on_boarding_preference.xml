@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    tools:context=".onboarding.OnBoardingPreferenceActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/pre_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:fontFamily="@font/fontfamily"
+            android:lineSpacingExtra="8sp"
+            android:text="코지"
+            android:textColor="@color/colorAccent"
+            android:textFontWeight="500"
+            android:textSize="28sp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fontfamily"
+            android:lineSpacingExtra="8sp"
+            android:text="님의 취향을"
+            android:textColor="@color/black"
+            android:textFontWeight="300"
+            android:textSize="28sp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toEndOf="@+id/pre_username"
+            app:layout_constraintTop_toTopOf="@+id/pre_username" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fontfamily"
+            android:lineSpacingExtra="8sp"
+            android:text="알려주세요"
+            android:textColor="@color/black"
+            android:textFontWeight="300"
+            android:textSize="28sp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="@+id/pre_username"
+            app:layout_constraintTop_toBottomOf="@+id/pre_username" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2sp"
+            android:text="취향을 기반으로 좋아할만한 서점을 추천해드려요."
+            android:textColor="#707070"
+            android:textSize="14sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="300"
+            android:layout_marginTop="14dp"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <ImageView
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="38dp"
+            android:src="@drawable/divide_line1"
+            app:layout_constraintTop_toBottomOf="@id/tv_info" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="2sp"
+            android:text="분위기/장르"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_info"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:text="*3개씩 선택해주세요"
+            android:textColor="@color/disabled"
+            android:textFontWeight="700"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"/>
+
+        <CheckBox
+            android:id="@+id/genre_art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="예술"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <CheckBox
+            android:id="@+id/genre_vintage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="빈티지"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_art"
+            app:layout_constraintTop_toTopOf="@+id/genre_art" />
+
+        <CheckBox
+            android:id="@+id/genre_sensitivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="감성"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_vintage"
+            app:layout_constraintTop_toTopOf="@+id/genre_vintage" />
+
+        <CheckBox
+            android:id="@+id/genre_independence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="독립출판"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toStartOf="@+id/genre_art"
+            app:layout_constraintTop_toBottomOf="@+id/genre_art" />
+
+        <CheckBox
+            android:id="@+id/genre_beer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="맥주"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_independence"
+            app:layout_constraintTop_toTopOf="@+id/genre_independence" />
+
+        <CheckBox
+            android:id="@+id/genre_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="소규모"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_beer"
+            app:layout_constraintTop_toTopOf="@+id/genre_beer" />
+
+        <CheckBox
+            android:id="@+id/genre_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="사진"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/genre_independence" />
+
+        <CheckBox
+            android:id="@+id/genre_coffee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="커피"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_picture"
+            app:layout_constraintTop_toTopOf="@+id/genre_picture" />
+
+        <CheckBox
+            android:id="@+id/genre_fairytale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="동화책"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_coffee"
+            app:layout_constraintTop_toTopOf="@+id/genre_coffee" />
+
+        <CheckBox
+            android:id="@+id/genre_stationery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="문구"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_warm"
+            app:layout_constraintTop_toTopOf="@+id/genre_warm" />
+
+        <CheckBox
+            android:id="@+id/genre_curation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="큐레이션"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/genre_picture" />
+
+        <CheckBox
+            android:id="@+id/genre_magazine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="잡지"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_curation"
+            app:layout_constraintTop_toTopOf="@+id/genre_curation" />
+
+        <CheckBox
+            android:id="@+id/genre_poem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="시집"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_magazine"
+            app:layout_constraintTop_toTopOf="@+id/genre_magazine" />
+
+        <CheckBox
+            android:id="@+id/genre_science"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="과학"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toStartOf="@+id/genre_curation"
+            app:layout_constraintTop_toBottomOf="@+id/genre_curation" />
+
+        <CheckBox
+            android:id="@+id/genre_cozy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="아늑함"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_science"
+            app:layout_constraintTop_toTopOf="@+id/genre_science" />
+
+        <CheckBox
+            android:id="@+id/genre_humanity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="인문사회"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_cozy"
+            app:layout_constraintTop_toTopOf="@+id/genre_cozy" />
+
+        <CheckBox
+            android:id="@+id/genre_warm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="따뜻함"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/genre_science"
+            app:layout_constraintTop_toBottomOf="@+id/genre_science" />
+
+        <CheckBox
+            android:id="@+id/genre_cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="카페"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/genre_stationery"
+            app:layout_constraintTop_toTopOf="@+id/genre_stationery" />
+
+        <ImageView
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="38dp"
+            android:src="@drawable/divide_line1"
+            app:layout_constraintTop_toBottomOf="@id/genre_warm" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="2sp"
+            android:text="활동"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:text="*3개씩 선택해주세요"
+            android:textColor="@color/disabled"
+            android:textFontWeight="700"
+            android:textSize="10sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <CheckBox
+            android:id="@+id/activity_reading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="독서모임"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <CheckBox
+            android:id="@+id/activity_workshop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="워크숍"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toEndOf="@+id/activity_reading"
+            app:layout_constraintTop_toTopOf="@+id/activity_reading" />
+
+        <CheckBox
+            android:id="@+id/activity_make"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="만들기"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toEndOf="@+id/activity_workshop"
+            app:layout_constraintTop_toTopOf="@+id/activity_workshop" />
+
+        <CheckBox
+            android:id="@+id/activity_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="영화상영"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toStartOf="@+id/activity_reading"
+            app:layout_constraintTop_toBottomOf="@+id/activity_reading" />
+
+        <CheckBox
+            android:id="@+id/activity_writing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="글쓰기 모임"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/activity_movie"
+            app:layout_constraintTop_toTopOf="@+id/activity_movie" />
+
+        <CheckBox
+            android:id="@+id/activity_lecture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="강연"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toEndOf="@+id/activity_writing"
+            app:layout_constraintTop_toTopOf="@+id/activity_writing" />
+
+        <CheckBox
+            android:id="@+id/activity_booktalk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="북토크"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toStartOf="@+id/activity_movie"
+            app:layout_constraintTop_toBottomOf="@+id/activity_movie" />
+
+        <CheckBox
+            android:id="@+id/activity_midnight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="심야책방"
+            android:textColor="@color/checkbox_text_selector"
+            app:layout_constraintStart_toEndOf="@+id/activity_booktalk"
+            app:layout_constraintTop_toTopOf="@+id/activity_booktalk" />
+
+        <CheckBox
+            android:id="@+id/activity_rental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="공간대여"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@+id/activity_midnight"
+            app:layout_constraintTop_toTopOf="@+id/activity_midnight" />
+
+        <CheckBox
+            android:id="@+id/activity_exhibit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_button"
+            android:button="@null"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="12dp"
+            android:text="전시/공연"
+            android:textColor="@color/checkbox_text_selector"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@id/activity_booktalk"
+            app:layout_constraintTop_toBottomOf="@id/activity_booktalk" />
+
+        <Button
+            android:id="@+id/btn_go_main"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="9sp"
+            android:text="선택완료"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="17sp"
+            android:layout_marginTop="49dp"
+            app:layout_constraintTop_toBottomOf="@id/activity_exhibit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_login_logo"
+        android:layout_width="100dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="146dp"
+        android:src="@drawable/compoundlogo100x146"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/kakao_sign_in_btn"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button_kakaologin_320_x_48"
+        android:fontFamily="@font/fontfamily"
+        android:letterSpacing="-0.02"
+        android:drawableStart="@drawable/icon_kakaotalk24x22"
+        android:paddingStart="45dp"
+        android:paddingEnd="45dp"
+        android:gravity="center"
+        android:text="카카오계정으로 시작"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/google_sign_in_button"
+        />
+
+
+    <Button
+        android:id="@+id/google_sign_in_button"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_googlelogin_320_x_48"
+        android:fontFamily="@font/fontfamily"
+        android:layout_gravity="center"
+        android:letterSpacing="-0.02"
+        android:paddingLeft="41dp"
+        android:paddingRight="41dp"
+        android:text="구글계정으로 시작"
+        android:textSize="16sp"
+        android:drawableStart="@drawable/icon_google32x31"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_passing_sign_in"  />
+
+
+    <Button
+        android:id="@+id/btn_passing_sign_in"
+        android:layout_width="120dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/button_white_120x32"
+        android:text="한 번 둘러볼래요!"
+        android:textColor="@color/text_hint"
+        android:letterSpacing="-0.02"
+        android:lineSpacingExtra="0sp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+        app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
