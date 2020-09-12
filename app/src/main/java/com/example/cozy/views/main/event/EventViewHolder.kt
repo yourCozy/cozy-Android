@@ -31,11 +31,6 @@ class EventViewHolder(
             textNull.visibility = View.VISIBLE
         }
         activityIdx = myData.activityIdx
-        if(myData.dday < 0){
-            day.text = "마감"
-        }else{
-            day.text = "D-" + myData.dday.toString()
-        }
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"

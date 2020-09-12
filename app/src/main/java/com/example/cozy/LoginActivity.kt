@@ -75,10 +75,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         val kakaoSignInButton : Button = findViewById(R.id.kakao_sign_in_btn)
         kakaoSignInButton.setOnClickListener(View.OnClickListener {
-            kakao_login.performClick() //카카오톡으로 로그인하기, 다른 카카오 계정으로 로그인하기
-//            session = Session.getCurrentSession()
-//            session.addCallback(SessionCallback())
-//            session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
+            session = Session.getCurrentSession()
+            session.addCallback(SessionCallback())
+            session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
         })
 
         val passingButton : Button = findViewById(R.id.btn_passing_sign_in)
@@ -87,6 +86,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mAuth = FirebaseAuth.getInstance()
 
     }
+
 
 
 
