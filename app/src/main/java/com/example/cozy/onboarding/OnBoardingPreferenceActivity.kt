@@ -48,6 +48,7 @@ class OnBoardingPreferenceActivity : AppCompatActivity() {
                     onSuccess = {
                         if(it.success){
                             Log.d("취향선택 성공 >>> ",it.message)
+                            Log.d("취향리스트", it.data.tasteIdx.toString() + " / " + it.data.tastes)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()

@@ -241,14 +241,14 @@
             app:layout_constraintStart_toEndOf="@+id/ic_adress"
             app:layout_constraintTop_toBottomOf="@id/divide_line2"/>
 
-        <ImageView
-            android:id="@+id/ic_clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_clock"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/ic_adress"
-            app:layout_constraintTop_toBottomOf="@+id/ic_adress" />
+            <ImageView
+                android:id="@+id/ic_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_clock"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/ic_adress"
+                app:layout_constraintTop_toBottomOf="@+id/rec_de_adress" />
 
         <TextView
             android:id="@+id/tv_operate"
