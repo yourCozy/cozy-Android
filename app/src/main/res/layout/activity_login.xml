@@ -17,11 +17,13 @@
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/kakao_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:visibility="gone"/>
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/google_sign_in_button"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/kakao_sign_in_btn"

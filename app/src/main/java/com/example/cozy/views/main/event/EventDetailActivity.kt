@@ -128,7 +128,13 @@ class EventDetailActivity : AppCompatActivity(){
                     if (it.success) {
                         if (it.success) {
                             detailData = it.data.elementAt(0)
-                            Glide.with(this).load(detailData.image1).into(event_img)
+                            if(detailData.image1 == null){
+                                Glide.with(this).load(R.drawable.null_img).into(event_img)
+                                eventdetail_img_prepare.visibility = View.VISIBLE
+                            }else {
+                                Glide.with(this).load(detailData.image1).into(event_img)
+                                eventdetail_img_prepare.visibility = View.GONE
+                            }
                             //리사이클러뷰
                             val arrayImage = arrayOf(
                                 detailData.image2,

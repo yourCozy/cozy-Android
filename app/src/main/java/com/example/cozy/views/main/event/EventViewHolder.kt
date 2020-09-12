@@ -23,7 +23,7 @@ class EventViewHolder(
 
     fun bind(myData: EventData){
         Glide.with(itemView).load("myData.image1").into(img)
-        Log.d("데이터야",myData.image1)
+        //Log.d("데이터야",myData.image1)
         activityIdx = myData.activityIdx
         if(myData.dday < 0){
             day.text = "마감"
