@@ -1,6 +1,6 @@
 package com.example.cozy.views.main.event
 
-import android.util.Log
+
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,16 +20,17 @@ class EventViewHolder(
     val title : TextView = itemView.findViewById(R.id.activity_title)
     val info : TextView = itemView.findViewById(R.id.activity_info)
     val price : TextView = itemView.findViewById(R.id.activity_price)
+    var textNull : TextView = itemView.findViewById(R.id.tv_activity_img_null)
 
     fun bind(myData: EventData){
-        Glide.with(itemView).load("myData.image1").into(img)
-        Log.d("데이터야",myData.image1)
-        activityIdx = myData.activityIdx
-        if(myData.dday < 0){
-            day.text = "마감"
+        if (myData.image1 != null) {
+            Glide.with(itemView).load(myData.image1).into(img)
+            textNull.visibility = View.GONE
         }else{
-            day.text = "D-" + myData.dday.toString()
+            Glide.with(itemView).load(R.drawable.img_null).into(img)
+            textNull.visibility = View.VISIBLE
         }
+        activityIdx = myData.activityIdx
         title.text = myData.activityName
         info.text = myData.shortIntro
         price.text = myData.price.toString() + "원"

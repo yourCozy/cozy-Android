@@ -19,6 +19,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_activity_null"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
+        app:layout_constraintEnd_toEndOf="@id/iv_activity_intro"
+        app:layout_constraintTop_toTopOf="@id/iv_activity_intro"
+        app:layout_constraintBottom_toBottomOf="@id/iv_activity_intro"
+        android:visibility="gone"
+        android:text="이미지 준비중이에요!"
+        style="@style/title_text"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textAlignment="center"/>
+
+    <TextView
         android:id="@+id/tv_activity_duedate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +47,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="700"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/iv_activity_intro"
         app:layout_constraintTop_toTopOf="@id/iv_activity_intro" />
 

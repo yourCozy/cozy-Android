@@ -66,8 +66,4 @@ class InterestsAdapter(val context: Context, var data : MutableList<InterestsDat
     override fun getItemCount(): Int {
         return data.size
     }
-
-    fun addItem(item: InterestsData) {
-        data.add(item)
-    }
 }

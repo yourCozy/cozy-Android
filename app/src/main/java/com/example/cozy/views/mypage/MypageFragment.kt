@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -19,16 +18,6 @@ import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.example.cozy.views.mypage.Interest.InterestsActivity
 import com.example.cozy.views.mypage.Notice.NoticeActivitiy
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.kakao.auth.Session
-import com.kakao.usermgmt.response.MeV2Response
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.view.*
 
@@ -38,7 +27,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
     lateinit var recentlySeenAdapter: RecentlySeenAdapter
     var data = mutableListOf<RecentlySeenData>()
     lateinit var sharedPref: SharedPreferences
-    lateinit var recentlySeenData: RecentlySeenData
     lateinit var fragView: View
     private val TAG = "MyPageTAG"
 

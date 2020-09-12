@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.cozy.DialogBookmark
@@ -156,15 +157,26 @@ class RecommendDetailActivity : AppCompatActivity() {
                 onSuccess = {
                     if (it.success) {
                         detailData = it.data.elementAt(0)
-                        Glide.with(this).load(detailData.mainImg).into(rec_de_img)
-                        Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                        if (detailData.mainImg != null) {
+                            Glide.with(this).load(detailData.mainImg).into(rec_de_img)
+                            tv_rec_de_img_null.visibility = View.GONE
+                        }else{
+                            Glide.with(this).load(R.drawable.img_null).into(rec_de_img)
+                            tv_rec_de_img_null.visibility = View.VISIBLE
+                        }
+                        if (detailData.profileImg != null) {
+                            Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                        }else{
+                            Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
+                        }
                         bookstore_name.text = detailData.bookstoreName
                         rec_de_tag1.text = detailData.hashtag1
                         rec_de_tag2.text = detailData.hashtag2
                         rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.description
+                        rec_de_intro.text = detailData.notice
+
                         tel = detailData.tel
-                        save.isSelected = detailData.bookmark != 0
+                        save.isSelected = detailData.checked != 0
                         latitude = detailData.latitude
                         longitude = detailData.longitude
                         rec_de_adress.text = detailData.location
@@ -181,15 +193,26 @@ class RecommendDetailActivity : AppCompatActivity() {
                 onSuccess = {
                     if (it.success) {
                         detailData = it.data.elementAt(0)
-                        Glide.with(this).load(detailData.mainImg).into(rec_de_img)
-                        Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                        if (detailData.mainImg != null) {
+                            Glide.with(this).load(detailData.mainImg).into(rec_de_img)
+                            tv_rec_de_img_null.visibility = View.GONE
+                        } else {
+                            Glide.with(this).load(R.drawable.img_null).into(rec_de_img)
+                            tv_rec_de_img_null.visibility = View.VISIBLE
+                        }
+                        if (detailData.profileImg != null) {
+                            Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                        }else{
+                            Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
+                        }
+
                         bookstore_name.text = detailData.bookstoreName
                         rec_de_tag1.text = detailData.hashtag1
                         rec_de_tag2.text = detailData.hashtag2
                         rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.description
+                        rec_de_intro.text = detailData.notice
                         tel = detailData.tel
-                        save.isSelected = detailData.bookmark != 0
+                        save.isSelected = detailData.checked != 0
                         latitude = detailData.latitude
                         longitude = detailData.longitude
                         rec_de_adress.text = detailData.location

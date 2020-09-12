@@ -11,9 +11,6 @@ import android.widget.Toast
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 
-/**
- * A simple [Fragment] subclass.
- */
 class CategoryFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(

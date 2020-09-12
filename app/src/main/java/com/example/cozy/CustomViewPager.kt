@@ -10,7 +10,7 @@ class CustomViewPager : ViewPager {
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!,
         attrs
-    ) {}
+    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var heightMeasureSpec = heightMeasureSpec

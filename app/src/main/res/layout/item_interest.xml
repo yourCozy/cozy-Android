@@ -18,18 +18,19 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/interest_img_prepare"
+        android:id="@+id/tv_interest_image_null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이미지 준비중이에요!"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/fontfamily"
-        android:textFontWeight="500"
         app:layout_constraintStart_toStartOf="@id/img_interest_bookstore"
         app:layout_constraintEnd_toEndOf="@id/img_interest_bookstore"
         app:layout_constraintTop_toTopOf="@id/img_interest_bookstore"
-        android:layout_marginTop="130dp"/>
+        app:layout_constraintBottom_toBottomOf="@id/img_interest_bookstore"
+        android:visibility="gone"
+        android:text="이미지 준비중이에요!"
+        style="@style/title_text"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/tv_interest_tag1"

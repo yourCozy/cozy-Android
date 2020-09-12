@@ -15,7 +15,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 
 class MainActivity : AppCompatActivity() {

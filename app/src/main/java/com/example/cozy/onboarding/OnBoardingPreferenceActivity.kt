@@ -6,9 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import com.example.cozy.LoginActivity
 import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer

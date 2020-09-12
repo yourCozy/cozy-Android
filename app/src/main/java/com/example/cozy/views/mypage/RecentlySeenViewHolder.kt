@@ -21,12 +21,6 @@ class RecentlySeenViewHolder(
     fun bind(myData: RecentlySeenData) {
         boostoreIdx = myData.bookstoreIdx
         Glide.with(itemView).load(myData.mainImg).into(mainImg)
-//        if(myData.mainImg != ""){
-//            val resourceId = itemView.context.resources.getIdentifier(myData.mainImg,"drawable", itemView.context.packageName)
-//            mainImg.setImageResource(resourceId)
-//        }else{
-//            mainImg.setImageResource(R.drawable.ex_socialcut_unsplash)
-//        }
         bookstoreName.text = myData.bookstoreName
 
         itemView.setOnClickListener{ itemClick(myData,itemView)}

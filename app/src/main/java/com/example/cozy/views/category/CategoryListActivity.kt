@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.ItemDecoration
@@ -21,7 +20,6 @@ class CategoryListActivity : AppCompatActivity() {
     val service = RequestToServer.service
     private lateinit var categoryAdapter: CategoryAdapter
     var data = mutableListOf<CategoryData>()
-    lateinit var activityData: CategoryData
     var categoryIdx by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

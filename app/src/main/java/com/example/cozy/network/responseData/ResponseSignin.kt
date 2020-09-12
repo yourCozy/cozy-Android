@@ -10,7 +10,8 @@ data class ResponseSignin(
 data class UserInfoData(
     val userIdx : Int,
     val nickname : String,
-    val email : String,
+    val id : String,
     val profile : String,
-    val jwtToken : String
+    val jwtToken : String,
+    val is_logined : Int
 )
