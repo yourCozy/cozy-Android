@@ -114,11 +114,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 editor.remove("profile")
                 editor.apply()
                 editor.commit()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 Log.d(TAG, "로그아웃. 성공")
                 Toast.makeText(applicationContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
-                startActivity(intent)
                 finish()
             }
         }
@@ -133,8 +130,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                         editor.remove("profile")
                         editor.apply()
                         editor.commit()
-                        val intent = Intent(this@ProfileActivity, MainActivity::class.java)
-                        startActivity(intent)
                         finish()
                     }
                 })

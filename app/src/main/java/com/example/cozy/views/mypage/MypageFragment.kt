@@ -43,10 +43,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
 
         sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
 
-
-
-        loadMypage()
-
         fragView.rounded_iv_profile.setOnClickListener(this)
         fragView.btn_interests.setOnClickListener(this)
         fragView.view_notice.setOnClickListener(this)
@@ -54,6 +50,11 @@ class MypageFragment : Fragment(), View.OnClickListener {
         fragView.btn_login.setOnClickListener(this)
 
         return fragView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadMypage()
     }
 
     private fun loadMypage() {
@@ -124,6 +125,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_login -> {
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
+                intent.putExtra("fromMypage",true)
                 startActivityForResult(intent, 100)
             }
         }

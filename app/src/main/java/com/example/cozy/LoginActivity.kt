@@ -3,7 +3,6 @@ package com.example.cozy
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,10 +14,8 @@ import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.requestData.RequestLogin
 import com.example.cozy.onboarding.OnBoardingPreferenceActivity
 import com.example.cozy.views.mypage.GOOGLE_ACCOUNT
-import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.*
-import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +31,6 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.usermgmt.response.model.UserAccount
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlin.properties.Delegates
 
 
@@ -49,7 +45,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-    var isLogined by Delegates.notNull<Int>()
+    var fromMypage : Boolean = false
+    var isLogined = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +60,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
+
+        if (intent.hasExtra("fromMypage")) {
+            fromMypage = intent.getBooleanExtra("fromMypage",false)
+        }
 
         //Build a GoogleSignInClient w/ the options specified by gso.
         googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -188,17 +189,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
                             Log.i("KAKAO_API", "사용자 이름: ${data.nickname}")
                             Log.i("KAKAO_API", "사용자 id: $kakao_id")
-                            val intent: Intent
-                            if(it.data.is_logined == 0) {
-                                Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
-                                intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
-                                startActivity(intent)
-                            }else{
-                                Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
-                                intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
-                                startActivity(intent)
-                            }
-                            finish()
+                            Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
+                            isLogined = it.data.is_logined
+                            go_next()
                         }
                     )
                 }
@@ -225,13 +218,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
-
-    private fun redirectSignupActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
 
     // [START auth_with_google]
     private fun firebaseAuthWithGoogle(idToken: String, completeTask: Task<GoogleSignInAccount>) {
@@ -266,17 +252,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 editor.putString("profile",data.profile)
                                 editor.apply()
                                 editor.commit()
-                                val intent: Intent
-                                if(it.data.is_logined == 0) {
-                                    Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
-                                    intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
-                                    startActivity(intent)
-                                }else{
-                                    Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
-                                    intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
-                                    startActivity(intent)
-                                }
-                                finish()
+                                Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
+                                isLogined = it.data.is_logined
+                                go_next()
                                 Log.d(TAG, "이름 = " + data.nickname)
                                 Log.d(TAG, "이메일 = " + data.id)
                                 Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
@@ -309,13 +287,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "sign in button works")
             }
             R.id.btn_passing_sign_in ->{
-                val intent = Intent(this, MainActivity::class.java)
                 editor.putString("token","token") // key,value 형식으로 저장
                 editor.putString("nickname","나그네")
                 editor.apply()
                 editor.commit();
-                startActivity(intent)
-                finish()
+                go_next()
             }
         }
 
@@ -334,5 +310,22 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         Session.getCurrentSession().removeCallback(SessionCallback())
+    }
+
+    fun go_next(){
+        if(fromMypage){
+            finish()
+        }
+        else{
+            val intent: Intent
+            if(isLogined == 0) {
+                intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
+                startActivity(intent)
+            }else{
+                intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
+                startActivity(intent)
+            }
+            finish()
+        }
     }
 }
