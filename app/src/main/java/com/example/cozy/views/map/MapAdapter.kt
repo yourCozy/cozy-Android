@@ -31,19 +31,22 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
     override fun onBindViewHolder(holder: MapViewHolder, position: Int) {
         holder.bind(data[position])
 
-        holder.bookmark.setOnClickListener{
+        holder.bookmark.setOnClickListener {
             val sharedPref = context.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "token")
             val header = mutableMapOf<String, String?>()
             header["Content-Type"] = "application/json"
             header["token"] = token
-            if(holder.bookmark.isSelected == false) {
-                RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header).customEnqueue(
+            if (header["token"] == "token") {
+                Toast.makeText(context, "로그인 후 이용해 주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                if (holder.bookmark.isSelected == false) {
+                    RequestToServer.service.requestBookmarkUpdate(
+                        data[position].bookstoreIdx,
+                        header
+                    ).customEnqueue(
                         onError = { Log.d("RESPONSE", "error") },
                         onSuccess = {
-                            if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
-                                //팝업창 띄우기
-                            }
                             if (it.success) {
                                 Log.d("RESPONSE", it.message)
                                 holder.bookmark.isSelected = true
@@ -60,29 +63,31 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                             }
                         }
                     )
-                }
-            else {
-                val customDialog = DialogBookmark(context!!)
-                customDialog.start()
-                customDialog.setOnOKClickedListener {
-                    RequestToServer.service.requestBookmarkUpdate(data[position].bookstoreIdx, header)
-                        .customEnqueue(
-                            onError = { Log.d("RESPONSE", "error") },
-                            onSuccess = {
-                                if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
-                                    //팝업창 띄우기
-                                }
-                                if (it.success) {
-                                    Log.d("RESPONSE", it.message)
-                                    holder.bookmark.isSelected = false
-                                }
-                            }
+                } else {
+                    val customDialog = DialogBookmark(context!!)
+                    customDialog.start()
+                    customDialog.setOnOKClickedListener {
+                        RequestToServer.service.requestBookmarkUpdate(
+                            data[position].bookstoreIdx,
+                            header
                         )
+                            .customEnqueue(
+                                onError = { Log.d("RESPONSE", "error") },
+                                onSuccess = {
+                                    if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                        //팝업창 띄우기
+                                    }
+                                    if (it.success) {
+                                        Log.d("RESPONSE", it.message)
+                                        holder.bookmark.isSelected = false
+                                    }
+                                }
+                            )
+                    }
                 }
+
             }
-
         }
-
     }
 }
 

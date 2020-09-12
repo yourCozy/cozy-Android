@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "475171166951",
+    "firebase_url": "https://cozy-2020-fbe93.firebaseio.com",
+    "project_id": "cozy-2020-fbe93",
+    "storage_bucket": "cozy-2020-fbe93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475171166951:android:d2a452d74ed5f816bc6042",
+        "android_client_info": {
+          "package_name": "com.example.cozy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475171166951-g45819sm7vheiiavap5g87iv38jm01b8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cozy",
+            "certificate_hash": "a6450a1b8d84e4e3205fbd4fd5aa6f7bffb7ade7"
+          }
+        },
+        {
+          "client_id": "475171166951-benbnv6pc19jv1p5v85i48d66ap9vf3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRWwsQEEarlrrwaX2MSfxCYPm---b2c_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475171166951-benbnv6pc19jv1p5v85i48d66ap9vf3h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

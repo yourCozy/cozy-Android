@@ -75,6 +75,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         if(header["token"] == "token"){
             fragView.btn_login.visibility = View.VISIBLE
             fragView.tv_login_needed.visibility = View.VISIBLE
+            fragView.btn_interests.visibility = View.GONE
             fragView.rounded_iv_profile.visibility = View.GONE
             fragView.tv_user_name.visibility = View.GONE
             fragView.tv_user_email.visibility = View.GONE

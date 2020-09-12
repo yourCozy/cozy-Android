@@ -45,6 +45,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/eventdetail_img_prepare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미지 준비중이에요!"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="500"
+                app:layout_constraintStart_toStartOf="@id/event_img"
+                app:layout_constraintEnd_toEndOf="@id/event_img"
+                app:layout_constraintTop_toTopOf="@id/event_img"
+                app:layout_constraintBottom_toBottomOf="@id/event_img"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_event"
@@ -89,29 +104,6 @@
                 app:layout_constraintTop_toTopOf="@id/event_icon" />
 
 
-            <ImageView
-                android:id="@+id/event_icon2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/iconfeaturewhite42"
-                app:layout_constraintLeft_toRightOf="@id/event_icon"
-                app:layout_constraintTop_toTopOf="@id/event_icon" />
-
-            <TextView
-                android:id="@+id/evnet_tv_cate2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="전시"
-                android:textSize="12sp"
-                android:fontFamily="@font/fontfamily"
-                android:textFontWeight="700"
-                android:textColor="@color/dark_gray"
-                app:layout_constraintBottom_toBottomOf="@id/event_icon2"
-                app:layout_constraintEnd_toEndOf="@id/event_icon2"
-                app:layout_constraintStart_toStartOf="@id/event_icon2"
-                app:layout_constraintTop_toTopOf="@id/event_icon2" />
 
             <TextView
                 android:id="@+id/event_tv_name"
@@ -127,37 +119,32 @@
                 app:layout_constraintStart_toStartOf="@+id/event_icon"
                 app:layout_constraintTop_toBottomOf="@id/event_icon" />
 
-            <ImageView
-                android:id="@+id/yellowbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:src="@drawable/box_yellow_day"
-                app:layout_constraintBottom_toBottomOf="@id/event_tv_name"
-                app:layout_constraintStart_toEndOf="@id/event_tv_name"
-                app:layout_constraintTop_toTopOf="@id/event_tv_name" />
 
             <TextView
                 android:id="@+id/event_tv_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
                 android:text="D-7"
                 android:fontFamily="@font/fontfamily"
                 android:textFontWeight="700"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:includeFontPadding="false"
-                app:layout_constraintBottom_toBottomOf="@id/yellowbox"
-                app:layout_constraintEnd_toEndOf="@id/yellowbox"
-                app:layout_constraintStart_toStartOf="@id/yellowbox"
-                app:layout_constraintTop_toTopOf="@+id/yellowbox" />
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:layout_marginLeft="17dp"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_name"
+                app:layout_constraintStart_toEndOf="@id/event_tv_name"
+                app:layout_constraintTop_toTopOf="@id/event_tv_name" />
 
             <ImageView
+                android:id="@+id/event_bookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/pickyellow20"
-                app:layout_constraintTop_toTopOf="@id/yellowbox"
-                app:layout_constraintBottom_toBottomOf="@id/yellowbox"
+                app:layout_constraintTop_toTopOf="@id/event_tv_day"
+                app:layout_constraintBottom_toBottomOf="@id/event_tv_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"/>
 
@@ -287,6 +274,7 @@
                 app:layout_constraintTop_toBottomOf="@id/event_tv_cost"/>
 
             <TextView
+                android:id="@+id/yellowbtn_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="신청하기"
