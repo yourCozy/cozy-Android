@@ -34,6 +34,7 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.usermgmt.response.model.UserAccount
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -72,9 +73,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         val kakaoSignInButton : Button = findViewById(R.id.kakao_sign_in_btn)
         kakaoSignInButton.setOnClickListener(View.OnClickListener {
-            session = Session.getCurrentSession()
-            session.addCallback(SessionCallback())
-            session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
+            kakao_login.performClick() //카카오톡으로 로그인하기, 다른 카카오 계정으로 로그인하기
+//            session = Session.getCurrentSession()
+//            session.addCallback(SessionCallback())
+//            session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
         })
 
         val passingButton : Button = findViewById(R.id.btn_passing_sign_in)
@@ -196,13 +198,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             editor.putString("profile",data.profile)
                             editor.apply()
                             editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
-                            Log.i("KAKAO_API", "사용자 이름: ${it.data.nickname}")
-                            Log.i("KAKAO_API", "사용자 이메일: ${it.data.email}")
-                            Log.i("KAKAO_API", "사용자 토큰: ${it.data.jwtToken}")
+                            Log.i("KAKAO_API", "사용자 이름: ${data.nickname}")
+                            Log.i("KAKAO_API", "사용자 id: $kakao_id")
+                            Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
                             finish()
                         }
                     )
-                    Log.i("KAKAO_API", "사용자 id: $kakao_id");
                     var intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
                     startActivity(intent)
                     finish()

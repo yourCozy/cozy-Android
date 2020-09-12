@@ -60,7 +60,10 @@ interface RequestInterface {
     //활동
     //활동 상세 조회 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C
     @GET("/activity/detail/{activityIdx}")
-    fun requestEventDetail(@Path("activityIdx") activityIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseEventDetail>
+    fun requestEventDetailLogin(@Path("activityIdx") activityIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseEventDetail>
+    //로그인 하지 않았을 때
+    @GET("/activity/detail/{activityIdx}")
+    fun requestEventDetail(@Path("activityIdx") activityIdx: Int) : Call<ResponseEventDetail>
 
     //카테고리별 활동 조회(마감 임박순) https://github.com/yourCozy/cozy-Server/wiki/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC%EB%B3%84-%ED%99%9C%EB%8F%99-%EC%A1%B0%ED%9A%8C(%EB%A7%88%EA%B0%90-%EC%9E%84%EB%B0%95%EC%88%9C)
     @GET("/activity/category/deadline/{categoryIdx}")
