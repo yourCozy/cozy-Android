@@ -20,10 +20,16 @@ class EventViewHolder(
     val title : TextView = itemView.findViewById(R.id.activity_title)
     val info : TextView = itemView.findViewById(R.id.activity_info)
     val price : TextView = itemView.findViewById(R.id.activity_price)
+    var textNull : TextView = itemView.findViewById(R.id.tv_activity_img_null)
 
     fun bind(myData: EventData){
-        Glide.with(itemView).load("myData.image1").into(img)
-        Log.d("데이터야",myData.image1)
+        if (myData.image1 != null) {
+            Glide.with(itemView).load(myData.image1).into(img)
+            textNull.visibility = View.GONE
+        }else{
+            Glide.with(itemView).load(R.drawable.img_null).into(img)
+            textNull.visibility = View.VISIBLE
+        }
         activityIdx = myData.activityIdx
         day.text = "D-" + myData.dday.toString()
         title.text = myData.activityName

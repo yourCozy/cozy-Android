@@ -41,6 +41,7 @@ class EventDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         bookstoreIdx = data.bookstoreIdx
         categoryIdx = data.categoryIdx
         categoryName.text = data.categoryName
+
         if (data.price == 0) {
             price.text = "무료"
         } else {

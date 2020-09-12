@@ -40,6 +40,20 @@
                 app:layout_constraintDimensionRatio="1.4:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_rec_de_img_null"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/rec_de_img"
+                app:layout_constraintEnd_toEndOf="@id/rec_de_img"
+                app:layout_constraintTop_toTopOf="@id/rec_de_img"
+                app:layout_constraintBottom_toBottomOf="@id/rec_de_img"
+                android:visibility="gone"
+                android:text="이미지 준비중이에요!"
+                style="@style/title_text"
+                android:textColor="@color/white"
+                android:textFontWeight="500"
+                android:textAlignment="center"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/bookstore_profile"
