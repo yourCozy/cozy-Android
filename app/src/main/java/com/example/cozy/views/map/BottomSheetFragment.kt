@@ -38,9 +38,6 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
 
     lateinit var countdata : MapCount
 
-    //커스텀
-    //override fun getTheme(): Int = R.style.RoundBottomSheet
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val fragView =  inflater.inflate(R.layout.bottomsheet_map,container,false)
         initCount()

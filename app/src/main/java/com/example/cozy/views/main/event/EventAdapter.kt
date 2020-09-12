@@ -24,9 +24,4 @@ class EventAdapter (private val context : Context, val itemClick: (EventData, Vi
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.bind(data[position])
     }
-
-    fun addItem(item : EventData){
-        data.add(item)
-    }
-
 }

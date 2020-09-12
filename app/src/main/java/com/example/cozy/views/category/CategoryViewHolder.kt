@@ -1,6 +1,5 @@
 package com.example.cozy.views.category
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,15 +23,12 @@ class CategoryViewHolder(
     var textNull : TextView = itemView.findViewById(R.id.tv_activity_null)
 
     fun bind(categoryData: CategoryData) {
-//        profile.setImageResource(R.drawable.ex_img_activity_unsplash)
-//        Log.d("IMAGE_CHECK",categoryData.image)
-        if(categoryData.image != null){
-            Glide.with(itemView).load(categoryData.image).into(image)
+        if(categoryData.image1 != null){
+            Glide.with(itemView).load(categoryData.image1).into(image)
             textNull.visibility = View.GONE
         }else{
             Glide.with(itemView).load(R.drawable.img_null).into(image)
             textNull.visibility = View.VISIBLE
-//            image.setImageResource(R.drawable.ex_img_activity_unsplash)
         }
         activityIdx = categoryData.activityIdx
         activityName = categoryData.activityName

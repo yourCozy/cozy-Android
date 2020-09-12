@@ -51,10 +51,4 @@ class NoticeAdapter(private val context: Context) :
     override fun getItemCount(): Int {
         return data.size
     }
-
-    fun addItem(item: NoticeData) {
-        data.add(item)
-    }
-
-
 }

@@ -25,7 +25,6 @@ import com.google.firebase.ktx.Firebase
 import com.kakao.auth.Session
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.LogoutResponseCallback
-import com.kakao.usermgmt.response.MeV2Response
 import kotlinx.android.synthetic.main.activity_myaccount.*
 
 
@@ -46,6 +45,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var callback: LoginActivity.SessionCallback
 
     lateinit var sharedPref: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     lateinit var nickname: String
     lateinit var profileImg: String
 
@@ -63,6 +63,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         tb_myaccount.elevation = 5F
 
         sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -108,12 +109,17 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             mGoogleSignInClient.signOut().addOnCompleteListener(this) {
                 val user = FirebaseAuth.getInstance().currentUser
                 user?.unlink(user.providerId)
-
-                val intent = Intent(applicationContext, MainActivity::class.java)
+                editor.remove("token")
+                editor.remove("nickname")
+                editor.remove("profile")
+                editor.apply()
+                editor.commit()
+                val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 Log.d(TAG, "로그아웃. 성공")
                 Toast.makeText(applicationContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
+                finish()
             }
         }
         else{
@@ -122,10 +128,14 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 .requestLogout(object : LogoutResponseCallback() {
                     override fun onCompleteLogout() {
                         Log.d(TAG, "카카오 로그아웃 logout")
+                        editor.remove("token")
+                        editor.remove("nickname")
+                        editor.remove("profile")
+                        editor.apply()
+                        editor.commit()
                         val intent = Intent(this@ProfileActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
-
                     }
                 })
         }

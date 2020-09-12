@@ -173,10 +173,10 @@ class RecommendDetailActivity : AppCompatActivity() {
                         rec_de_tag1.text = detailData.hashtag1
                         rec_de_tag2.text = detailData.hashtag2
                         rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.description
+                        rec_de_intro.text = detailData.notice
 
                         tel = detailData.tel
-                        save.isSelected = detailData.bookmark != 0
+                        save.isSelected = detailData.checked != 0
                         latitude = detailData.latitude
                         longitude = detailData.longitude
                         rec_de_adress.text = detailData.location
@@ -210,9 +210,9 @@ class RecommendDetailActivity : AppCompatActivity() {
                         rec_de_tag1.text = detailData.hashtag1
                         rec_de_tag2.text = detailData.hashtag2
                         rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.description
+                        rec_de_intro.text = detailData.notice
                         tel = detailData.tel
-                        save.isSelected = detailData.bookmark != 0
+                        save.isSelected = detailData.checked != 0
                         latitude = detailData.latitude
                         longitude = detailData.longitude
                         rec_de_adress.text = detailData.location

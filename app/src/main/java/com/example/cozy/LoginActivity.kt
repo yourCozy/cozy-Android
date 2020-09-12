@@ -35,6 +35,7 @@ import com.kakao.usermgmt.response.model.UserAccount
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlin.properties.Delegates
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -48,6 +49,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
+    var isLogined by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,20 +135,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             val result : GoogleSignInResult? = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result!!.isSuccess()) {
                 val account: GoogleSignInAccount? = result.signInAccount
-
-                /*val runnable = Runnable {
-                    val scope = "oauth2:"+Scopes.EMAIL+" "+Scopes.PROFILE
-                    val accessToken: String = GoogleAuthUtil.getToken(
-                        applicationContext,
-                        account?.account,
-                        scope,
-                        Bundle()
-                    )
-
-                    Log.d(TAG, "accessToken : ${accessToken}")
-
-                }
-                AsyncTask.execute(runnable)*/
             }
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -200,13 +188,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             editor.commit()    //최종 커밋. 커밋을 해야 저장이 된다.
                             Log.i("KAKAO_API", "사용자 이름: ${data.nickname}")
                             Log.i("KAKAO_API", "사용자 id: $kakao_id")
-                            Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
+                            val intent: Intent
+                            if(it.data.is_logined == 0) {
+                                Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
+                                intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
+                                startActivity(intent)
+                            }else{
+                                Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
+                                intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
+                                startActivity(intent)
+                            }
                             finish()
                         }
                     )
-                    var intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
-                    startActivity(intent)
-                    finish()
                 }
 
                 override fun onSessionClosed(errorResult: ErrorResult?) {
@@ -267,20 +261,30 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             if (it.success) {
                                 val data = it.data
                                 editor.putString("token", data.jwtToken)
-                                editor.putString("email", data.email)
+                                editor.putString("email", data.id)
                                 editor.putString("nickname", data.nickname)
                                 editor.putString("profile",data.profile)
                                 editor.apply()
                                 editor.commit()
+                                val intent: Intent
+                                if(it.data.is_logined == 0) {
+                                    Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
+                                    intent = Intent(this@LoginActivity, OnBoardingPreferenceActivity::class.java) //MainActivity
+                                    startActivity(intent)
+                                }else{
+                                    Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
+                                    intent = Intent(this@LoginActivity, MainActivity::class.java) //MainActivity
+                                    startActivity(intent)
+                                }
+                                finish()
                                 Log.d(TAG, "이름 = " + data.nickname)
-                                Log.d(TAG, "이메일 = " + data.email)
+                                Log.d(TAG, "이메일 = " + data.id)
                                 Log.d(TAG, "사용자 토큰 = "+ data.jwtToken)
                             }else{
                                 Log.d(TAG, "로그인 정보 서버에 전송하는 건 실패!")
                             }
                         }
                     )
-                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -293,18 +297,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         snackbar.dismiss()
                     })
                     snackbar.show()
-                    updateUI(null)
                 }
 
             }
-    }
-
-    private fun updateUI(account: GoogleSignInAccount?) {
-        val intent = Intent(applicationContext, OnBoardingPreferenceActivity::class.java)//ProfileActivity
-        intent.putExtra(GOOGLE_ACCOUNT, account)
-        Log.d(TAG, "프로필 액티비티로 넘어갈 intent의 이메일 주소" + account?.email)
-        startActivityForResult(intent, 1001)
-        finish()
     }
 
     override fun onClick(v: View?) {
@@ -329,16 +324,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    private fun revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut()
-
-        // Google revoke access
-        googleSignInClient.revokeAccess().addOnCompleteListener(this) {
-            updateUI(null)
-        }
     }
 
     companion object {

@@ -1,6 +1,6 @@
 package com.example.cozy.views.map
 
-import android.util.Log
+
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -12,7 +12,6 @@ import kotlin.properties.Delegates
 
 class MapViewHolder(itemView: View, val itemClick: (MapData, View) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
-    //val bookstoreIdx = itemView.findViewById<TextView>(R.id.tv_bookstore_name)
     val img1 = itemView.findViewById<ImageView>(R.id.img_bookstore)
     val bookstoreName = itemView.findViewById<TextView>(R.id.tv_bookstore_name)
     val location = itemView.findViewById<TextView>(R.id.tv_bookstore_address)

@@ -7,15 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cozy.R
-import com.example.cozy.views.mypage.Interest.InterestsData
-import kotlinx.android.synthetic.main.activity_event_detail.*
-import org.w3c.dom.Text
 import kotlin.properties.Delegates
 
 class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View) -> Unit ) : RecyclerView.ViewHolder(itemView){
     var bookstoreIdx by Delegates.notNull<Int>()
     var bookstoreImg = itemView.findViewById<ImageView>(R.id.img_interest_bookstore)
-    var interest_img_prepare = itemView.findViewById<TextView>(R.id.interest_img_prepare)
     var bookstorename = itemView.findViewById<TextView>(R.id.interest_place)
     var shortIntro1 = itemView.findViewById<TextView>(R.id.interest_intro1)
     var shortIntro2 = itemView.findViewById<TextView>(R.id.interest_intro2)

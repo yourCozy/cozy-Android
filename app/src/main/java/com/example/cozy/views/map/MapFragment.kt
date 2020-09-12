@@ -8,15 +8,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.cozy.ItemDecoration
-import com.example.cozy.MainActivity
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_map.*
-import kotlinx.android.synthetic.main.fragment_map.view.*
 
 
 class MapFragment : Fragment() {
