@@ -17,6 +17,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:id="@+id/tv_bookstore_img_null"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/img_bookstore"
+        app:layout_constraintEnd_toEndOf="@id/img_bookstore"
+        app:layout_constraintTop_toTopOf="@id/img_bookstore"
+        app:layout_constraintBottom_toBottomOf="@id/img_bookstore"
+        android:visibility="gone"
+        android:text="이미지 준비중이에요!"
+        style="@style/title_text"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textAlignment="center"/>
     <View
         android:id="@id/view"
         android:layout_width="match_parent"

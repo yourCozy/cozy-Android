@@ -1,5 +1,6 @@
 package com.example.cozy.views.category
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,19 +21,28 @@ class CategoryViewHolder(
     var shortIntro : TextView = itemView.findViewById(R.id.tv_activity_title) //이게 뭐하는 데이터인지 물어볼 것
     var price: TextView = itemView.findViewById(R.id.tv_activity_price)
     var dDay: TextView = itemView.findViewById(R.id.tv_activity_duedate)
+    var textNull : TextView = itemView.findViewById(R.id.tv_activity_null)
 
     fun bind(categoryData: CategoryData) {
 //        profile.setImageResource(R.drawable.ex_img_activity_unsplash)
-        if(categoryData.image != ""){
+//        Log.d("IMAGE_CHECK",categoryData.image)
+        if(categoryData.image != null){
             Glide.with(itemView).load(categoryData.image).into(image)
+            textNull.visibility = View.GONE
         }else{
-            image.setImageResource(R.drawable.ex_img_activity_unsplash)
+            Glide.with(itemView).load(R.drawable.img_null).into(image)
+            textNull.visibility = View.VISIBLE
+//            image.setImageResource(R.drawable.ex_img_activity_unsplash)
         }
         activityIdx = categoryData.activityIdx
         activityName = categoryData.activityName
         bookstoreName.text = categoryData.bookstoreName
         shortIntro.text = categoryData.shortIntro
-        dDay.text = "D-" + categoryData.dday
+        if (categoryData.dday == 0) {
+            dDay.text = "오늘 마감"
+        }else{
+            dDay.text = "D-" + categoryData.dday
+        }
         price.text = categoryData.price
 
         itemView.setOnClickListener { itemClick(categoryData, itemView) }

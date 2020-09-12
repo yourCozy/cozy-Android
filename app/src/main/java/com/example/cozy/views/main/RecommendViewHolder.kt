@@ -21,10 +21,18 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
     var address : TextView = itemView.findViewById(R.id.rec_address)
     var save : ImageButton = itemView.findViewById(R.id.btn_save)
     var checked by Delegates.notNull<Int>()
+    var textNull : TextView = itemView.findViewById(R.id.tv_recommend_image_null)
 
     fun bind(myData: RecommendData){
         bookstoreIdx = myData.bookstoreIdx
-        Glide.with(itemView).load(myData.mainImg).into(mainImg)
+        if (myData.mainImg != null) {
+            Glide.with(itemView).load(myData.mainImg).into(mainImg)
+            textNull.visibility = View.GONE
+        }else{
+            Glide.with(itemView).load(R.drawable.img_null).into(mainImg)
+            textNull.visibility = View.VISIBLE
+        }
+
         tag1.text = "#" + myData.hashtag1
         tag2.text = "#" + myData.hashtag2
         tag3.text = "#" + myData.hashtag3
