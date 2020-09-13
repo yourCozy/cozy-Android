@@ -336,12 +336,34 @@
                 android:textFontWeight="300"
                 android:textColor="@color/dark_gray"
                 app:layout_constraintTop_toBottomOf="@id/event_tv_introtitle"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/event_view"
                 android:layout_marginTop="14dp"
                 android:paddingLeft="20dp"
-                android:paddingEnd="20dp"/>
+                android:paddingEnd="26dp"/>
+
+            <View
+                android:id="@+id/event_view"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/light_gray"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_introduce"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:overScrollMode="never"
+                android:orientation="vertical"
+                tools:listitem="@layout/item_comment"
+                android:paddingBottom="122dp"
+                android:layout_marginTop="18dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

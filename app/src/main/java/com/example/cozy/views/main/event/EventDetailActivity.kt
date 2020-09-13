@@ -11,6 +11,8 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
+import com.example.cozy.views.main.event.comment.CommentAdapter
+import com.example.cozy.views.main.event.comment.CommentData
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import java.text.SimpleDateFormat
 import kotlin.properties.Delegates
@@ -22,6 +24,8 @@ class EventDetailActivity : AppCompatActivity(){
     var data = mutableListOf<EventDetailData>()
     private lateinit var detailData : EventDetailData
     var activityIdx by Delegates.notNull<Int>()
+    private var commentData = mutableListOf<CommentData>()
+    lateinit var commentAdapter: CommentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +46,14 @@ class EventDetailActivity : AppCompatActivity(){
         yellowbtn.visibility = View.GONE
         yellowbtn_text.visibility = View.GONE
 
+        commentAdapter = CommentAdapter(this)
+        rv_comment.adapter = commentAdapter
+        commentAdapter.notifyDataSetChanged()
+        loadComment()
 
         loadData()
+
+
     }
 
 
@@ -184,12 +194,30 @@ class EventDetailActivity : AppCompatActivity(){
         }
         rc_event.addItemDecoration(ItemDecoration(this, 8,0))
 
+
     }
+
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.search,menu)
 //        return super.onCreateOptionsMenu(menu)
 //    }
+
+    fun loadComment(){
+        commentData.apply {
+            add(
+                CommentData(
+                    activityIdx = 1,
+                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
+                    commentName = "지윤김",
+                    commentDate = "20.09.07  22:10",
+                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
+                )
+            )
+        }
+    }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
