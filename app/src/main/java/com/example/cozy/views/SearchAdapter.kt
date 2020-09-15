@@ -42,10 +42,10 @@ class SearchAdapter(val context: Context,var data: MutableList<SearchData> , val
                             )
                         },
                         onSuccess = {
-                            Log.d("Bookmark message", "${it.message}")
-                            Log.d("Bookmark checked11", "${it.data}")
-                            if (it.success) {
-                                val data = it.data
+                            Log.d("Bookmark message", "${it.body()!!.message}")
+                            Log.d("Bookmark checked11", "${it.body()!!.data}")
+                            if (it.body()!!.success) {
+                                val data = it.body()!!.data
                                 Log.d("Bookmark checked22", "북마크 성공 ${data!!.checked}")
                                 holder.bookmark.isSelected = true
                                 val inflater: LayoutInflater =
@@ -73,16 +73,16 @@ class SearchAdapter(val context: Context,var data: MutableList<SearchData> , val
                                     )
                                 },
                                 onSuccess = {
-                                    Log.d("Bookmark message", "${it.message}")
-                                    Log.d("Bookmark checked11", "${it.data}")
+                                    Log.d("Bookmark message", "${it.body()!!.message}")
+                                    Log.d("Bookmark checked11", "${it.body()!!.data}")
 
-                                    if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                    if (it.body()!!.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
                                         //팝업창 띄우기
                                     }
-                                    if (it.success) {
-                                        Log.d("RESPONSE", it.message)
+                                    if (it.body()!!.success) {
+                                        Log.d("RESPONSE", it.body()!!.message)
                                         holder.bookmark.isSelected = false
-                                        Log.d("Bookmark checked22", "북마크 해제${it.data!!.checked}")
+                                        Log.d("Bookmark checked22", "북마크 해제${it.body()!!.data!!.checked}")
                                     }
                                 }
                             )

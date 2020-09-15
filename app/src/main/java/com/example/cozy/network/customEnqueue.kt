@@ -7,7 +7,7 @@ import retrofit2.Response
 
 fun<ResponseType> Call<ResponseType>.customEnqueue(
     onFail: () -> Unit = { Log.d("network", "통신 실패")},
-    onSuccess: (ResponseType) -> Unit,
+    onSuccess: (response: Response<ResponseType>) -> Unit,
     onError: () -> Unit
 ) {
     this.enqueue(object:Callback<ResponseType>{
@@ -18,7 +18,7 @@ fun<ResponseType> Call<ResponseType>.customEnqueue(
 
         override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
             Log.d("onResponse response", response.toString())
-            response.body()?.let {
+            response?.let {
                 onSuccess(it)
             } ?: onError()
         }

@@ -120,17 +120,17 @@ class SearchActivity :AppCompatActivity() {
                 Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
             },
             onSuccess = {
-                if (it.success) {
-                    searchAdapter = SearchAdapter(applicationContext, it.data.toMutableList()){
+                if (it.body()!!.success) {
+                    searchAdapter = SearchAdapter(applicationContext, it.body()!!.data.toMutableList()){
                         SearchData, View ->
                         val intent = Intent(applicationContext, RecommendDetailActivity::class.java)
-                        intent.putExtra("bookstoreIdx",it.data[0].bookstoreIdx)
+                        intent.putExtra("bookstoreIdx",it.body()!!.data[0].bookstoreIdx)
                         startActivity(intent)
                     }
                     rv_search_result.adapter = searchAdapter
                     searchAdapter.notifyDataSetChanged()
-                    if(it.data[0].count != null){
-                        tv_search_result_cnt.text = it.data[0].count.toString()
+                    if(it.body()!!.data[0].count != null){
+                        tv_search_result_cnt.text = it.body()!!.data[0].count.toString()
                     }
 
                     tv_search_result.visibility = View.VISIBLE
