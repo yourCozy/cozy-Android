@@ -77,31 +77,22 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-
-            <ImageView
-                android:id="@+id/event_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/iconfeaturewhite42"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rc_event" />
-
             <TextView
                 android:id="@+id/event_tv_cate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/iconfeaturewhite42"
+                android:fontFamily="@font/fontfamily"
+                android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="전시"
-                android:textSize="12sp"
-                android:fontFamily="@font/fontfamily"
-                android:textFontWeight="700"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintBottom_toBottomOf="@id/event_icon"
-                app:layout_constraintEnd_toEndOf="@id/event_icon"
-                app:layout_constraintStart_toStartOf="@id/event_icon"
-                app:layout_constraintTop_toTopOf="@id/event_icon" />
+                android:textFontWeight="700"
+                android:textSize="12sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rc_event" />
 
 
 
@@ -116,8 +107,8 @@
                 android:fontFamily="@font/fontfamily"
                 android:textFontWeight="700"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/event_icon"
-                app:layout_constraintTop_toBottomOf="@id/event_icon" />
+                app:layout_constraintStart_toStartOf="@+id/event_tv_cate"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_cate" />
 
 
             <TextView
@@ -374,6 +365,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="10dp"
+        android:paddingVertical="12dp"
         android:outlineSpotShadowColor="@color/comment_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -385,8 +377,6 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="22dp"
             android:src="@drawable/img_bookstore_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -405,7 +395,7 @@
             android:fontFamily="@font/fontfamily"
             android:textFontWeight="300"
             android:textSize="14sp"
-            android:lines="4"
+            android:maxLines="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/event_comment_user"
