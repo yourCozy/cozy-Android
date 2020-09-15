@@ -58,16 +58,16 @@ class EventFragment : Fragment() {
         service.requestBookstoreActivity(bookstoreIdx).customEnqueue(
             onError = { Toast.makeText(context, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
             onSuccess = {
-                if(it.success) {
-                    Log.d("success message >>>> ",it.message)
-                    Log.d("success data >>>> ",it.data.toString())
+                if(it.body()!!.success) {
+                    Log.d("success message >>>> ",it.body()!!.message)
+                    Log.d("success data >>>> ",it.body()!!.data.toString())
                     eventData.clear()
-                    eventData.addAll(it.data)
+                    eventData.addAll(it.body()!!.data)
                     eventAdapter.data = eventData
                     view.rv_activity.addItemDecoration(ItemDecoration(this.context!!, 0,40))
                     eventAdapter.notifyDataSetChanged()
                 }else{
-                    Log.d("non success message >>>> ",it.message)
+                    Log.d("non success message >>>> ",it.body()!!.message)
                     view.tv_nonActivity.visibility = View.VISIBLE
                 }
             }

@@ -67,8 +67,8 @@ class EventDetailActivity : AppCompatActivity(){
             service.requestEventDetail(activityIdx).customEnqueue(
                 onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
                 onSuccess = {
-                    if(it.success){
-                        detailData = it.data.elementAt(0)
+                    if(it.body()!!.success){
+                        detailData = it.body()!!.data.elementAt(0)
                         if(detailData.image1 == null){
                             Glide.with(this).load(R.drawable.null_img).into(event_img)
                             eventdetail_img_prepare.visibility = View.VISIBLE
@@ -135,9 +135,9 @@ class EventDetailActivity : AppCompatActivity(){
                     )
                 },
                 onSuccess = {
-                    if (it.success) {
-                        if (it.success) {
-                            detailData = it.data.elementAt(0)
+                    if (it.body()!!.success) {
+                        if (it.body()!!.success) {
+                            detailData = it.body()!!.data.elementAt(0)
                             if(detailData.image1 == null){
                                 Glide.with(this).load(R.drawable.null_img).into(event_img)
                                 eventdetail_img_prepare.visibility = View.VISIBLE

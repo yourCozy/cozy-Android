@@ -52,12 +52,12 @@ class InterestsActivity : AppCompatActivity() {
         service.requestInterest(header).customEnqueue(
             onError = { Log.d("test", "error")},
             onSuccess = {
-                if (it.success) {
-                    if (it.message == "서점 리스트 조회 성공") {
+                if (it.body()!!.success) {
+                    if (it.body()!!.message == "서점 리스트 조회 성공") {
                         interestAdapter =
                             InterestsAdapter(
                                 this,
-                                it.data.toMutableList(),
+                                it.body()!!.data.toMutableList(),
                                 { onEmpty() }) { InterestsData, View ->
                                 val intent = Intent(this, RecommendDetailActivity::class.java)
                                 intent.putExtra("bookstoreIdx", InterestsData.bookstoreIdx)

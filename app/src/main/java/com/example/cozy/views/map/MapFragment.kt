@@ -71,13 +71,13 @@ class MapFragment : Fragment() {
                 onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
                 onSuccess = {
                     setSection(num)
-                    Log.d("maplist message >> ", it.message)
-                    if (it.success) {
+                    Log.d("maplist message >> ", it.body()!!.message)
+                    if (it.body()!!.success) {
                         Log.d("maplist", "성공")
-                        detailData = it.data.elementAt(0)
+                        detailData = it.body()!!.data.elementAt(0)
                         rv_map.visibility = View.VISIBLE
                         mapAdapter =
-                            MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
+                            MapAdapter(view.context, it.body()!!.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
                                 intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
@@ -85,7 +85,7 @@ class MapFragment : Fragment() {
                         rv_map.adapter = mapAdapter
                         map_no_bookstore.visibility = View.GONE
                     }
-                    if (it.message == "서점 리스트가 없습니다.") {
+                    if (it.body()!!.message == "서점 리스트가 없습니다.") {
                         rv_map.visibility = View.GONE
                         map_no_bookstore.visibility = View.VISIBLE
                     }
@@ -97,13 +97,13 @@ class MapFragment : Fragment() {
                 onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
                 onSuccess = {
                     setSection(num)
-                    Log.d("오류", it.message)
-                    if (it.success) {
+                    Log.d("오류", it.body()!!.message)
+                    if (it.body()!!.success) {
                         Log.d("maplist", "성공")
-                        detailData = it.data.elementAt(0)
+                        detailData = it.body()!!.data.elementAt(0)
                         rv_map.visibility = View.VISIBLE
                         mapAdapter =
-                            MapAdapter(view.context, it.data.toMutableList()) { MapData, View ->
+                            MapAdapter(view.context, it.body()!!.data.toMutableList()) { MapData, View ->
                                 val intent = Intent(activity, RecommendDetailActivity::class.java)
                                 intent.putExtra("bookstoreIdx", MapData.bookstoreIdx)
                                 startActivity(intent)
@@ -111,7 +111,7 @@ class MapFragment : Fragment() {
                         rv_map.adapter = mapAdapter
                         map_no_bookstore.visibility = View.GONE
                     }
-                    if (it.message == "서점 리스트가 없습니다.") {
+                    if (it.body()!!.message == "서점 리스트가 없습니다.") {
                         rv_map.visibility = View.GONE
                         map_no_bookstore.visibility = View.VISIBLE
                     }

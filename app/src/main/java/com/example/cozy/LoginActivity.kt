@@ -181,7 +181,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.e(TAG, "onError!!!!")
                         },
                         onSuccess = {
-                            val data = it.data
+                            val data = it.body()!!.data
                             editor.putString("token",data.jwtToken) // key,value 형식으로 저장
                             editor.putString("nickname",data.nickname)
                             editor.putString("profile",data.profile)
@@ -190,7 +190,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.i("KAKAO_API", "사용자 이름: ${data.nickname}")
                             Log.i("KAKAO_API", "사용자 id: $kakao_id")
                             Log.i("KAKAO_API", "사용자 토큰: ${data.jwtToken}")
-                            isLogined = it.data.is_logined
+                            isLogined = data.is_logined
                             go_next()
                         }
                     )
@@ -244,8 +244,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.d(TAG, "server 로그인 정보 전송 실패")
                         },
                         onSuccess = {
-                            if (it.success) {
-                                val data = it.data
+                            if (it.body()!!.success) {
+                                val data = it.body()!!.data
                                 editor.putString("token", data.jwtToken)
                                 editor.putString("email", data.id)
                                 editor.putString("nickname", data.nickname)
@@ -253,7 +253,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 editor.apply()
                                 editor.commit()
                                 Log.i("Google_API", "사용자 토큰: ${data.jwtToken}")
-                                isLogined = it.data.is_logined
+                                isLogined = data.is_logined
                                 go_next()
                                 Log.d(TAG, "이름 = " + data.nickname)
                                 Log.d(TAG, "이메일 = " + data.id)

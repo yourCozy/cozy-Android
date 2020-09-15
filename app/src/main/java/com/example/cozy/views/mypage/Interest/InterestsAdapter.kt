@@ -46,14 +46,14 @@ class InterestsAdapter(val context: Context, var data : MutableList<InterestsDat
                     .customEnqueue(
                         onError = { Log.d("RESPONSE", "error") },
                         onSuccess = {
-                            if (it.success) {
-                                Log.d("RESPONSE", it.message)
+                            if (it.body()!!.success) {
+                                Log.d("RESPONSE", it.body()!!.message)
                                 data.removeAt(position)
                                 notifyItemRemoved(position)
                                 notifyItemRangeChanged(position, data.size)
                                 if(data.size == 0) onEmpty()
                             }
-                            else Log.d("RESPONSE", it.message)
+                            else Log.d("RESPONSE", it.body()!!.message)
                         }
                     )
             }
