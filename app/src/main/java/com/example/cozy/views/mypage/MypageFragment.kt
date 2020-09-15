@@ -136,7 +136,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
         val header = mutableMapOf<String, String?>()
         header["Content-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
-        service.requestRecentlySeen(header).customEnqueue(
+        service.requestRecentlySeen().customEnqueue(
             onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show() },
             onSuccess = {
                 if (it.success) {
@@ -157,9 +157,12 @@ class MypageFragment : Fragment(), View.OnClickListener {
                         Log.d(TAG, "최근 본 책방 통신 성공.")
                     } else {
                         onEmpty()
-                        Log.d(TAG, "최근 본 책방 없음. 통신 성공")
+                        Log.d(TAG, it.message)
                     }
-                }else onEmpty()
+                }else {
+                    onEmpty()
+                    Log.d(TAG, it.message)
+                }
             }
         )
         Log.d(TAG, "최근 본 책방 어댑터 적용 됨.")
