@@ -13,6 +13,7 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.event.EventDetailActivity
 import kotlinx.android.synthetic.main.activity_event_list.*
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlin.properties.Delegates
 
 class CategoryListActivity : AppCompatActivity() {
@@ -38,6 +39,7 @@ class CategoryListActivity : AppCompatActivity() {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_before)
 
         tb_event.elevation = 5F
+
         loadCategoryActivityData()
     }
 

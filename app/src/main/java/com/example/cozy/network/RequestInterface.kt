@@ -104,6 +104,9 @@ interface RequestInterface {
     //취향 수정 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EC%88%98%EC%A0%95
     //@PUT("/mypage/recommendation?opt=%&opt=% ...")
 
+    //검색 https://github.com/yourCozy/cozy-Server/wiki/%EA%B2%80%EC%83%89-%ED%8E%98%EC%9D%B4%EC%A7%80
+    @GET("/bookstore/search/{keyword}")
+    fun requestSearch(@Path("keyword") keyword : String, @HeaderMap headers: Map<String, String?>) : Call<ResponseSearch>
 }
 
 

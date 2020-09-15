@@ -49,6 +49,15 @@
         <item name="android:textColor">@color/dark_gray</item>
     </style>
 
+    <style name="text_search_tag" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/fontfamily</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontWeight">500</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="tag_text_white" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/fontfamily</item>
         <item name="fontWeight">500</item>
