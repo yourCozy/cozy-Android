@@ -35,9 +35,24 @@ class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View)
         shortIntro2.text = myData.shortIntro2
         bookstorename.text = myData.bookstoreName
         location.text = myData.location
-        tag1.text = "#" + myData.tag1
-        tag2.text = "#" + myData.tag2
-        tag3.text = "#" + myData.tag3
+        if(myData.hashtag1 != null) {
+            tag1.text = "#" + myData.hashtag1
+        }
+        else{
+            tag1.visibility = View.INVISIBLE
+        }
+        if(myData.hashtag2 != null) {
+            tag2.text = "#" + myData.hashtag2
+        }
+        else {
+            tag2.visibility = View.INVISIBLE
+        }
+        if(myData.hashtag3 != null) {
+            tag3.text = "#" + myData.hashtag3
+        }
+        else{
+            tag3.visibility = View.INVISIBLE
+        }
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }
 }

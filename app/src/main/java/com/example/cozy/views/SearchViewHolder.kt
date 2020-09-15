@@ -37,9 +37,24 @@ class SearchViewHolder(itemView : View, val itemClick : (SearchData, View) -> Un
         shortIntro2.text = data.shortIntro2
         bookstorename.text = data.bookstoreName
         location.text = data.location
-        tag1.text = "#" + data.hashtag1
-        tag2.text = "#" + data.hashtag2
-        tag3.text = "#" + data.hashtag3
+        if(data.hashtag1 != null) {
+            tag1.text = "#" + data.hashtag1
+        }
+        else{
+            tag1.visibility = View.INVISIBLE
+        }
+        if(data.hashtag2 != null) {
+            tag2.text = "#" + data.hashtag2
+        }
+        else {
+            tag2.visibility = View.INVISIBLE
+        }
+        if(data.hashtag3 != null) {
+            tag3.text = "#" + data.hashtag3
+        }
+        else{
+            tag3.visibility = View.INVISIBLE
+        }
         checked = data.checked
         bookmark.isSelected = checked != 0
         itemView.setOnClickListener{itemClick(data, itemView)}

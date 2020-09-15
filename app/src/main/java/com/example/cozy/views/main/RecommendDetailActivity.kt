@@ -170,9 +170,24 @@ class RecommendDetailActivity : AppCompatActivity() {
                             Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
                         }
                         bookstore_name.text = detailData.bookstoreName
-                        rec_de_tag1.text = detailData.hashtag1
-                        rec_de_tag2.text = detailData.hashtag2
-                        rec_de_tag3.text = detailData.hashtag3
+                        if(detailData.hashtag1 != null) {
+                            rec_de_tag1.text = "#" + detailData.hashtag1
+                        }
+                        else{
+                            rec_de_tag1.visibility = View.INVISIBLE
+                        }
+                        if(detailData.hashtag2 != null) {
+                            rec_de_tag2.text = "#" + detailData.hashtag2
+                        }
+                        else {
+                            rec_de_tag2.visibility = View.INVISIBLE
+                        }
+                        if(detailData.hashtag3 != null) {
+                            rec_de_tag3.text = "#" + detailData.hashtag3
+                        }
+                        else{
+                            rec_de_tag3.visibility = View.INVISIBLE
+                        }
                         rec_de_intro.text = detailData.notice
 
                         tel = detailData.tel
@@ -203,13 +218,28 @@ class RecommendDetailActivity : AppCompatActivity() {
                         if (detailData.profileImg != null) {
                             Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
                         }else{
-                            Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
+                            Glide.with(this).load(R.mipmap.ic_cozy).into(bookstore_profile)
                         }
 
                         bookstore_name.text = detailData.bookstoreName
-                        rec_de_tag1.text = detailData.hashtag1
-                        rec_de_tag2.text = detailData.hashtag2
-                        rec_de_tag3.text = detailData.hashtag3
+                        if(detailData.hashtag1 != null) {
+                            rec_de_tag1.text = "#" + detailData.hashtag1
+                        }
+                        else{
+                            rec_de_tag1.visibility = View.INVISIBLE
+                        }
+                        if(detailData.hashtag2 != null) {
+                            rec_de_tag2.text = "#" + detailData.hashtag2
+                        }
+                        else {
+                            rec_de_tag2.visibility = View.INVISIBLE
+                        }
+                        if(detailData.hashtag3 != null) {
+                            rec_de_tag3.text = "#" + detailData.hashtag3
+                        }
+                        else{
+                            rec_de_tag3.visibility = View.INVISIBLE
+                        }
                         rec_de_intro.text = detailData.notice
                         tel = detailData.tel
                         save.isSelected = detailData.checked != 0
