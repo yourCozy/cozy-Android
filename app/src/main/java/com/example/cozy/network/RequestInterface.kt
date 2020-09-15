@@ -90,7 +90,7 @@ interface RequestInterface {
 
     //최근 본 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EC%B5%9C%EA%B7%BC-%EB%B3%B8-%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
     @GET("/mypage/recent")
-    fun requestRecentlySeen(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecent>
+    fun requestRecentlySeen() : Call<ResponseRecent>
 
     //프로필 사진 업데이트 https://github.com/yourCozy/cozy-Server/wiki/%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
     //@POST("/user/profile")
