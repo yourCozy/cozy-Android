@@ -336,14 +336,97 @@
                 android:textFontWeight="300"
                 android:textColor="@color/dark_gray"
                 app:layout_constraintTop_toBottomOf="@id/event_tv_introtitle"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/event_view"
                 android:layout_marginTop="14dp"
                 android:paddingLeft="20dp"
-                android:paddingEnd="20dp"/>
+                android:paddingEnd="26dp"/>
+
+            <View
+                android:id="@+id/event_view"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/light_gray"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_introduce"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:overScrollMode="never"
+                android:orientation="vertical"
+                tools:listitem="@layout/item_comment"
+                android:paddingBottom="122dp"
+                android:layout_marginTop="18dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:outlineSpotShadowColor="@color/comment_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/event_comment_user"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="22dp"
+            android:src="@drawable/img_bookstore_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/event_comment_write"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:hint="댓글 남기기"
+            android:textColor="@color/black"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="300"
+            android:textSize="14sp"
+            android:lines="4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintStart_toEndOf="@+id/event_comment_user"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="50dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/comment_btn_yellow"
+            android:fontFamily="@font/fontfamily"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
