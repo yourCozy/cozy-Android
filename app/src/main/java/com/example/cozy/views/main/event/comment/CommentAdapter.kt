@@ -1,6 +1,7 @@
 package com.example.cozy.views.main.event.comment
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,13 +10,14 @@ import com.example.cozy.views.map.MapViewHolder
 
 class CommentAdapter(private val context : Context) : RecyclerView.Adapter<CommentViewHolder>(){
 
-    val data = mutableListOf<CommentData>()
+    var data = mutableListOf<CommentData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_comment,parent,false)
         return CommentViewHolder(view)
     }
 
     override fun getItemCount(): Int {
+        Log.d("댓글", data.size.toString())
         return data.size
     }
 

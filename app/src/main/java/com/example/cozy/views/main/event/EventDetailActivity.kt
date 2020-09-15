@@ -48,7 +48,7 @@ class EventDetailActivity : AppCompatActivity(){
 
         commentAdapter = CommentAdapter(this)
         rv_comment.adapter = commentAdapter
-        commentAdapter.notifyDataSetChanged()
+
         loadComment()
 
         loadData()
@@ -203,7 +203,7 @@ class EventDetailActivity : AppCompatActivity(){
 //        return super.onCreateOptionsMenu(menu)
 //    }
 
-    fun loadComment(){
+    private fun loadComment(){
         commentData.apply {
             add(
                 CommentData(
@@ -214,7 +214,27 @@ class EventDetailActivity : AppCompatActivity(){
                     commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
                 )
             )
+            add(
+                CommentData(
+                    activityIdx = 1,
+                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
+                    commentName = "지윤김",
+                    commentDate = "20.09.07  22:10",
+                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
+                )
+            )
+            add(
+                CommentData(
+                    activityIdx = 1,
+                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
+                    commentName = "지윤김",
+                    commentDate = "20.09.07  22:10",
+                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
+                )
+            )
         }
+        commentAdapter.data = commentData
+        commentAdapter.notifyDataSetChanged()
     }
 
 
