@@ -3,13 +3,13 @@ package com.example.cozy.views.category
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.example.cozy.views.SearchActivity
 
 class CategoryFragment : Fragment(), View.OnClickListener {
 
@@ -153,8 +153,25 @@ class CategoryFragment : Fragment(), View.OnClickListener {
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.search, menu)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search, menu)
+//        val searchView: SearchView = menu.findItem(R.id.search).actionView as SearchView
+//        searchView.maxWidth = Integer.MAX_VALUE
+//
+//        searchView.queryHint = "검색"
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.search -> {
+                Toast.makeText(this.context, "검색",Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, SearchActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //해보고 이상하면 지울것
+                startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }
