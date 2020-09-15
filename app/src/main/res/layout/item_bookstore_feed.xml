@@ -15,6 +15,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/bookstorefeed_img_prepare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지 준비중이에요!"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="@id/bookstore_feed_img"
+        app:layout_constraintEnd_toEndOf="@id/bookstore_feed_img"
+        app:layout_constraintTop_toTopOf="@id/bookstore_feed_img"
+        app:layout_constraintBottom_toBottomOf="@id/bookstore_feed_img"
+        />
+
+    <TextView
         android:id="@+id/bookstore_feed_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

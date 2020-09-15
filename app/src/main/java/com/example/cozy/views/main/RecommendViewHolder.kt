@@ -33,9 +33,24 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
             textNull.visibility = View.VISIBLE
         }
 
-        tag1.text = "#" + myData.hashtag1
-        tag2.text = "#" + myData.hashtag2
-        tag3.text = "#" + myData.hashtag3
+        if(myData.hashtag1 != null) {
+            tag1.text = "#" + myData.hashtag1
+        }
+        else{
+            tag1.visibility = View.INVISIBLE
+        }
+        if(myData.hashtag2 != null) {
+            tag2.text = "#" + myData.hashtag2
+        }
+        else {
+            tag2.visibility = View.INVISIBLE
+        }
+        if(myData.hashtag3 != null) {
+            tag3.text = "#" + myData.hashtag3
+        }
+        else{
+            tag3.visibility = View.INVISIBLE
+        }
         intro1.text = myData.shortIntro1
         intro2.text = myData.shortIntro2
         name.text = myData.bookstoreName
