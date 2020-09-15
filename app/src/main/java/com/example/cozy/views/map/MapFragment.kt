@@ -11,6 +11,7 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
+import com.example.cozy.views.SearchActivity
 import com.example.cozy.views.main.RecommendDetailActivity
 import kotlinx.android.synthetic.main.fragment_map.*
 
@@ -120,12 +121,17 @@ class MapFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.search, menu)
+        inflater.inflate(R.menu.search, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.search -> Toast.makeText(context,"검색",Toast.LENGTH_SHORT).show()
+            R.id.search -> {
+                Toast.makeText(this.context, "검색",Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, SearchActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //해보고 이상하면 지울것
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

@@ -5,5 +5,6 @@
         android:id="@+id/search"
         android:icon="@drawable/icon_search"
         android:title="검색"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 </menu>

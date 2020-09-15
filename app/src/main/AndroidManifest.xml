@@ -32,6 +32,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".views.mypage.Notice.NoticeActivitiy"/>
         <activity android:name=".views.mypage.ProfileActivity" />
+        <activity android:name=".views.SearchActivity"/>
         <activity android:name=".MainActivity" >
         </activity>
 
