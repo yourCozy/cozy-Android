@@ -14,5 +14,6 @@
     <color name="gray_textbox">#fafafa</color>
     <color name="text_hint">#bdbdbd</color>
     <color name="tab_bar_gray">#e0e0e0</color>
-    <color name="item_shadow">#29bdbdbd</color>/
+    <color name="item_shadow">#29bdbdbd</color>
+    <color name="comment_shadow">#09bdbdbd</color>
 </resources>
