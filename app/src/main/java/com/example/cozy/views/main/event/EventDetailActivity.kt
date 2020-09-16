@@ -203,8 +203,6 @@ class EventDetailActivity : AppCompatActivity(){
             )
         }
         rc_event.addItemDecoration(ItemDecoration(this, 8,0))
-
-
     }
 
     override fun onResume() {
@@ -237,6 +235,7 @@ class EventDetailActivity : AppCompatActivity(){
                     commentAdapter = CommentAdapter(this) { mycommentIdx: Int, comment_text: String ->
                         event_comment_write.setText(comment_text)
                         event_comment_write.requestFocus()   // 포커스 주기
+                        event_comment_write.setSelection(event_comment_write.length())
                         imm.showSoftInput(event_comment_write, InputMethodManager.SHOW_IMPLICIT)   // 키보드 띄우기
                         isNew = false
                         commentIdx = mycommentIdx
