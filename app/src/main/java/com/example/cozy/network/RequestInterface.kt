@@ -114,7 +114,8 @@ interface RequestInterface {
     @POST("comment/{activityIdx}")
     fun requestCommentWrite(@Body body: RequestCommentWrite, @HeaderMap headers: Map<String, String?>, @Path("activityIdx") activityIdx: Int) : Call<ResponseCommentWrite>
     //댓글 수정
-
+    @PUT("{commentIdx}")
+    fun requestCommentChange(@Path("commentIdx") commentIdx: Int, @Body body: RequestCommentWrite, @HeaderMap headers: Map<String, String?>) : Call<ResponseCommentChange>
     //댓글 삭제 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EB%8C%93%EA%B8%80-%EC%82%AD%EC%A0%9C
     @DELETE("/comment/{commentIdx}")
     fun requestCommentDel(@Path("commentIdx") commentIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseCommentDel>
