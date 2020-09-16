@@ -120,10 +120,6 @@ class RecommendDetailActivity : AppCompatActivity() {
                                 onSuccess = {
                                     Log.d("Bookmark message", "${it.body()!!.message}")
                                     Log.d("Bookmark checked11", "${it.body()!!.data}")
-
-                                    if (it.body()!!.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
-                                        //팝업창 띄우기
-                                    }
                                     if (it.body()!!.success) {
                                         save.isSelected = false
                                         Log.d("Bookmark checked22", "북마크 해제${it.body()!!.data!!.checked}")

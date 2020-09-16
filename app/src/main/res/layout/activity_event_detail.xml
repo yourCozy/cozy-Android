@@ -307,6 +307,11 @@
                 android:id="@+id/event_tv_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingLeft="20dp"
+                android:paddingEnd="26dp"
                 android:text="홍철책방에 다시 찾아온 감각적인 전시를 소개합니다. 올해
 로 벌써 두번째로 전시를 함께 진행하게된 주목받는 디자이
 너 무라카미 다카시의 개인전으로 평소 저희 책방 능히 넣
@@ -321,17 +326,12 @@
 석가는 방황하여도, 교향악이다. 풀밭에 이상 끓는 불어 무
 엇을 너의 위하여 따뜻한 운다.
 "
-                android:textSize="14sp"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/fontfamily"
-                android:textFontWeight="300"
                 android:textColor="@color/dark_gray"
-                app:layout_constraintTop_toBottomOf="@id/event_tv_introtitle"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textFontWeight="300"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/event_view"
-                android:layout_marginTop="14dp"
-                android:paddingLeft="20dp"
-                android:paddingEnd="26dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/event_tv_introtitle" />
 
             <View
                 android:id="@+id/event_view"
@@ -377,7 +377,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/img_bookstore_list"
+            android:src="@drawable/splash_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -397,24 +397,34 @@
             android:textSize="14sp"
             android:maxLines="4"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/comment_button"
             app:layout_constraintStart_toEndOf="@+id/event_comment_user"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button"
+        <ImageButton
+            android:id="@+id/comment_button"
             android:layout_width="50dp"
             android:layout_height="28dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/comment_btn_yellow"
-            android:fontFamily="@font/fontfamily"
-            android:text="확인"
-            android:textColor="@color/white"
-            android:textFontWeight="700"
-            android:textSize="14sp"
+            android:src="@drawable/selector_comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/comment_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fontfamily"
+            android:text="확인"
+            android:textColor="@color/disabled"
+            android:textFontWeight="700"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="@id/comment_button"
+            app:layout_constraintLeft_toLeftOf="@id/comment_button"
+            app:layout_constraintRight_toRightOf="@id/comment_button"
+            app:layout_constraintBottom_toBottomOf="@id/comment_button"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
