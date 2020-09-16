@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,6 @@ class EventDetailActivity : AppCompatActivity(){
     lateinit var commentAdapter: CommentAdapter
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
@@ -57,6 +57,12 @@ class EventDetailActivity : AppCompatActivity(){
         loadData()
         loadComment()
         putComment()
+
+        //다른 곳 클릭했을 때 키보드 사라지게
+//        findViewById<ConstraintLayout>(R.id.layout_comment).setOnClickListener {
+//             imm.hideSoftInputFromWindow(event_comment_write.windowToken, 0);
+//        }
+
 
     }
 
@@ -288,6 +294,8 @@ class EventDetailActivity : AppCompatActivity(){
                             Toast.LENGTH_SHORT
                         ).show()
                         event_comment_write.text = null
+                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(view.windowToken, 0)
                         //다시 불러오기
                         loadComment()
 
