@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cozy.R
+import com.example.cozy.views.main.event.comment.CommentData
 
 
 class EventDetailAdapter (private val context : Context, private var data : Array<String?>): RecyclerView.Adapter<EventDetailViewHolder>(){

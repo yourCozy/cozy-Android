@@ -18,13 +18,15 @@ class CommentViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
     val commentText = itemView.findViewById<TextView>(R.id.comment_text)
     val comment_change = itemView.findViewById<TextView>(R.id.comment_change)
     val comment_delete = itemView.findViewById<TextView>(R.id.comment_delete)
+    val comment_line = itemView.findViewById<ImageView>(R.id.comment_line)
+    val event_comment_write = itemView.findViewById<ImageView>(R.id.event_comment_write)
 
     fun bind(data: CommentData){
         activityIdx = data.activityIdx
-        Glide.with(itemView).load(data.commentProfile).into(commentProfile)
-        commentName.text = data.commentName
+        Glide.with(itemView).load(data.profileImg).into(commentProfile)
+        commentName.text = data.nickname
         Log.d("댓글", "{$data.commentName}")
-        commentDate.text = data.commentDate
-        commentText.text = data.commentText
+        commentDate.text = data.createdAt
+        commentText.text = data.content
     }
 }
