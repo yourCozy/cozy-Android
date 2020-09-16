@@ -12,19 +12,22 @@ import kotlin.properties.Delegates
 class CommentViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
 
     var activityIdx by Delegates.notNull<Int>()
+    var commentIdx by Delegates.notNull<Int>()
     val commentProfile = itemView.findViewById<ImageView>(R.id.comment_profile)
     val commentName = itemView.findViewById<TextView>(R.id.comment_name)
     val commentDate = itemView.findViewById<TextView>(R.id.comment_date)
     val commentText = itemView.findViewById<TextView>(R.id.comment_text)
     val comment_change = itemView.findViewById<TextView>(R.id.comment_change)
     val comment_delete = itemView.findViewById<TextView>(R.id.comment_delete)
+    val comment_line = itemView.findViewById<ImageView>(R.id.comment_line)
 
     fun bind(data: CommentData){
         activityIdx = data.activityIdx
-        Glide.with(itemView).load(data.commentProfile).into(commentProfile)
-        commentName.text = data.commentName
+        commentIdx = data.commentIdx
+        Glide.with(itemView).load(data.profileImg).into(commentProfile)
+        commentName.text = data.nickname
         Log.d("댓글", "{$data.commentName}")
-        commentDate.text = data.commentDate
-        commentText.text = data.commentText
+        commentDate.text = data.createdAt
+        commentText.text = data.content
     }
 }

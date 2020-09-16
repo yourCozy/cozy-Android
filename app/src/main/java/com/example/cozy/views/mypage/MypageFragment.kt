@@ -69,6 +69,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
             fragView.rounded_iv_profile.visibility = View.GONE
             fragView.tv_user_name.visibility = View.GONE
             fragView.tv_user_email.visibility = View.GONE
+            loadRSData()
         }
         else{
             val header = mutableMapOf<String, String?>()

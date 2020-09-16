@@ -2,8 +2,13 @@ package com.example.cozy.views.main.event
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -11,6 +16,7 @@ import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
+import com.example.cozy.network.requestData.RequestCommentWrite
 import com.example.cozy.views.main.event.comment.CommentAdapter
 import com.example.cozy.views.main.event.comment.CommentData
 import kotlinx.android.synthetic.main.activity_event_detail.*
@@ -24,8 +30,12 @@ class EventDetailActivity : AppCompatActivity(){
     var data = mutableListOf<EventDetailData>()
     private lateinit var detailData : EventDetailData
     var activityIdx by Delegates.notNull<Int>()
-    private var commentData = mutableListOf<CommentData>()
+    var commentIdx by Delegates.notNull<Int>()
+    var commentData = mutableListOf<CommentData>()
+    private lateinit var detailCommentData : CommentData
+    lateinit var imm : InputMethodManager
     lateinit var commentAdapter: CommentAdapter
+    var isNew = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +52,15 @@ class EventDetailActivity : AppCompatActivity(){
             activityIdx = intent.getIntExtra("activityIdx",0)
         }
 
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
         event_bookmark.visibility = View.INVISIBLE
         yellowbtn.visibility = View.GONE
         yellowbtn_text.visibility = View.GONE
 
-        commentAdapter = CommentAdapter(this)
-        rv_comment.adapter = commentAdapter
-
-        loadComment()
-
         loadData()
-
+        loadComment()
+        putComment()
 
     }
 
@@ -120,6 +128,7 @@ class EventDetailActivity : AppCompatActivity(){
                         }
                         event_tv_introduce.text = detailData.introduction
 
+                        Glide.with(this).load(R.mipmap.ic_cozy).into(event_comment_user)
 
                     }
                 }
@@ -186,6 +195,7 @@ class EventDetailActivity : AppCompatActivity(){
                             }
                             event_tv_introduce.text = detailData.introduction
 
+                            Glide.with(this).load(R.mipmap.ic_cozy).into(event_comment_user)
                         }
 
                     }
@@ -193,10 +203,12 @@ class EventDetailActivity : AppCompatActivity(){
             )
         }
         rc_event.addItemDecoration(ItemDecoration(this, 8,0))
-
-
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadComment()
+    }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.search,menu)
@@ -204,37 +216,115 @@ class EventDetailActivity : AppCompatActivity(){
 //    }
 
     private fun loadComment(){
-        commentData.apply {
-            add(
-                CommentData(
-                    activityIdx = 1,
-                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
-                    commentName = "지윤김",
-                    commentDate = "20.09.07  22:10",
-                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
+        val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        val header = mutableMapOf<String, String?>()
+        header["Context-Type"] = "application/json"
+        header["token"] = sharedPref.getString("token", "token")
+        //Log.d("nayeon token", header["token"]!!)
+        service.requestComment(activityIdx, header).customEnqueue(
+            onError = {
+                Toast.makeText(
+                    this,
+                    "올바르지 않은 요청입니다.",
+                    Toast.LENGTH_SHORT
                 )
-            )
-            add(
-                CommentData(
-                    activityIdx = 1,
-                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
-                    commentName = "지윤김",
-                    commentDate = "20.09.07  22:10",
-                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
-                )
-            )
-            add(
-                CommentData(
-                    activityIdx = 1,
-                    commentProfile = "https://pixabay.com/ko/photos/%EA%B3%A0%EC%96%91%EC%9D%B4-%EB%8B%AC%EC%BD%A4%ED%95%9C-%ED%82%A4%ED%8B%B0-%EB%8F%99%EB%AC%BC-323262/",
-                    commentName = "지윤김",
-                    commentDate = "20.09.07  22:10",
-                    commentText = "이 활동은 홍철책방에 다시 찾아온 감각적 전시입니다. 1만여 점의 작품 중 주목할 만한 작품을 올해 20주년을 맞아 전시를 진행하고 있습니다."
-                )
-            )
+            },
+            onSuccess = {
+                if(it.body()!!.success){
+                    detailCommentData = it.body()!!.data.elementAt(0)
+                    commentAdapter = CommentAdapter(this) { mycommentIdx: Int, comment_text: String ->
+                        event_comment_write.setText(comment_text)
+                        event_comment_write.requestFocus()   // 포커스 주기
+                        event_comment_write.setSelection(event_comment_write.length())
+                        imm.showSoftInput(event_comment_write, InputMethodManager.SHOW_IMPLICIT)   // 키보드 띄우기
+                        isNew = false
+                        commentIdx = mycommentIdx
+                        }
+                    rv_comment.adapter = commentAdapter
+                    commentData.clear()
+                    commentData.addAll(it.body()!!.data)
+                    commentAdapter.data = commentData
+                    commentAdapter.notifyDataSetChanged()
+                }
+            }
+
+        )
+
+
+
+    }
+
+    private fun putComment(){
+
+        findViewById<EditText>(R.id.event_comment_write).addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s!!.isEmpty()) {
+                    comment_button.isSelected = false
+                    comment_btn_text.setTextColor(resources.getColor(R.color.disabled))
+                } else{
+                    comment_button.isSelected = true
+                    comment_btn_text.setTextColor(resources.getColor(R.color.white))
+                }
+            }
+        })
+
+        comment_button.setOnClickListener {
+            if (comment_button.isSelected) {
+                Log.d("텍스트 내용", event_comment_write.text.toString())
+                val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                val header = mutableMapOf<String, String?>()
+                header["Context-Type"] = "application/json"
+                header["token"] = sharedPref.getString("token", "token")
+                if(isNew) {
+                    service.requestCommentWrite(
+                        RequestCommentWrite(content = event_comment_write.text.toString()), header, activityIdx
+                    ).customEnqueue(
+                        onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                        },
+                        onSuccess = {
+                            if(it.body()!!.success) {
+                                Log.d("댓글 수정 완료 여부", it.body()!!.message)
+                                Toast.makeText(this, "댓글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                event_comment_write.text = null
+                                imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+                                //다시 불러오기
+                                loadComment()
+                            }else{
+                                Log.d("댓글 작성 실패", it.body()!!.message)
+                            }
+                        }
+                    )
+                }
+                else{
+                    service.requestCommentChange(commentIdx,RequestCommentWrite(content = event_comment_write.text.toString()),header).customEnqueue(
+                        onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                        },
+                        onSuccess = {
+                            if(it.body()!!.success) {
+                                Log.d("댓글 수정 완료 여부", it.body()!!.message)
+                                Toast.makeText(this, "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                event_comment_write.text = null
+                                imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+                                isNew = true
+                                //다시 불러오기
+                                loadComment()
+                            }else{
+                                Log.d("댓글 수정 실패", it.body()!!.message)
+                            }
+                        }
+                    )
+                }
+            }
+            else{
+                Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
-        commentAdapter.data = commentData
-        commentAdapter.notifyDataSetChanged()
+
     }
 
 
