@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -46,7 +47,12 @@ class EventDetailActivity : AppCompatActivity(){
         yellowbtn.visibility = View.GONE
         yellowbtn_text.visibility = View.GONE
 
-        commentAdapter = CommentAdapter(this)
+        commentAdapter = CommentAdapter(this){ position: Int, comment_text: String ->
+            event_comment_write.setText(comment_text)
+            event_comment_write.requestFocus()   // 포커스 주기
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(event_comment_write, InputMethodManager.SHOW_IMPLICIT)   // 키보드 띄우기
+        }
         rv_comment.adapter = commentAdapter
 
         loadComment()
