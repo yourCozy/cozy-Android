@@ -6,20 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cozy.DialogComment
 import com.example.cozy.R
-import com.example.cozy.views.map.MapViewHolder
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 
-class CommentAdapter(private val context : Context, val modify_click: (Int, String) -> Unit, val onEmpty : () -> Unit) : RecyclerView.Adapter<CommentViewHolder>() {
+class CommentAdapter(private val context : Context, val modify_click: (Int, String) -> Unit) : RecyclerView.Adapter<CommentViewHolder>() {
 
     var data = mutableListOf<CommentData>()
-
-    var commentText = "null"
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -60,7 +56,6 @@ class CommentAdapter(private val context : Context, val modify_click: (Int, Stri
                                     data.removeAt(position)
                                     notifyItemRemoved(position)
                                     notifyItemRangeChanged(position, data.size)
-                                    if (data.size == 0) onEmpty()
                                 }
                             }
                         )
@@ -68,13 +63,8 @@ class CommentAdapter(private val context : Context, val modify_click: (Int, Stri
             }
         }
 
-        //수정 및 삭제 통신
-        holder.comment_change.setOnClickListener {
-            modify_click(
-                position,
-                holder.commentText.text.toString()
-            )
-        }
+        //수정
+        holder.comment_change.setOnClickListener { modify_click(holder.commentIdx, holder.commentText.text.toString()) }
     }
 }
 
