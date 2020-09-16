@@ -1,5 +1,6 @@
 package com.example.cozy.network
 
+import com.example.cozy.network.requestData.RequestCommentWrite
 import com.example.cozy.network.responseData.*
 import com.example.cozy.network.responseData.ResponseCategoryActivity
 import com.example.cozy.network.requestData.RequestLogin
@@ -105,6 +106,18 @@ interface RequestInterface {
     //검색 https://github.com/yourCozy/cozy-Server/wiki/%EA%B2%80%EC%83%89-%ED%8E%98%EC%9D%B4%EC%A7%80
     @GET("/bookstore/search/{keyword}")
     fun requestSearch(@Path("keyword") keyword : String, @HeaderMap headers: Map<String, String?>) : Call<ResponseSearch>
+
+    //댓글 조회 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EB%8C%93%EA%B8%80-%EC%A1%B0%ED%9A%8C
+    @GET("comment/activity/{activityIdx}")
+    fun requestComment(@Path("activityIdx") activityIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseComment>
+    //댓글 작성 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EB%8C%93%EA%B8%80-%EC%9E%91%EC%84%B1
+    @POST("comment/{activityIdx}")
+    fun requestCommentWrite(@Body body: RequestCommentWrite, @HeaderMap headers: Map<String, String?>, @Path("activityIdx") activityIdx: Int) : Call<ResponseCommentWrite>
+    //댓글 수정
+
+    //댓글 삭제 https://github.com/yourCozy/cozy-Server/wiki/%ED%99%9C%EB%8F%99-%EB%8C%93%EA%B8%80-%EC%82%AD%EC%A0%9C
+    @DELETE("/comment/{commentIdx}")
+    fun requestCommentDel(@Path("commentIdx") commentIdx: Int, @HeaderMap headers: Map<String, String?>) : Call<ResponseCommentDel>
 }
 
 
