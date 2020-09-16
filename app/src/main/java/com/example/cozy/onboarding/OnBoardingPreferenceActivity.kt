@@ -46,14 +46,14 @@ class OnBoardingPreferenceActivity : AppCompatActivity() {
                 service.requestPreference(header,genreList[0],genreList[1],genreList[2],activityList[0],activityList[1],activityList[2]).customEnqueue(
                     onError = {Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
                     onSuccess = {
-                        if(it.success){
-                            Log.d("취향선택 성공 >>> ",it.message)
-                            Log.d("취향리스트", it.data.tasteIdx.toString() + " / " + it.data.tastes)
+                        if(it.body()!!.success){
+                            Log.d("취향선택 성공 >>> ",it.body()!!.message)
+                            Log.d("취향리스트", it.body()!!.data.tasteIdx.toString() + " / " + it.body()!!.data.tastes)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         }else{
-                            Log.d("취향선택 실패 >>> ",it.message)
+                            Log.d("취향선택 실패 >>> ",it.body()!!.message)
                         }
                     }
                 )

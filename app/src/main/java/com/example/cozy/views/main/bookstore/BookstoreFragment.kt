@@ -13,6 +13,7 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.responseData.BookstoreFeedData
 import kotlinx.android.synthetic.main.fragment_bookstore.view.*
+import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlin.properties.Delegates
 
 class BookstoreFragment : Fragment() {
@@ -44,14 +45,17 @@ class BookstoreFragment : Fragment() {
         service.requestBookstoreFeed(bookstoreIdx).customEnqueue(
             onError = { Toast.makeText(context, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
             onSuccess = {
-                if(it.success){
-                    Log.d("success message >>>> ",it.message)
+                if(it.body()!!.success){
+                    Log.d("success message >>>> ",it.body()!!.message)
                     bookstoreFeedData.clear()
-                    bookstoreFeedData.addAll(it.data)
+                    bookstoreFeedData.addAll(it.body()!!.data)
                     bookstoreFeedAdapter.datas = bookstoreFeedData
                     view.rv_feed.addItemDecoration(ItemDecoration(this.context!!, 36, 0))
                     bookstoreFeedAdapter.notifyDataSetChanged()
-                }else(Log.d("fail message >>>> ",it.message))
+                }else{
+                    Log.d("fail message >>>> ",it.body()!!.message)
+                    view.tv_nonBookstorefeed.visibility = View.VISIBLE
+                }
             }
         )
     }

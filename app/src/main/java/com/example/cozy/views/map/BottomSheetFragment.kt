@@ -349,14 +349,14 @@ class BottomSheetFragment(private val sectionIdx : (Int) -> Unit) : BottomSheetD
         RequestToServer.service.requestCount(header).customEnqueue(
             onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)},
             onSuccess = {
-                if(it.success){
+                if(it.body()!!.success){
                     Log.d("지도 개수", "성공")
-                    tv_yongsan_num.text = it.data.elementAt(0).count.toString()
-                    tv_mapo_num.text = it.data.elementAt(1).count.toString()
-                    tv_gwanak_num.text = it.data.elementAt(2).count.toString()
-                    tv_nowon_num.text = it.data.elementAt(3).count.toString()
-                    tv_seocho_num.text = it.data.elementAt(4).count.toString()
-                    tv_jongro_num.text = it.data.elementAt(5).count.toString()
+                    tv_yongsan_num.text = it.body()!!.data.elementAt(0).count.toString()
+                    tv_mapo_num.text = it.body()!!.data.elementAt(1).count.toString()
+                    tv_gwanak_num.text = it.body()!!.data.elementAt(2).count.toString()
+                    tv_nowon_num.text = it.body()!!.data.elementAt(3).count.toString()
+                    tv_seocho_num.text = it.body()!!.data.elementAt(4).count.toString()
+                    tv_jongro_num.text = it.body()!!.data.elementAt(5).count.toString()
 
                 }
             }

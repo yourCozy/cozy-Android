@@ -55,6 +55,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         loadMypage()
+        rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 13, 0))
     }
 
     private fun loadMypage() {
@@ -68,8 +69,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
             fragView.rounded_iv_profile.visibility = View.GONE
             fragView.tv_user_name.visibility = View.GONE
             fragView.tv_user_email.visibility = View.GONE
-            fragView.rv_recently_seen.visibility = View.GONE
-            fragView.tv_no_recently_seen_text.visibility = View.GONE
         }
         else{
             val header = mutableMapOf<String, String?>()
@@ -78,21 +77,19 @@ class MypageFragment : Fragment(), View.OnClickListener {
             service.requestMypage(header).customEnqueue(
                 onError = {Toast.makeText(context,"올바르지 못한 요청입니다.",Toast.LENGTH_SHORT).show()},
                 onSuccess = {
-                    if(it.success){
-                        Log.d(TAG,"성공 message >> ${it.message}")
+                    if(it.body()!!.success){
+                        Log.d(TAG,"성공 message >> ${it.body()!!.message}")
                         fragView.btn_login.visibility = View.GONE
                         fragView.tv_login_needed.visibility = View.GONE
                         fragView.rounded_iv_profile.visibility = View.VISIBLE
                         fragView.tv_user_name.visibility = View.VISIBLE
                         fragView.tv_user_email.visibility = View.VISIBLE
-                        fragView.rv_recently_seen.visibility = View.VISIBLE
-                        fragView.tv_no_recently_seen_text.visibility = View.VISIBLE
-                        val data = it.data.elementAt(0)
+                        val data = it.body()!!.data.elementAt(0)
                         tv_user_name.text = data.nickname
                         Glide.with(this).load(data.profileImg).into(rounded_iv_profile)
                         loadRSData()
                     }else{
-                        Log.d(TAG,"실패 message >> ${it.message}")
+                        Log.d(TAG,"실패 message >> ${it.body()!!.message}")
                     }
                 }
             )
@@ -135,15 +132,18 @@ class MypageFragment : Fragment(), View.OnClickListener {
     fun loadRSData() {
         val header = mutableMapOf<String, String?>()
         header["Content-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token", "token")
+        val cookie = sharedPref.getString("Cookie","cookie").toString()
+        if(cookie != "cookie") {
+            header["Cookie"] = cookie
+        }
         service.requestRecentlySeen(header).customEnqueue(
             onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show() },
             onSuccess = {
-                if (it.success) {
-                    if (it.message == "최근 본 책방 조회 성공") {
+                if (it.body()!!.success) {
+                    if (it.body()!!.message == "최근 본 책방 조회 성공") {
                         recentlySeenAdapter = RecentlySeenAdapter(
                             context!!,
-                            it.data.toMutableList()
+                            it.body()!!.data.toMutableList()
                         ) { RecentlySeenData, View ->
                             val intent = Intent(
                                 activity as MainActivity,
@@ -153,13 +153,17 @@ class MypageFragment : Fragment(), View.OnClickListener {
                             startActivity(intent)
                         }
                         rv_recently_seen.adapter = recentlySeenAdapter
-                        rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 13, 0))
+                        rv_recently_seen.visibility = View.VISIBLE
+                        tv_no_recently_seen_text.visibility = View.GONE
                         Log.d(TAG, "최근 본 책방 통신 성공.")
                     } else {
                         onEmpty()
-                        Log.d(TAG, "최근 본 책방 없음. 통신 성공")
+                        Log.d(TAG, it.body()!!.message)
                     }
-                }else onEmpty()
+                }else {
+                    onEmpty()
+                    Log.d(TAG, it.body()!!.message)
+                }
             }
         )
         Log.d(TAG, "최근 본 책방 어댑터 적용 됨.")

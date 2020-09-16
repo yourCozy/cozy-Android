@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -12,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.cozy.DialogBookmark
 import com.example.cozy.R
@@ -32,6 +32,7 @@ class RecommendDetailActivity : AppCompatActivity() {
     lateinit var detailData : BookstoreDetailData
     var bookstoreIdx by Delegates.notNull<Int>()
     lateinit var sharedPref: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     var kakaoPackageName : String = "net.daum.android.map"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,7 @@ class RecommendDetailActivity : AppCompatActivity() {
             bookstoreIdx = intent.getIntExtra("bookstoreIdx",0)
         }
         sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
 
         initDetail()
 
@@ -85,10 +87,10 @@ class RecommendDetailActivity : AppCompatActivity() {
                     service.requestBookmarkUpdate(bookstoreIdx, header).customEnqueue(
                         onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
                         onSuccess = {
-                            Log.d("Bookmark message", "${it.message}")
-                            Log.d("Bookmark checked11", "${it.data}")
-                            if (it.success) {
-                                val data = it.data
+                            Log.d("Bookmark message", "${it.body()!!.message}")
+                            Log.d("Bookmark checked11", "${it.body()!!.data}")
+                            if (it.body()!!.success) {
+                                val data = it.body()!!.data
                                 Log.d("Bookmark checked22", "북마크 성공 ${data!!.checked}")
                                 save.isSelected = true
                                 val inflater: LayoutInflater =
@@ -116,15 +118,15 @@ class RecommendDetailActivity : AppCompatActivity() {
                                     )
                                 },
                                 onSuccess = {
-                                    Log.d("Bookmark message", "${it.message}")
-                                    Log.d("Bookmark checked11", "${it.data}")
+                                    Log.d("Bookmark message", "${it.body()!!.message}")
+                                    Log.d("Bookmark checked11", "${it.body()!!.data}")
 
-                                    if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
+                                    if (it.body()!!.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
                                         //팝업창 띄우기
                                     }
-                                    if (it.success) {
+                                    if (it.body()!!.success) {
                                         save.isSelected = false
-                                        Log.d("Bookmark checked22", "북마크 해제${it.data!!.checked}")
+                                        Log.d("Bookmark checked22", "북마크 해제${it.body()!!.data!!.checked}")
                                     }
                                 }
                             )
@@ -150,79 +152,67 @@ class RecommendDetailActivity : AppCompatActivity() {
 
         val header = mutableMapOf<String, String>()
         header["Content-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token","token").toString()
-        if(header["token"] == "token") {
-            service.requestBookstoreDatail(bookstoreIdx).customEnqueue(
-                onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
-                onSuccess = {
-                    if (it.success) {
-                        detailData = it.data.elementAt(0)
-                        if (detailData.mainImg != null) {
-                            Glide.with(this).load(detailData.mainImg).into(rec_de_img)
-                            tv_rec_de_img_null.visibility = View.GONE
-                        }else{
-                            Glide.with(this).load(R.drawable.img_null).into(rec_de_img)
-                            tv_rec_de_img_null.visibility = View.VISIBLE
-                        }
-                        if (detailData.profileImg != null) {
-                            Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
-                        }else{
-                            Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
-                        }
-                        bookstore_name.text = detailData.bookstoreName
-                        rec_de_tag1.text = detailData.hashtag1
-                        rec_de_tag2.text = detailData.hashtag2
-                        rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.notice
-
-                        tel = detailData.tel
-                        save.isSelected = detailData.checked != 0
-                        latitude = detailData.latitude
-                        longitude = detailData.longitude
-                        rec_de_adress.text = detailData.location
-                        rec_de_time.text = detailData.businessHours
-                        rec_de_closed.text = detailData.dayoff
-                        rec_de_activity.text = detailData.activities
-                    }
-                }
-            )
+        val token = sharedPref.getString("token","token").toString()
+        val cookie = sharedPref.getString("Cookie","cookie").toString()
+        if (token != token){
+            header["token"] = token
         }
-        else{
-            service.requestBookstoreDatailUser(header,bookstoreIdx).customEnqueue(
-                onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
-                onSuccess = {
-                    if (it.success) {
-                        detailData = it.data.elementAt(0)
-                        if (detailData.mainImg != null) {
-                            Glide.with(this).load(detailData.mainImg).into(rec_de_img)
-                            tv_rec_de_img_null.visibility = View.GONE
-                        } else {
-                            Glide.with(this).load(R.drawable.img_null).into(rec_de_img)
-                            tv_rec_de_img_null.visibility = View.VISIBLE
-                        }
-                        if (detailData.profileImg != null) {
-                            Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
-                        }else{
-                            Glide.with(this).load(R.drawable.splash_logo).into(bookstore_profile)
-                        }
-
-                        bookstore_name.text = detailData.bookstoreName
-                        rec_de_tag1.text = detailData.hashtag1
-                        rec_de_tag2.text = detailData.hashtag2
-                        rec_de_tag3.text = detailData.hashtag3
-                        rec_de_intro.text = detailData.notice
-                        tel = detailData.tel
-                        save.isSelected = detailData.checked != 0
-                        latitude = detailData.latitude
-                        longitude = detailData.longitude
-                        rec_de_adress.text = detailData.location
-                        rec_de_time.text = detailData.businessHours
-                        rec_de_closed.text = detailData.dayoff
-                        rec_de_activity.text = detailData.activities
-                    }
-                }
-            )
+        if(cookie != "cookie") {
+            header["Cookie"] = cookie
         }
+        service.requestBookstoreDatail(header,bookstoreIdx).customEnqueue(
+            onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
+            onSuccess = {
+                val cookie = it.headers().get("Set-Cookie")
+                val idx: Int = cookie!!.indexOf(";")
+                val Cookie = cookie.substring(0,idx)
+                editor.putString("Cookie",Cookie)
+                editor.commit()
+                if (it.body()!!.success) {
+                    detailData = it.body()!!.data.elementAt(0)
+                    if (detailData.mainImg != null) {
+                        Glide.with(this).load(detailData.mainImg).into(rec_de_img)
+                        tv_rec_de_img_null.visibility = View.GONE
+                    } else {
+                        Glide.with(this).load(R.drawable.img_null).into(rec_de_img)
+                        tv_rec_de_img_null.visibility = View.VISIBLE
+                    }
+                    if (detailData.profileImg != null) {
+                        Glide.with(this).load(detailData.profileImg).into(bookstore_profile)
+                    }else{
+                        Glide.with(this).load(R.mipmap.ic_cozy).into(bookstore_profile)
+                    }
+                    bookstore_name.text = detailData.bookstoreName
+                    if(detailData.hashtag1 != null) {
+                        rec_de_tag1.text = "#" + detailData.hashtag1
+                    }
+                    else{
+                        rec_de_tag1.visibility = View.INVISIBLE
+                    }
+                    if(detailData.hashtag2 != null) {
+                        rec_de_tag2.text = "#" + detailData.hashtag2
+                    }
+                    else {
+                        rec_de_tag2.visibility = View.INVISIBLE
+                    }
+                    if(detailData.hashtag3 != null) {
+                        rec_de_tag3.text = "#" + detailData.hashtag3
+                    }
+                    else{
+                        rec_de_tag3.visibility = View.INVISIBLE
+                    }
+                    rec_de_intro.text = detailData.notice
+                    tel = detailData.tel
+                    save.isSelected = detailData.checked != 0
+                    latitude = detailData.latitude
+                    longitude = detailData.longitude
+                    rec_de_adress.text = detailData.location
+                    rec_de_time.text = detailData.businessHours
+                    rec_de_closed.text = detailData.dayoff
+                    rec_de_activity.text = detailData.activities
+                }
+            }
+        )
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {

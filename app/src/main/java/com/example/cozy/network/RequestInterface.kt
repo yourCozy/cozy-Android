@@ -26,11 +26,9 @@ interface RequestInterface {
     fun requestRecommendation() : Call<ResponseRecommendData>
 
     //책방 상세 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8
-    @GET("/bookstore/detail/{bookstoreIdx}")
-    fun requestBookstoreDatailUser(@HeaderMap headers: Map<String, String?>, @Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
     //로그인 안한 사용자
     @GET("/bookstore/detail/{bookstoreIdx}")
-    fun requestBookstoreDatail(@Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
+    fun requestBookstoreDatail(@HeaderMap headers: Map<String, String?>, @Path("bookstoreIdx") bookstoreIdx: Int)  : Call<ResponseBookstoreDetailData>
 
 
     //책방 상세_책방 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%EC%B1%85%EB%B0%A9-%ED%94%BC%EB%93%9C

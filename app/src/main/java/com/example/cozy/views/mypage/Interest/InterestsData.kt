@@ -7,7 +7,7 @@ class InterestsData(
     val shortIntro2 : String,
     val mainimg : String,
     val location : String,
-    val tag1 : String,
-    val tag2 : String,
-    val tag3 : String
+    val hashtag1 : String,
+    val hashtag2 : String,
+    val hashtag3 : String
 )
