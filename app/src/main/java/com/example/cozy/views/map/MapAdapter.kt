@@ -74,9 +74,6 @@ class MapAdapter (private val context : Context, val data : MutableList<MapData>
                             .customEnqueue(
                                 onError = { Log.d("RESPONSE", "error") },
                                 onSuccess = {
-                                    if (it.message != "북마크 체크/해제 성공") { //로그인 하지 않았을 때
-                                        //팝업창 띄우기
-                                    }
                                     if (it.success) {
                                         Log.d("RESPONSE", it.message)
                                         holder.bookmark.isSelected = false
