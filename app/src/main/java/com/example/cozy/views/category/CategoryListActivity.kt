@@ -58,10 +58,10 @@ class CategoryListActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
             },
             onSuccess = {
-                if (it.success) {
+                if (it.body()!!.success) {
 
                         categoryAdapter =
-                            CategoryAdapter(this, it.data.toMutableList()) { CategoryData, View ->
+                            CategoryAdapter(this, it.body()!!.data.toMutableList()) { CategoryData, View ->
                                 val intent = Intent(this, EventDetailActivity::class.java)
                                 //여기 사이에 activityIdx 누른 것을 어떻게 받아오지??
                                 intent.putExtra("activityIdx", CategoryData.activityIdx)

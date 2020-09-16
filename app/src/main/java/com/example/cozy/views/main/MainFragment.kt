@@ -63,15 +63,15 @@ class MainFragment : Fragment() {
                     Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
                 },
                 onSuccess = {
-                    if (it.success) {
-                        Log.d("success message >>>> ", it.message)
+                    if (it.body()!!.success) {
+                        Log.d("success message >>>> ", it.body()!!.message)
                         recommendData.clear()
-                        recommendData.addAll(it.data)
+                        recommendData.addAll(it.body()!!.data)
                         recommendAdapter.datas = recommendData
                         v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
                         recommendAdapter.notifyDataSetChanged()
                     } else {
-                        Log.d("message >>>> ", it.message)
+                        Log.d("message >>>> ", it.body()!!.message)
                     }
                 }
             )
@@ -82,15 +82,15 @@ class MainFragment : Fragment() {
                     Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
                 },
                 onSuccess = {
-                    if (it.success) {
-                        Log.d("success message >>>> ", it.message)
+                    if (it.body()!!.success) {
+                        Log.d("success message >>>> ", it.body()!!.message)
                         recommendData.clear()
-                        recommendData.addAll(it.data)
+                        recommendData.addAll(it.body()!!.data)
                         recommendAdapter.datas = recommendData
                         v.rv_recommend.addItemDecoration(ItemDecoration(this.context!!, 0, 16))
                         recommendAdapter.notifyDataSetChanged()
                     } else {
-                        Log.d("message >>>> ", it.message)
+                        Log.d("message >>>> ", it.body()!!.message)
                     }
                 }
             )

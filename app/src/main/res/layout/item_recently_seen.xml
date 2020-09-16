@@ -28,4 +28,18 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/iv_recently_seen_profile"
         app:layout_constraintTop_toBottomOf="@+id/iv_recently_seen_profile" />
+
+    <TextView
+        android:id="@+id/tv_recently_seen_null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지 준비중이에요!"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_recently_seen_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_recently_seen_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_recently_seen_profile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
