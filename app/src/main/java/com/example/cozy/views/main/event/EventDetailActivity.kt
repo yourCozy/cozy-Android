@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,11 +30,12 @@ class EventDetailActivity : AppCompatActivity(){
     var data = mutableListOf<EventDetailData>()
     private lateinit var detailData : EventDetailData
     var activityIdx by Delegates.notNull<Int>()
+    var commentIdx by Delegates.notNull<Int>()
     var commentData = mutableListOf<CommentData>()
     private lateinit var detailCommentData : CommentData
+    lateinit var imm : InputMethodManager
     lateinit var commentAdapter: CommentAdapter
-
-
+    var isNew = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,8 @@ class EventDetailActivity : AppCompatActivity(){
         if (intent.hasExtra("activityIdx")) {
             activityIdx = intent.getIntExtra("activityIdx",0)
         }
+
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
         event_bookmark.visibility = View.INVISIBLE
         yellowbtn.visibility = View.GONE
@@ -208,7 +212,10 @@ class EventDetailActivity : AppCompatActivity(){
         loadComment()
     }
 
-
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.search,menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
     private fun loadComment(){
         val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
@@ -227,7 +234,13 @@ class EventDetailActivity : AppCompatActivity(){
             onSuccess = {
                 if(it.body()!!.success){
                     detailCommentData = it.body()!!.data.elementAt(0)
-                    commentAdapter = CommentAdapter(this) { onEmpty() }
+                    commentAdapter = CommentAdapter(this) { mycommentIdx: Int, comment_text: String ->
+                        event_comment_write.setText(comment_text)
+                        event_comment_write.requestFocus()   // 포커스 주기
+                        imm.showSoftInput(event_comment_write, InputMethodManager.SHOW_IMPLICIT)   // 키보드 띄우기
+                        isNew = false
+                        commentIdx = mycommentIdx
+                        }
                     rv_comment.adapter = commentAdapter
                     commentData.clear()
                     commentData.addAll(it.body()!!.data)
@@ -268,38 +281,48 @@ class EventDetailActivity : AppCompatActivity(){
                 val header = mutableMapOf<String, String?>()
                 header["Context-Type"] = "application/json"
                 header["token"] = sharedPref.getString("token", "token")
-                service.requestCommentWrite(
-                    RequestCommentWrite(
-                        content = event_comment_write.text.toString()
-                    ), header, activityIdx
-                ).customEnqueue(
-                    onError = {
-                        Toast.makeText(
-                            this,
-                            "올바르지 않은 요청입니다.",
-                            Toast.LENGTH_SHORT
-                        )
-                    },
-                    onSuccess = {
-                        Log.d("댓글 작성 완료 여부", "성공")
-                        Toast.makeText(
-                            this,
-                            "댓글 작성이 완료되었습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        event_comment_write.text = null
-                        //다시 불러오기
-                        loadComment()
-
-                    }
-                )
+                if(isNew) {
+                    service.requestCommentWrite(
+                        RequestCommentWrite(content = event_comment_write.text.toString()), header, activityIdx
+                    ).customEnqueue(
+                        onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                        },
+                        onSuccess = {
+                            if(it.body()!!.success) {
+                                Log.d("댓글 수정 완료 여부", it.body()!!.message)
+                                Toast.makeText(this, "댓글 작성이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                event_comment_write.text = null
+                                imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+                                //다시 불러오기
+                                loadComment()
+                            }else{
+                                Log.d("댓글 작성 실패", it.body()!!.message)
+                            }
+                        }
+                    )
+                }
+                else{
+                    service.requestCommentChange(commentIdx,RequestCommentWrite(content = event_comment_write.text.toString()),header).customEnqueue(
+                        onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
+                        },
+                        onSuccess = {
+                            if(it.body()!!.success) {
+                                Log.d("댓글 수정 완료 여부", it.body()!!.message)
+                                Toast.makeText(this, "댓글 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                event_comment_write.text = null
+                                imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+                                isNew = true
+                                //다시 불러오기
+                                loadComment()
+                            }else{
+                                Log.d("댓글 수정 실패", it.body()!!.message)
+                            }
+                        }
+                    )
+                }
             }
             else{
-                Toast.makeText(
-                    this,
-                    "댓글을 입력해주세요.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -313,10 +336,5 @@ class EventDetailActivity : AppCompatActivity(){
             R.id.search -> Toast.makeText(this,"검색", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    //댓글이 없을 때
-    fun onEmpty(){
-
     }
 }

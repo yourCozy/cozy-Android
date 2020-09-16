@@ -112,7 +112,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 editor.remove("token")
                 editor.remove("nickname")
                 editor.remove("profile")
-                editor.remove("Cookie")
                 editor.apply()
                 editor.commit()
                 Log.d(TAG, "로그아웃. 성공")
