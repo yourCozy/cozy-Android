@@ -29,7 +29,6 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
             Glide.with(itemView).load(myData.mainImg).into(mainImg)
             textNull.visibility = View.GONE
         }else{
-            Glide.with(itemView).load(R.drawable.img_null).into(mainImg)
             textNull.visibility = View.VISIBLE
         }
 
@@ -52,7 +51,12 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
             tag3.visibility = View.INVISIBLE
         }
         intro1.text = myData.shortIntro1
-        intro2.text = myData.shortIntro2
+        if(myData.shortIntro2 != null) {
+            intro2.text = myData.shortIntro2
+        }
+        else{
+            intro2.visibility = View.GONE
+        }
         name.text = myData.bookstoreName
         address.text = myData.location
         checked = myData.checked
