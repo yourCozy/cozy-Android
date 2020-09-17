@@ -40,7 +40,7 @@
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="18dp"
-                android:src="@drawable/event_pic"
+                app:layout_constraintDimensionRatio="1:0.7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -361,6 +361,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/write_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

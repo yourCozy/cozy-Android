@@ -12,6 +12,7 @@ import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.responseData.BookstoreFeedData
+import com.example.cozy.network.responseData.ResponseBookstoreFeedData
 import kotlinx.android.synthetic.main.fragment_bookstore.view.*
 import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlin.properties.Delegates
@@ -48,9 +49,14 @@ class BookstoreFragment : Fragment() {
                 if(it.body()!!.success){
                     Log.d("success message >>>> ",it.body()!!.message)
                     bookstoreFeedData.clear()
-                    bookstoreFeedData.addAll(it.body()!!.data)
+                    for(i in it.body()!!.data){
+                        if(i.image != "null"){
+                            bookstoreFeedData.add(i)
+                        }
+                        else break
+                    }
                     bookstoreFeedAdapter.datas = bookstoreFeedData
-                    view.rv_feed.addItemDecoration(ItemDecoration(this.context!!, 36, 0))
+                    view.rv_feed.addItemDecoration(ItemDecoration(this.context!!, 0, 36))
                     bookstoreFeedAdapter.notifyDataSetChanged()
                 }else{
                     Log.d("fail message >>>> ",it.body()!!.message)
