@@ -43,7 +43,6 @@
         android:id="@+id/rounded_iv_profile"
         android:layout_width="78dp"
         android:layout_height="78dp"
-        android:src="@drawable/ex_rayul_unsplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_vertical_top" />

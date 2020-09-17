@@ -11,7 +11,6 @@
         app:layout_constraintDimensionRatio="1.2:1"
         android:scaleType="centerCrop"
         android:contentDescription="bookstore profile image"
-        android:src="@drawable/ex_socialcut_unsplash"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -15,9 +15,8 @@ class CategoryViewHolder(
 
     var activityIdx by Delegates.notNull<Int>()
     var bookstoreName: TextView = itemView.findViewById(R.id.tv_activity_bookstore_name)
-    var activityName by Delegates.notNull<String>()
+    var activityName : TextView = itemView.findViewById(R.id.tv_activity_title)
     var image: ImageView = itemView.findViewById(R.id.iv_activity_intro)
-    var shortIntro : TextView = itemView.findViewById(R.id.tv_activity_title) //이게 뭐하는 데이터인지 물어볼 것
     var price: TextView = itemView.findViewById(R.id.tv_activity_price)
     var dDay: TextView = itemView.findViewById(R.id.tv_activity_duedate)
     var textNull : TextView = itemView.findViewById(R.id.tv_activity_null)
@@ -31,9 +30,8 @@ class CategoryViewHolder(
             textNull.visibility = View.VISIBLE
         }
         activityIdx = categoryData.activityIdx
-        activityName = categoryData.activityName
+        activityName.text = categoryData.activityName
         bookstoreName.text = categoryData.bookstoreName
-        shortIntro.text = categoryData.shortIntro
         if (categoryData.dday == 0) {
             dDay.text = "오늘 마감"
         }else{

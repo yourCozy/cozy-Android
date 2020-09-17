@@ -34,9 +34,10 @@
                 android:id="@+id/rec_de_img"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:foreground="#40000000"
                 android:scaleType="centerCrop"
-                android:src="@drawable/recommend_img"
                 android:layout_marginTop="18dp"
+                android:transitionName="sharedImg"
                 app:layout_constraintDimensionRatio="1.4:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +61,6 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginBottom="22dp"
-            android:src="@drawable/hong_profile"
             app:layout_constraintBottom_toBottomOf="@+id/rec_de_img"
             app:layout_constraintStart_toStartOf="@id/start_guideline" />
 
@@ -71,6 +71,7 @@
             android:fontFamily="@font/fontfamily"
             android:includeFontPadding="false"
             android:text="홍철책빵"
+            android:transitionName="sharedName"
             android:textColor="@color/white"
             android:textFontWeight="700"
             android:textSize="20sp"
