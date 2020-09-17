@@ -124,7 +124,7 @@ class SearchActivity :AppCompatActivity() {
                     searchAdapter = SearchAdapter(applicationContext, it.body()!!.data.toMutableList()){
                         SearchData, View ->
                         val intent = Intent(applicationContext, RecommendDetailActivity::class.java)
-                        intent.putExtra("bookstoreIdx",it.body()!!.data[0].bookstoreIdx)
+                        intent.putExtra("bookstoreIdx", SearchData.bookstoreIdx)
                         startActivity(intent)
                     }
                     rv_search_result.adapter = searchAdapter
@@ -157,13 +157,14 @@ class SearchActivity :AppCompatActivity() {
 
                     et_search_bar.setText(keyword)
                     et_search_bar.clearFocus()//키보드 내려버리기
+
                 }else{
                     //검색 결과가 0건
                     tv_search_result_cnt.setText("0")
                     tv_search_result.visibility = View.VISIBLE
                     tv_search_result_cnt.visibility = View.VISIBLE
                     tv_search_result_amount.visibility = View.VISIBLE
-                    rv_search_result.visibility = View.VISIBLE
+                    rv_search_result.visibility = View.GONE
 
                     iv_search.visibility = View.GONE
                     iv_x.visibility = View.VISIBLE
