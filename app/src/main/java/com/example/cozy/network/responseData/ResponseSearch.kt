@@ -13,7 +13,7 @@ data class SearchData(
     val location : String,
     val shortIntro1 : String,
     val shortIntro2 : String,
-    val mainimg : String,
+    val mainImg : String,
     val hashtag1 : String,
     val hashtag2 : String,
     val hashtag3 : String,

@@ -26,8 +26,8 @@ class SearchViewHolder(itemView : View, val itemClick : (SearchData, View) -> Un
 
     fun bind(data: SearchData){
         bookstoreIdx = data.bookstoreIdx
-        if (data.mainimg != null) {
-            Glide.with(itemView).load(data.mainimg).into(bookstoreImg)
+        if (data.mainImg != null) {
+            Glide.with(itemView).load(data.mainImg).into(bookstoreImg)
             textNull.visibility = View.GONE
         }else{
             Glide.with(itemView).load(R.drawable.img_null).into(bookstoreImg)

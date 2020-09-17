@@ -24,8 +24,8 @@ class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View)
 
     fun bind(myData: InterestsData) {
         bookstoreIdx = myData.bookstoreIdx
-        if (myData.mainimg != null) {
-            Glide.with(itemView).load(myData.mainimg).into(bookstoreImg)
+        if (myData.mainImg != null) {
+            Glide.with(itemView).load(myData.mainImg).into(bookstoreImg)
             textNull.visibility = View.GONE
         }else{
             Glide.with(itemView).load(R.drawable.img_null).into(bookstoreImg)
