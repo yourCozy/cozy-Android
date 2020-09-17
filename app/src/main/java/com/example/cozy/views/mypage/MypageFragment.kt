@@ -48,14 +48,10 @@ class MypageFragment : Fragment(), View.OnClickListener {
         fragView.view_notice.setOnClickListener(this)
         fragView.view_event.setOnClickListener(this)
         fragView.btn_login.setOnClickListener(this)
-
-        return fragView
-    }
-
-    override fun onResume() {
-        super.onResume()
         loadMypage()
-        rv_recently_seen.addItemDecoration(ItemDecoration(this.context!!, 13, 0))
+        fragView.rv_recently_seen.addItemDecoration(ItemDecoration(context!!, 13, 0))
+        return fragView
+
     }
 
     private fun loadMypage() {
