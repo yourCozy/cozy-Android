@@ -14,7 +14,6 @@
         app:layout_constraintDimensionRatio="1:0.675"
         android:scaleType="centerCrop"
         android:contentDescription="독립서점 활동 이미지"
-        android:src="@drawable/ex_img_activity_unsplash"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

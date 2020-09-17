@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="6dp"
@@ -12,8 +13,8 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_activity_img_null"
@@ -30,30 +31,23 @@
         android:textFontWeight="500"
         android:textAlignment="center"/>
 
-    <ImageView
-        android:id="@+id/box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/box_yellow_day"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/d_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
         android:fontFamily="@font/fontfamily"
         android:lineSpacingExtra="1sp"
+        android:paddingHorizontal="9dp"
+        android:paddingVertical="5dp"
         android:text="D-3"
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toTopOf="@+id/box" />
+        app:layout_constraintStart_toStartOf="@+id/activity_img"
+        app:layout_constraintTop_toTopOf="@+id/activity_img" />
 
     <TextView
         android:id="@+id/activity_title"

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/recommend_img"
+        android:transitionName="sharedImg"
+        android:foreground="#40000000"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -144,6 +145,7 @@
         android:layout_marginBottom="6dp"
         android:lineSpacingExtra="2sp"
         android:text="홍철책빵"
+        android:transitionName="sharedName"
         android:textColor="#ffffff"
         android:textSize="14sp"
         android:includeFontPadding="false"

@@ -1,6 +1,7 @@
 package com.example.cozy.views.main.event
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -35,6 +36,7 @@ class EventDetailActivity : AppCompatActivity(){
     private lateinit var detailCommentData : CommentData
     lateinit var imm : InputMethodManager
     lateinit var commentAdapter: CommentAdapter
+    lateinit var sharedPref: SharedPreferences
     var isNew = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +54,11 @@ class EventDetailActivity : AppCompatActivity(){
             activityIdx = intent.getIntExtra("activityIdx",0)
         }
 
+        sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+        if(sharedPref.getString("token", "token") == "token"){
+            write_comment.visibility = View.GONE
+        }
+
         imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
         event_bookmark.visibility = View.INVISIBLE
@@ -67,7 +74,6 @@ class EventDetailActivity : AppCompatActivity(){
 
 
     fun loadData() {
-        val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
@@ -78,7 +84,7 @@ class EventDetailActivity : AppCompatActivity(){
                     if(it.body()!!.success){
                         detailData = it.body()!!.data.elementAt(0)
                         if(detailData.image1 == null){
-                            Glide.with(this).load(R.drawable.null_img).into(event_img)
+                            Glide.with(this).load(R.drawable.img_null).into(event_img)
                             eventdetail_img_prepare.visibility = View.VISIBLE
                         }else {
                             Glide.with(this).load(detailData.image1).into(event_img)
@@ -103,14 +109,12 @@ class EventDetailActivity : AppCompatActivity(){
                         eventdetailAdapter.notifyDataSetChanged()
                         event_tv_cate.text = detailData.categoryName
                         event_tv_name.text = detailData.activityName
-                        if(detailData.dday < 0){
-                            event_tv_day.text = "D-" + detailData.dday
-                        }
-                        else if(detailData.dday == 0){
+
+                         if(detailData.dday == 0){
                             event_tv_day.text = "오늘 마감"
                         }
                         else{
-                            event_tv_day.text = "마감"
+                            event_tv_day.text = "D-" + detailData.dday
                         }
                         event_tv_time_explain.text = detailData.period
                         event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
@@ -148,7 +152,7 @@ class EventDetailActivity : AppCompatActivity(){
                         if (it.body()!!.success) {
                             detailData = it.body()!!.data.elementAt(0)
                             if(detailData.image1 == null){
-                                Glide.with(this).load(R.drawable.null_img).into(event_img)
+                                Glide.with(this).load(R.drawable.img_null).into(event_img)
                                 eventdetail_img_prepare.visibility = View.VISIBLE
                             }else {
                                 Glide.with(this).load(detailData.image1).into(event_img)
@@ -172,12 +176,10 @@ class EventDetailActivity : AppCompatActivity(){
                             eventdetailAdapter.notifyDataSetChanged()
                             event_tv_cate.text = detailData.categoryName
                             event_tv_name.text = detailData.activityName
-                            if (detailData.dday < 0) {
-                                event_tv_day.text = "D-" + detailData.dday
-                            } else if (detailData.dday == 0) {
+                            if (detailData.dday == 0) {
                                 event_tv_day.text = "오늘 마감"
                             } else {
-                                event_tv_day.text = "마감"
+                                event_tv_day.text = "D-" + detailData.dday
                             }
                             event_tv_time_explain.text = detailData.period
                             event_tv_deadline_explain.text =
@@ -210,22 +212,20 @@ class EventDetailActivity : AppCompatActivity(){
         loadComment()
     }
 
-
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.search,menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
     private fun loadComment(){
-        val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token", "token")
-        Log.d("nayeon token", header["token"]!!)
-        service.requestComment(activityIdx, header).customEnqueue(
-            onError = {
-                Toast.makeText(
-                    this,
-                    "올바르지 않은 요청입니다.",
-                    Toast.LENGTH_SHORT
-                )
-            },
+        val token = sharedPref.getString("token", "token")
+        if(token != "token"){
+            header["token"] = sharedPref.getString("token", "token")
+        }
+        service.requestComment(activityIdx,header).customEnqueue(
+            onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
             onSuccess = {
                 if(it.body()!!.success){
                     detailCommentData = it.body()!!.data.elementAt(0)
@@ -246,9 +246,6 @@ class EventDetailActivity : AppCompatActivity(){
             }
 
         )
-
-
-
     }
 
     private fun putComment(){
@@ -333,5 +330,4 @@ class EventDetailActivity : AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
