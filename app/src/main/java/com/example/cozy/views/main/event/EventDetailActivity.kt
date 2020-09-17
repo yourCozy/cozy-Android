@@ -217,7 +217,7 @@ class EventDetailActivity : AppCompatActivity(){
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
-        //Log.d("nayeon token", header["token"]!!)
+        Log.d("nayeon token", header["token"]!!)
         service.requestComment(activityIdx, header).customEnqueue(
             onError = {
                 Toast.makeText(
