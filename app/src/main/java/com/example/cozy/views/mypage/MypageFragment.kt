@@ -51,7 +51,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
         loadMypage()
         fragView.rv_recently_seen.addItemDecoration(ItemDecoration(context!!, 13, 0))
         return fragView
-
     }
 
     private fun loadMypage() {
