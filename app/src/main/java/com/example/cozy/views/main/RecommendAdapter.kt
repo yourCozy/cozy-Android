@@ -37,7 +37,7 @@ class RecommendAdapter (private val context : Context, val itemClick: (Recommend
                 Toast.makeText(context,"로그인 후 이용해 주세요.",Toast.LENGTH_SHORT).show()
             }else {
                 if (!holder.save.isSelected) {
-                    service.requestBookmarkUpdate(holder.bookstoreIdx, header).customEnqueue(
+                    service.requestBookmarkUpdate(datas[position].bookstoreIdx, header).customEnqueue(
                         onError = {
                             Toast.makeText(
                                 context!!,
@@ -67,7 +67,7 @@ class RecommendAdapter (private val context : Context, val itemClick: (Recommend
                 } else {
                     val customDialog = DialogBookmark(context!!)
                     customDialog.setOnOKClickedListener {
-                        RequestToServer.service.requestBookmarkUpdate(holder.bookstoreIdx, header)
+                        RequestToServer.service.requestBookmarkUpdate(datas[position].bookstoreIdx, header)
                             .customEnqueue(
                                 onError = {
                                     Toast.makeText(
