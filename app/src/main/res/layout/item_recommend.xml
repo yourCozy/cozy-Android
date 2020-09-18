@@ -107,7 +107,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/rec_intro2"
         app:layout_constraintEnd_toStartOf="@id/end_guideline"
-        app:layout_constraintStart_toStartOf="@id/rec_intro2" />
+        app:layout_constraintStart_toStartOf="@+id/rec_icon" />
 
     <TextView
         android:id="@+id/rec_intro2"

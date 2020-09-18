@@ -53,43 +53,36 @@ class CategoryFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_movie -> {
-                Log.e("error","btn click doesn't work")
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",1)
                 startActivity(intent)
             }
             R.id.btn_writing -> {
-                Toast.makeText(context, "[활동] 글쓰기 모임 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",2)
                 startActivity(intent)
             }
             R.id.btn_rental -> {
-                Toast.makeText(context, "[활동] 공간 대여 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",3)
                 startActivity(intent)
             }
             R.id.btn_readingClub -> {
-                Toast.makeText(context, "[활동] 독서 모임 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",4)
                 startActivity(intent)
             }
             R.id.btn_night -> {
-                Toast.makeText(context, "[활동] 심야 책방 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",5)
                 startActivity(intent)
             }
             R.id.btn_exhibit -> {
-                Toast.makeText(context, "[활동] 전시, 공연 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",6)
                 startActivity(intent)
             }
             R.id.btn_recommendation -> {
-                Toast.makeText(context, "[활동] 책 추천 버튼을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity as MainActivity, CategoryListActivity::class.java)
                 intent.putExtra("categoryIdx",7)
                 startActivity(intent)
@@ -155,17 +148,11 @@ class CategoryFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search, menu)
-//        val searchView: SearchView = menu.findItem(R.id.search).actionView as SearchView
-//        searchView.maxWidth = Integer.MAX_VALUE
-//
-//        searchView.queryHint = "검색"
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.search -> {
-                Toast.makeText(this.context, "검색",Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, SearchActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //해보고 이상하면 지울것
                 startActivity(intent)
