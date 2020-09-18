@@ -50,12 +50,13 @@ class RecommendViewHolder(itemView: View, val itemClick: (RecommendData, View) -
         else{
             tag3.visibility = View.INVISIBLE
         }
-        intro1.text = myData.shortIntro1
         if(myData.shortIntro2 != null) {
+            intro1.text = myData.shortIntro1
             intro2.text = myData.shortIntro2
         }
         else{
-            intro2.visibility = View.GONE
+            intro1.visibility = View.GONE
+            intro2.text = myData.shortIntro1
         }
         name.text = myData.bookstoreName
         address.text = myData.location

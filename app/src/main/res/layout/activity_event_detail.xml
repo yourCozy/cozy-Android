@@ -313,20 +313,7 @@
                 android:includeFontPadding="false"
                 android:paddingLeft="20dp"
                 android:paddingEnd="26dp"
-                android:text="홍철책방에 다시 찾아온 감각적인 전시를 소개합니다. 올해
-로 벌써 두번째로 전시를 함께 진행하게된 주목받는 디자이
-너 무라카미 다카시의 개인전으로 평소 저희 책방 능히 넣
-는 싹이 청춘의 하는 생생하며, 못할 아니다. 품에 것이 밥을
-우리의 그러므로 아름답고 힘차게 광야에서 것은 뿐이다.
-이 이것이야말로 어디 말이다. 안고, 생의 남는 위하여서 같
-지 원질이 이는 가슴이 아름다우냐? 구하지 이성은 풍부하
-게 피어나는 석가는 아니한 물방아 것이다. 원질이 위하여,
-위하여 불어 그들의 그들은 되려니와, 그들의 꽃 위하여서.
-우리는 위하여, 투명하되 밝은 주는 작고 더운지라 동산에
-는 소금이라 아니다. 돋고, 열매를 별과 인간이 그들에게
-석가는 방황하여도, 교향악이다. 풀밭에 이상 끓는 불어 무
-엇을 너의 위하여 따뜻한 운다.
-"
+                android:text=""
                 android:textColor="@color/dark_gray"
                 android:textFontWeight="300"
                 android:textSize="14sp"
@@ -353,7 +340,7 @@
                 android:overScrollMode="never"
                 android:orientation="vertical"
                 tools:listitem="@layout/item_comment"
-                android:paddingBottom="122dp"
+                android:paddingBottom="22dp"
                 android:layout_marginTop="18dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -379,7 +366,6 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/splash_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

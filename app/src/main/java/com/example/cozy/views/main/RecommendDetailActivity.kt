@@ -28,6 +28,7 @@ class RecommendDetailActivity : AppCompatActivity() {
     lateinit var tel: String
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()
+    lateinit var bookstoreName: String
     val service = RequestToServer.service
     lateinit var detailData : BookstoreDetailData
     var bookstoreIdx by Delegates.notNull<Int>()
@@ -135,6 +136,7 @@ class RecommendDetailActivity : AppCompatActivity() {
         road.setOnClickListener {
             if(isInstalledApp(kakaoPackageName)) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://look?p=$latitude,$longitude"))
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://search?q=$bookstoreName&p=$latitude,$longitude"))
                 startActivity(intent)
             } else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$kakaoPackageName"))
@@ -178,6 +180,7 @@ class RecommendDetailActivity : AppCompatActivity() {
                         Glide.with(this).load(R.mipmap.ic_cozy).into(bookstore_profile)
                     }
                     bookstore_name.text = detailData.bookstoreName
+                    bookstoreName = detailData.bookstoreName
                     if(detailData.hashtag1 != null) {
                         rec_de_tag1.text = "#" + detailData.hashtag1
                     }

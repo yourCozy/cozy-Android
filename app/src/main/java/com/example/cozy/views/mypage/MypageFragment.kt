@@ -48,7 +48,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
         fragView.view_notice.setOnClickListener(this)
         fragView.view_event.setOnClickListener(this)
         fragView.btn_login.setOnClickListener(this)
-        loadMypage()
         fragView.rv_recently_seen.addItemDecoration(ItemDecoration(context!!, 13, 0))
         return fragView
     }
@@ -77,6 +76,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
                         Log.d(TAG,"성공 message >> ${it.body()!!.message}")
                         fragView.btn_login.visibility = View.GONE
                         fragView.tv_login_needed.visibility = View.GONE
+                        fragView.btn_interests.visibility = View.VISIBLE
                         fragView.rounded_iv_profile.visibility = View.VISIBLE
                         fragView.tv_user_name.visibility = View.VISIBLE
                         fragView.tv_user_email.visibility = View.VISIBLE
@@ -96,6 +96,13 @@ class MypageFragment : Fragment(), View.OnClickListener {
         super.onStart()
 
         Log.d(TAG, "화면 구성 onStart 호출")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        loadMypage()
 
     }
 
@@ -176,7 +183,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting -> {
-                Toast.makeText(this.context, "설정", Toast.LENGTH_SHORT).show()
                 val intent = Intent(context,ProfileActivity::class.java)
                 startActivity(intent)
             }

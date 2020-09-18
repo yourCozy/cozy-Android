@@ -28,7 +28,6 @@ class InterestsViewHolder(itemView : View, val itemClick : (InterestsData, View)
             Glide.with(itemView).load(myData.mainImg).into(bookstoreImg)
             textNull.visibility = View.GONE
         }else{
-            Glide.with(itemView).load(R.drawable.img_null).into(bookstoreImg)
             textNull.visibility = View.VISIBLE
         }
         shortIntro1.text = myData.shortIntro1
