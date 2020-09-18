@@ -121,7 +121,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.view_event -> {
-                Toast.makeText(context, "이벤트를 선택했습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "이벤트 준비중입니다.", Toast.LENGTH_SHORT).show()
             }
             R.id.btn_login -> {
                 val intent = Intent(activity as MainActivity, LoginActivity::class.java)
