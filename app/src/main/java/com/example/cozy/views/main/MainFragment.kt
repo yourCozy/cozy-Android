@@ -109,7 +109,6 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.search -> {
-                Toast.makeText(this.context, "검색",Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, SearchActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //해보고 이상하면 지울것
                 startActivity(intent)

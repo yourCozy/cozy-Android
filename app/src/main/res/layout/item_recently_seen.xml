@@ -16,15 +16,16 @@
 
     <TextView
         android:id="@+id/tv_recently_seen_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/fontfamily"
-        android:text="홍철책빵"
         android:includeFontPadding="false"
+        android:text="홍철책빵"
         android:textColor="@color/black"
         android:textFontWeight="500"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_recently_seen_profile"
         app:layout_constraintTop_toBottomOf="@+id/iv_recently_seen_profile" />
 
