@@ -40,6 +40,8 @@
         android:layout_marginTop="14dp"
         android:background="@color/light_gray"
         android:drawablePadding="13dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
         android:hint="검색"
         android:maxLength="22"
         android:paddingVertical="12dp"

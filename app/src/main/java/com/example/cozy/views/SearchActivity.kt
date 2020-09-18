@@ -5,18 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cozy.ItemDecoration
 import com.example.cozy.R
 import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
-import com.example.cozy.network.responseData.SearchData
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.example.cozy.views.mypage.MypageFragment
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.et_search_bar
-import kotlinx.android.synthetic.main.activity_search.rv_search_result
+
 
 class SearchActivity :AppCompatActivity() {
     val service = RequestToServer.service
@@ -105,7 +105,18 @@ class SearchActivity :AppCompatActivity() {
         iv_x.setOnClickListener {
             emptyView()
         }
-        rv_search_result.addItemDecoration(ItemDecoration(this,0,32))
+        rv_search_result.addItemDecoration(ItemDecoration(this, 0, 32))
+
+        et_search_bar.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> showResult(et_search_bar.text.toString())
+                else -> {
+                    return@OnEditorActionListener false
+                }
+            }
+            true
+        })
+
     }
 
 
@@ -115,21 +126,23 @@ class SearchActivity :AppCompatActivity() {
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
-        service.requestSearch(keyword,header).customEnqueue(
+        service.requestSearch(keyword, header).customEnqueue(
             onError = {
                 Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
             },
             onSuccess = {
                 if (it.body()!!.success) {
-                    searchAdapter = SearchAdapter(applicationContext, it.body()!!.data.toMutableList()){
-                        SearchData, View ->
+                    searchAdapter = SearchAdapter(
+                        applicationContext,
+                        it.body()!!.data.toMutableList()
+                    ) { SearchData, View ->
                         val intent = Intent(applicationContext, RecommendDetailActivity::class.java)
                         intent.putExtra("bookstoreIdx", SearchData.bookstoreIdx)
                         startActivity(intent)
                     }
                     rv_search_result.adapter = searchAdapter
                     searchAdapter.notifyDataSetChanged()
-                    if(it.body()!!.data[0].count != null){
+                    if (it.body()!!.data[0].count != null) {
                         tv_search_result_cnt.text = it.body()!!.data[0].count.toString()
                     }
 
@@ -158,7 +171,7 @@ class SearchActivity :AppCompatActivity() {
                     et_search_bar.setText(keyword)
                     et_search_bar.clearFocus()//키보드 내려버리기
 
-                }else{
+                } else {
                     //검색 결과가 0건
                     tv_search_result_cnt.setText("0")
                     tv_search_result.visibility = View.VISIBLE

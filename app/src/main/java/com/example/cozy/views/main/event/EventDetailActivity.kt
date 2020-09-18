@@ -73,7 +73,7 @@ class EventDetailActivity : AppCompatActivity(){
 
 
 
-    fun loadData() {
+    private fun loadData() {
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
@@ -91,6 +91,8 @@ class EventDetailActivity : AppCompatActivity(){
                             eventdetail_img_prepare.visibility = View.GONE
                         }
                         //리사이클러뷰
+                        var cnt : Int = 0
+
                         val arrayImage = arrayOf(
                             detailData.image2,
                             detailData.image3,
@@ -104,7 +106,20 @@ class EventDetailActivity : AppCompatActivity(){
                         )
 
 
-                        eventdetailAdapter = EventDetailAdapter(this, arrayImage)
+                        for(i in 0..9){
+                            if(arrayImage[i] == null){
+                                cnt = i
+                                break
+                            }
+                        }
+                        val arrayValidImage = arrayImage.copyOfRange(0,cnt)
+
+                        Log.d("image2" , detailData.image2.toString())
+                        Log.d("event rc : ", cnt.toString())
+                        if(cnt == 0)
+                            rc_event.visibility = View.GONE
+
+                        eventdetailAdapter = EventDetailAdapter(this, arrayValidImage)
                         rc_event.adapter = eventdetailAdapter
                         eventdetailAdapter.notifyDataSetChanged()
                         event_tv_cate.text = detailData.categoryName
@@ -159,6 +174,8 @@ class EventDetailActivity : AppCompatActivity(){
                                 eventdetail_img_prepare.visibility = View.GONE
                             }
                             //리사이클러뷰
+                            var cnt : Int = 0
+
                             val arrayImage = arrayOf(
                                 detailData.image2,
                                 detailData.image3,
@@ -171,7 +188,21 @@ class EventDetailActivity : AppCompatActivity(){
                                 detailData.image10
                             )
 
-                            eventdetailAdapter = EventDetailAdapter(this, arrayImage)
+
+                            for(i in 0..9){
+                                if(arrayImage[i] == null){
+                                    cnt = i
+                                    break
+                                }
+                            }
+                            val arrayValidImage = arrayImage.copyOfRange(0,cnt)
+
+                            Log.d("image2" , detailData.image2.toString())
+                            Log.d("event rc : ", cnt.toString())
+                            if(cnt == 0)
+                                rc_event.visibility = View.GONE
+
+                            eventdetailAdapter = EventDetailAdapter(this, arrayValidImage)
                             rc_event.adapter = eventdetailAdapter
                             eventdetailAdapter.notifyDataSetChanged()
                             event_tv_cate.text = detailData.categoryName
