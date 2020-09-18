@@ -43,7 +43,7 @@ class NoticeActivitiy : AppCompatActivity() {
                     noticeIdx = 1,
                     noticeTitle = "버그 안내",
                     noticeDate = "20.09.09",
-                    noticeContent = "안드로이드 sdk 26버전 이하에서 발생하는 버그를 발견하여 조치를 취하였습니다. 앞으로도 열심히 개발하겠다"
+                    noticeContent = "안드로이드 sdk 26버전 이하에서 발생하는 버그를 발견하여 조치를 취하는 중입니다. 빠른 시일 내에 업데이트하겠습니다."
                 )
             )
             add(
@@ -51,7 +51,7 @@ class NoticeActivitiy : AppCompatActivity() {
                     noticeIdx = 2,
                     noticeTitle = "회원탈퇴 안내",
                     noticeDate = "20.09.09",
-                    noticeContent = "죄송하지만 아직 기능이 개발중이라 탈퇴는 할 수 없습니다. ㅎㅎ"
+                    noticeContent = "죄송하지만 아직 기능 개발중이라 앱 내에서 탈퇴할 수 없습니다."
                 )
             )
         }

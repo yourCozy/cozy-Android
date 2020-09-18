@@ -17,7 +17,7 @@
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="16sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +35,7 @@
         android:textColor="@color/text_hint"
         android:textFontWeight="500"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login" />
@@ -54,10 +55,11 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/fontfamily"
         android:includeFontPadding="false"
-        android:text="꼬지"
+        android:text="나그네"
         android:textColor="@color/black"
         android:textFontWeight="900"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/rounded_iv_profile"
         app:layout_constraintStart_toStartOf="@id/rounded_iv_profile"
         app:layout_constraintTop_toBottomOf="@id/rounded_iv_profile" />
@@ -90,6 +92,7 @@
         android:text="관심책방"
         android:drawablePadding="9dp"
         android:includeFontPadding="false"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/mypage_line_1"
         android:layout_marginBottom="18dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,6 +133,7 @@
         android:textColor="@color/gray"
         android:textFontWeight="700"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_recently_seen" />
@@ -144,6 +148,7 @@
         android:orientation="horizontal"
         android:overScrollMode="never"
         android:paddingHorizontal="20dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_recently_seen"
