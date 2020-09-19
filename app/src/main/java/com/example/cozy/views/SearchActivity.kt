@@ -200,6 +200,8 @@ class SearchActivity :AppCompatActivity() {
 
                     tv_search_result_null.visibility = View.VISIBLE
 
+                    et_search_bar.setText(keyword)
+                    et_search_bar.clearFocus()
                 }
             }
         )
