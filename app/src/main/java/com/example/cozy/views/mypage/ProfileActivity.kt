@@ -13,8 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.cozy.LoginActivity
-import com.example.cozy.MainActivity
 import com.example.cozy.R
+import com.example.cozy.views.mypage.setting.VersionInfoActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -83,6 +83,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         setDataOnView()
 
         btn_account_detail_logout.setOnClickListener(this)
+        btn_version_info.setOnClickListener(this)
 
     }
 
@@ -97,6 +98,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_account_detail_logout -> {
                 Log.d(TAG, "로그아웃 버튼 클릭")
                 signOut()
+            }
+            R.id.btn_version_info -> {
+                val intent = Intent(applicationContext, VersionInfoActivity::class.java)
+                startActivity(intent)
             }
         }
     }

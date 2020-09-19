@@ -35,7 +35,8 @@
         <activity android:name=".views.SearchActivity"/>
         <activity android:name=".MainActivity" >
         </activity>
-
+        <activity android:name=".views.mypage.setting.VersionInfoActivity"/>
+        <activity android:name=".views.mypage.setting.OpenSourceLicenseActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
