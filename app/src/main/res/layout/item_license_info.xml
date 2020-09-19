@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
 
     <TextView
         android:id="@+id/tv_license_link"
@@ -10,7 +11,9 @@
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
         android:text="http://"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:autoLink="web"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="5dp"/>
 
     <TextView
         android:id="@+id/tv_license"
@@ -19,6 +22,8 @@
         android:background="@color/light_gray"
         android:text="라이센스 정보를 솰라솰라"
         app:layout_constraintStart_toStartOf="parent"
+        android:padding="5dp"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/tv_license_link" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
