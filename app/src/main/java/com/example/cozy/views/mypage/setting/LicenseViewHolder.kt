@@ -14,4 +14,5 @@ class LicenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         licenseLink.text = data.link
         licenseInfo.text = data.info
     }
+
 }
