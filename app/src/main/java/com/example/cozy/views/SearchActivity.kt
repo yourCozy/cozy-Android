@@ -46,61 +46,51 @@ class SearchActivity :AppCompatActivity() {
         imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
         tag1.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag1.text.toString()
             showResult(keyword)
         }
 
         tag2.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag2.text.toString()
             showResult(keyword)
         }
 
         tag3.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag3.text.toString()
             showResult(keyword)
         }
 
         tag4.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag4.text.toString()
             showResult(keyword)
         }
 
         tag5.setOnClickListener{
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag5.text.toString()
             showResult(keyword)
         }
 
         tag6.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag6.text.toString()
             showResult(keyword)
         }
 
         tag7.setOnClickListener{
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag7.text.toString()
             showResult(keyword)
         }
 
         tag8.setOnClickListener{
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag8.text.toString()
             showResult(keyword)
         }
 
         tag9.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag9.text.toString()
             showResult(keyword)
         }
 
         tag10.setOnClickListener {
-            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag10.text.toString()
             showResult(keyword)
         }
