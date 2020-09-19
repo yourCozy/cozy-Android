@@ -20,8 +20,7 @@ import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 
-class SearchActivity :AppCompatActivity() {
-
+class SearchActivity :AppCompatActivity(), View.OnClickListener {
     val service = RequestToServer.service
     private lateinit var searchAdapter: SearchAdapter
     lateinit var keyword: String
@@ -119,8 +118,6 @@ class SearchActivity :AppCompatActivity() {
         })
 
     }
-
-
 
     fun showResult(keyword: String){
         val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
@@ -241,6 +238,47 @@ class SearchActivity :AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
 
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.tag1 -> {
+                keyword = tag1.text.toString()
+            }
+            R.id.tag2 ->{
+                keyword = tag2.text.toString()
+            }
+            R.id.tag3 ->{
+                keyword = tag3.text.toString()
+            }
+            R.id.tag4 -> {
+                keyword = tag4.text.toString()
+            }
+            R.id.tag5 -> {
+                keyword = tag5.text.toString()
+            }
+            R.id.tag6 -> {
+                keyword = tag6.text.toString()
+            }
+            R.id.tag7 -> {
+                keyword = tag7.text.toString()
+            }
+            R.id.tag8 -> {
+                keyword = tag8.text.toString()
+            }
+            R.id.tag9 -> {
+                keyword = tag9.text.toString()
+            }
+            R.id.tag10 -> {
+                keyword = tag10.text.toString()
+            }
+            R.id.iv_search -> {
+
+            }
+            R.id.iv_x -> {
+
+            }
+        }
+        showResult(keyword)
     }
 }

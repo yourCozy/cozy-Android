@@ -39,13 +39,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.2.0'
-    //리사이클러뷰
+    //리사이클러뷰 https://github.com/VenomVendor/RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    //material디자인 라이브러리
+    //material디자인 라이브러리 https://github.com/rey5137/material
     implementation "com.google.android.material:material:1.2.0-alpha05"
+    //bottom sheet 라이브러리
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.android.support:appcompat-v7:29.0.0'
     //이미지 로딩 라이브러리 : glide
     implementation "com.github.bumptech.glide:glide:4.10.0"
     kapt "com.github.bumptech.glide:compiler:4.10.0"
+
     //동그란 이미지 커스텀 뷰 라이브러리 : https://github.com/hdodenhof/CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //Retrofit 라이브러리 : https://github.com/square/retrofit
@@ -59,34 +64,18 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    //디자인 라이브러리 BottomNavigation
+    //디자인 라이브러리 BottomNavigation https://github.com/Ashok-Varma/BottomNavigation
     implementation 'com.android.support:design:29.0.0'
-    //cardView 라이브러리
-    implementation "androidx.cardview:cardview:1.0.0"
-    //모서리 둥근 imageView 라이브러리 : https://github.com/vinc3m1/RoundedImageView
-    implementation 'com.makeramen:roundedimageview:2.3.0'
     //Glide 적용 가능한 모서리 둥근 imageView 라이브러리 : https://github.com/rishabh876/RoundedImageView?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7549
     implementation 'com.rishabhharit.roundedimageview:RoundedImageView:0.8.4'
-    //카카오 API
-//    implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation files('libs/libDaumMapAndroid.jar')
-    //bottom sheet 라이브러리
-    implementation 'com.google.android.material:material:1.2.0-alpha02'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.android.support:appcompat-v7:29.0.0'
-    //implementation 'com.android.support:design:29.0.0’
-    // 카카오 로그인
+    // 카카오 로그인 https://github.com/yongbeam/Android-kakaologin-gradle-sample
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
-    //RxJava2 : https://github.com/ReactiveX/RxJava/tree/2.x
-    //implementation "io.reactivex.rxjava2:rxjava:2.x.y"
     //google 로그인
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    //Glide 오류 해결
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt "android.arch.lifecycle:compiler:1.0.0"
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
+
 }
