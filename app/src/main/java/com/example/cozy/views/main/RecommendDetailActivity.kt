@@ -135,8 +135,8 @@ class RecommendDetailActivity : AppCompatActivity() {
 
         road.setOnClickListener {
             if(isInstalledApp(kakaoPackageName)) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://look?p=$latitude,$longitude"))
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://search?q=$bookstoreName&p=$latitude,$longitude"))
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://look?p=$latitude,$longitude"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://search?q=$bookstoreName&p=$latitude,$longitude"))
                 startActivity(intent)
             } else {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$kakaoPackageName"))

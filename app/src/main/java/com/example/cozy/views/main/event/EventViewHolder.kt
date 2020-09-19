@@ -31,7 +31,7 @@ class EventViewHolder(
         }
         activityIdx = myData.activityIdx
         title.text = myData.activityName
-        info.text = myData.shortIntro
+        info.text = myData.introduction
         price.text = myData.price.toString() + "원"
         price.text = "" + myData.price + "원"
         when {

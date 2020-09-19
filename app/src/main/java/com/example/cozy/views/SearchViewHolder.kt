@@ -30,7 +30,6 @@ class SearchViewHolder(itemView : View, val itemClick : (SearchData, View) -> Un
             Glide.with(itemView).load(data.mainImg).into(bookstoreImg)
             textNull.visibility = View.GONE
         }else{
-            Glide.with(itemView).load(R.drawable.img_null).into(bookstoreImg)
             textNull.visibility = View.VISIBLE
         }
         shortIntro1.text = data.shortIntro1

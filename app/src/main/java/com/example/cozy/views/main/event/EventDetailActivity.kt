@@ -38,6 +38,7 @@ class EventDetailActivity : AppCompatActivity(){
     lateinit var commentAdapter: CommentAdapter
     lateinit var sharedPref: SharedPreferences
     var isNew = true
+    var imageList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,8 +91,6 @@ class EventDetailActivity : AppCompatActivity(){
                             Glide.with(this).load(detailData.image1).into(event_img)
                             eventdetail_img_prepare.visibility = View.GONE
                         }
-                        //리사이클러뷰
-                        var cnt : Int = 0
 
                         val arrayImage = arrayOf(
                             detailData.image2,
@@ -106,21 +105,19 @@ class EventDetailActivity : AppCompatActivity(){
                         )
 
 
-                        for(i in 0..9){
-                            if(arrayImage[i] == null){
-                                cnt = i
-                                break
+                        for(i in arrayImage){
+                            if(i != null){
+                                imageList.add(i)
                             }
+                            else break
                         }
-                        val arrayValidImage = arrayImage.copyOfRange(0,cnt)
-
-                        Log.d("image2" , detailData.image2.toString())
-                        Log.d("event rc : ", cnt.toString())
-                        if(cnt == 0)
+                        Log.d("길이!",imageList.toString())
+                        if(imageList.size == 0)
                             rc_event.visibility = View.GONE
 
-                        eventdetailAdapter = EventDetailAdapter(this, arrayValidImage)
+                        eventdetailAdapter = EventDetailAdapter(this)
                         rc_event.adapter = eventdetailAdapter
+                        eventdetailAdapter.data = imageList
                         eventdetailAdapter.notifyDataSetChanged()
                         event_tv_cate.text = detailData.categoryName
                         event_tv_name.text = detailData.activityName
@@ -179,7 +176,6 @@ class EventDetailActivity : AppCompatActivity(){
                                 eventdetail_img_prepare.visibility = View.GONE
                             }
                             //리사이클러뷰
-                            var cnt : Int = 0
 
                             val arrayImage = arrayOf(
                                 detailData.image2,
@@ -194,21 +190,19 @@ class EventDetailActivity : AppCompatActivity(){
                             )
 
 
-                            for(i in 0..9){
-                                if(arrayImage[i] == null){
-                                    cnt = i
-                                    break
+                            for(i in arrayImage){
+                                if(i != null){
+                                    imageList.add(i)
                                 }
+                                else break
                             }
-                            val arrayValidImage = arrayImage.copyOfRange(0,cnt)
-
-                            Log.d("image2" , detailData.image2.toString())
-                            Log.d("event rc : ", cnt.toString())
-                            if(cnt == 0)
+                            Log.d("길이!",imageList.toString())
+                            if(imageList.size == 0)
                                 rc_event.visibility = View.GONE
 
-                            eventdetailAdapter = EventDetailAdapter(this, arrayValidImage)
+                            eventdetailAdapter = EventDetailAdapter(this)
                             rc_event.adapter = eventdetailAdapter
+                            eventdetailAdapter.data = imageList
                             eventdetailAdapter.notifyDataSetChanged()
                             event_tv_cate.text = detailData.categoryName
                             event_tv_name.text = detailData.activityName
@@ -273,6 +267,7 @@ class EventDetailActivity : AppCompatActivity(){
                         isNew = false
                         commentIdx = mycommentIdx
                         }
+
                     rv_comment.adapter = commentAdapter
                     commentData.clear()
                     commentData.addAll(it.body()!!.data)

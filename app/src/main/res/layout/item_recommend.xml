@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:transitionName="sharedImg"
-        android:foreground="#40000000"
+        android:foreground="#59000000"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

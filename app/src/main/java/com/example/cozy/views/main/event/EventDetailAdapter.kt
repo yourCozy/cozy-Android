@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cozy.R
 
-class EventDetailAdapter (private val context : Context, private var data : Array<String?>): RecyclerView.Adapter<EventDetailViewHolder>(){
+class EventDetailAdapter (private val context : Context): RecyclerView.Adapter<EventDetailViewHolder>(){
+
+    var data = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventDetailViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event_items, parent, false)
