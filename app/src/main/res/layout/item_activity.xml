@@ -84,7 +84,7 @@
         android:id="@+id/activity_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/fontfamily"
         android:lineSpacingExtra="2sp"
         android:text="16,000원"
