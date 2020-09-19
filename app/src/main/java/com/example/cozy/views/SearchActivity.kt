@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,13 +16,17 @@ import com.example.cozy.network.RequestToServer
 import com.example.cozy.network.customEnqueue
 import com.example.cozy.views.main.RecommendDetailActivity
 import com.example.cozy.views.mypage.MypageFragment
+import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 
 class SearchActivity :AppCompatActivity() {
+
     val service = RequestToServer.service
     private lateinit var searchAdapter: SearchAdapter
     lateinit var keyword: String
+    lateinit var imm : InputMethodManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -38,68 +43,71 @@ class SearchActivity :AppCompatActivity() {
         iv_search.elevation = 5F
         iv_x.elevation = 5F
 
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
         tag1.setOnClickListener {
-//            tag1.isSelected != tag1.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag1.text.toString()
             showResult(keyword)
         }
 
         tag2.setOnClickListener {
-//            tag2.isSelected != tag2.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag2.text.toString()
             showResult(keyword)
         }
 
         tag3.setOnClickListener {
-//            tag3.isSelected != tag3.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag3.text.toString()
             showResult(keyword)
         }
 
         tag4.setOnClickListener {
-//            tag4.isSelected = !tag4.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag4.text.toString()
             showResult(keyword)
         }
 
         tag5.setOnClickListener{
-//            tag5.isSelected = !tag5.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag5.text.toString()
             showResult(keyword)
         }
 
         tag6.setOnClickListener {
-//            tag6.isSelected = !tag6.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag6.text.toString()
             showResult(keyword)
         }
 
         tag7.setOnClickListener{
-//            tag7.isSelected = !tag7.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag7.text.toString()
             showResult(keyword)
         }
 
         tag8.setOnClickListener{
-//            tag8.isSelected = !tag8.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag8.text.toString()
             showResult(keyword)
         }
 
         tag9.setOnClickListener {
-//            tag9.isSelected = !tag9.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag9.text.toString()
             showResult(keyword)
         }
 
         tag10.setOnClickListener {
-//            tag10.isSelected = !tag10.isSelected
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             keyword = tag10.text.toString()
             showResult(keyword)
         }
 
         iv_search.setOnClickListener {
             showResult(et_search_bar.text.toString())
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
         }
 
         iv_x.setOnClickListener {
@@ -109,7 +117,10 @@ class SearchActivity :AppCompatActivity() {
 
         et_search_bar.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH -> showResult(et_search_bar.text.toString())
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    showResult(et_search_bar.text.toString())
+                    imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+                }
                 else -> {
                     return@OnEditorActionListener false
                 }
@@ -125,8 +136,11 @@ class SearchActivity :AppCompatActivity() {
         val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
         header["Context-Type"] = "application/json"
-        header["token"] = sharedPref.getString("token", "token")
-        service.requestSearch(keyword, header).customEnqueue(
+        val token = sharedPref.getString("token", "token")
+        if(token != "token"){
+            header["token"] = token
+        }
+        service.requestSearch(keyword,header).customEnqueue(
             onError = {
                 Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
             },

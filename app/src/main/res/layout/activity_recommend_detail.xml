@@ -38,7 +38,7 @@
                 android:scaleType="centerCrop"
                 android:layout_marginTop="18dp"
                 android:transitionName="sharedImg"
-                app:layout_constraintDimensionRatio="1.4:1"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
