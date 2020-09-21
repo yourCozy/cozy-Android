@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     //Retrofit 에서 Gson 을 사용하기 위한 라이브러리
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-    //okhttp3
+    //okhttp3 https://github.com/MaxToyberman/react-native-ssl-pinning
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.rishabhharit.roundedimageview:RoundedImageView:0.8.4'
     // 카카오 로그인 https://github.com/yongbeam/Android-kakaologin-gradle-sample
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
-    //google 로그인
+    //google 로그인 https://github.com/firebase/functions-samples
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
