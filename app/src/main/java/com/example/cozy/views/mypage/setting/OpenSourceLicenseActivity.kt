@@ -27,6 +27,48 @@ class OpenSourceLicenseActivity : AppCompatActivity() {
                     getString(R.string.glide_license)
                 )
             )
+            add(
+                LicenseData(
+                    getString(R.string.recycler_license_link),
+                    getString(R.string.recycler_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.material_license_link),
+                    getString(R.string.material_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.retrofit_license_link),
+                    getString(R.string.retrofit_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.roundImage_license_link),
+                    getString(R.string.roundImage_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.kakao_license_link),
+                    getString(R.string.kakao_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.google_license_link),
+                    getString(R.string.google_license)
+                )
+            )
+            add(
+                LicenseData(
+                    getString(R.string.okhttp_license_link),
+                    getString(R.string.okhttp_license)
+                )
+            )
             Log.d("OPENSOURCE", "오픈소스 추가는 됨")
 
         }
