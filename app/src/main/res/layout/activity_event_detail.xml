@@ -142,7 +142,7 @@
                 android:id="@+id/event_tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전시시간"
+                android:text="진행기간"
                 android:textSize="14sp"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/fontfamily"

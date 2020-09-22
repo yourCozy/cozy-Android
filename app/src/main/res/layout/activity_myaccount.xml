@@ -138,7 +138,7 @@
         android:textAlignment="textStart"
         android:background="@color/transparent"
         android:paddingHorizontal="20dp"
-        app:layout_constraintBottom_toTopOf="@id/view_account_deatail_bottomline"/>
+        app:layout_constraintTop_toBottomOf="@id/view_account_deatail_bottomline"/>
     <Button
         android:id="@+id/btn_version_info"
         android:layout_width="match_parent"
@@ -149,13 +149,33 @@
         android:textSize="14sp"
         android:textAlignment="textStart"
         android:paddingHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_account_detail_logout"/>
+        app:layout_constraintBottom_toTopOf="@id/view_account_deatail_bottomline0"/>
     <View
         android:id="@+id/view_account_deatail_bottomline"
         android:layout_width="match_parent"
         android:layout_height="3dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="82dp"
+        android:background="@color/light_gray"/>
+
+    <Button
+        android:id="@+id/btn_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/icon_next_14"
+        android:text="개인정보 처리방침"
+        android:background="@color/transparent"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_account_detail_logout"/>
+    <View
+        android:id="@+id/view_account_deatail_bottomline0"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_privacy"
         android:background="@color/light_gray"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

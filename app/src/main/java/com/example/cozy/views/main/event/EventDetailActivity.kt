@@ -149,7 +149,7 @@ class EventDetailActivity : AppCompatActivity(){
                         else {
                             event_tv_people_explain.text = detailData.limitation.toString() + "명"
                         }
-                        if(detailData.price == null){
+                        if(detailData.price == 0){
                             event_tv_cost_explain.text = "무료"
                         }
                         else{
@@ -240,7 +240,7 @@ class EventDetailActivity : AppCompatActivity(){
                                 event_tv_people_explain.text =
                                     detailData.limitation.toString() + "명"
                             }
-                            if (detailData.price == null) {
+                            if (detailData.price == 0) {
                                 event_tv_cost_explain.text = "무료"
                             } else {
                                 event_tv_cost_explain.text = detailData.price.toString() + "원"

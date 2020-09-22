@@ -42,7 +42,7 @@ class CategoryViewHolder(
         else{
             dDay.text = "선착순"
         }
-        price.text = categoryData.price
+        price.text = categoryData.price + "원"
 
         itemView.setOnClickListener { itemClick(categoryData, itemView) }
     }
