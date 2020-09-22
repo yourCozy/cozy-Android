@@ -137,7 +137,12 @@ class EventDetailActivity : AppCompatActivity(){
                             event_tv_day.text = "선착순"
                         }
                         event_tv_time_explain.text = detailData.period
-                        event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+
+                        if(SimpleDateFormat("yyyy").format(detailData.deadline).toString().equals("3000")){
+                            event_tv_deadline_explain.text = "선착순 마감"
+                        }else{
+                            event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                        }
                         if(detailData.limitation == null){
                             event_tv_people_explain.text = "제한없음"
                         }
@@ -224,8 +229,11 @@ class EventDetailActivity : AppCompatActivity(){
                                 event_tv_day.text = "선착순"
                             }
                             event_tv_time_explain.text = detailData.period
-                            event_tv_deadline_explain.text =
-                                SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                            if(SimpleDateFormat("yyyy").format(detailData.deadline).toString().equals("3000")){
+                                event_tv_deadline_explain.text = "선착순 마감"
+                            }else{
+                                event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                            }
                             if (detailData.limitation == null) {
                                 event_tv_people_explain.text = "제한없음"
                             } else {

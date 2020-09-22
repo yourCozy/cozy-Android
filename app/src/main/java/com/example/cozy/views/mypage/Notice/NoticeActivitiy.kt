@@ -41,9 +41,9 @@ class NoticeActivitiy : AppCompatActivity() {
             add(
                 NoticeData(
                     noticeIdx = 1,
-                    noticeTitle = "버그 안내",
-                    noticeDate = "20.09.09",
-                    noticeContent = "안드로이드 sdk 26버전 이하에서 발생하는 버그를 발견하여 조치를 취하는 중입니다. 빠른 시일 내에 업데이트하겠습니다."
+                    noticeTitle = "출시 안내",
+                    noticeDate = "20.09.22",
+                    noticeContent = "안녕하세요. 독립서점 소개 어플리케이션 코지입니다. 드디어 어플리케이션이 출시 되었어요~ 독립 서점에 대한 정보들이 지속적으로 업데이트 될 예정이니 관심 가지고 지켜봐주세요! 여러분들의 행복한 독서 생활"
                 )
             )
             add(
