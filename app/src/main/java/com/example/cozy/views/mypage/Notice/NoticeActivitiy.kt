@@ -51,7 +51,7 @@ class NoticeActivitiy : AppCompatActivity() {
                     noticeIdx = 2,
                     noticeTitle = "회원탈퇴 안내",
                     noticeDate = "20.09.09",
-                    noticeContent = "죄송하지만 아직 기능 개발중이라 앱 내에서 탈퇴할 수 없습니다."
+                    noticeContent = "탈퇴 기능은 아직 개발 중입니다. 탈퇴 관련 문의는 개발자 메일로 연락주세요!"
                 )
             )
         }
