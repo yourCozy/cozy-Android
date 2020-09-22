@@ -33,9 +33,12 @@ class EventViewHolder(
         activityIdx = myData.activityIdx
         title.text = myData.activityName
         info.text = myData.introduction
-        price.text = myData.price.toString() + "원"
-        price.text = "" + myData.price + "원"
-        Log.d("디데이", myData.dday.toString())
+        if(myData.price == 0) {
+            price.text = "무료"
+        }
+        else {
+            price.text = myData.price.toString() + "원"
+        }
         if (myData.dday != null) {
             when {
                 myData.dday < 0 -> {
