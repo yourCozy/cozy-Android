@@ -35,12 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:lineSpacingExtra="6sp"
-        android:fontFamily="@font/fontfamily"
-        android:textFontWeight="300"
+        style="@style/content_text"
         android:includeFontPadding="false"
         android:text=""
-        android:textColor="@color/black"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/bookstore_feed_img"
         app:layout_constraintTop_toBottomOf="@id/bookstore_feed_img" />
 
