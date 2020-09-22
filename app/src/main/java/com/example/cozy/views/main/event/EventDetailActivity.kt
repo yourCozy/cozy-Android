@@ -134,7 +134,12 @@ class EventDetailActivity : AppCompatActivity(){
                             }
                         }
                         event_tv_time_explain.text = detailData.period
-                        event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+
+                        if(SimpleDateFormat("yyyy").format(detailData.deadline).toString().equals("3000")){
+                            event_tv_deadline_explain.text = "선착순 마감"
+                        }else{
+                            event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                        }
                         if(detailData.limitation == null){
                             event_tv_people_explain.text = "제한없음"
                         }
@@ -206,14 +211,23 @@ class EventDetailActivity : AppCompatActivity(){
                             eventdetailAdapter.notifyDataSetChanged()
                             event_tv_cate.text = detailData.categoryName
                             event_tv_name.text = detailData.activityName
-                            if (detailData.dday == 0) {
-                                event_tv_day.text = "오늘 마감"
-                            } else {
-                                event_tv_day.text = "D-" + detailData.dday
+                            when (detailData.dday) {
+                                0 -> {
+                                    event_tv_day.text = "오늘 마감"
+                                }
+                                null -> {
+                                    event_tv_day.text = "선착순"
+                                }
+                                else -> {
+                                    event_tv_day.text = "D-" + detailData.dday
+                                }
                             }
                             event_tv_time_explain.text = detailData.period
-                            event_tv_deadline_explain.text =
-                                SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                            if(SimpleDateFormat("yyyy").format(detailData.deadline).toString().equals("3000")){
+                                event_tv_deadline_explain.text = "선착순 마감"
+                            }else{
+                                event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+                            }
                             if (detailData.limitation == null) {
                                 event_tv_people_explain.text = "제한없음"
                             } else {

@@ -43,6 +43,14 @@
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
+    <style name="content_text" parent="@android:style/Widget.TextView">
+        <item name="fontFamily">@font/fontfamily</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
     <style name="hint_text" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/fontfamily</item>
         <item name="fontWeight">500</item>
