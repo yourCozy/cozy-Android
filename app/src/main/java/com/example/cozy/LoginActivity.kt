@@ -288,7 +288,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_passing_sign_in ->{
                 editor.putString("token","token") // key,value 형식으로 저장
-                editor.putString("nickname","나그네")
+                editor.putString("nickname","코지")
                 editor.apply()
                 editor.commit();
                 go_next()
