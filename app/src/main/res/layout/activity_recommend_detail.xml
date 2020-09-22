@@ -302,6 +302,7 @@
             android:includeFontPadding="false"
             android:textFontWeight="500"
             android:layout_marginTop="4dp"
+            android:text="시간 변동 사항은 게시판을 확인해주세요"
             app:layout_constraintStart_toStartOf="@id/tv_closed"
             app:layout_constraintTop_toBottomOf="@id/rec_de_closed"
             android:textSize="14sp"

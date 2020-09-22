@@ -124,13 +124,14 @@ class EventDetailActivity : AppCompatActivity(){
 
                         if (detailData.dday != null) {
 
-                            when (detailData.dday) {
-                                0 -> {
-                                    event_tv_day.text = "오늘 마감"
-                                }
-                                else -> {
-                                    event_tv_day.text = "D-" + detailData.dday
-                                }
+                            if(detailData.dday!! < 0){
+                                event_tv_day.text = "마감"
+                            }
+                            else if(detailData.dday == 0){
+                                event_tv_day.text = "오늘 마감"
+                            }
+                            else{
+                                event_tv_day.text = "D-" + detailData.dday
                             }
                         }
                         else{
@@ -215,14 +216,14 @@ class EventDetailActivity : AppCompatActivity(){
                             event_tv_cate.text = detailData.categoryName
                             event_tv_name.text = detailData.activityName
                             if (detailData.dday != null) {
-
-                                when (detailData.dday) {
-                                    0 -> {
-                                        event_tv_day.text = "오늘 마감"
-                                    }
-                                    else -> {
-                                        event_tv_day.text = "D-" + detailData.dday
-                                    }
+                                if(detailData.dday!! < 0){
+                                    event_tv_day.text = "마감"
+                                }
+                                else if(detailData.dday == 0){
+                                    event_tv_day.text = "오늘 마감"
+                                }
+                                else{
+                                    event_tv_day.text = "D-" + detailData.dday
                                 }
                             }
                             else{
