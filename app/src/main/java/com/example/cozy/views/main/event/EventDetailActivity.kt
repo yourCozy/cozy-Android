@@ -135,6 +135,7 @@ class EventDetailActivity : AppCompatActivity(){
                         }
                         event_tv_time_explain.text = detailData.period
                         event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
+
                         if(detailData.limitation == null){
                             event_tv_people_explain.text = "제한없음"
                         }
