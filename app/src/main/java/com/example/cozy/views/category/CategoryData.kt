@@ -6,5 +6,5 @@ class CategoryData (
     val activityName : String,
     val price : String,
     val image1 : String,
-    val dday : Int
+    val dday : Int?
 )
