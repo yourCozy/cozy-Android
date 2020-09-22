@@ -20,15 +20,15 @@ class CustomViewPager : ViewPager {
         if (mode == MeasureSpec.UNSPECIFIED || mode == MeasureSpec.AT_MOST) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             var height = 0
-//            for (i in 0 until childCount) {
-//                val child = getChildAt(i)
-//                child.measure(
-//                    widthMeasureSpec,
-//                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
-//                )
-//                val h = child.measuredHeight
-//                if (h > height) height = h
-//            }
+            for (i in 0 until childCount) {
+                val child = getChildAt(i)
+                child.measure(
+                    widthMeasureSpec,
+                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+                )
+                val h = child.measuredHeight
+                if (h > height) height = h
+            }
 
             val child: View = getChildAt(currentItem)
                 child.measure(
