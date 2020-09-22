@@ -35,7 +35,6 @@ class EventViewHolder(
         info.text = myData.introduction
         price.text = myData.price.toString() + "원"
         price.text = "" + myData.price + "원"
-        Log.d("디데이", myData.dday.toString())
         when {
             myData.dday < 0 -> {
                 day.text = "마감"
