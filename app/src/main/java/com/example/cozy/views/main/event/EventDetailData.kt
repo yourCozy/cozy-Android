@@ -23,5 +23,5 @@ data class EventDetailData(
     val image8 : String?,
     val image9 : String?,
     val image10 : String?,
-    val dday : Int
+    val dday : Int?
 )

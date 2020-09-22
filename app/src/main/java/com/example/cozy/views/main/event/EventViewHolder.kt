@@ -1,5 +1,6 @@
 package com.example.cozy.views.main.event
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -34,19 +35,22 @@ class EventViewHolder(
         info.text = myData.introduction
         price.text = myData.price.toString() + "원"
         price.text = "" + myData.price + "원"
-        when {
-            myData.dday < 0 -> {
-                day.text = "마감"
+        Log.d("디데이", myData.dday.toString())
+        if (myData.dday != null) {
+            when {
+                myData.dday < 0 -> {
+                    day.text = "마감"
+                }
+                myData.dday == 0 -> {
+                    day.text = "오늘"
+                }
+                else -> {
+                    day.text = "D-" + myData.dday
+                }
             }
-            myData.dday == null -> {
-                day.text = "선착순"
-            }
-            myData.dday == 0 -> {
-                day.text = "오늘"
-            }
-            else -> {
-                day.text = "D-" + myData.dday
-            }
+        }
+        else{
+            day.text = "선착순"
         }
         itemView.setOnClickListener{itemClick(myData, itemView)}
     }

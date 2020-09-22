@@ -122,16 +122,19 @@ class EventDetailActivity : AppCompatActivity(){
                         event_tv_cate.text = detailData.categoryName
                         event_tv_name.text = detailData.activityName
 
-                        when (detailData.dday) {
-                            0 -> {
-                                event_tv_day.text = "오늘 마감"
+                        if (detailData.dday != null) {
+
+                            when (detailData.dday) {
+                                0 -> {
+                                    event_tv_day.text = "오늘 마감"
+                                }
+                                else -> {
+                                    event_tv_day.text = "D-" + detailData.dday
+                                }
                             }
-                            null -> {
-                                event_tv_day.text = "선착순"
-                            }
-                            else -> {
-                                event_tv_day.text = "D-" + detailData.dday
-                            }
+                        }
+                        else{
+                            event_tv_day.text = "선착순"
                         }
                         event_tv_time_explain.text = detailData.period
                         event_tv_deadline_explain.text = SimpleDateFormat("yyyy.MM.dd").format(detailData.deadline)
@@ -206,10 +209,19 @@ class EventDetailActivity : AppCompatActivity(){
                             eventdetailAdapter.notifyDataSetChanged()
                             event_tv_cate.text = detailData.categoryName
                             event_tv_name.text = detailData.activityName
-                            if (detailData.dday == 0) {
-                                event_tv_day.text = "오늘 마감"
-                            } else {
-                                event_tv_day.text = "D-" + detailData.dday
+                            if (detailData.dday != null) {
+
+                                when (detailData.dday) {
+                                    0 -> {
+                                        event_tv_day.text = "오늘 마감"
+                                    }
+                                    else -> {
+                                        event_tv_day.text = "D-" + detailData.dday
+                                    }
+                                }
+                            }
+                            else{
+                                event_tv_day.text = "선착순"
                             }
                             event_tv_time_explain.text = detailData.period
                             event_tv_deadline_explain.text =
