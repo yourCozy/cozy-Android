@@ -41,20 +41,9 @@ class EventFragment : Fragment() {
 
     private fun initActivity(view: View) {
         eventAdapter = EventAdapter(view.context) { EventData, View ->
-            if(EventData.dday != null) {
-                if (EventData.dday < 0) {
-                    Toast.makeText(context, "마감된 활동입니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    var intent = Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
-                    intent.putExtra("activityIdx", EventData.activityIdx)
-                    startActivity(intent)
-                }
-            }
-            else{
-                var intent = Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
-                intent.putExtra("activityIdx", EventData.activityIdx)
-                startActivity(intent)
-            }
+            var intent = Intent(activity as RecommendDetailActivity, EventDetailActivity::class.java)
+            intent.putExtra("activityIdx", EventData.activityIdx)
+            startActivity(intent)
         }
         view.rv_activity.adapter = eventAdapter
 
