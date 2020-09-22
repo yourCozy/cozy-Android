@@ -43,11 +43,6 @@ class CategoryListActivity : AppCompatActivity() {
         loadCategoryActivityData()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     fun loadCategoryActivityData() {
         val sharedPref = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         val header = mutableMapOf<String, String?>()
