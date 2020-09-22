@@ -20,7 +20,6 @@ import com.example.cozy.network.customEnqueue
 import com.example.cozy.network.responseData.BookstoreDetailData
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_recommend_detail.*
-import org.json.JSONObject.NULL
 import kotlin.properties.Delegates
 
 class RecommendDetailActivity : AppCompatActivity() {
@@ -66,7 +65,7 @@ class RecommendDetailActivity : AppCompatActivity() {
         })
 
         call.setOnClickListener {
-            if(tel == NULL) {
+            if(tel == "0") {
                 Toast.makeText(this,"전화가 없어요.",Toast.LENGTH_SHORT).show()
             }
             else{
@@ -200,7 +199,12 @@ class RecommendDetailActivity : AppCompatActivity() {
                         rec_de_tag3.visibility = View.INVISIBLE
                     }
                     rec_de_intro.text = detailData.notice
-                    tel = detailData.tel
+                    if(detailData.tel != null) {
+                        tel = detailData.tel
+                    }
+                    else{
+                        tel = "0"
+                    }
                     save.isSelected = detailData.checked != 0
                     latitude = detailData.latitude
                     longitude = detailData.longitude
