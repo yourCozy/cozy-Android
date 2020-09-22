@@ -359,7 +359,7 @@
                     app:tabIndicatorFullWidth="false"/>
             </com.google.android.material.appbar.AppBarLayout>
 
-            <com.example.cozy.CustomViewPager
+            <com.yourcozy.cozy.CustomViewPager
                 android:id="@+id/detail_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
