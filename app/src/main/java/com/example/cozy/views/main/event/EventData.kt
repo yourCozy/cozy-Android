@@ -6,5 +6,5 @@ class EventData (
     val introduction: String,
     val image1: String,
     val price: Int,
-    val dday: Int
+    val dday: Int?
 )
