@@ -32,10 +32,15 @@ class CategoryViewHolder(
         activityIdx = categoryData.activityIdx
         activityName.text = categoryData.activityName
         bookstoreName.text = categoryData.bookstoreName
-        if (categoryData.dday == 0) {
-            dDay.text = "오늘 마감"
-        }else{
-            dDay.text = "D-" + categoryData.dday
+        if(categoryData.dday != null) {
+            if (categoryData.dday == 0) {
+                dDay.text = "오늘 마감"
+            } else {
+                dDay.text = "D-" + categoryData.dday
+            }
+        }
+        else{
+            dDay.text = "선착순"
         }
         price.text = categoryData.price + "원"
 
