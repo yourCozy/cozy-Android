@@ -33,7 +33,11 @@ class SearchViewHolder(itemView : View, val itemClick : (SearchData, View) -> Un
             textNull.visibility = View.VISIBLE
         }
         shortIntro1.text = data.shortIntro1
-        shortIntro2.text = data.shortIntro2
+        if(data.shortIntro2 == null){
+            shortIntro2.visibility = View.GONE
+        }else {
+            shortIntro2.text = data.shortIntro2
+        }
         bookstorename.text = data.bookstoreName
         location.text = data.location
         if(data.hashtag1 != null) {
