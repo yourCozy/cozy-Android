@@ -3,6 +3,7 @@ package com.example.cozy.views.mypage
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -84,6 +85,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_account_detail_logout.setOnClickListener(this)
         btn_version_info.setOnClickListener(this)
+        btn_privacy.setOnClickListener(this)
 
     }
 
@@ -101,6 +103,11 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_version_info -> {
                 val intent = Intent(applicationContext, VersionInfoActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_privacy -> {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://cozybookpaltform.creatorlink.net/")
                 startActivity(intent)
             }
         }
