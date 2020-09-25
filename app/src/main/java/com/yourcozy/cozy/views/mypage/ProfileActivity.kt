@@ -13,7 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.yourcozy.cozy.LoginActivity
+import com.yourcozy.cozy.signin.LoginActivity
 import com.yourcozy.cozy.R
 import com.yourcozy.cozy.views.mypage.setting.VersionInfoActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn

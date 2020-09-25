@@ -8,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.yourcozy.cozy.onboarding.OnBoardingActivity
+import com.yourcozy.cozy.signin.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 

@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
 
         userNickname = view.findViewById(R.id.nickname)
         sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
-        userNickname.text = sharedPref.getString("nickname","나그네")
+        userNickname.text = sharedPref.getString("nickname","코지")
 
         initRecommend(view)
         return view
