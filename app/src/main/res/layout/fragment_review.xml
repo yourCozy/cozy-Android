@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="30dp"
+    android:overScrollMode="never"
+    android:clipToPadding="false"
+    android:descendantFocusability="blocksDescendants"
+    tools:context=".views.main.review.ReviewFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_cons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintStart_toStartOf="@+id/main_cons"
+            app:layout_constraintTop_toTopOf="@+id/main_cons">
+
+            <ImageView
+                android:id="@+id/iv_white_box"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/white_rectangle"
+                android:outlineAmbientShadowColor="@color/tab_bar_gray"
+                android:outlineSpotShadowColor="@color/item_shadow"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2sp"
+                android:text="책방에 다녀온 친구들은 이렇게 느꼈어요"
+                android:textColor="@color/colorAccent"
+                android:textFontWeight="700"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@id/iv_white_box"
+                app:layout_constraintStart_toStartOf="@id/iv_white_box"
+                app:layout_constraintTop_toTopOf="@id/iv_white_box" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/white_rectangle_gray_stroke"
+                app:layout_constraintEnd_toEndOf="@id/iv_white_box"
+                app:layout_constraintStart_toStartOf="@id/iv_white_box"
+                app:layout_constraintTop_toBottomOf="@id/tv_simple" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:columnCount="4"
+                android:rowCount="3"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_white_box"
+                app:layout_constraintEnd_toEndOf="@+id/iv_white_box"
+                app:layout_constraintStart_toStartOf="@+id/iv_white_box"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="시설"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="700"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="책"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="700"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="서점활동"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="700"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:gravity="center"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="1sp"
+                    android:text="음료,디저트"
+                    android:textColor="@color/black"
+                    android:textFontWeight="700"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_facility"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="2"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_bad"/>
+
+                <ImageView
+                    android:id="@+id/iv_book"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="2"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_good"/>
+
+                <ImageView
+                    android:id="@+id/iv_activity"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="2"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_soso"/>
+
+                <ImageView
+                    android:id="@+id/iv_dessert"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="2"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_no"/>
+
+                <TextView
+                    android:id="@+id/tv_facility"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="별로예요"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="500"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_book"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:layout_rowWeight="1"
+                    android:text="만족해요"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="500"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_activity"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="보통이에요"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="500"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_dessert"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:lineSpacingExtra="1sp"
+                    android:text="해당없음"
+                    android:gravity="center"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:fontFamily="@font/fontfamily"
+                    android:includeFontPadding="false"
+                    android:textFontWeight="500"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/btn_simple_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/button_yellow_stroke_round"
+                android:fontFamily="@font/fontfamily"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2sp"
+                android:paddingVertical="15dp"
+                android:text="간편후기 작성하기"
+                android:textColor="@color/colorAccent"
+                android:textFontWeight="700"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/iv_white_box" />
+
+            <TextView
+                android:id="@+id/btn_detail_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/button_yellow_round"
+                android:fontFamily="@font/fontfamily"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2sp"
+                android:paddingVertical="15dp"
+                android:text="상세후기 작성하기"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/btn_simple_review" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
