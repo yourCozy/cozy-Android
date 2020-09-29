@@ -15,11 +15,13 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="10dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:src="@drawable/text_logo"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -50,5 +52,5 @@
         app:itemTextColor="@color/bottom_text_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />z
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
