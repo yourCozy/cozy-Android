@@ -26,7 +26,7 @@
         android:background="@color/transparent"
         android:fontFamily="@font/fontfamily"
         android:includeFontPadding="false"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:text="마감임박순"
         android:textFontWeight="700"
         app:layout_constraintStart_toStartOf="parent"

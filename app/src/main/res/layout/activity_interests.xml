@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="아직 관심 책방이 없어요."
         android:textColor="@color/text_hint"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

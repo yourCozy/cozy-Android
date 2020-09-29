@@ -37,6 +37,7 @@
         </activity>
         <activity android:name="com.yourcozy.cozy.views.mypage.setting.VersionInfoActivity"/>
         <activity android:name="com.yourcozy.cozy.views.mypage.setting.OpenSourceLicenseActivity"/>
+        <activity android:name="com.yourcozy.cozy.signin.EmailLoginActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
