@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.main.review.SimpleReviewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="2sp"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:text="1. 서점 내부 시설은 어떠셨는지 알고싶어요." />
+
+        <RadioGroup
+            android:id="@+id/rg_facility"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp">
+
+            <RadioButton
+                android:id="@+id/facility_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_bad_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="별로예요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/facility_soso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_soso_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:text="보통이에요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/facility_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_good_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="만족해요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/fontfamily"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="2sp"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:text="2. 서점에서 제공하는 책은 어떠셨는지 궁금해요." />
+
+        <RadioGroup
+            android:id="@+id/rg_book"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/book_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_bad_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="별로예요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/book_soso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_soso_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:text="보통이에요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/book_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_good_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="만족해요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="2sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="3. 서점 활동에 참여하셨다면, 어떠셨는지 알고싶어요."/>
+
+        <RadioGroup
+            android:id="@+id/rg_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp">
+
+            <RadioButton
+                android:id="@+id/activity_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_bad_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="별로예요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/activity_soso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_soso_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:text="보통이에요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/activity_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_good_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:padding="17dp"
+                android:text="만족해요"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/activity_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_no_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:text="해당없음"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="2sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="4. 음료나 디저트를 드셨다면, 어떠셨는지 궁금해요."/>
+
+        <RadioGroup
+            android:id="@+id/rg_dessert"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="3"
+            android:layout_marginStart="8dp">
+
+            <RadioButton
+                android:id="@+id/dessert_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="500"
+                android:includeFontPadding="false"
+                android:textSize="12sp"
+                android:padding="17dp"
+                android:text="별로예요"
+                android:drawablePadding="8dp"
+                android:drawableTop="@drawable/icon_bad_selector"/>
+
+            <RadioButton
+                android:id="@+id/dessert_soso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="500"
+                android:includeFontPadding="false"
+                android:textSize="12sp"
+                android:text="보통이에요"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:drawablePadding="8dp"
+                android:drawableTop="@drawable/icon_soso_selector"/>
+
+            <RadioButton
+                android:id="@+id/dessert_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:fontFamily="@font/fontfamily"
+                android:textFontWeight="500"
+                android:includeFontPadding="false"
+                android:textSize="12sp"
+                android:text="만족해요"
+                android:padding="17dp"
+                android:drawablePadding="8dp"
+                android:drawableTop="@drawable/icon_good_selector"/>
+
+            <RadioButton
+                android:id="@+id/dessert_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_no_selector"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/fontfamily"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="17dp"
+                android:text="해당없음"
+                android:textFontWeight="500"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/btn_completion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@drawable/button_gray_round"
+            android:text="작성완료"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:lineSpacingExtra="2sp"
+            android:fontFamily="@font/fontfamily"
+            android:textFontWeight="700"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
