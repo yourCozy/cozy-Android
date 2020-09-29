@@ -27,14 +27,14 @@
         <activity android:name=".onboarding.OnBoardingActivity"></activity>
         <activity android:name=".views.main.RecommendDetailActivity" />
         <activity android:name=".views.category.CategoryListActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".signin.LoginActivity" />
         <activity android:name=".views.mypage.Notice.NoticeActivitiy" />
         <activity android:name=".views.mypage.ProfileActivity" />
         <activity android:name=".views.SearchActivity" />
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".views.mypage.setting.VersionInfoActivity" />
         <activity android:name=".views.mypage.setting.OpenSourceLicenseActivity" />
-
+        <activity android:name=".signin.EmailLoginActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

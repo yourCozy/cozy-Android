@@ -1,4 +1,4 @@
-package com.yourcozy.cozy
+package com.yourcozy.cozy.signin
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yourcozy.cozy.network.RequestToServer
@@ -31,6 +32,8 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.usermgmt.response.model.UserAccount
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
+import com.yourcozy.cozy.MainActivity
+import com.yourcozy.cozy.R
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -70,6 +73,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         editor = sharedPref.edit()
 
+        val emailLoginButton: Button = findViewById(R.id.email_sign_in_btn)
+        emailLoginButton.setOnClickListener(this)
+
         val googleSingInButton: Button = findViewById(R.id.google_sign_in_button)
         googleSingInButton.setOnClickListener(this)
 
@@ -80,7 +86,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             session.open(AuthType.KAKAO_LOGIN_ALL, this@LoginActivity)
         })
 
-        val passingButton : Button = findViewById(R.id.btn_passing_sign_in)
+        val signupButton: TextView = findViewById(R.id.btn_sign_up)
+        signupButton.setOnClickListener(this)
+
+        val passingButton : TextView = findViewById(R.id.btn_passing_sign_in)
         passingButton.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
@@ -281,15 +290,23 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.email_sign_in_btn -> {
+                val intent = Intent(this@LoginActivity, EmailLoginActivity::class.java)
+                startActivity(intent)
+            }
             R.id.google_sign_in_button -> {
                 signIn()
                 Log.d(TAG, "sign in button works")
             }
-            R.id.btn_passing_sign_in ->{
+            R.id.btn_sign_up -> {
+                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_passing_sign_in -> {
                 editor.putString("token","token") // key,value 형식으로 저장
                 editor.putString("nickname","코지")
                 editor.apply()
-                editor.commit();
+                editor.commit()
                 go_next()
             }
         }
@@ -298,7 +315,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent,
+            RC_SIGN_IN
+        )
     }
 
     companion object {

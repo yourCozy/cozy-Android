@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.yourcozy.cozy.LoginActivity
+import com.yourcozy.cozy.signin.LoginActivity
 import com.yourcozy.cozy.R
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 

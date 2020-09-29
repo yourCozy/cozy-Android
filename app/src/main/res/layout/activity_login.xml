@@ -15,15 +15,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.kakao.usermgmt.LoginButton
-        android:id="@+id/kakao_login"
+    <Button
+        android:id="@+id/email_sign_in_btn"
         android:layout_width="320dp"
         android:layout_height="48dp"
         android:layout_marginBottom="12dp"
+        android:background="@drawable/buttonemaillogin_320_x_48"
+        android:fontFamily="@font/fontfamily"
+        android:letterSpacing="-0.02"
+        android:drawableStart="@drawable/iconemail_22_x_16"
+        android:paddingStart="45dp"
+        android:paddingEnd="45dp"
+        android:gravity="center"
+        android:text="이메일계정으로 시작"
+        android:textSize="16dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/google_sign_in_button"
-        android:visibility="invisible"/>
+        app:layout_constraintBottom_toTopOf="@id/kakao_sign_in_btn"/>
 
     <Button
         android:id="@+id/kakao_sign_in_btn"
@@ -38,7 +47,7 @@
         android:paddingEnd="45dp"
         android:gravity="center"
         android:text="카카오계정으로 시작"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/google_sign_in_button"
@@ -57,27 +66,51 @@
         android:paddingLeft="41dp"
         android:paddingRight="41dp"
         android:text="구글계정으로 시작"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:drawableStart="@drawable/icon_google32x31"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_passing_sign_in"  />
 
-
-    <Button
-        android:id="@+id/btn_passing_sign_in"
-        android:layout_width="120dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/button_white_120x32"
-        android:text="한 번 둘러볼래요!"
-        android:textColor="@color/text_hint"
-        android:letterSpacing="-0.02"
-        android:lineSpacingExtra="0sp"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+    <TextView
+        android:id="@+id/btn_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/fontfamily"
+        android:text="회원가입"
+        android:textColor="#707070"
+        android:textFontWeight="500"
+        android:textSize="12dp"
+        android:layout_marginStart="57dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/btn_passing_sign_in" />
+
+    <ImageView
+        android:id="@+id/sign_line"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/line_comment"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_passing_sign_in" />
+
+
+    <TextView
+        android:id="@+id/btn_passing_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한 번 둘러볼래요!"
+        android:textSize="12dp"
+        android:textColor="#707070"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="500"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

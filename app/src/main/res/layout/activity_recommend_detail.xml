@@ -72,7 +72,7 @@
             android:transitionName="sharedName"
             android:textColor="@color/white"
             android:textFontWeight="700"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@+id/bookstore_profile"
@@ -87,10 +87,10 @@
             android:background="@drawable/tag_box"
             android:fontFamily="@font/fontfamily"
             android:gravity="center"
-            android:lineSpacingExtra="2sp"
+            android:lineSpacingExtra="2dp"
             android:textColor="@color/white"
             android:textFontWeight="500"
-            android:textSize="10sp"
+            android:textSize="10dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/bookstore_name"
             app:layout_constraintTop_toBottomOf="@+id/bookstore_name" />
@@ -105,10 +105,10 @@
             android:fontFamily="@font/fontfamily"
             android:gravity="center"
             android:layout_marginLeft="4dp"
-            android:lineSpacingExtra="2sp"
+            android:lineSpacingExtra="2dp"
             android:textColor="@color/white"
             android:textFontWeight="500"
-            android:textSize="10sp"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@+id/rec_de_tag1"
             app:layout_constraintTop_toTopOf="@+id/rec_de_tag1" />
 
@@ -122,10 +122,10 @@
             android:fontFamily="@font/fontfamily"
             android:gravity="center"
             android:layout_marginLeft="4dp"
-            android:lineSpacingExtra="2sp"
+            android:lineSpacingExtra="2dp"
             android:textColor="@color/white"
             android:textFontWeight="500"
-            android:textSize="10sp"
+            android:textSize="10dp"
             app:layout_constraintStart_toEndOf="@+id/rec_de_tag2"
             app:layout_constraintTop_toTopOf="@+id/rec_de_tag2" />
 
@@ -136,9 +136,9 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/fontfamily"
             android:textFontWeight="700"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#282828"
-            android:lineSpacingExtra="8sp"
+            android:lineSpacingExtra="8dp"
             app:layout_constraintStart_toStartOf="@+id/start_guideline"
             app:layout_constraintEnd_toEndOf="@+id/end_guideline"
             app:layout_constraintTop_toBottomOf="@+id/rec_de_img" />
@@ -174,7 +174,7 @@
                 android:text="전화"
                 android:textColor="@color/black"
                 android:textFontWeight="700"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/save"
@@ -188,7 +188,7 @@
                 android:text="저장"
                 android:textColor="@color/black"
                 android:textFontWeight="700"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/road"
@@ -202,7 +202,7 @@
                 android:text="길찾기"
                 android:textColor="@color/black"
                 android:textFontWeight="700"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
         </LinearLayout>
 
@@ -230,9 +230,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:lineSpacingExtra="6sp"
+            android:lineSpacingExtra="6dp"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:fontFamily="@font/fontfamily"
             android:textFontWeight="500"
             android:layout_marginLeft="7.5dp"
@@ -311,7 +311,7 @@
             android:text="시간 변동 사항은 게시판을 확인해주세요"
             app:layout_constraintStart_toStartOf="@id/tv_closed"
             app:layout_constraintTop_toBottomOf="@id/rec_de_closed"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:textColor="@color/dark_gray"
             android:lineSpacingExtra="6sp" />
 
@@ -334,7 +334,7 @@
                 android:lineSpacingExtra="6sp"
                 android:textColor="@color/black"
                 android:textFontWeight="500"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@id/tv_guidance"
                 app:layout_constraintTop_toBottomOf="@id/tv_guidance" />

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_email_login"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일 로그인"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="300"
+        app:layout_constraintTop_toBottomOf="@id/tb_email_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="54dp"/>
+
+    <EditText
+        android:id="@+id/et_email_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/inputfield_320_x_44"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:hint="이메일"
+        android:paddingStart="20dp"
+        android:textSize="14dp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="500"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="28dp"/>
+
+    <TextView
+        android:id="@+id/check_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일을 확인해주세요."
+        android:textColor="@color/sub_color"
+        android:textSize="12dp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="300"
+        app:layout_constraintEnd_toEndOf="@id/et_email_login"
+        app:layout_constraintTop_toBottomOf="@id/et_email_login"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/et_pw_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/inputfield_320_x_44"
+        android:inputType="textMultiLine|textNoSuggestions|textPassword"
+        android:hint="비밀번호"
+        android:paddingStart="20dp"
+        android:textSize="14dp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="500"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/check_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/check_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 확인해주세요."
+        android:textColor="@color/sub_color"
+        android:textSize="12dp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="300"
+        app:layout_constraintEnd_toEndOf="@id/et_pw_login"
+        app:layout_constraintTop_toBottomOf="@id/et_pw_login"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/btn_finish_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_email_login"
+        android:text="로그인"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="700"
+        app:layout_constraintTop_toBottomOf="@id/check_pw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_forget_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:textSize="12dp"
+        android:fontFamily="@font/fontfamily"
+        android:textFontWeight="700"
+        app:layout_constraintTop_toBottomOf="@id/btn_finish_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.yourcozy.cozy.network
 
 import com.yourcozy.cozy.network.requestData.RequestCommentWrite
+import com.yourcozy.cozy.network.requestData.RequestEmailLogin
 import com.yourcozy.cozy.network.responseData.*
 import com.yourcozy.cozy.network.responseData.ResponseCategoryActivity
 import com.yourcozy.cozy.network.requestData.RequestLogin
@@ -15,6 +16,9 @@ import retrofit2.http.*
 
 interface RequestInterface {
 
+    //이메일로그인 https://github.com/yourCozy/cozy-Server/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8
+    @POST("/user/signin")
+    fun requestEmailLogin(@Body body: RequestEmailLogin) : Call<ResponseEmailLogin>
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
     @POST("/auth/social")
     fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
