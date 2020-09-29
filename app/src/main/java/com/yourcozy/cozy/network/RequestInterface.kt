@@ -5,6 +5,7 @@ import com.yourcozy.cozy.network.requestData.RequestEmailLogin
 import com.yourcozy.cozy.network.responseData.*
 import com.yourcozy.cozy.network.responseData.ResponseCategoryActivity
 import com.yourcozy.cozy.network.requestData.RequestLogin
+import com.yourcozy.cozy.network.requestData.RequestSimpleReview
 import com.yourcozy.cozy.network.responseData.ResponseBookmarkUpdate
 import com.yourcozy.cozy.network.responseData.ResponseInterest
 import com.yourcozy.cozy.network.responseData.ResponseMap
@@ -44,6 +45,15 @@ interface RequestInterface {
     //책방 상세_활동 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%ED%99%9C%EB%8F%99-%ED%94%BC%EB%93%9C
     @GET("/activity/{bookstoreIdx}")
     fun requestBookstoreActivity(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseBookstoreActivityData>
+
+
+    //책방 상세_간단 후기 조회 https://github.com/yourCozy/cozy-Server/wiki/%EA%B0%84%EB%8B%A8%ED%9B%84%EA%B8%B0-%EC%A1%B0%ED%9A%8C
+    @GET("review/simple/{bookstoreIdx}")
+    fun requestSimpleReview(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseSimpleReview>
+
+    //책방 상세_간단 후기 작성 https://github.com/yourCozy/cozy-Server/wiki/%EA%B0%84%EB%8B%A8%ED%9B%84%EA%B8%B0-%EC%9E%91%EC%84%B1
+    @POST("review/simple/{bookstoreIdx}")
+    fun requestSimpleReviewWrite(@HeaderMap headers: Map<String, String?>,@Path("bookstoreIdx") bookstoreIdx: Int, @Body body: RequestSimpleReview) : Call<ResponseSimpleReviewWrite>
 
 
     //지역

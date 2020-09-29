@@ -61,6 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_simple" />
 
             <GridLayout
+                android:id="@+id/simple_gridlayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:columnCount="4"
@@ -134,8 +135,7 @@
                     android:layout_height="0dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="2"
-                    android:padding="10dp"
-                    android:src="@drawable/icon_bad"/>
+                    android:padding="10dp" />
 
                 <ImageView
                     android:id="@+id/iv_book"
@@ -143,8 +143,7 @@
                     android:layout_height="0dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="2"
-                    android:padding="10dp"
-                    android:src="@drawable/icon_good"/>
+                    android:padding="10dp" />
 
                 <ImageView
                     android:id="@+id/iv_activity"
@@ -152,8 +151,7 @@
                     android:layout_height="0dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="2"
-                    android:padding="10dp"
-                    android:src="@drawable/icon_soso"/>
+                    android:padding="10dp" />
 
                 <ImageView
                     android:id="@+id/iv_dessert"
@@ -161,15 +159,13 @@
                     android:layout_height="0dp"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="2"
-                    android:padding="10dp"
-                    android:src="@drawable/icon_no"/>
+                    android:padding="10dp" />
 
                 <TextView
                     android:id="@+id/tv_facility"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:lineSpacingExtra="1sp"
-                    android:text="별로예요"
                     android:gravity="center"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
@@ -185,7 +181,6 @@
                     android:layout_height="0dp"
                     android:lineSpacingExtra="1sp"
                     android:layout_rowWeight="1"
-                    android:text="만족해요"
                     android:gravity="center"
                     android:layout_columnWeight="1"
                     android:fontFamily="@font/fontfamily"
@@ -199,7 +194,6 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:lineSpacingExtra="1sp"
-                    android:text="보통이에요"
                     android:gravity="center"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
@@ -214,7 +208,6 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:lineSpacingExtra="1sp"
-                    android:text="해당없음"
                     android:gravity="center"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
@@ -225,6 +218,20 @@
                     android:textSize="10dp" />
 
             </GridLayout>
+
+            <TextView
+                android:id="@+id/none_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fontfamily"
+                android:text="작성된 후기가 없습니다."
+                android:textColor="@color/gray"
+                android:textFontWeight="700"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_white_box"
+                app:layout_constraintEnd_toEndOf="@+id/iv_white_box"
+                app:layout_constraintStart_toStartOf="@+id/iv_white_box"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
             <TextView
                 android:id="@+id/btn_simple_review"
