@@ -1,10 +1,12 @@
 package com.yourcozy.cozy.network.responseData
 
-import com.yourcozy.cozy.views.main.RecommendData
-
-data class ResponseRecommendData (
+data class ResponseSimpleReviewWrite (
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: List<RecommendData>
+    val data: ReviewIdx
+)
+
+data class ReviewIdx(
+    val reviewIdx : Int
 )
