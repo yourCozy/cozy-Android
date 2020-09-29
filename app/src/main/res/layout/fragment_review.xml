@@ -45,7 +45,7 @@
                 android:text="책방에 다녀온 친구들은 이렇게 느꼈어요"
                 android:textColor="@color/colorAccent"
                 android:textFontWeight="700"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="@id/iv_white_box"
                 app:layout_constraintStart_toStartOf="@id/iv_white_box"
                 app:layout_constraintTop_toTopOf="@id/iv_white_box" />
@@ -84,7 +84,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="700"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -98,7 +98,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="700"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -112,7 +112,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="700"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -126,7 +126,7 @@
                     android:text="음료,디저트"
                     android:textColor="@color/black"
                     android:textFontWeight="700"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
                 <ImageView
                     android:id="@+id/iv_facility"
@@ -177,7 +177,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="500"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/tv_book"
@@ -192,7 +192,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="500"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/tv_activity"
@@ -207,7 +207,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="500"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/tv_dessert"
@@ -222,7 +222,7 @@
                     android:includeFontPadding="false"
                     android:textFontWeight="500"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10dp" />
 
             </GridLayout>
 
@@ -240,7 +240,7 @@
                 android:text="간편후기 작성하기"
                 android:textColor="@color/colorAccent"
                 android:textFontWeight="700"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintTop_toBottomOf="@id/iv_white_box" />
 
             <TextView
@@ -257,7 +257,7 @@
                 android:text="상세후기 작성하기"
                 android:textColor="@color/white"
                 android:textFontWeight="700"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintTop_toBottomOf="@id/btn_simple_review" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.yourcozy.cozy.MainActivity
 import com.yourcozy.cozy.R
@@ -24,6 +25,7 @@ class EmailLoginActivity : AppCompatActivity(){
     val requestToServer = RequestToServer
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
+    lateinit var imm : InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,8 @@ class EmailLoginActivity : AppCompatActivity(){
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_x)
 
         tb_email_login.elevation = 5F
+
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
         tv_forget_pw.text = Html.fromHtml("<u>아이디/비밀번호를 잊어버리셨나요?</u>")
 
@@ -76,6 +80,7 @@ class EmailLoginActivity : AppCompatActivity(){
         })
 
         btn_finish_login.setOnClickListener{
+            imm.hideSoftInputFromWindow(getCurrentFocus()!!.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
             requestToServer.service.requestEmailLogin(
                 RequestEmailLogin(
                     email = et_email_login.text.toString(),
