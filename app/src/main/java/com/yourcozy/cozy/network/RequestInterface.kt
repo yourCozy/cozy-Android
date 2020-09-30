@@ -1,9 +1,11 @@
 package com.yourcozy.cozy.network
 
 import com.yourcozy.cozy.network.requestData.RequestCommentWrite
+import com.yourcozy.cozy.network.requestData.RequestEmailLogin
 import com.yourcozy.cozy.network.responseData.*
 import com.yourcozy.cozy.network.responseData.ResponseCategoryActivity
 import com.yourcozy.cozy.network.requestData.RequestLogin
+import com.yourcozy.cozy.network.requestData.RequestSimpleReview
 import com.yourcozy.cozy.network.responseData.ResponseBookmarkUpdate
 import com.yourcozy.cozy.network.responseData.ResponseInterest
 import com.yourcozy.cozy.network.responseData.ResponseMap
@@ -14,6 +16,9 @@ import retrofit2.http.*
 
 interface RequestInterface {
 
+    //이메일로그인 https://github.com/yourCozy/cozy-Server/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8
+    @POST("/user/signin")
+    fun requestEmailLogin(@Body body: RequestEmailLogin) : Call<ResponseEmailLogin>
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
     @POST("/auth/social")
     fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
@@ -40,6 +45,15 @@ interface RequestInterface {
     //책방 상세_활동 피드 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-%EC%83%81%EC%84%B8_%ED%99%9C%EB%8F%99-%ED%94%BC%EB%93%9C
     @GET("/activity/{bookstoreIdx}")
     fun requestBookstoreActivity(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseBookstoreActivityData>
+
+
+    //책방 상세_간단 후기 조회 https://github.com/yourCozy/cozy-Server/wiki/%EA%B0%84%EB%8B%A8%ED%9B%84%EA%B8%B0-%EC%A1%B0%ED%9A%8C
+    @GET("review/simple/{bookstoreIdx}")
+    fun requestSimpleReview(@Path("bookstoreIdx") bookstoreIdx: Int) : Call<ResponseSimpleReview>
+
+    //책방 상세_간단 후기 작성 https://github.com/yourCozy/cozy-Server/wiki/%EA%B0%84%EB%8B%A8%ED%9B%84%EA%B8%B0-%EC%9E%91%EC%84%B1
+    @POST("review/simple/{bookstoreIdx}")
+    fun requestSimpleReviewWrite(@HeaderMap headers: Map<String, String?>,@Path("bookstoreIdx") bookstoreIdx: Int, @Body body: RequestSimpleReview) : Call<ResponseSimpleReviewWrite>
 
 
     //지역

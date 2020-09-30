@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.yourcozy.cozy.LoginActivity
+import com.yourcozy.cozy.signin.LoginActivity
 import com.yourcozy.cozy.R
 import com.yourcozy.cozy.views.mypage.setting.VersionInfoActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn

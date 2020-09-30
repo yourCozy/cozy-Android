@@ -43,7 +43,7 @@
         android:layout_marginBottom="13dp"
         android:text="내 계정정보"
         android:textFontWeight="700"
-        android:textSize="16sp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/view_account_detail_midline"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -64,7 +64,7 @@
         android:layout_marginTop="48dp"
         android:text="이름"
         android:textFontWeight="500"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_account_detail_midline" />
 
@@ -179,7 +179,7 @@
         android:drawableEnd="@drawable/icon_next_14"
         android:text="버전 정보"
         android:background="@color/transparent"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:textAlignment="textStart"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@id/view_account_deatail_bottomline0"/>
@@ -199,7 +199,7 @@
         android:drawableEnd="@drawable/icon_next_14"
         android:text="개인정보 처리방침"
         android:background="@color/transparent"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:textAlignment="textStart"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@id/btn_account_detail_logout"/>

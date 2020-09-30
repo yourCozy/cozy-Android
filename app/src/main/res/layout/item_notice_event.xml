@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
-        android:lineSpacingExtra="2sp"
+        android:lineSpacingExtra="2dp"
         android:maxLines="2"
         android:text="이벤트"
         android:textFontWeight="700"
@@ -26,7 +26,7 @@
         android:layout_marginTop="6dp"
         android:paddingBottom="14dp"
         android:text="20.11.09"
-        android:textSize="12sp"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="@id/tv_event_title"
         app:layout_constraintTop_toBottomOf="@id/tv_event_title" />
 

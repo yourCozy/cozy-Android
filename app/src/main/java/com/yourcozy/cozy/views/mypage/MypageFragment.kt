@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.yourcozy.cozy.ItemDecoration
 import com.yourcozy.cozy.MainActivity
 import com.yourcozy.cozy.R
-import com.yourcozy.cozy.LoginActivity
+import com.yourcozy.cozy.signin.LoginActivity
 import com.yourcozy.cozy.network.RequestToServer
 import com.yourcozy.cozy.network.customEnqueue
 import com.yourcozy.cozy.views.main.RecommendDetailActivity

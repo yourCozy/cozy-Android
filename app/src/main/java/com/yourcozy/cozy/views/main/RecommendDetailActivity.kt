@@ -55,7 +55,7 @@ class RecommendDetailActivity : AppCompatActivity() {
         initDetail()
 
         detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager,bookstoreIdx)
-        detail_viewpager.offscreenPageLimit = 2
+        detail_viewpager.offscreenPageLimit = 3
         detail_tablayout.setupWithViewPager(detail_viewpager)
         detail_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(detail_tablayout))
         detail_tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -198,7 +198,12 @@ class RecommendDetailActivity : AppCompatActivity() {
                     else{
                         rec_de_tag3.visibility = View.INVISIBLE
                     }
-                    rec_de_intro.text = detailData.notice
+                    if(detailData.notice != null) {
+                        rec_de_intro.text = detailData.notice
+                    }
+                    else{
+                        rec_de_intro.text = "책방 이야기가 준비중입니다 : ) \n" + "조금만 기다려주세요!"
+                    }
                     if(detailData.tel != null) {
                         tel = detailData.tel
                     }

@@ -46,7 +46,7 @@
         android:maxLength="22"
         android:paddingVertical="12dp"
         android:paddingLeft="10dp"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         android:layout_marginStart="30dp"
@@ -83,7 +83,7 @@
         android:fontFamily="@font/fontfamily"
         android:text="인기검색어"
         android:textColor="@color/text_color_dark"
-        android:textSize="12sp"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/et_search_bar" />
 
@@ -157,7 +157,6 @@
         android:paddingVertical="10dp"
         android:text="영화상영"
         android:textColor="@color/checkbox_text_selector"
-
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/tag1" />
@@ -249,7 +248,7 @@
         android:layout_marginTop="95dp"
         android:text="검색 결과 "
         android:textFontWeight="500"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -262,7 +261,7 @@
         android:text="14"
         android:textColor="@color/colorAccent"
         android:textFontWeight="500"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/tv_search_result"
         app:layout_constraintTop_toTopOf="@id/tv_search_result" />
@@ -273,7 +272,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="건"
-        android:textSize="14sp"
+        android:textSize="14dp"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/tv_search_result_cnt"
         app:layout_constraintTop_toTopOf="@id/tv_search_result_cnt" />
@@ -299,8 +298,8 @@
         android:text="검색하신 결과가 없어요 :(\n다른 단어로 검색해주시겠어요?"
         style="@style/hint_text"
         android:textAlignment="center"
-        android:lineSpacingExtra="10sp"
-        android:textSize="16sp"
+        android:lineSpacingExtra="10dp"
+        android:textSize="16dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
