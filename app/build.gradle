@@ -8,12 +8,20 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    kotlinOptions{
+        jvmTarget = "1.8"
+    }
+
+    dataBinding{
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.yourcozy.cozy"
         minSdkVersion 28
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.5.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -77,5 +85,13 @@ dependencies {
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
 
+    //페이징 라이브러리
+    def paging_version = "2.1.2"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-rxjava2:$paging_version"
 
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 }

@@ -1,10 +1,14 @@
 package com.yourcozy.cozy.views.mypage
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +16,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.yourcozy.cozy.LoginActivity
 import com.yourcozy.cozy.R
@@ -26,6 +32,8 @@ import com.google.firebase.ktx.Firebase
 import com.kakao.auth.Session
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.LogoutResponseCallback
+import com.yourcozy.cozy.views.mypage.profile.ItemPhoto
+import com.yourcozy.cozy.views.mypage.profile.ProfileSetActivity
 import kotlinx.android.synthetic.main.activity_myaccount.*
 
 
@@ -37,6 +45,7 @@ private lateinit var profileImage: ImageView
 val GOOGLE_ACCOUNT: String = "google_account"
 private val TAG = "ProfileActivityTAG"
 
+private const val REQUEST_PERMISSION_CODE = 100
 class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -83,6 +92,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         setDataOnView()
 
+        btn_profile_change.setOnClickListener(this)
         btn_account_detail_logout.setOnClickListener(this)
         btn_version_info.setOnClickListener(this)
         btn_privacy.setOnClickListener(this)
@@ -94,7 +104,37 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         profileName.text = sharedPref.getString("nickname", "token")
 //        profileEmail.text = mGoogleSignInAccount.email
     }
+    private fun getAllImages(limit: Int? = null, offset: Int? = null) : MutableList<ItemPhoto>{
+        val cursor: Cursor?
+        val columnIndexData: Int
+        val order = MediaStore.Video.Media.DATE_TAKEN
+        val sortOrder =
+            if(limit == null) "$order DESC"
+            else "$order DESC LIMIT $limit OFFSET $offset"
 
+        val photoLists : MutableList<ItemPhoto> = mutableListOf()
+        val absolutePathOfImg : String? = null
+        val uri: Uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
+        val projection = arrayOf(
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME
+        )
+
+        cursor = contentResolver.query(
+            uri, projection, null, null , sortOrder
+        )
+
+        if (cursor != null) {
+            columnIndexData = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+            while (cursor.moveToNext()) {
+                val imageDataPath = cursor.getString(columnIndexData)
+                photoLists.add(ItemPhoto(imageDataPath))
+            }
+        }
+
+        return photoLists
+    }
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_account_detail_logout -> {
@@ -109,6 +149,11 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse("https://cozybookpaltform.creatorlink.net/")
                 startActivity(intent)
+            }
+            R.id.btn_profile_change ->{
+                checkPermission()
+//                val intent = Intent(applicationContext, ProfileSetActivity::class.java)
+//                startActivity(intent)
             }
         }
     }
@@ -163,5 +208,48 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun checkPermission(){
+        val permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            val intent = Intent(applicationContext, ProfileSetActivity::class.java)
+            startActivity(intent)
+        }else{
+            requestPermission()
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+                Toast.makeText(applicationContext, "기능 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+            } else{
+                Toast.makeText(applicationContext, "기능 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun requestPermission(){
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            REQUEST_PERMISSION_CODE -> {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    val intent = Intent(applicationContext, ProfileSetActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(applicationContext, "기능 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

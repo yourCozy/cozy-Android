@@ -3,6 +3,7 @@
     package="com.yourcozy.cozy">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:usesCleartextTraffic="true"
@@ -42,6 +43,7 @@
             android:value="@string/kakao_app_key" />
         <activity android:name="com.yourcozy.cozy.views.mypage.Interest.InterestsActivity"/>
         <activity android:name="com.yourcozy.cozy.views.main.event.EventDetailActivity" />
+        <activity android:name=".views.mypage.profile.ProfileSetActivity"/>
     </application>
 
 </manifest>

@@ -92,8 +92,8 @@ interface RequestInterface {
     fun requestRecentlySeen(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecent>
 
     //프로필 사진 업데이트 https://github.com/yourCozy/cozy-Server/wiki/%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
-    //@POST("/user/profile")
-
+    @POST("/user/profile")
+    fun requestProfile(@HeaderMap headers: Map<String, String?>) : Call<ResponseProfile>
 
 //    취향 등록 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EB%93%B1%EB%A1%9D
     @POST("/mypage/recommendation")

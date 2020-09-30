@@ -39,7 +39,7 @@
         <item name="fontFamily">@font/fontfamily</item>
         <item name="fontWeight">700</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
@@ -47,7 +47,7 @@
         <item name="fontFamily">@font/fontfamily</item>
         <item name="fontWeight">500</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
@@ -98,5 +98,11 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="button_next" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/button_next_selector</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontWeight">700</item>
     </style>
 </resources>

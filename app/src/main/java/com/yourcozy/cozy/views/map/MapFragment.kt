@@ -50,6 +50,11 @@ class MapFragment : Fragment() {
             fragmentManager?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
         }
 
+        icon_map.setOnClickListener {
+            val bottomsheet = BottomSheetFragment(sectionIdx)
+            fragmentManager?.let { it1 -> bottomsheet.show(it1, bottomsheet.tag) }
+        }
+
         rv_map.addItemDecoration(ItemDecoration(this.context!!, 0,32))
     }
 
