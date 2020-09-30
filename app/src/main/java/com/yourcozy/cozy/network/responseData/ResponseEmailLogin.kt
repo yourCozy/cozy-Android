@@ -11,6 +11,7 @@ data class UserEmailInfoData(
     val userIdx : Int,
     val nickname : String,
     val email : String,
-    val accessToken : String
+    val accessToken : String,
+    val is_logined : Int
 )
 

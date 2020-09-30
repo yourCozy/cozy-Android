@@ -16,6 +16,7 @@ import com.yourcozy.cozy.R
 import com.yourcozy.cozy.network.RequestToServer
 import com.yourcozy.cozy.network.customEnqueue
 import com.yourcozy.cozy.network.requestData.RequestEmailLogin
+import com.yourcozy.cozy.onboarding.OnBoardingPreferenceActivity
 import kotlinx.android.synthetic.main.activity_email_signin.*
 
 class EmailLoginActivity : AppCompatActivity(){
@@ -26,6 +27,7 @@ class EmailLoginActivity : AppCompatActivity(){
     lateinit var sharedPref : SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     lateinit var imm : InputMethodManager
+    var isLogined = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,7 @@ class EmailLoginActivity : AppCompatActivity(){
 
         imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
-        tv_forget_pw.text = Html.fromHtml("<u>아이디/비밀번호를 잊어버리셨나요?</u>")
+        tv_forget_pw.text = Html.fromHtml("<u>비밀번호를 잊어버리셨나요?</u>")
 
 
         et_email_login.addTextChangedListener(object : TextWatcher{
@@ -101,13 +103,20 @@ class EmailLoginActivity : AppCompatActivity(){
                         check_pw.visibility = View.VISIBLE
                     }
                     if(it.body()!!.success){
+                        isLogined = data.is_logined
                         editor.putString("token", data.accessToken)
                         editor.putString("nickname", data.nickname)
                         editor.putString("email", data.email)
                         editor.apply()
                         editor.commit()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        val intent: Intent
+                        if(isLogined == 0) {
+                            intent = Intent(this, OnBoardingPreferenceActivity::class.java)
+                            startActivity(intent)
+                        }else{
+                            intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
                         finish()
                     }
                 }

@@ -1,11 +1,8 @@
 package com.yourcozy.cozy.network
 
-import com.yourcozy.cozy.network.requestData.RequestCommentWrite
-import com.yourcozy.cozy.network.requestData.RequestEmailLogin
+import com.yourcozy.cozy.network.requestData.*
 import com.yourcozy.cozy.network.responseData.*
 import com.yourcozy.cozy.network.responseData.ResponseCategoryActivity
-import com.yourcozy.cozy.network.requestData.RequestLogin
-import com.yourcozy.cozy.network.requestData.RequestSimpleReview
 import com.yourcozy.cozy.network.responseData.ResponseBookmarkUpdate
 import com.yourcozy.cozy.network.responseData.ResponseInterest
 import com.yourcozy.cozy.network.responseData.ResponseMap
@@ -16,6 +13,12 @@ import retrofit2.http.*
 
 interface RequestInterface {
 
+    //회원가입 https://github.com/yourCozy/cozy-Server/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85
+    @POST("/user/signup")
+    fun requestSignup(@Body body: RequestSignup) : Call<ResponseSignup>
+    //이메일 중복확인 https://github.com/yourCozy/cozy-Server/wiki/%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%A4%91%EB%B3%B5-%ED%99%95%EC%9D%B8
+    @POST("/user/checkemail")
+    fun requestCheckEmail(@Body body: RequestCheckEmail) : Call<ResponseCheckEmail>
     //이메일로그인 https://github.com/yourCozy/cozy-Server/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8
     @POST("/user/signin")
     fun requestEmailLogin(@Body body: RequestEmailLogin) : Call<ResponseEmailLogin>
