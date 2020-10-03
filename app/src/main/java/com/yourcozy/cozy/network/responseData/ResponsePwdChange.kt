@@ -1,12 +1,8 @@
 package com.yourcozy.cozy.network.responseData
 
-data class ResponseProfile (
+data class ResponsePwdChange (
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: UserProfileData
-)
-
-data class UserProfileData(
-    val profileImg: String
+    val data: Int
 )

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_toast_info_changed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="76dp"
+    android:background="@drawable/bookmark_toast_background"
+    android:paddingTop="20dp"
+    android:paddingBottom="19dp">
+
+    <ImageView
+        android:id="@+id/iv_pwd_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_check_circle_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_pwd_changed"
+        style="@style/title_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.4dp"
+        android:text="비밀번호 변경이\n완료되었어요."
+        android:lineSpacingExtra="6dp"
+        app:layout_constraintEnd_toEndOf="@id/iv_pwd_change"
+        app:layout_constraintStart_toStartOf="@id/iv_pwd_change"
+        app:layout_constraintTop_toBottomOf="@+id/iv_pwd_change"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fontfamily"
         android:lineSpacingExtra="9dp"
-        android:text="관심책방에 등록되었습니다."
+        android:text="관심 책방에 등록되었습니다."
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="14dp"

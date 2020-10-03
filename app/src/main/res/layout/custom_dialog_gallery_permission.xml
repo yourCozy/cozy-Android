@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_permission_title"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="갤러리 접근 허용"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_permission_explain"
+        style="@style/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="미디어 접근을 허용하시겠어요?"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_permission_title"
+        app:layout_constraintStart_toStartOf="@id/tv_permission_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_permission_title" />
+
+    <Button
+        android:id="@+id/btn_disagree"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@color/colorAccent"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="15dp"
+        android:text="아니요"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_permission_agree"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_permission_explain" />
+
+    <Button
+        android:id="@+id/btn_permission_agree"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="59.5dp"
+        android:paddingVertical="15dp"
+        android:text="네"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_disagree"
+        app:layout_constraintStart_toEndOf="@id/btn_disagree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_disagree" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
