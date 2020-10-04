@@ -136,6 +136,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
                         }else{//로컬 사용자
                             Glide.with(this).load(data.profileImg).into(profileImage)
                             profileName.text = data.nickname
+                            btn_edit_pwd.visibility = View.GONE//나중에 비밀번호 변경 서버 고쳐지면 이거 지우기
                         }
                     } else {
                         Log.d(TAG, "프로필상세조회실패 >> ${it.body()!!.message}")
