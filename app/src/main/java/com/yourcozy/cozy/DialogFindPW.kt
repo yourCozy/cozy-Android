@@ -2,6 +2,7 @@ package com.yourcozy.cozy
 
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Editable
@@ -18,12 +19,14 @@ class DialogFindPW  (context: Context){
     private lateinit var listener : MyDialogOKClickedListener
 
 
+
     fun start() {
 
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)   //타이틀바 제거
         dlg.setContentView(R.layout.dialog_pw_find)     //다이얼로그에 사용할 xml 파일을 불러옴
         dlg.setCancelable(false)    //다이얼로그의 바깥 화면을 눌렀을 때 다이얼로그가 닫히지 않도록 함
         dlg?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) //색 투명하게
+
 
         //dlg?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
@@ -48,6 +51,7 @@ class DialogFindPW  (context: Context){
         btnOK = dlg.findViewById(R.id.btn_check)
         btnOK.setOnClickListener {
             listener.onOKClicked(false)
+            val text_email = email.text.toString()
             dlg.dismiss()
         }
 
