@@ -8,6 +8,7 @@ import com.yourcozy.cozy.network.responseData.ResponseInterest
 import com.yourcozy.cozy.network.responseData.ResponseMap
 import com.yourcozy.cozy.network.responseData.ResponseSignin
 import com.yourcozy.cozy.network.responseData.ResponseRecent
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -96,6 +97,21 @@ interface RequestInterface {
     @GET("/mypage/myinfo")
     fun requestMypage(@HeaderMap headers: Map<String, String?>): Call<ResponseMypage>
 
+    //내 정보 수정 클릭 https://github.com/yourCozy/cozy-Server/wiki/%EB%82%B4-%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95-%ED%81%B4%EB%A6%AD
+    @GET("/mypage/update/myinfo")
+    fun requestMypageDetail(@HeaderMap headers: Map<String, String?>) : Call<ResponseMypageDetail>
+
+    //닉네임 변경 https://github.com/yourCozy/cozy-Server/wiki/%EB%82%B4-%EC%A0%95%EB%B3%B4-%EB%8B%89%EB%84%A4%EC%9E%84-%EC%88%98%EC%A0%95
+    @POST("/mypage/update/nickname")
+    fun requestNickChanged(@Body body: RequestNick, @HeaderMap headers: Map<String, String?>): Call<ResponseNickChanged>
+
+    //비밀번호 변경-1 https://github.com/yourCozy/cozy-Server/wiki/%EB%82%B4-%EC%A0%95%EB%B3%B4-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%98%EC%A0%951
+    @POST("/mypage/update/password/1")
+    fun requestPwdChangeEmail(@Body body: RequestEmailPC, @HeaderMap headers: Map<String, String?>): Call<ResponsePwdChangeEmail>
+
+    //비밀번호 변경-2 https://github.com/yourCozy/cozy-Server/wiki/%EB%82%B4-%EC%A0%95%EB%B3%B4-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%98%EC%A0%952
+    @POST("/mypage/update/password/2")
+    fun requestPwdChange(@Body body: RequestNewPwd, @HeaderMap headers: Map<String, String?>) : Call<ResponsePwdChange>
 
     //관심 책방 조회 https://github.com/yourCozy/cozy-Server/wiki/%EA%B4%80%EC%8B%AC%EC%B1%85%EB%B0%A9-%EC%A1%B0%ED%9A%8C
     @GET("/mypage/interest")
@@ -112,8 +128,9 @@ interface RequestInterface {
     fun requestRecentlySeen(@HeaderMap headers: Map<String, String?>) : Call<ResponseRecent>
 
     //프로필 사진 업데이트 https://github.com/yourCozy/cozy-Server/wiki/%ED%94%84%EB%A1%9C%ED%95%84-%EC%82%AC%EC%A7%84-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
-    //@POST("/user/profile")
-
+    @Multipart
+    @POST("/user/profile")
+    fun requestProfile(@Body body : RequestProfilePic, @HeaderMap headers: Map<String, String?>) : Call<ResponseProfile>
 
 //    취향 등록 https://github.com/yourCozy/cozy-Server/wiki/%EC%B7%A8%ED%96%A5-%EB%93%B1%EB%A1%9D
     @POST("/mypage/recommendation")

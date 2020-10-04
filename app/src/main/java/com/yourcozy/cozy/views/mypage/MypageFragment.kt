@@ -69,6 +69,7 @@ class MypageFragment : Fragment(), View.OnClickListener {
             val header = mutableMapOf<String, String?>()
             header["Content-Type"] = "application/json"
             header["token"] = sharedPref.getString("token", "token")
+            Log.d("tokenCHECK",">>>>>>토큰${header["token"]}")
             service.requestMypage(header).customEnqueue(
                 onError = {Toast.makeText(context,"올바르지 못한 요청입니다.",Toast.LENGTH_SHORT).show()},
                 onSuccess = {

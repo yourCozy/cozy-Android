@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
     lateinit var recommendAdapter: RecommendAdapter
     val service = RequestToServer.service
     val recommendData = mutableListOf<RecommendData>()
-    private lateinit var userNickname : TextView
+    private lateinit var userNickname: TextView
     lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
@@ -33,31 +33,49 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view =  inflater.inflate(R.layout.fragment_main, container, false)
+        var view = inflater.inflate(R.layout.fragment_main, container, false)
 
         setHasOptionsMenu(true)
 
         userNickname = view.findViewById(R.id.nickname)
         sharedPref = activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
-        userNickname.text = sharedPref.getString("nickname","코지")
+
+        val header = mutableMapOf<String, String>()
+        header["Content-Type"] = "application/json"
+        header["token"] = sharedPref.getString("token", "token").toString()
+        if (header["token"] != "token") {
+            service.requestMypage(headers = header).customEnqueue(
+                onError = {
+                },
+                onSuccess = {
+                    val data = it.body()!!.data.elementAt(0)
+                    userNickname.text = data.nickname
+                }
+            )
+        } else {
+            userNickname.text = sharedPref.getString("nickname", "코지")
+        }
 
         initRecommend(view)
         return view
     }
 
-    fun initRecommend(v : View){
-        recommendAdapter = RecommendAdapter(v.context){RecommendData, View ->
-            var intent = Intent(activity as MainActivity,RecommendDetailActivity::class.java)
-            intent.putExtra("bookstoreIdx",RecommendData.bookstoreIdx)
+    fun initRecommend(v: View) {
+        recommendAdapter = RecommendAdapter(v.context) { RecommendData, View ->
+            var intent = Intent(activity as MainActivity, RecommendDetailActivity::class.java)
+            intent.putExtra("bookstoreIdx", RecommendData.bookstoreIdx)
             val imageViewPair = Pair.create<View, String>(View.rec_img, View.rec_img.transitionName)
-            var option : ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity as MainActivity, imageViewPair)
+            var option: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity as MainActivity,
+                imageViewPair
+            )
             startActivity(intent, option.toBundle())
         }
         v.rv_recommend.adapter = recommendAdapter
         loadData(v)
     }
 
-    private fun loadData(v : View) {
+    private fun loadData(v: View) {
 
         val header = mutableMapOf<String, String>()
         header["Content-Type"] = "application/json"
@@ -80,8 +98,7 @@ class MainFragment : Fragment() {
                     }
                 }
             )
-        }
-        else{
+        } else {
             service.requestRecommendationUser(header).customEnqueue(
                 onError = {
                     Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
@@ -107,7 +124,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.search -> {
                 val intent = Intent(context, SearchActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //해보고 이상하면 지울것

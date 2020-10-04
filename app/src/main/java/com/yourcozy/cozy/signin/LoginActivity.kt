@@ -148,11 +148,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "이름 = " + account.displayName)
-                Log.d(TAG, "이메일 = " + account.email)
-                Log.d(TAG, "getID() = " + account.id)
-                Log.d(TAG, "getAccount() = " + account.account)
-                Log.d(TAG, "getIDToken() = " + account.idToken)
+//                Log.d(TAG, "이름 = " + account.displayName)
+//                Log.d(TAG, "이메일 = " + account.email)
+//                Log.d(TAG, "getID() = " + account.id)
+//                Log.d(TAG, "getAccount() = " + account.account)
+//                Log.d(TAG, "getIDToken() = " + account.idToken)
 
                 firebaseAuthWithGoogle(account.idToken!!,task)
             } catch (e: ApiException) {

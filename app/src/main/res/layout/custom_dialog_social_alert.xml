@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tv_social_alert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 정보 수정이 불가능해요."
+        style="@style/title_text"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginHorizontal="46dp"/>
+
+    <TextView
+        android:id="@+id/tv_social_alert_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="소셜 로그인 이용자는\n내 계정 정보 수정이 불가해요."
+        style="@style/hint_text"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/tv_social_alert_title"
+        app:layout_constraintEnd_toEndOf="@id/tv_social_alert_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_social_alert_title"
+        android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/btn_social_alert_confirm"
+        android:layout_width="268dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:text="확인"
+        style="@style/title_text"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/tv_social_alert_title"
+        app:layout_constraintEnd_toEndOf="@id/tv_social_alert_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_social_alert_detail"
+        android:layout_marginTop="20dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

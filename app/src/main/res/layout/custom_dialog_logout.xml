@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_logout_dial_title"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="로그아웃 하시겠어요?"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_logout_dial_expl"
+        style="@style/hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="메인페이지로 돌아갑니다."
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_logout_dial_title"
+        app:layout_constraintStart_toStartOf="@id/tv_logout_dial_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_logout_dial_title" />
+
+    <Button
+        android:id="@+id/btn_logout_cancel"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@color/colorAccent"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="15dp"
+        android:text="아니요"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_logout_yes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_logout_dial_expl" />
+
+    <Button
+        android:id="@+id/btn_logout_yes"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="59.5dp"
+        android:paddingVertical="15dp"
+        android:text="네"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_logout_cancel"
+        app:layout_constraintStart_toEndOf="@id/btn_logout_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_logout_cancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

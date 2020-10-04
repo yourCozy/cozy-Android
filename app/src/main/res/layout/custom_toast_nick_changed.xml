@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_toast_info_changed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bookmark_toast_background"
+    android:paddingTop="25dp"
+    android:paddingBottom="34dp"
+    android:paddingHorizontal="47dp">
+
+    <ImageView
+        android:id="@+id/iv_nick_changed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_check_circle_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nick_changed"
+        style="@style/title_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16.4dp"
+        android:text="이름 변경이 완료되었어요."
+        android:lineSpacingExtra="6dp"
+        app:layout_constraintEnd_toEndOf="@id/iv_nick_changed"
+        app:layout_constraintStart_toStartOf="@id/iv_nick_changed"
+        app:layout_constraintTop_toBottomOf="@+id/iv_nick_changed"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
