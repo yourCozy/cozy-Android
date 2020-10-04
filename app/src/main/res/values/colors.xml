@@ -17,4 +17,5 @@
     <color name="item_shadow">#29bdbdbd</color>
     <color name="comment_shadow">#09bdbdbd</color>
     <color name="sub_color">#fd7e2d</color>
+    <color name="notice">#9e9e9e</color>
 </resources>

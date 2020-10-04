@@ -14,8 +14,7 @@
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
-        android:paddingTop="28dp"
-        android:paddingBottom="80dp"
+        android:paddingVertical="28dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
@@ -25,8 +24,8 @@
 
     <TextView
         android:id="@+id/tv_nonActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:gravity="center"
         android:text="준비중 입니다."
         android:fontFamily="@font/fontfamily"

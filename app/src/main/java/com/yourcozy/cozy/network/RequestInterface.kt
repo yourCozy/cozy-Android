@@ -14,12 +14,21 @@ import retrofit2.http.*
 
 interface RequestInterface {
 
+    //회원가입 https://github.com/yourCozy/cozy-Server/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85
+    @POST("/user/signup")
+    fun requestSignup(@Body body: RequestSignup) : Call<ResponseSignup>
+    //이메일 중복확인 https://github.com/yourCozy/cozy-Server/wiki/%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%A4%91%EB%B3%B5-%ED%99%95%EC%9D%B8
+    @POST("/user/checkemail")
+    fun requestCheckEmail(@Body body: RequestCheckEmail) : Call<ResponseCheckEmail>
     //이메일로그인 https://github.com/yourCozy/cozy-Server/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8
     @POST("/user/signin")
     fun requestEmailLogin(@Body body: RequestEmailLogin) : Call<ResponseEmailLogin>
     //소셜로그인 https://github.com/yourCozy/cozy-Server/wiki/%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8(%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%A0%80%EC%9E%A5)
     @POST("/auth/social")
     fun requestLogin(@Body body: RequestLogin) : Call<ResponseSignin>
+    //비밀번호 찾기 https://github.com/yourCozy/cozy-Server/wiki/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%B0%BE%EA%B8%B0
+    @POST("/user/findpw")
+    fun requestFindPW(@Body body : RequestFindPW) : Call<ResponseFindPW>
 
     //추천
     //책방 8개 추천 https://github.com/yourCozy/cozy-Server/wiki/%EC%B1%85%EB%B0%A9-8%EA%B0%9C-%EC%B6%94%EC%B2%9C

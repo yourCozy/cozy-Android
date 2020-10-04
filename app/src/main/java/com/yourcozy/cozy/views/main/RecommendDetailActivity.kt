@@ -12,15 +12,20 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
 import com.yourcozy.cozy.DialogBookmark
 import com.yourcozy.cozy.R
 import com.yourcozy.cozy.network.RequestToServer
 import com.yourcozy.cozy.network.customEnqueue
 import com.yourcozy.cozy.network.responseData.BookstoreDetailData
-import com.google.android.material.tabs.TabLayout
+import com.yourcozy.cozy.views.main.bookstore.BookstoreFragment
+import com.yourcozy.cozy.views.main.event.EventFragment
+import com.yourcozy.cozy.views.main.review.ReviewFragment
 import kotlinx.android.synthetic.main.activity_recommend_detail.*
 import kotlin.properties.Delegates
+
 
 class RecommendDetailActivity : AppCompatActivity() {
 
@@ -54,14 +59,34 @@ class RecommendDetailActivity : AppCompatActivity() {
 
         initDetail()
 
-        detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager,bookstoreIdx)
-        detail_viewpager.offscreenPageLimit = 3
-        detail_tablayout.setupWithViewPager(detail_viewpager)
-        detail_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(detail_tablayout))
+//        detail_viewpager.adapter = TabViewPagerAdapter(supportFragmentManager,bookstoreIdx)
+//        detail_viewpager.offscreenPageLimit = 3
+//        detail_tablayout.setupWithViewPager(detail_viewpager)
+//        detail_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(detail_tablayout))
+
+        detail_tablayout.addTab(detail_tablayout.newTab().setText("책방"),0)
+        detail_tablayout.addTab(detail_tablayout.newTab().setText("활동"),1)
+        detail_tablayout.addTab(detail_tablayout.newTab().setText("후기"),2)
+
+        val bundle = Bundle()
+        bundle.putInt("bookstoreIdx", bookstoreIdx)
+        val firstFragment = BookstoreFragment()
+        firstFragment.arguments = bundle
+        supportFragmentManager.beginTransaction().add(R.id.detail_viewpager, firstFragment).commit()
+
         detail_tablayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabSelected(tab: TabLayout.Tab?) {}
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                var selected = when (tab!!.position) {
+                    0 -> BookstoreFragment()
+                    1 -> EventFragment()
+                    else -> ReviewFragment()
+                }
+                selected.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.detail_viewpager, selected).commit()
+            }
         })
 
         call.setOnClickListener {

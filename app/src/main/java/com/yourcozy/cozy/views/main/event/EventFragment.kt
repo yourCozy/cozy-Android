@@ -65,6 +65,7 @@ class EventFragment : Fragment() {
                 }else{
                     Log.d("non success message >>>> ",it.body()!!.message)
                     view.tv_nonActivity.visibility = View.VISIBLE
+                    Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         )
