@@ -122,9 +122,17 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
 
                             profileName.text = data.nickname
                             Glide.with(this).load(data.profileImg).into(profileImage)
-                            tv_account_detail_pwd.text = "이메일"
                             edit_detail_pwd.setInputType(InputType.TYPE_CLASS_TEXT)
-                            profileEmail.text = (auth.currentUser)!!.email.toString()
+                            if(auth.currentUser!= null){
+                                tv_account_detail_pwd.text = "이메일"
+
+                                profileEmail.text = (auth.currentUser)!!.email.toString()
+                            }else{
+                                tv_account_detail_pwd.text = "계정"
+                                profileEmail.text = "카카오 계정으로 로그인 하셨습니다."
+                                btn_edit_pwd.visibility = View.GONE
+                            }
+
                         }else{//로컬 사용자
                             Glide.with(this).load(data.profileImg).into(profileImage)
                             profileName.text = data.nickname
