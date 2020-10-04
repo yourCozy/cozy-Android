@@ -17,17 +17,20 @@
         android:id="@+id/iv_pwd_change_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
         android:src="@drawable/icon_x"
         app:layout_constraintBottom_toBottomOf="@id/view_pwd_change"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/view_pwd_change" />
 
     <TextView
+        android:id="@+id/tv_pwd_change_title"
         style="@style/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 변경"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@id/iv_pwd_change_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

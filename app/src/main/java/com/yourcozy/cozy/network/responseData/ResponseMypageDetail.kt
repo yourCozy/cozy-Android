@@ -9,5 +9,6 @@ data class ResponseMypageDetail(
 
 data class MyInfoDetail(
     val nickname: String,
-    val profileImg: String
+    val profileImg: String,
+    val checked: Int
 )

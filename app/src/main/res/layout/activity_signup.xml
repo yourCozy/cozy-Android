@@ -173,7 +173,7 @@
                 android:textFontWeight="300"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="@id/et_signup_pw"
-                app:layout_constraintTop_toBottomOf="@id/et_signup_pw" />
+                app:layout_constraintTop_toBottomOf="@id/et_signup_pw"/>
 
             <EditText
                 android:id="@+id/et_signup_pw_check"

@@ -102,6 +102,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
         btn_privacy.setOnClickListener(this)
         btn_edit_username.setOnClickListener(this)
         btn_edit_pwd.setOnClickListener(this)
+        kakao_plus.setOnClickListener(this)
 
     }
 
@@ -109,62 +110,25 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
         val header = mutableMapOf<String, String?>()
         header["Content-Type"] = "application/json"
         header["token"] = sharedPref.getString("token", "token")
-        if (auth.currentUser != null ) {
-//            Log.d(TAG, "토큰 >>>${header["token"]}")
-            service.requestMypage(header).customEnqueue(
-                onError = {
-                    Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
-                },
-                onSuccess = {
-                    if(it.body()!!.success){
-                        val data = it.body()!!.data.elementAt(0)
-                        profileName.text = data.nickname
-                        Glide.with(this).load(data.profileImg).into(profileImage)
-                        tv_account_detail_pwd.text = "이메일"
-                        edit_detail_pwd.setInputType(InputType.TYPE_CLASS_TEXT)
-                        profileEmail.text = (auth.currentUser)!!.email.toString()
-                    } else{
-                        Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            )
-//            Glide.with(this).load(sharedPref.getString("profile", "token")).into(profileImage)
-//            profileName.text = sharedPref.getString("nickname", "token")
-
-//            (auth.currentUser)!!.photoUrl
-        }else if(Session.getCurrentSession().isOpened){
-            //카카오 로그인 사용자 표시 부분.
-            service.requestMypage(header).customEnqueue(
-                onError = {
-                    Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
-                },
-                onSuccess = {
-                    if(it.body()!!.success){
-                        val data = it.body()!!.data.elementAt(0)
-                        profileName.text = data.nickname
-                        Glide.with(this).load(data.profileImg).into(profileImage)
-                        Log.d(TAG,"이름 변경 띄우기 성공!")
-//                        tv_account_detail_pwd.text = "이메일"
-//                        edit_detail_pwd.setInputType(InputType.TYPE_CLASS_TEXT)
-//                        profileEmail.text = (auth.currentUser)!!.email.toString()
-                    } else{
-                        Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            )
-        } else {
             service.requestMypageDetail(header).customEnqueue(
                 onError = {
                     Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show()
                 },
                 onSuccess = {
                     if (it.body()!!.success) {
-                        Log.d(TAG, "프로필조회성공>>> ${it.body()!!.message}")
+//                        Log.d(TAG, "프로필조회성공>>> ${it.body()!!.message}")
                         val data = it.body()!!.data
-                        Glide.with(this).load(data.profileImg).into(profileImage)
-                        profileName.text = data.nickname
+                        if(data.checked == 1){//소셜 사용자
 
-
+                            profileName.text = data.nickname
+                            Glide.with(this).load(data.profileImg).into(profileImage)
+                            tv_account_detail_pwd.text = "이메일"
+                            edit_detail_pwd.setInputType(InputType.TYPE_CLASS_TEXT)
+                            profileEmail.text = (auth.currentUser)!!.email.toString()
+                        }else{//로컬 사용자
+                            Glide.with(this).load(data.profileImg).into(profileImage)
+                            profileName.text = data.nickname
+                        }
                     } else {
                         Log.d(TAG, "프로필상세조회실패 >> ${it.body()!!.message}")
                         Toast.makeText(applicationContext, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT)
@@ -172,7 +136,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
                     }
                 }
             )
-        }
+//        }
 
     }
 
@@ -242,28 +206,28 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
 //                startActivity(intent)
             }
             R.id.btn_edit_username ->{
-                if(auth.currentUser != null /* || Session.getCurrentSession().isOpened*/){
-                    Log.d(TAG,"다이얼로그 소환!")
+                if(auth.currentUser != null || Session.getCurrentSession().isOpened){
                     val customDialog = DialogSocial(this@ProfileActivity)
                     customDialog.call()
                 }else{
-                    Log.d(TAG,"여기로 왔는가?")
                     val customDialog = DialogName(this@ProfileActivity)
                     customDialog.setOnDismissListener(this)
                     customDialog.callDialog(this)
+                    setDataOnView()
                 }
             }
             R.id.btn_edit_pwd -> {
-                if(auth.currentUser != null/* || Session.getCurrentSession().isOpened*/){
-                    Log.d(TAG,"다이얼로그 소환!")
+                if(auth.currentUser != null || Session.getCurrentSession().isOpened){
                     val customDialog = DialogSocial(this@ProfileActivity)
                     customDialog.call()
                 }else{
-                    Log.d(TAG,"여기로 왔는가?")
                     val customDialog = DialogChangePwd(this@ProfileActivity)
                     customDialog.callDialog(this)
-
                 }
+            }
+            R.id.kakao_plus -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://pf.kakao.com/_xmxjgCK"))
+                startActivity(intent)
             }
         }
     }
@@ -374,8 +338,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
     }
 
     override fun onDismiss(p0: DialogInterface?) {
-        Log.d(TAG,">>>>>>뷰 다시 그리기 확인!!")
-        setDataOnView()
+//        Log.d(TAG,">>>>>>뷰 다시 그리기 확인!!")
+//        setDataOnView()
     }
 
 

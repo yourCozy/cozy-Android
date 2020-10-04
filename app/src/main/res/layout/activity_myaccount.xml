@@ -165,6 +165,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_account_detail_phone" />
 
+    <ImageView
+        android:id="@+id/kakao_plus"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakaotalk_icon"
+        app:layout_constraintBottom_toTopOf="@id/btn_version_info"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <Button
         android:id="@+id/btn_account_detail_logout"
         android:layout_width="match_parent"
