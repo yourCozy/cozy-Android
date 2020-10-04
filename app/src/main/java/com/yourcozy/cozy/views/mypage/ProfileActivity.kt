@@ -181,7 +181,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
         when (v?.id) {
             R.id.btn_account_detail_logout -> {
                 Log.d(TAG, "로그아웃 버튼 클릭")
-                val customDialog = DialogLogout(this@ProfileActivity)
+                val customDialog = DialogLogout(this)
 
                 customDialog.setOnOKClickedListener {
                     Log.d(TAG, "로그아웃 시도")
@@ -235,40 +235,46 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
     private fun signOut() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
-        if (currentUser != null) {
-            Firebase.auth.signOut()
-            mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-                val user = FirebaseAuth.getInstance().currentUser
-                user?.unlink(user.providerId)
-                editor.remove("token")
-                editor.remove("nickname")
-                editor.remove("profile")
-                editor.apply()
-                editor.commit()
-                Log.d(TAG, "로그아웃. 성공")
-                Toast.makeText(applicationContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        } else {
-            Log.d(TAG, "카카오 로그아웃")
-            UserManagement.getInstance()
-                .requestLogout(object : LogoutResponseCallback() {
-                    override fun onCompleteLogout() {
-                        Log.d(TAG, "카카오 로그아웃 logout")
-                        editor.remove("token")
-                        editor.remove("nickname")
-                        editor.remove("profile")
-                        editor.apply()
-                        editor.commit()
-                        finish()
-                    }
-                })
+        if(sharedPref.getBoolean("isEmail",false)){
+            editor.remove("token")
+            editor.remove("nickname")
+            editor.remove("profile")
+            editor.remove("isEmail")
+            editor.apply()
+            editor.commit()
+            finish()
         }
-//        mAuth.signOut()//파이어베이스 signout
-
-        /*googleSignInClient.signOut().addOnCompleteListener(this){
-            updateUI()
-        }*/
+        else {
+            if (currentUser != null) {
+                Firebase.auth.signOut()
+                mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    user?.unlink(user.providerId)
+                    editor.remove("token")
+                    editor.remove("nickname")
+                    editor.remove("profile")
+                    editor.apply()
+                    editor.commit()
+                    Log.d(TAG, "로그아웃. 성공")
+                    Toast.makeText(applicationContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            } else {
+                Log.d(TAG, "카카오 로그아웃")
+                UserManagement.getInstance()
+                    .requestLogout(object : LogoutResponseCallback() {
+                        override fun onCompleteLogout() {
+                            Log.d(TAG, "카카오 로그아웃 logout")
+                            editor.remove("token")
+                            editor.remove("nickname")
+                            editor.remove("profile")
+                            editor.apply()
+                            editor.commit()
+                            finish()
+                        }
+                    })
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
