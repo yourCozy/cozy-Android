@@ -6,4 +6,269 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_signup"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:descendantFocusability="blocksDescendants"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/tb_signup"
+        tools:layout_editor_absoluteX="16dp"
+        android:onClick="linearOnClick"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="54dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="회원가입"
+                android:textColor="@color/black"
+                android:textFontWeight="300"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_signup_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/inputfield_320_x_44"
+                android:fontFamily="@font/fontfamily"
+                android:hint="이름"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_signup" />
+
+            <TextView
+                android:id="@+id/tv_name_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="특수문자 제외 글자와 숫자 포함 10자 이내로 입력해주세요."
+                android:textColor="@color/sub_color"
+                android:textFontWeight="300"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_name"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_name" />
+
+            <EditText
+                android:id="@+id/et_signup_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/inputfield_320_x_44"
+                android:fontFamily="@font/fontfamily"
+                android:hint="이메일"
+                android:inputType="textMultiLine|textNoSuggestions|textEmailAddress"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_name" />
+
+            <Button
+                android:id="@+id/check_overlap_email"
+                android:layout_width="64dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="9dp"
+                android:background="@drawable/roundboxyellow_64_x_26"
+                android:fontFamily="@font/fontfamily"
+                android:text="중복확인"
+                android:textColor="@color/white"
+                android:textFontWeight="500"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/et_signup_email"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_email"
+                app:layout_constraintTop_toTopOf="@id/et_signup_email" />
+
+            <ImageView
+                android:id="@+id/iv_email_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_gray_check"
+                app:layout_constraintEnd_toStartOf="@id/tv_email_check"
+                app:layout_constraintTop_toTopOf="@id/tv_email_check"
+                app:layout_constraintBottom_toBottomOf="@id/tv_email_check"
+                android:visibility="gone"
+                android:layout_marginEnd="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_email_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="가능한 이메일입니다."
+                android:textColor="@color/dark_gray"
+                android:textFontWeight="300"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_email"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_email" />
+
+
+            <EditText
+                android:id="@+id/et_signup_pw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/inputfield_320_x_44"
+                android:fontFamily="@font/fontfamily"
+                android:hint="비밀번호"
+                android:inputType="textMultiLine|textNoSuggestions|textPassword"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_email" />
+
+            <TextView
+                android:id="@+id/signup_pw_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="영문, 숫자, 특수문자 포함 10 ~ 20자로 입력해주세요."
+                android:textColor="@color/notice"
+                android:textFontWeight="300"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_pw"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_pw" />
+
+            <EditText
+                android:id="@+id/et_signup_pw_check"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/inputfield_320_x_44"
+                android:fontFamily="@font/fontfamily"
+                android:hint="비밀번호 확인"
+                android:inputType="textMultiLine|textNoSuggestions|textPassword"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textFontWeight="500"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_pw" />
+
+            <TextView
+                android:id="@+id/notice_check_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="비밀번호가 일치하지 않아요."
+                android:textColor="@color/sub_color"
+                android:textFontWeight="300"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_pw_check"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_pw_check" />
+
+            <Button
+                android:id="@+id/check_btn"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="49dp"
+                android:background="@drawable/selector_signup_check_btn"
+                app:layout_constraintStart_toStartOf="@id/et_signup_pw_check"
+                app:layout_constraintTop_toBottomOf="@id/et_signup_pw_check" />
+
+            <TextView
+                android:id="@+id/tv_check_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/fontfamily"
+                android:text="개인정보 수집 및 이용 동의"
+                android:textColor="@color/dark_gray"
+                android:textFontWeight="500"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@id/check_btn"
+                app:layout_constraintStart_toEndOf="@id/check_btn"
+                app:layout_constraintTop_toTopOf="@id/check_btn" />
+
+            <Button
+                android:id="@+id/btn_check_more"
+                android:layout_width="53dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/roundbox_yellow_stroke"
+                android:fontFamily="@font/fontfamily"
+                android:text="자세히"
+                android:textColor="@color/colorAccent"
+                android:textFontWeight="500"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_check_text"
+                app:layout_constraintEnd_toEndOf="@id/et_signup_pw_check"
+                app:layout_constraintTop_toTopOf="@id/tv_check_text" />
+
+            <Button
+                android:id="@+id/btn_finish_signup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/selector_email_login"
+                android:fontFamily="@font/fontfamily"
+                android:text="회원가입"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_check_text" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
