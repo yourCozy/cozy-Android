@@ -128,6 +128,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         else{
             Log.d(TAG, "현재 카카오 로그인한 계정이 없는 경우")
         }
+
+        if(sharedPref.getBoolean("isEmail",false)){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
