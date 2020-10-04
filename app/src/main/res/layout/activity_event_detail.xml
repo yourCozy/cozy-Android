@@ -309,7 +309,7 @@
                 android:paddingEnd="26dp"
                 android:text=""
                 android:textColor="@color/dark_gray"
-                android:textFontWeight="300"
+                android:textFontWeight="500"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toTopOf="@id/event_view"
                 app:layout_constraintStart_toStartOf="parent"

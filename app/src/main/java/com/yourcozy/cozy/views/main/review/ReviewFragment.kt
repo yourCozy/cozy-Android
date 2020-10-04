@@ -45,7 +45,7 @@ class ReviewFragment : Fragment() {
                 startActivity(intent)
             }
             else{
-                Toast.makeText(context, "로그인 후 이용해주세요.", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "로그인 후 이용해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
