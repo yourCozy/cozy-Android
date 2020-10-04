@@ -1,6 +1,7 @@
 package com.yourcozy.cozy.signin
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +10,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yourcozy.cozy.KeyBoardControl
 import com.yourcozy.cozy.R
 import com.yourcozy.cozy.network.RequestToServer
 import com.yourcozy.cozy.network.customEnqueue
 import com.yourcozy.cozy.network.requestData.RequestCheckEmail
+import com.yourcozy.cozy.network.requestData.RequestSignup
 import kotlinx.android.synthetic.main.activity_signup.*
 import java.util.regex.Pattern
 
@@ -28,6 +31,7 @@ class SignupActivity : AppCompatActivity(){
     var isemail = false
     var password = false
     var passwordcheck = false
+    var info = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,8 +176,41 @@ class SignupActivity : AppCompatActivity(){
             }
         })
 
-        btn_finish_signup.setOnClickListener {
+        check_btn.setOnClickListener {
+            if(check_btn.isSelected) {
+                check_btn.isSelected = false
+                info = false
+                signup_finish()
+            }
+            else {
+                check_btn.isSelected = true
+                info = true
+                signup_finish()
+            }
+        }
 
+        btn_check_more.setOnClickListener {
+            val intent = Intent(this, PersonalActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_finish_signup.setOnClickListener {
+            requestToServer.service.requestSignup(
+                RequestSignup(
+                    email = et_signup_email.text.toString(),
+                    nickname = et_signup_name.text.toString(),
+                    password = et_signup_pw.text.toString(),
+                    passwordConfirm = et_signup_pw_check.text.toString()
+                )
+            ).customEnqueue(
+                onError = {},
+                onSuccess = {
+                    if(it.body()!!.success){
+                        Toast.makeText(this, "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                }
+            )
         }
 
     }
@@ -201,11 +238,12 @@ class SignupActivity : AppCompatActivity(){
     }
 
     private fun signup_finish(){
-        if(isnickname&&isemail&&password&&passwordcheck) {
-            btn_finish_signup.isEnabled
+        if(isnickname&&isemail&&password&&passwordcheck&&info) {
+            btn_finish_signup.isEnabled = true
             btn_finish_signup.isSelected = true
         }
         else{
+            btn_finish_signup.isEnabled = false
             btn_finish_signup.isSelected = false
         }
     }

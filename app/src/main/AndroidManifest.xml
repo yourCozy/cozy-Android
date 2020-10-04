@@ -37,6 +37,8 @@
         <activity android:name=".signin.EmailLoginActivity"/>
         <activity android:name=".signin.SignupActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".signin.FindPWActivity"/>
+        <activity android:name=".signin.PersonalActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
