@@ -33,6 +33,7 @@
         app:layout_constraintStart_toStartOf="@id/rounded_iv_account_detail_profile"
         android:layout_marginTop="61.5dp"
         android:layout_marginStart="59dp"
+        android:visibility="gone"
         app:layout_goneMarginEnd="18dp"/>
 
     <TextView
@@ -70,7 +71,7 @@
 
     <EditText
         android:id="@+id/edit_detail_username"
-        style="@style/title_text"
+        style="@style/content_text"
         android:layout_width="254dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
@@ -104,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:textSize="14dp"
         android:text="비밀번호"
         android:textFontWeight="500"
         app:layout_constraintStart_toStartOf="@id/tv_account_detail_username"
@@ -111,7 +113,7 @@
 
     <EditText
         android:id="@+id/edit_detail_pwd"
-        style="@style/title_text"
+        style="@style/content_text"
         android:layout_width="254dp"
         android:layout_height="40dp"
         android:layout_marginEnd="20dp"
@@ -167,13 +169,14 @@
 
     <ImageView
         android:id="@+id/kakao_plus"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/kakaotalk_icon"
         app:layout_constraintBottom_toTopOf="@id/btn_version_info"
-        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/edit_detail_pwd"
+        app:layout_constraintVertical_bias="0.85" />
 
     <Button
         android:id="@+id/btn_account_detail_logout"

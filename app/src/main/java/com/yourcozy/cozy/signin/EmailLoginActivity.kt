@@ -123,6 +123,7 @@ class EmailLoginActivity : AppCompatActivity(){
                         editor.putString("token", data.accessToken)
                         editor.putString("nickname", data.nickname)
                         editor.putString("email", data.email)
+                        editor.putBoolean("isEmail",true)
                         editor.apply()
                         editor.commit()
                         val intent: Intent
