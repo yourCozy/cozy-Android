@@ -123,6 +123,7 @@
         android:textSize="12dp"
         android:fontFamily="@font/fontfamily"
         android:textFontWeight="700"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/btn_finish_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId "com.yourcozy.cozy"
-        minSdkVersion 28
+        minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
         versionName "0.5.0"
