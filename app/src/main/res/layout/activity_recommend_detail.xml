@@ -259,6 +259,7 @@
             android:fontFamily="@font/fontfamily"
             android:textFontWeight="500"
             android:layout_marginTop="14dp"
+            android:textSize="14dp"
             android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="@id/rec_de_adress"
             app:layout_constraintTop_toBottomOf="@id/rec_de_adress"/>
@@ -271,6 +272,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:textFontWeight="500"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toEndOf="@id/tv_operate"
                 app:layout_constraintTop_toTopOf="@id/tv_operate" />
@@ -283,6 +285,7 @@
                 android:fontFamily="@font/fontfamily"
                 android:includeFontPadding="false"
                 android:text="휴무 : "
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:textFontWeight="500"
                 app:layout_constraintStart_toStartOf="@id/tv_operate"
@@ -296,6 +299,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/black"
             android:textFontWeight="500"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/tv_closed"
             app:layout_constraintTop_toTopOf="@id/tv_closed" />
