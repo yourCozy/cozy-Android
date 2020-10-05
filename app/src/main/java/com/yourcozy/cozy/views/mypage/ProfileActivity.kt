@@ -102,7 +102,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
         btn_privacy.setOnClickListener(this)
         btn_edit_username.setOnClickListener(this)
         btn_edit_pwd.setOnClickListener(this)
-        kakao_plus.setOnClickListener(this)
 
     }
 
@@ -233,10 +232,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener, DialogInterfa
                     val customDialog = DialogChangePwd(this@ProfileActivity)
                     customDialog.callDialog(this)
                 }
-            }
-            R.id.kakao_plus -> {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://pf.kakao.com/_xmxjgCK"))
-                startActivity(intent)
             }
         }
     }
