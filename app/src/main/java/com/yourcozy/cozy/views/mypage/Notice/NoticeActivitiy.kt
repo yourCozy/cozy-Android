@@ -1,6 +1,7 @@
 package com.yourcozy.cozy.views.mypage.Notice
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -25,6 +26,10 @@ class NoticeActivitiy : AppCompatActivity() {
 
         tb_notice.elevation = 5F
 
+        kakao_plus.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://pf.kakao.com/_xmxjgCK"))
+            startActivity(intent)
+        }
 
         noticeAdapter =
             NoticeAdapter(tb_notice.context)
