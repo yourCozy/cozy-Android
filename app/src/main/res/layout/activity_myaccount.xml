@@ -20,10 +20,10 @@
         android:id="@+id/rounded_iv_account_detail_profile"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tb_myaccount" />
 
     <Button
         android:id="@+id/btn_profile_change"
