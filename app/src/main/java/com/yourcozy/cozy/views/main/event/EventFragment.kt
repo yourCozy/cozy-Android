@@ -57,6 +57,7 @@ class EventFragment : Fragment() {
                 if(it.body()!!.success) {
                     Log.d("success message >>>> ",it.body()!!.message)
                     Log.d("success data >>>> ",it.body()!!.data.toString())
+                    Log.d("EVENT_CHECK>>>" , "dday 표시 어떻게 나오는지. 확인하기.${it.body()!!.data[0].activityName} 디데이 얼마남았나 ${it.body()!!.data[0].dday}")
                     eventData.clear()
                     eventData.addAll(it.body()!!.data)
                     eventAdapter.data = eventData
