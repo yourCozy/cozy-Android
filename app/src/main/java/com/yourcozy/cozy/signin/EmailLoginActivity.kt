@@ -52,10 +52,10 @@ class EmailLoginActivity : AppCompatActivity(){
         sharedPref = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
         editor = sharedPref.edit()
 
-        pref = this.getSharedPreferences("EMAIL", Context.MODE_PRIVATE)
-        editor = pref.edit()
-
-        val e = pref.getString("email", "email")
+//        pref = this.getSharedPreferences("EMAIL", Context.MODE_PRIVATE)
+//        editor = pref.edit()
+//
+//        val e = pref.getString("email", "email")
 
 
         imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
@@ -141,45 +141,40 @@ class EmailLoginActivity : AppCompatActivity(){
 
         }
 
-        tv_forget_pw.setOnClickListener {
-            val customDialog = DialogFindPW(this)
-            customDialog.start(this)
-            Log.d("email", e)
-            customDialog.setOnOKClickedListener{
-                RequestToServer.service.requestFindPW(
-                    RequestFindPW(
-                        email = e!!
-                    )
-                ).customEnqueue(
-                    onError = {},
-                    onSuccess = {
-                        if(it.body()!!.message == "존재하지 않는 회원입니다.")
-                        {
-                            editor.remove("email")
-                            Log.d("email 전송", it.body()!!.message)
-                            intent = Intent(this, FindPWActivity::class.java)
-                            intent.putExtra("userEmail", "no")
-                            startActivity(intent)
-                        }
-                        if(it.body()!!.success)
-                        {
-                            editor.remove("email")
-                            Log.d("email 전송", "성공")
-                            intent = Intent(this, FindPWActivity::class.java)
-                            intent.putExtra("userEmail", it.body()!!.data.toEmail)
-                            startActivity(intent)
-                        }
+//        tv_forget_pw.setOnClickListener {
+//            val customDialog = DialogFindPW(this)
+//            customDialog.start(this)
+//            Log.d("email", e)
+//            customDialog.setOnOKClickedListener{
+//                RequestToServer.service.requestFindPW(
+//                    RequestFindPW(
+//                        email = e!!
+//                    )
+//                ).customEnqueue(
+//                    onError = {},
+//                    onSuccess = {
+//                        if(it.body()!!.message == "존재하지 않는 회원입니다.")
+//                        {
+//                            editor.remove("email")
+//                            Log.d("email 전송", it.body()!!.message)
+//                            intent = Intent(this, FindPWActivity::class.java)
+//                            intent.putExtra("userEmail", "no")
+//                            startActivity(intent)
+//                        }
+//                        if(it.body()!!.success)
+//                        {
+//                            editor.remove("email")
+//                            Log.d("email 전송", "성공")
+//                            intent = Intent(this, FindPWActivity::class.java)
+//                            intent.putExtra("userEmail", it.body()!!.data.toEmail)
+//                            startActivity(intent)
+//                        }
+//
+//                    }
+//                )
+//            }
+//        }
 
-                    }
-                )
-            }
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val e = pref.getString("email", "email")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
