@@ -228,6 +228,7 @@
                 android:textColor="@color/gray"
                 android:textFontWeight="700"
                 android:visibility="invisible"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_white_box"
                 app:layout_constraintEnd_toEndOf="@+id/iv_white_box"
                 app:layout_constraintStart_toStartOf="@+id/iv_white_box"
