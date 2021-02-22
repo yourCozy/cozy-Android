@@ -16,7 +16,7 @@ object RequestToServer {
 
     var retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl("http://52.78.69.91:3000")
+        .baseUrl("http://13.209.251.34:3000")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var service: RequestInterface = retrofit.create(RequestInterface::class.java)
