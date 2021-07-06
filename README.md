@@ -8,6 +8,7 @@
   <br/>
   <i>📚취향으로 찾고, 공간으로 느끼다🎈</i>
   <br/>
+  코지가 궁금하시다면 지금 <a href="https://play.google.com/store/apps/details?id=com.yourcozy.cozy"><b>여기</b></a>에서 확인해보세요!😎
 </p>
 
 
@@ -43,8 +44,6 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/23499504/124617525-f53e2380-deb1-11eb-912d-7a259944224f.png" width="200"><img src="https://user-images.githubusercontent.com/23499504/124617985-5bc34180-deb2-11eb-8a0f-d583d430da6b.png" width="200"><img src="https://user-images.githubusercontent.com/23499504/124618278-9f1db000-deb2-11eb-87b0-984ba0d469e5.png" width="200"><img src="https://user-images.githubusercontent.com/23499504/124618333-aa70db80-deb2-11eb-9cc4-ce2a13b5e031.png" width="200">
 </p>
-
-코지가 궁금하시다면 지금 [여기](https://play.google.com/store/apps/details?id=com.yourcozy.cozy)에서 확인해보세요!😎
 
 
 
