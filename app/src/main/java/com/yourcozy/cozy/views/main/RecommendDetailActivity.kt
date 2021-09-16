@@ -175,21 +175,12 @@ class RecommendDetailActivity : AppCompatActivity() {
         val header = mutableMapOf<String, String>()
         header["Content-Type"] = "application/json"
         val token = sharedPref.getString("token","token").toString()
-        val cookie = sharedPref.getString("Cookie","cookie").toString()
         if (token != "token"){
             header["token"] = token
-        }
-        if(cookie != "cookie") {
-            header["Cookie"] = cookie
         }
         service.requestBookstoreDatail(header,bookstoreIdx).customEnqueue(
             onError = { Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT) },
             onSuccess = {
-                val cookie = it.headers().get("Set-Cookie")
-                val idx: Int = cookie!!.indexOf(";")
-                val Cookie = cookie.substring(0,idx)
-                editor.putString("Cookie",Cookie)
-                editor.commit()
                 if (it.body()!!.success) {
                     detailData = it.body()!!.data.elementAt(0)
                     if (detailData.mainImg != null) {
@@ -246,11 +237,6 @@ class RecommendDetailActivity : AppCompatActivity() {
             }
         )
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.search,menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
