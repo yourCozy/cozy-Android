@@ -136,10 +136,6 @@ class MypageFragment : Fragment(), View.OnClickListener {
     fun loadRSData() {
         val header = mutableMapOf<String, String?>()
         header["Content-Type"] = "application/json"
-        val cookie = sharedPref.getString("Cookie","cookie").toString()
-        if(cookie != "cookie") {
-            header["Cookie"] = cookie
-        }
         service.requestRecentlySeen(header).customEnqueue(
             onError = { Toast.makeText(context!!, "올바르지 않은 요청입니다.", Toast.LENGTH_SHORT).show() },
             onSuccess = {

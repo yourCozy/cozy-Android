@@ -7,24 +7,12 @@
     android:background="@color/onboarding"
     tools:context=".onboarding.OnBoardingActivity">
 
-    <ProgressBar
-        android:id="@+id/onboarding_progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:max="100"
-        android:progress="25"
-        android:progressDrawable="@drawable/onboarding_progressbar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/onboarding_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/onboarding_progressbar"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/go_select"
@@ -34,7 +22,7 @@
         android:background="@drawable/buttonround"
         android:fontFamily="@font/fontfamily"
         android:lineSpacingExtra="2sp"
-        android:text="로그인 하러가기"
+        android:text="취향선택하고 시작하기"
         android:textColor="@color/colorAccent"
         android:textFontWeight="700"
         android:textSize="16dp"
@@ -42,6 +30,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/endline"
         app:layout_constraintStart_toStartOf="@+id/startline" />
+
+    <LinearLayout
+        android:id="@+id/dotlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:src="@drawable/icon_circle_white" />
+
+        <ImageView
+            android:id="@+id/iv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:src="@drawable/icon_circle_gray" />
+
+        <ImageView
+            android:id="@+id/iv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:src="@drawable/icon_circle_gray" />
+
+        <ImageView
+            android:id="@+id/iv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:src="@drawable/icon_circle_gray" />
+
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startline"
@@ -56,6 +85,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="20dp"/>
+
+    <include
+        android:id="@+id/layoutinfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/layout_information"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

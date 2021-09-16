@@ -7,29 +7,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".onboarding.ThirdFragment">
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/icon_onboarding"
         android:fontFamily="@font/fontfamily"
         android:gravity="center"
         android:lineSpacingExtra="2dp"
-        android:text="01"
-        android:textColor="@color/colorAccent"
-        android:textFontWeight="900"
-        android:textSize="10dp"
+        android:text="02"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="38dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +32,7 @@
         android:lineSpacingExtra="6dp"
         android:text="경험을 주는 독립서점"
         android:textColor="@color/white"
-        android:textFontWeight="900"
+        android:textFontWeight="700"
         android:textSize="26dp"
         android:layout_marginTop="11dp"
         app:layout_constraintStart_toStartOf="@+id/number"
@@ -59,18 +49,17 @@
         android:paddingEnd="51dp"
         android:text="독립서점에서 진행되는 다양한 문화활동을\n모아보고, 신청까지 한번에!"
         android:textColor="@color/white"
-        android:textFontWeight="500"
+        android:textFontWeight="300"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:scaleType="fitEnd"
-        android:layout_marginTop="43dp"
-        app:layout_constraintDimensionRatio="0.65:1"
+        android:layout_marginTop="11dp"
         android:src="@drawable/img_onboarding_3"
+        android:paddingBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
